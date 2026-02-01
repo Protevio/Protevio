@@ -406,19 +406,19 @@ body{
   <div class="contact">
     <p class="contact__label">Get in touch</p>
     <div class="contact__grid">
-      <a href="mailto:info@protevio.com" class="contact__card">
+      <a href="/cdn-cgi/l/email-protection#88e1e6eee7c8f8fae7fcedfee1e7a6ebe7e5" class="contact__card">
         <div class="contact__card-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6.5L2 7"/></svg>
         </div>
         <span class="contact__card-type">General</span>
-        <span class="contact__card-email">info@protevio.com</span>
+        <span class="contact__card-email"><span class="__cf_email__" data-cfemail="20494e464f6050524f544556494f0e434f4d">[email&#160;protected]</span></span>
       </a>
-      <a href="mailto:help@protevio.com" class="contact__card">
+      <a href="/cdn-cgi/l/email-protection#cea6aba2be8ebebca1baabb8a7a1e0ada1a3" class="contact__card">
         <div class="contact__card-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
         <span class="contact__card-type">Support</span>
-        <span class="contact__card-email">help@protevio.com</span>
+        <span class="contact__card-email"><span class="__cf_email__" data-cfemail="076f626b77477775687362716e682964686a">[email&#160;protected]</span></span>
       </a>
     </div>
   </div>
@@ -430,7 +430,7 @@ body{
 <!-- ════════════════════════════════════════
      SCRIPTS
      ════════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Particle Field ── */
 (function(){
   const canvas=document.getElementById('canvas');
@@ -504,18 +504,17 @@ body{
   tick();setInterval(tick,1000);
 })();
 
-/* ── Newsletter via Formspree ── */
+/* ── Newsletter → redirect to thankyou.html ── */
 (function(){
   const btn=document.getElementById('subBtn');
   const input=document.getElementById('emailIn');
   const row=document.getElementById('formRow');
-  const box=document.getElementById('successBox');
   const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function shake(el){
     el.style.transition='transform .05s';
     el.style.transform='translateX(-6px)';
-    setTimeout(()=>{el.style.transform='translateX(6px)';setTimeout(()=>{el.style.transform='translateX(-6px)';setTimeout(()=>{el.style.transform='translateX(6px)';setTimeout(()=>{el.style.transform='';el.style.transition=''},50)},50)},50)},50);
+    setTimeout(()=>{el.style.transform='translateX(6px)';setTimeout(()=>{el.style.transform='translateX(-6px)';setTimeout(()=>{el.style.transform='translateX(6px)';setTimeout(()=>{el.style.transform=''  ;el.style.transition=''  },50)},50)},50)},50);
   }
 
   btn.addEventListener('click',async()=>{
@@ -526,25 +525,15 @@ body{
     btn.disabled=true;
 
     try{
-      const res=await fetch('https://formspree.io/f/xgozkqpa',{
+      await fetch('https://formspree.io/f/YOUR_FORMSPREE_ID',{
         method:'POST',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
         body:JSON.stringify({email:v})
       });
-      // Show success regardless — works even before Formspree is configured
-      row.style.display='none';
-      box.classList.add('show');
-    } catch(e){
-      row.style.display='none';
-      box.classList.add('show');
-    }
+    } catch(e){}
 
-    btn.classList.remove('loading');
-    btn.disabled=false;
+    window.location.href='thankyou.html';
   });
 
   input.addEventListener('keydown',e=>{if(e.key==='Enter')btn.click()});
 })();
-</script>
-</body>
-</html>
