@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thank You — Protevio AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   RESET & ROOT
+   ════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#050608;
+  --white:#f0eff2;
+  --muted:#5a5d64;
+  --accent:#00e5ff;
+  --accent2:#7c4dff;
+  --glow:rgba(0,229,255,.18);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--ink);
+  color:var(--white);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ════════════════════════════════════════
+   PARTICLE CANVAS
+   ════════════════════════════════════════ */
+#canvas{position:fixed;inset:0;z-index:0;display:block}
+
+/* ════════════════════════════════════════
+   NOISE + VIGNETTE
+   ════════════════════════════════════════ */
+.noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+.vignette{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 40%,rgba(5,6,8,.75) 100%);
+}
+
+/* ════════════════════════════════════════
+   NAV
+   ════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav__logo-mark{width:36px;height:36px}
+.nav__logo-mark svg{width:100%;height:100%}
+.nav__logo-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.55rem;letter-spacing:.22em;color:var(--white);
+}
+.nav__back{
+  display:flex;align-items:center;gap:8px;
+  text-decoration:none;color:var(--muted);
+  font-size:.68rem;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;transition:color .3s;
+}
+.nav__back:hover{color:var(--accent)}
+.nav__back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+.nav__back:hover svg{transform:translateX(-3px)}
+
+/* ════════════════════════════════════════
+   HERO — THANK YOU
+   ════════════════════════════════════════ */
+.hero{
+  position:relative;z-index:10;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:120px 24px 80px;
+  text-align:center;
+}
+
+/* Animated check ring */
+.check-ring{
+  width:100px;height:100px;margin-bottom:48px;
+  position:relative;
+  opacity:0;animation:fadeUp .7s .1s cubic-bezier(.22,1,.36,1) forwards;
+}
+.check-ring__circle{
+  position:absolute;inset:0;
+  border-radius:50%;
+  border:2px solid rgba(0,229,255,.15);
+}
+.check-ring__svg{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+/* Draw the circle stroke */
+.check-ring__path{
+  fill:none;stroke:url(#checkGrad);stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-dasharray:290;
+  stroke-dashoffset:290;
+  animation:drawCircle .9s .3s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes drawCircle{to{stroke-dashoffset:0}}
+/* Draw the checkmark */
+.check-ring__tick{
+  fill:none;stroke:url(#checkGrad);stroke-width:3;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:40;stroke-dashoffset:40;
+  animation:drawTick .5s .95s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes drawTick{to{stroke-dashoffset:0}}
+/* Glow pulse after tick draws */
+.check-ring__glow{
+  position:absolute;inset:-12px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,.12) 0%,transparent 70%);
+  opacity:0;animation:glowPulse .8s 1.3s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes glowPulse{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}
+
+.hero__eyebrow{
+  font-size:.7rem;font-weight:500;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:20px;
+  opacity:0;animation:fadeUp .7s .5s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero__title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,10vw,7.5rem);
+  line-height:.92;color:var(--white);
+  margin-bottom:24px;
+  opacity:0;animation:fadeUp .8s .6s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero__title span{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero__sub{
+  font-size:.9rem;font-weight:300;color:var(--muted);
+  max-width:460px;line-height:1.9;
+  opacity:0;animation:fadeUp .7s .75s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* ════════════════════════════════════════
+   VISION SECTION
+   ════════════════════════════════════════ */
+.vision{
+  position:relative;z-index:10;
+  padding:0 24px 120px;
+}
+.vision__inner{
+  max-width:680px;margin:0 auto;
+}
+
+/* Divider */
+.vision__divider{
+  width:1px;height:80px;margin:0 auto 80px;
+  background:linear-gradient(180deg,transparent,var(--accent),transparent);
+  opacity:0;animation:fadeUp .6s .9s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* Section heading */
+.vision__heading{
+  text-align:center;margin-bottom:64px;
+  opacity:0;animation:fadeUp .7s 1s cubic-bezier(.22,1,.36,1) forwards;
+}
+.vision__heading-label{
+  font-size:.65rem;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:16px;display:block;
+}
+.vision__heading h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  color:var(--white);letter-spacing:.04em;
+}
+
+/* Timeline cards */
+.vision__timeline{display:flex;flex-direction:column;gap:0}
+.vision__item{
+  display:grid;
+  grid-template-columns:60px 1fr;
+  gap:0 28px;
+  position:relative;
+  opacity:0;
+  animation:fadeUp .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+.vision__item:nth-child(1){animation-delay:1.15s}
+.vision__item:nth-child(2){animation-delay:1.3s}
+.vision__item:nth-child(3){animation-delay:1.45s}
+.vision__item:nth-child(4){animation-delay:1.6s}
+.vision__item:nth-child(5){animation-delay:1.75s}
+
+/* Left column: number + line */
+.vision__line-col{
+  display:flex;flex-direction:column;align-items:center;
+}
+.vision__num{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(0,229,255,.06);
+  border:1px solid rgba(0,229,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:.08em;
+  color:var(--accent);
+  position:relative;z-index:1;
+  flex-shrink:0;
+}
+.vision__connector{
+  width:1px;flex:1;min-height:40px;
+  background:linear-gradient(180deg,rgba(0,229,255,.2),transparent);
+}
+.vision__item:last-child .vision__connector{display:none}
+
+/* Right column: content */
+.vision__content{
+  padding-bottom:48px;
+}
+.vision__item:last-child .vision__content{padding-bottom:0}
+.vision__content-tag{
+  display:inline-block;font-size:.6rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+  background:rgba(0,229,255,.08);
+  border:1px solid rgba(0,229,255,.12);
+  border-radius:20px;padding:4px 12px;
+}
+.vision__content h3{
+  font-family:'Inter',sans-serif;font-weight:500;
+  font-size:.95rem;color:var(--white);
+  margin-bottom:8px;
+}
+.vision__content p{
+  font-size:.82rem;font-weight:300;
+  color:var(--muted);line-height:1.8;
+}
+
+/* ════════════════════════════════════════
+   FOOTER CTA
+   ════════════════════════════════════════ */
+.footer-cta{
+  position:relative;z-index:10;
+  text-align:center;padding:0 24px 100px;
+  opacity:0;animation:fadeUp .7s 2s cubic-bezier(.22,1,.36,1) forwards;
+}
+.footer-cta__rule{
+  width:40px;height:1px;margin:0 auto 40px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+.footer-cta p{
+  font-size:.78rem;font-weight:300;color:var(--muted);
+  margin-bottom:28px;max-width:380px;margin-left:auto;margin-right:auto;
+  line-height:1.8;
+}
+.footer-cta__emails{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+}
+.footer-cta__email{
+  display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;color:var(--muted);
+  font-size:.72rem;font-weight:400;
+  padding:10px 18px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;
+  background:rgba(255,255,255,.03);
+  transition:border-color .3s,color .3s,box-shadow .3s;
+}
+.footer-cta__email:hover{
+  border-color:rgba(0,229,255,.3);
+  color:var(--accent);
+  box-shadow:0 0 16px rgba(0,229,255,.1);
+}
+.footer-cta__email svg{
+  width:13px;height:13px;stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* ════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+@media(max-width:560px){
+  .nav{padding:22px 20px}
+  .vision__item{grid-template-columns:40px 1fr;gap:0 16px}
+  .vision__num{width:36px;height:36px;font-size:.9rem}
+  .footer-cta__emails{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<div class="noise"></div>
+<div class="vignette"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav__logo">
+    <div class="nav__logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#g1)" stroke-width="1.4" fill="none"/>
+        <circle cx="18" cy="18" r="5.5" fill="url(#g1)" opacity=".9"/>
+        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36">
+            <stop offset="0%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span class="nav__logo-text">PROTEVIO</span>
+  </a>
+  <a href="index.html" class="nav__back">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Animated check -->
+  <div class="check-ring">
+    <div class="check-ring__glow"></div>
+    <svg class="check-ring__svg" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="checkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00e5ff"/>
+          <stop offset="100%" stop-color="#7c4dff"/>
+        </linearGradient>
+      </defs>
+      <!-- Circle -->
+      <circle class="check-ring__path" cx="50" cy="50" r="46" transform="rotate(-90 50 50)"/>
+      <!-- Tick -->
+      <path class="check-ring__tick" d="M30 50 L44 64 L70 36"/>
+    </svg>
+  </div>
+
+  <p class="hero__eyebrow">You're in</p>
+  <h1 class="hero__title">THANK<br><span>YOU</span></h1>
+  <p class="hero__sub">
+    You've just joined something bigger. Below is a look at what we're building — and why it matters.
+  </p>
+</section>
+
+<!-- VISION -->
+<section class="vision">
+  <div class="vision__inner">
+    <div class="vision__divider"></div>
+
+    <div class="vision__heading">
+      <span class="vision__heading-label">The Roadmap</span>
+      <h2>What Protevio AI Will Do</h2>
+    </div>
+
+    <div class="vision__timeline">
+
+      <!-- 01 -->
+      <div class="vision__item">
+        <div class="vision__line-col">
+          <div class="vision__num">01</div>
+          <div class="vision__connector"></div>
+        </div>
+        <div class="vision__content">
+          <span class="vision__content-tag">Identity Layer</span>
+          <h3>Real-Time Face Detection & Matching</h3>
+          <p>Protevio's core engine will detect, extract, and match faces from live video or static images in milliseconds. Built on a custom neural network optimized for accuracy across lighting conditions, angles, and resolutions — delivering results you can actually rely on.</p>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="vision__item">
+        <div class="vision__line-col">
+          <div class="vision__num">02</div>
+          <div class="vision__connector"></div>
+        </div>
+        <div class="vision__content">
+          <span class="vision__content-tag">Search Engine</span>
+          <h3>Cross-Source Face Search</h3>
+          <p>Upload a single photo and Protevio will search across a massive indexed database of faces in seconds. Whether it's verifying identity, finding duplicates, or tracing an image across the web — the platform makes it instant and effortless.</p>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="vision__item">
+        <div class="vision__line-col">
+          <div class="vision__num">03</div>
+          <div class="vision__connector"></div>
+        </div>
+        <div class="vision__content">
+          <span class="vision__content-tag">Data Pipeline</span>
+          <h3>Automated Web Crawling & Indexing</h3>
+          <p>Behind the scenes, Protevio continuously discovers and indexes faces from public sources using intelligent crawling. Perceptual hashing and quality filtering ensure the database stays clean, fast, and free of duplicates — all running automatically.</p>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="vision__item">
+        <div class="vision__line-col">
+          <div class="vision__num">04</div>
+          <div class="vision__connector"></div>
+        </div>
+        <div class="vision__content">
+          <span class="vision__content-tag">Enterprise Ready</span>
+          <h3>Security & Compliance First</h3>
+          <p>Enterprise-grade encryption, role-based access, full audit logs, and a permission system that gives teams control over exactly what data they can access. Protevio is built to meet the standards that businesses actually need.</p>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="vision__item">
+        <div class="vision__line-col">
+          <div class="vision__num">05</div>
+          <div class="vision__connector"></div>
+        </div>
+        <div class="vision__content">
+          <span class="vision__content-tag">Developer Platform</span>
+          <h3>API & Integration Layer</h3>
+          <p>A clean REST API so developers can plug Protevio's face recognition into any application. SDKs, webhooks, and detailed documentation — everything needed to build on top of the platform from day one.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <div class="footer-cta__rule"></div>
+  <p>Questions or want to talk about what's coming? Reach out — we'd love to hear from you.</p>
+  <div class="footer-cta__emails">
+    <a href="mailto:info@protevio.com" class="footer-cta__email">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6.5L2 7"/></svg>
+      info@protevio.com
+    </a>
+    <a href="mailto:help@protevio.com" class="footer-cta__email">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      help@protevio.com
+    </a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SCRIPTS
+     ════════════════════════════════════════ -->
+<script>
+/* ── Particle Field ── */
+(function(){
+  const canvas=document.getElementById('canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+  resize();
+  window.addEventListener('resize',resize);
+
+  class Particle{
+    constructor(){this.reset()}
+    reset(){
+      this.x=Math.random()*W;this.y=Math.random()*H;
+      this.r=Math.random()*1.4+.3;this.speed=Math.random()*.4+.08;
+      this.angle=Math.random()*Math.PI*2;
+      this.opacity=Math.random()*.5+.1;
+      this.hue=Math.random()<.6?187:262;
+    }
+    update(){
+      this.x+=Math.cos(this.angle)*this.speed;
+      this.y+=Math.sin(this.angle)*this.speed;
+      this.angle+=(.005)*(Math.random()-.5);
+      if(this.x<-10||this.x>W+10||this.y<-10||this.y>H+10)this.reset();
+    }
+    draw(){
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`hsla(${this.hue},100%,60%,${this.opacity})`;ctx.fill();
+    }
+  }
+
+  const COUNT=Math.floor((W*H)/8000);
+  for(let i=0;i<COUNT;i++)particles.push(new Particle());
+
+  function drawLines(){
+    const maxDist=120;
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<maxDist){
+          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(0,229,255,${(.12)*(1-d/maxDist)})`;
+          ctx.lineWidth=.6;ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{p.update();p.draw()});
+    drawLines();requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+</body>
+</html>
