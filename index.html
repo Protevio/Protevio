@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Protevio AI — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   RESET & ROOT
+   ════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#050608;
+  --white:#f0eff2;
+  --muted:#5a5d64;
+  --accent:#00e5ff;
+  --accent2:#7c4dff;
+  --glow:rgba(0,229,255,.18);
+  --glow2:rgba(124,77,255,.12);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--ink);
+  color:var(--white);
+  min-height:100vh;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ════════════════════════════════════════
+   PARTICLE CANVAS (full-screen bg)
+   ════════════════════════════════════════ */
+#canvas{
+  position:fixed;inset:0;z-index:0;
+  display:block;
+}
+
+/* ════════════════════════════════════════
+   NOISE OVERLAY (film grain)
+   ════════════════════════════════════════ */
+.noise{
+  position:fixed;inset:0;z-index:1;
+  pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+
+/* ════════════════════════════════════════
+   VIGNETTE
+   ════════════════════════════════════════ */
+.vignette{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 40%,rgba(5,6,8,.7) 100%);
+}
+
+/* ════════════════════════════════════════
+   TOP LOGO BAR
+   ════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav__logo{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;
+}
+.nav__logo-mark{
+  width:36px;height:36px;
+  position:relative;
+}
+.nav__logo-mark svg{width:100%;height:100%}
+.nav__logo-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.55rem;letter-spacing:.22em;
+  color:var(--white);
+}
+.nav__status{
+  display:flex;align-items:center;gap:7px;
+  font-size:.68rem;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);
+}
+.nav__status-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+  animation:blink 2.4s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ════════════════════════════════════════
+   MAIN CONTENT
+   ════════════════════════════════════════ */
+.main{
+  position:relative;z-index:10;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 24px 80px;
+  text-align:center;
+}
+
+/* ── Eyebrow ── */
+.eyebrow{
+  font-size:.7rem;font-weight:500;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:32px;
+  opacity:0;
+  animation:fadeUp .8s .2s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* ── Title ── */
+.title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,13vw,10rem);
+  line-height:.92;letter-spacing:-.01em;
+  color:var(--white);
+  margin-bottom:8px;
+  opacity:0;
+  animation:fadeUp .9s .35s cubic-bezier(.22,1,.36,1) forwards;
+}
+.title__accent{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;
+}
+/* glow under accent word */
+.title__accent::after{
+  content:'';position:absolute;
+  bottom:-6px;left:10%;right:10%;height:40px;
+  background:linear-gradient(180deg,var(--glow) 0%,transparent 100%);
+  filter:blur(12px);z-index:-1;
+  pointer-events:none;
+}
+
+/* ── Subtitle ── */
+.subtitle{
+  font-size:.92rem;font-weight:300;
+  color:var(--muted);line-height:1.8;
+  max-width:420px;margin:20px auto 0;
+  opacity:0;
+  animation:fadeUp .8s .55s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* ── Thin rule ── */
+.rule{
+  width:40px;height:1px;margin:40px auto;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0;
+  animation:fadeUp .6s .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* ════════════════════════════════════════
+   COUNTDOWN
+   ════════════════════════════════════════ */
+.countdown{
+  display:flex;gap:0;justify-content:center;
+  opacity:0;
+  animation:fadeUp .8s .82s cubic-bezier(.22,1,.36,1) forwards;
+  margin-bottom:52px;
+}
+.cd-unit{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 20px;
+  position:relative;
+}
+/* vertical separator */
+.cd-unit+.cd-unit::before{
+  content:':';
+  position:absolute;left:0;top:50%;
+  transform:translate(-50%,-58%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,7vw,4.2rem);
+  color:var(--accent);opacity:.35;
+  line-height:1;
+}
+.cd-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,9vw,6.4rem);
+  line-height:1;
+  color:var(--white);
+  position:relative;
+  text-shadow:0 0 40px rgba(0,229,255,.08);
+  transition:color .3s;
+}
+.cd-unit:hover .cd-num{color:var(--accent)}
+.cd-label{
+  margin-top:10px;
+  font-size:.6rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ════════════════════════════════════════
+   NEWSLETTER
+   ════════════════════════════════════════ */
+.newsletter{
+  width:100%;max-width:440px;
+  opacity:0;
+  animation:fadeUp .8s .95s cubic-bezier(.22,1,.36,1) forwards;
+}
+.newsletter__label{
+  font-size:.68rem;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.newsletter__row{
+  display:flex;gap:0;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:40px;
+  overflow:hidden;
+  transition:border-color .3s,box-shadow .3s;
+}
+.newsletter__row:focus-within{
+  border-color:var(--accent);
+  box-shadow:0 0 32px var(--glow);
+}
+.newsletter__input{
+  flex:1;background:transparent;border:none;outline:none;
+  padding:15px 24px;
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  font-size:.82rem;font-weight:300;
+}
+.newsletter__input::placeholder{color:var(--muted)}
+.newsletter__btn{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border:none;
+  padding:15px 28px;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:filter .3s,transform .15s;
+}
+.newsletter__btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  opacity:0;transition:opacity .3s;
+}
+.newsletter__btn:hover::before{opacity:1}
+.newsletter__btn:hover{filter:brightness(1.15);transform:scale(.97)}
+.newsletter__btn span{position:relative;z-index:1}
+
+/* Success overlay */
+.newsletter__success{
+  display:none;flex-direction:column;align-items:center;gap:12px;
+  padding:28px 20px;
+  border:1px solid rgba(0,229,255,.18);
+  border-radius:16px;
+  background:rgba(0,229,255,.04);
+  backdrop-filter:blur(8px);
+}
+.newsletter__success.show{display:flex;animation:fadeUp .5s cubic-bezier(.22,1,.36,1) forwards}
+.newsletter__success svg{
+  width:28px;height:28px;
+  stroke:var(--accent);fill:none;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.newsletter__success p{
+  font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.6;
+}
+.newsletter__success strong{color:var(--accent);font-weight:500}
+
+.newsletter__note{
+  margin-top:14px;text-align:center;
+  font-size:.64rem;color:rgba(90,93,100,.6);
+  padding-bottom:48px;
+}
+.newsletter__note a{color:var(--muted);text-decoration:none;transition:color .2s}
+.newsletter__note a:hover{color:var(--accent)}
+
+/* ════════════════════════════════════════
+   BOTTOM DATE LINE
+   ════════════════════════════════════════ */
+.launch-date{
+  position:fixed;bottom:32px;left:0;right:0;
+  text-align:center;z-index:10;
+  font-size:.62rem;font-weight:400;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);
+  opacity:0;
+  animation:fadeUp .7s 1.3s cubic-bezier(.22,1,.36,1) forwards;
+}
+.launch-date span{color:var(--accent)}
+
+/* ════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+@media(max-width:560px){
+  .nav{padding:22px 20px}
+  .cd-unit{padding:0 10px}
+  .cd-unit+.cd-unit::before{font-size:1.8rem}
+  .cd-num{font-size:2.6rem}
+  .newsletter__row{flex-direction:column;border-radius:16px}
+  .newsletter__btn{border-radius:0 0 14px 14px;padding:14px}
+  .newsletter__input{padding:14px 20px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<div class="noise"></div>
+<div class="vignette"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav__logo">
+    <div class="nav__logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#g1)" stroke-width="1.4" fill="none"/>
+        <circle cx="18" cy="18" r="5.5" fill="url(#g1)" opacity=".9"/>
+        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36">
+            <stop offset="0%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span class="nav__logo-text">PROTEVIO</span>
+  </a>
+  <div class="nav__status">
+    <span class="nav__status-dot"></span>
+    Under Construction
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+  <p class="eyebrow">Protevio AI &mdash; 2026</p>
+
+  <h1 class="title">
+    PROTEVIO<br>
+    <span class="title__accent">AI</span>
+  </h1>
+
+  <p class="subtitle">
+    Next-generation facial recognition built for speed, accuracy, and enterprise-grade security. A platform redefining identity verification.
+  </p>
+
+  <div class="rule"></div>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-d">00</span>
+      <span class="cd-label">Days</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-h">00</span>
+      <span class="cd-label">Hours</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-m">00</span>
+      <span class="cd-label">Minutes</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-s">00</span>
+      <span class="cd-label">Seconds</span>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <p class="newsletter__label">Get early access</p>
+    <div class="newsletter__row" id="formRow">
+      <input type="email" class="newsletter__input" id="emailIn" placeholder="you@company.com" autocomplete="off">
+      <button class="newsletter__btn" id="subBtn"><span>Notify Me</span></button>
+    </div>
+    <div class="newsletter__success" id="successBox">
+      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+      <p><strong>You're on the list.</strong><br>We'll reach out before launch day.</p>
+    </div>
+    <p class="newsletter__note">No spam, ever. <a href="#">Unsubscribe</a> anytime.</p>
+  </div>
+</main>
+
+<!-- Bottom date -->
+<div class="launch-date">Launching <span>March 15, 2026</span></div>
+
+<!-- ════════════════════════════════════════
+     SCRIPTS
+     ════════════════════════════════════════ -->
+<script>
+/* ── Particle Field ── */
+(function(){
+  const canvas=document.getElementById('canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  class Particle{
+    constructor(){this.reset()}
+    reset(){
+      this.x=Math.random()*W;
+      this.y=Math.random()*H;
+      this.r=Math.random()*1.4+.3;
+      this.speed=Math.random()*.4+.08;
+      this.angle=Math.random()*Math.PI*2;
+      this.opacity=Math.random()*.5+.1;
+      this.hue=Math.random()<.6?187:262;
+    }
+    update(){
+      this.x+=Math.cos(this.angle)*this.speed;
+      this.y+=Math.sin(this.angle)*this.speed;
+      this.angle+=(.005)*(Math.random()-.5);
+      if(this.x<-10||this.x>W+10||this.y<-10||this.y>H+10)this.reset();
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`hsla(${this.hue},100%,60%,${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  const COUNT=Math.floor((W*H)/8000);
+  for(let i=0;i<COUNT;i++)particles.push(new Particle());
+
+  function drawLines(){
+    const maxDist=120;
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<maxDist){
+          const alpha=(.12)*(1-d/maxDist);
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(0,229,255,${alpha})`;
+          ctx.lineWidth=.6;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{p.update();p.draw()});
+    drawLines();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ── Countdown ── */
+(function(){
+  const target=new Date('2026-03-15T00:00:00').getTime();
+  const pad=n=>n<10?'0'+n:''+n;
+  function tick(){
+    const diff=target-Date.now();
+    if(diff<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return}
+    document.getElementById('cd-d').textContent=pad(Math.floor(diff/86400000));
+    document.getElementById('cd-h').textContent=pad(Math.floor(diff%86400000/3600000));
+    document.getElementById('cd-m').textContent=pad(Math.floor(diff%3600000/60000));
+    document.getElementById('cd-s').textContent=pad(Math.floor(diff%60000/1000));
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* ── Newsletter ── */
+(function(){
+  const btn=document.getElementById('subBtn');
+  const input=document.getElementById('emailIn');
+  const row=document.getElementById('formRow');
+  const box=document.getElementById('successBox');
+  const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function shake(el){
+    el.style.transition='transform .05s';
+    el.style.transform='translateX(-6px)';
+    setTimeout(()=>{el.style.transform='translateX(6px)';setTimeout(()=>{el.style.transform='translateX(-6px)';setTimeout(()=>{el.style.transform='translateX(6px)';setTimeout(()=>{el.style.transform='';el.style.transition=''},50)},50)},50)},50);
+  }
+
+  btn.addEventListener('click',()=>{
+    const v=input.value.trim();
+    if(!re.test(v)){shake(row);input.placeholder='Valid email please';return}
+    row.style.display='none';
+    box.classList.add('show');
+  });
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')btn.click()});
+})();
+</script>
+</body>
+</html>
