@@ -4,8 +4,14 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Protevio AI — Coming Soon</title>
+<!-- DNS Prefetch for performance -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://formspree.io">
+<!-- Preconnect and preload fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -405,7 +411,7 @@ body{
     ctx.fillStyle='hsla('+this.hue+',100%,60%,'+this.opacity+')';ctx.fill();
   };
 
-  var divisor=isMobile?16000:8000;
+  var divisor=isMobile?16000:12000; // Optimized: less particles on desktop
   var COUNT=Math.floor((W*H)/divisor);
   for(var i=0;i<COUNT;i++)particles.push(new Particle());
 
@@ -435,11 +441,13 @@ body{
     drawLines();
   }
   
-  // Lazy-load: start animation after page loads
+  // Lazy-load: start animation after page loads + small delay for LCP
   if(document.readyState==='complete'){
-    requestAnimationFrame(loop);
+    setTimeout(function(){requestAnimationFrame(loop)},100);
   }else{
-    window.addEventListener('load',function(){requestAnimationFrame(loop)});
+    window.addEventListener('load',function(){
+      setTimeout(function(){requestAnimationFrame(loop)},100);
+    });
   }
 })();
 
