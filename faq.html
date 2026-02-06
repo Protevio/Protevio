@@ -58,47 +58,137 @@ body{
   pointer-events:none;z-index:0;opacity:.5;
 }
 
+/* NAV - Exact from testhomepage */
 .nav{
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   padding:14px 40px;
   background:rgba(26,31,46,.9);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--glass-border);
-  position:sticky;top:0;z-index:100;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 .nav__logo{
-  font-size:1.5rem;font-weight:800;color:var(--text);
-  letter-spacing:-.02em;display:flex;align-items:center;gap:10px;
+  font-size:1.5rem;
+  font-weight:800;
+  color:var(--text);
+  letter-spacing:-.02em;
+  display:flex;
+  align-items:center;
+  gap:10px;
   text-decoration:none;
 }
 .nav__logo-icon{
-  width:36px;height:36px;
+  width:36px;
+  height:36px;
   background:linear-gradient(135deg,var(--accent) 0%,var(--purple) 100%);
-  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   box-shadow:0 4px 16px rgba(91,154,255,.35);
-  font-size:1.2rem;font-weight:800;color:#fff;
+  position:relative;
 }
-.nav__links{display:flex;gap:32px;align-items:center}
+.nav__logo-icon::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 50%);
+}
+.nav__logo-icon svg{
+  width:18px;
+  height:18px;
+  stroke:white;
+  stroke-width:2.5;
+  fill:none;
+  position:relative;
+  z-index:1;
+}
+.nav__links{
+  display:flex;
+  align-items:center;
+  gap:32px;
+}
 .nav__link{
-  color:var(--text-secondary);text-decoration:none;
-  font-size:.88rem;font-weight:500;
-  transition:color .2s;position:relative;
+  font-size:.88rem;
+  font-weight:500;
+  color:var(--text-muted);
+  text-decoration:none;
+  transition:color .25s;
+  position:relative;
 }
-.nav__link:hover{color:var(--accent-light)}
-.nav__link.active{color:var(--accent)}
-.nav__link.active::after{
-  content:'';position:absolute;bottom:-18px;left:0;right:0;
-  height:2px;background:var(--accent);
+.nav__link:hover{color:var(--text)}
+.nav__link--active{color:var(--text)}
+.nav__link--active::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--purple));
+  border-radius:2px;
 }
-.nav__cta{
-  padding:10px 20px;
-  background:linear-gradient(135deg,var(--accent),var(--purple));
-  color:#fff;border-radius:8px;text-decoration:none;
-  font-size:.85rem;font-weight:600;
-  box-shadow:0 4px 12px rgba(91,154,255,.3);
-  transition:transform .2s,box-shadow .2s;
+.nav__right{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-.nav__cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,154,255,.4)}
+.nav__lang{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:9px 14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:.85rem;
+  font-weight:500;
+  color:var(--text-secondary);
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+  transition:all .25s;
+}
+.nav__lang:hover{
+  border-color:var(--border-light);
+  background:var(--bg-card);
+  transform:translateY(-1px);
+}
+.nav__lang svg{width:16px;height:16px;opacity:.7}
+.nav__login{
+  padding:9px 20px;
+  font-size:.85rem;
+  font-weight:600;
+  color:white;
+  background:linear-gradient(135deg,var(--accent) 0%,#7c6aff 100%);
+  border:none;
+  border-radius:10px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:all .25s;
+  box-shadow:0 4px 16px rgba(91,154,255,.35);
+  position:relative;
+  overflow:hidden;
+}
+.nav__login::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,#7c6aff 0%,var(--accent) 100%);
+  opacity:0;
+  transition:opacity .25s;
+}
+.nav__login:hover::before{opacity:1}
+.nav__login:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,154,255,.45)}
+.nav__login span{position:relative;z-index:1}
+.nav__login svg{width:16px;height:16px;stroke:white;stroke-width:2.5;fill:none;position:relative;z-index:1}
+
 
 .container{
   max-width:900px;margin:0 auto;padding:80px 24px;
@@ -292,17 +382,29 @@ body{
 
 <nav class="nav">
   <a href="testhomepage.html" class="nav__logo">
-    <div class="nav__logo-icon">P</div>
+    <div class="nav__logo-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
+    </div>
     Protevio
   </a>
   <div class="nav__links">
     <a href="testhomepage.html" class="nav__link">Home</a>
     <a href="about.html" class="nav__link">About</a>
-    <a href="faq.html" class="nav__link active">FAQ</a>
+    <a href="faq.html" class="nav__link nav__link--active">FAQ</a>
     <a href="contact.html" class="nav__link">Contact</a>
-    <a href="#" class="nav__cta">Get Started</a>
+  </div>
+  <div class="nav__right">
+    <button class="nav__lang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      EN
+    </button>
+    <a href="#" class="nav__login">
+      <span>Log In</span>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 </nav>
+
 
 <div class="container">
   
@@ -510,7 +612,7 @@ body{
         </svg>
       </button>
       <div class="faq-answer">
-        <p>Yes! We provide an opt-out mechanism. Contact us at <strong>privacy@protevio.com</strong> with a photo of yourself, and we'll remove all matching faces from our index within 48 hours.</p>
+        <p>Yes! We provide an opt-out mechanism. Contact us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a7a78637c6b69734a7a78657e6f7c636524696567">[email&#160;protected]</a></strong> with a photo of yourself, and we'll remove all matching faces from our index within 48 hours.</p>
         <p>This is a core part of our GDPR compliance and your right to be forgotten.</p>
       </div>
     </div>
@@ -548,7 +650,7 @@ body{
   </p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // FAQ accordion
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -593,16 +695,4 @@ searchInput.addEventListener('input', (e) => {
     if (question.includes(query) || answer.includes(query)) {
       item.style.display = 'block';
     } else {
-      item.style.display = 'none';
-    }
-  });
   
-  // Reset category filter when searching
-  if (query) {
-    document.querySelectorAll('.faq-category').forEach(c => c.classList.remove('active'));
-  }
-});
-</script>
-
-</body>
-</html>
