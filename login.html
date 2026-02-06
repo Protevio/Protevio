@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Log In — Protevio AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#1a1f2e;
   --bg-elevated:#232a3d;
@@ -61,7 +63,7 @@ body{
   pointer-events:none;z-index:0;opacity:.5;
 }
 
-.back-link{
+.back-link{min-height:44px;
   position:fixed;top:24px;left:24px;
   display:flex;align-items:center;gap:8px;
   color:var(--text-muted);text-decoration:none;
@@ -241,8 +243,13 @@ body{
 @media(max-width:560px){
   .login-card{padding:36px 28px}
   .login-title{font-size:1.5rem}
-  .back-link{top:16px;left:16px}
+  .back-link{min-height:44px;top:16px;left:16px}
   .form-footer{flex-direction:column;gap:12px;align-items:flex-start}
+}
+
+@media(max-width:380px){
+  .card, .login-card{padding:28px 20px}
+  .title, .login-title{font-size:1.35rem}
 }
 </style>
 </head>
@@ -302,7 +309,7 @@ body{
           <input type="checkbox" id="remember">
           <label for="remember">Remember me</label>
         </div>
-        <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+        <a href="forgot-password__1_.html" class="forgot-link">Forgot password?</a>
       </div>
 
       <button type="submit" class="btn btn-primary">
@@ -329,7 +336,7 @@ body{
 
     <div class="signup-prompt">
       Don't have an account? 
-      <a href="signup.html">Sign up</a>
+      <a href="signup__1_.html">Sign up</a>
     </div>
 
   </div>

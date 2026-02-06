@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Sign Up — Protevio AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#1a1f2e;
   --bg-card:#2a3349;
@@ -49,7 +51,7 @@ body{
   background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5;
 }
 
-.back-link{
+.back-link{min-height:44px;
   position:fixed;top:24px;left:24px;display:flex;align-items:center;gap:8px;
   color:var(--text-muted);text-decoration:none;font-size:.9rem;font-weight:500;
   transition:all .2s;z-index:10;
@@ -143,8 +145,13 @@ body{
 @media(max-width:560px){
   .card{padding:36px 28px}
   .title{font-size:1.5rem}
-  .back-link{top:16px;left:16px}
+  .back-link{min-height:44px;top:16px;left:16px}
   .form-row{grid-template-columns:1fr}
+}
+
+@media(max-width:380px){
+  .card, .login-card{padding:28px 20px}
+  .title, .login-title{font-size:1.35rem}
 }
 </style>
 </head>
@@ -231,7 +238,7 @@ body{
     </button>
 
     <div class="login-prompt">
-      Already have an account? <a href="login.html">Log in</a>
+      Already have an account? <a href="login__1_.html">Log in</a>
     </div>
 
   </div>

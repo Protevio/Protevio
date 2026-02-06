@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>FAQ — Protevio AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#1a1f2e;
   --bg-elevated:#232a3d;
@@ -363,8 +365,8 @@ body{
 .footer__link:hover{color:var(--accent-light)}
 
 @media(max-width:768px){
-  .nav{padding:12px 20px;flex-wrap:wrap}
-  .nav__links{width:100%;justify-content:center;margin-top:12px;gap:16px}
+  .nav{padding:12px 20px}
+  .nav__links{display:none}
   .nav__link{font-size:.8rem}
   .container{padding:60px 20px}
   .hero__title{font-size:2rem}
@@ -373,6 +375,92 @@ body{
   .faq-icon{width:20px;height:20px}
   .cta-section{padding:40px 24px}
 }
+
+/* Hamburger Menu */
+.nav__hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  padding:8px;
+  z-index:110;
+  background:none;
+  border:none;
+}
+.nav__hamburger span{
+  display:block;
+  width:24px;
+  height:2.5px;
+  background:var(--text);
+  border-radius:2px;
+  transition:all .3s;
+}
+.nav__hamburger.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.nav__hamburger.active span:nth-child(2){opacity:0}
+.nav__hamburger.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+.nav__mobile-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);
+  z-index:98;
+}
+.nav__mobile-overlay.active{display:block}
+
+.nav__mobile-menu{
+  display:none;
+  position:fixed;
+  top:0;right:-100%;
+  width:280px;
+  height:100vh;
+  background:var(--bg);
+  border-left:1px solid var(--glass-border);
+  padding:80px 32px 32px;
+  z-index:99;
+  transition:right .35s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav__mobile-menu.active{right:0}
+
+.nav__mobile-menu .mobile-link{
+  display:block;
+  padding:16px 0;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--text-muted);
+  text-decoration:none;
+  border-bottom:1px solid var(--glass-border);
+  transition:color .2s;
+}
+.nav__mobile-menu .mobile-link:hover,
+.nav__mobile-menu .mobile-link--active{color:var(--accent)}
+
+.nav__mobile-menu .mobile-login{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:24px;
+  padding:16px;
+  background:linear-gradient(135deg,var(--accent),var(--purple));
+  color:#fff;
+  border-radius:12px;
+  text-decoration:none;
+  font-size:1rem;
+  font-weight:600;
+  box-shadow:0 4px 16px rgba(91,154,255,.35);
+}
+
+@media(max-width:768px){
+  .nav__hamburger{display:flex}
+  .nav__mobile-menu{display:block}
+  .nav__links{display:none}
+  .nav__lang{display:none}
+  .nav__login{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -393,17 +481,27 @@ body{
     <a href="faq.html" class="nav__link nav__link--active">FAQ</a>
     <a href="contact.html" class="nav__link">Contact</a>
   </div>
+  <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav__right">
     <button class="nav__lang">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       EN
     </button>
-    <a href="login.html" class="nav__login">
+    <a href="login__1_.html" class="nav__login">
       <span>Log In</span>
       <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
 </nav>
+  <div class="nav__mobile-overlay"></div>
+  <div class="nav__mobile-menu">
+    <a href="testhomepage.html" class="mobile-link">Home</a>
+    <a href="about.html" class="mobile-link">About</a>
+    <a href="faq.html" class="mobile-link mobile-link--active">FAQ</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="login__1_.html" class="mobile-login">Log In</a>
+  </div>
+
 
 
 <div class="container">
@@ -612,7 +710,7 @@ body{
         </svg>
       </button>
       <div class="faq-answer">
-        <p>Yes! We provide an opt-out mechanism. Contact us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a7a78637c6b69734a7a78657e6f7c636524696567">[email&#160;protected]</a></strong> with a photo of yourself, and we'll remove all matching faces from our index within 48 hours.</p>
+        <p>Yes! We provide an opt-out mechanism. Contact us at <strong>privacy@protevio.com</strong> with a photo of yourself, and we'll remove all matching faces from our index within 48 hours.</p>
         <p>This is a core part of our GDPR compliance and your right to be forgotten.</p>
       </div>
     </div>
@@ -645,12 +743,12 @@ body{
 <footer class="footer">
   <p class="footer__text">
     © 2026 Protevio AI. All rights reserved. | 
-    <a href="#" class="footer__link">Privacy Policy</a> | 
-    <a href="#" class="footer__link">Terms of Service</a>
+    <a href="privacy-policy__1_.html" class="footer__link">Privacy Policy</a> | 
+    <a href="terms-of-service__1_.html" class="footer__link">Terms of Service</a>
   </p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // FAQ accordion
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
