@@ -241,7 +241,7 @@ body{
 }
 
 .grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));
   gap:24px;
 }
 
@@ -278,7 +278,7 @@ body{
 }
 
 .stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));
   gap:24px;margin:60px 0;
 }
 .stat{
@@ -347,12 +347,37 @@ body{
   .nav{padding:12px 20px}
   .nav__links{gap:16px}
   .nav__link{font-size:.8rem}
-  .container{padding:60px 20px}
-  .hero__title{font-size:2.2rem}
-  .section__title{font-size:1.6rem}
-  .grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr 1fr}
-  .cta-section{padding:40px 24px}
+  .container{padding:40px 16px}
+  .hero{margin-bottom:40px}
+  .hero__title{font-size:2rem}
+  .hero__subtitle{font-size:1rem}
+  .section{margin-bottom:50px}
+  .section__title{font-size:1.5rem}
+  .section__description{font-size:.95rem}
+  .grid{grid-template-columns:1fr;gap:16px}
+  .stats{grid-template-columns:1fr 1fr;gap:16px;margin:40px 0}
+  .stat{padding:24px 16px}
+  .stat__value{font-size:2rem}
+  .stat__label{font-size:.8rem}
+  .card{padding:24px 20px}
+  .card__title{font-size:1.15rem}
+  .card__text{font-size:.9rem}
+  .cta-section{padding:36px 20px;margin:50px 0 30px}
+  .cta-section__title{font-size:1.6rem}
+  .cta-section__text{font-size:.95rem}
+  .cta-section__btn{padding:14px 32px;font-size:.95rem}
+}
+
+@media(max-width:420px){
+  .container{padding:32px 12px}
+  .hero__title{font-size:1.7rem}
+  .stats{grid-template-columns:1fr 1fr;gap:12px}
+  .stat{padding:20px 12px}
+  .stat__value{font-size:1.7rem}
+  .card{padding:20px 16px}
+  .card__icon{width:48px;height:48px;font-size:1.4rem;margin-bottom:14px}
+  .cta-section{padding:28px 16px}
+  .cta-section__title{font-size:1.4rem}
 }
 
 /* ── Hamburger Menu ── */

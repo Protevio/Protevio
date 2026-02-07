@@ -368,12 +368,24 @@ body{
 
 @media(max-width:768px){
   .nav{padding:12px 20px}
-  
   .nav__link{font-size:.8rem}
-  .container{padding:60px 20px}
-  .hero__title{font-size:2rem}
-  .form-section{padding:32px 24px}
-  .contact-card{padding:24px}
+  .container{padding:40px 16px}
+  .hero__title{font-size:1.8rem}
+  .hero__subtitle{font-size:1rem}
+  .form-section{padding:28px 20px}
+  .form__title{font-size:1.3rem}
+  .form__input,.form__textarea{font-size:.9rem;padding:12px 14px}
+  .contact-card{padding:24px 20px}
+  .contact-card__title{font-size:1.1rem}
+  .social-section{padding:24px 20px}
+  .footer{margin-top:50px}
+}
+
+@media(max-width:420px){
+  .container{padding:32px 12px}
+  .hero__title{font-size:1.6rem}
+  .form-section{padding:24px 16px}
+  .contact-card{padding:20px 16px}
 }
 
 /* ── Hamburger Menu ── */
@@ -607,4 +619,41 @@ body{
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
-  const btn = this.queryS
+  const btn = this.querySelector('.form__btn');
+  btn.textContent = 'Sending...';
+  btn.classList.add('loading');
+  
+  setTimeout(function() {
+    btn.textContent = '✓ Message Sent!';
+    btn.classList.remove('loading');
+    btn.style.background = 'linear-gradient(135deg, var(--green), var(--accent))';
+    
+    setTimeout(function() {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      document.getElementById('contactForm').reset();
+    }, 3000);
+  }, 1500);
+});
+</script>
+
+<script>
+(function(){
+  var h=document.querySelector('.nav__hamburger'),
+      m=document.querySelector('.nav__mobile-menu'),
+      o=document.querySelector('.nav__mobile-overlay');
+  if(!h||!m)return;
+  function toggle(){
+    h.classList.toggle('active');
+    m.classList.toggle('active');
+    if(o)o.classList.toggle('active');
+    document.body.style.overflow=m.classList.contains('active')?'hidden':'';
+  }
+  h.addEventListener('click',toggle);
+  if(o)o.addEventListener('click',toggle);
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
+})();
+</script>
+
+</body>
+</html>
