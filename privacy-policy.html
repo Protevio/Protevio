@@ -34,8 +34,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .dot-pattern{position:fixed;inset:0;background-image:radial-gradient(rgba(91,154,255,.15) 1px, transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5}
 
 nav{background:rgba(26,31,46,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);padding:16px 40px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:1.3rem;font-weight:800;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(91,154,255,.3);font-weight:800;color:#fff}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;font-weight:400;letter-spacing:.18em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center}
 .nav-link{color:var(--text-secondary);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
 .nav-link:hover{color:var(--accent)}
 
@@ -103,6 +103,7 @@ footer a{color:var(--accent);margin:0 12px}
   h2{font-size:1.2rem}
 }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -111,8 +112,18 @@ footer a{color:var(--accent);margin:0 12px}
 
 <nav>
   <a href="testhomepage.html" class="logo">
-    <div class="logo-icon">P</div>
-    Protevio
+    <div class="logo-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
+        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
+        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <defs>
+          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
+            <stop offset="0%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </linearGradient>
+        </defs>
+      </svg></div>
+    PROTEVIO
   </a>
   <a href="testhomepage.html" class="nav-link">Back to Home</a>
 </nav>
