@@ -740,13 +740,13 @@ async function loadMessages() {
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
 async function markRead(id) {
-  await api('/admin/messages/' + id + '/read', 'POST');
+  await apiPost('/admin/messages/' + id + '/read', {});
   loadMessages();
 }
 
 async function deleteMsg(id) {
   if(!confirm('Delete this message?')) return;
-  await api('/admin/messages/' + id, 'DELETE');
+  await apiDel('/admin/messages/' + id);
   loadMessages();
 }
 
