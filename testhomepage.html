@@ -1416,7 +1416,12 @@ function resetSearch() {
 
 // ===== STEP 1: UPLOAD =====
 uploadBox.addEventListener('click', () => fileInput.click());
-fileInput.addEventListener('change', (e) => { if(e.target.files.length) handleFiles(e.target.files); });
+fileInput.addEventListener('change', (e) => {
+  if(e.target.files.length > 5) {
+    alert('Maximum 5 photos allowed. Only the first 5 will be processed.');
+  }
+  if(e.target.files.length) handleFiles(e.target.files);
+});
 
 uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
 uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
@@ -1436,39 +1441,64 @@ document.addEventListener('paste', (e) => {
   }
 });
 
-async function handleFiles(files) {
+async function handleFiles(fileList) {
   const token = getToken();
   if(!token) { window.location.href = '/login'; return; }
 
-  const file = files[0];
-  if(!file || !file.type.startsWith('image/')) return;
+  // Filter valid images, max 5
+  const validFiles = Array.from(fileList).filter(f => f.type.startsWith('image/')).slice(0, 5);
+  if(validFiles.length === 0) return;
 
   hideAll();
   searchStatus.style.display = 'block';
   statusText.textContent = 'Detecting faces...';
-  statusSub.textContent = 'Analyzing your photo with AI';
+  statusSub.textContent = 'Analyzing ' + validFiles.length + ' photo' + (validFiles.length > 1 ? 's' : '') + ' with AI';
 
   try {
-    const formData = new FormData();
-    formData.append('file', file);
+    let allFaces = [];
+    let faceIdCounter = 0;
 
-    const res = await fetch(API + '/upload', {
-      method: 'POST',
-      headers: {'Authorization': 'Bearer ' + token},
-      body: formData
-    });
+    for(let i = 0; i < validFiles.length; i++) {
+      if(validFiles.length > 1) {
+        statusSub.textContent = 'Processing photo ' + (i+1) + ' of ' + validFiles.length + '...';
+      }
 
-    if(res.status === 401) { window.location.href = '/login'; return; }
-    const data = await res.json();
+      const formData = new FormData();
+      formData.append('file', validFiles[i]);
 
-    if(!res.ok || !data.faces || data.faces.length === 0) {
+      const res = await fetch(API + '/upload', {
+        method: 'POST',
+        headers: {'Authorization': 'Bearer ' + token},
+        body: formData
+      });
+
+      if(res.status === 401) { window.location.href = '/login'; return; }
+      const data = await res.json();
+
+      if(res.ok && data.faces && data.faces.length > 0) {
+        // Add photo index to each face for labeling
+        data.faces.forEach(face => {
+          face._photoIndex = i + 1;
+          face._totalPhotos = validFiles.length;
+          allFaces.push(face);
+        });
+      }
+
+      // Stop if we already have 8 faces
+      if(allFaces.length >= 8) {
+        allFaces = allFaces.slice(0, 8);
+        break;
+      }
+    }
+
+    if(allFaces.length === 0) {
       statusText.textContent = 'No face detected';
-      statusSub.textContent = 'Please upload a clear photo with a visible face.';
+      statusSub.textContent = 'Please upload clear photos with visible faces.';
       setTimeout(resetSearch, 3000);
       return;
     }
 
-    detectedFaces = data.faces;
+    detectedFaces = allFaces;
     showFaceSelection();
 
   } catch(err) {
@@ -1487,12 +1517,16 @@ function showFaceSelection() {
   searchSelectedBtn.disabled = true;
   searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select a face to continue';
 
+  // Update count text
+  const countText = faceSelection.querySelector('p');
+  if(countText) countText.textContent = 'We detected ' + detectedFaces.length + ' face' + (detectedFaces.length > 1 ? 's' : '') + '. Tap one to search for it.';
+
   detectedFaces.forEach((face, i) => {
     const thumb = document.createElement('div');
     thumb.className = 'face-thumb';
     thumb.dataset.faceId = face.id;
 
-    const info = 'Face ' + (i+1);
+    const info = face._totalPhotos > 1 ? ('Photo ' + face._photoIndex + ' · Face ' + (i+1)) : ('Face ' + (i+1));
 
     thumb.innerHTML =
       '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
