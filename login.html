@@ -339,23 +339,56 @@ body{
 </div>
 
 <script>
-// Demo mode - just visual feedback, no real authentication
+const API = 'https://api.protevio.com/api';
 
-// Email/Password Login
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  
+  const btn = this.querySelector('button[type="submit"]');
+  const btnText = btn.querySelector('span');
   const email = document.getElementById('email').value;
-  
-  // Simple demo feedback
-  if (email) {
-    alert('✅ Login page demo\n\nThis is a visual mockup. Authentication will be implemented in production.\n\nFor now, this just shows the design.');
+  const password = document.getElementById('password').value;
+
+  btnText.textContent = 'Signing in...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  try {
+    const res = await fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username: email, password})
+    });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      localStorage.setItem('protevio_token', data.token);
+      localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
+      window.location.href = '/testhomepage';
+    } else {
+      showError(data.error || 'Invalid email or password');
+    }
+  } catch(err) {
+    showError('Connection error. Please try again.');
+  } finally {
+    btnText.textContent = 'Log In';
+    btn.disabled = false;
+    btn.style.opacity = '1';
   }
 });
 
-// Google Sign-In Demo
+function showError(msg) {
+  let el = document.querySelector('.login-error');
+  if (!el) {
+    el = document.createElement('div');
+    el.className = 'login-error';
+    el.style.cssText = 'background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171;padding:12px 16px;border-radius:12px;font-size:.9rem;margin-bottom:16px;text-align:center;';
+    document.getElementById('loginForm').prepend(el);
+  }
+  el.textContent = msg;
+  setTimeout(() => el.remove(), 5000);
+}
+
 document.getElementById('googleBtn').addEventListener('click', function() {
-  alert('🔐 Google Sign-In Demo\n\nThis button will be connected to Google OAuth when the project launches.\n\nFor now, this is just a design showcase.');
+  alert('Google Sign-In will be available soon.');
 });
 </script>
 

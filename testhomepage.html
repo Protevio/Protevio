@@ -998,8 +998,9 @@ body{
     </div>
     
     <!-- UPLOAD ZONE -->
-    <div class="upload-zone">
-      <div class="upload-box">
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" accept="image/*" multiple style="display:none" max="5">
+      <div class="upload-box" id="uploadBox">
         <div class="upload-icon">
           <svg viewBox="0 0 52 52">
             <rect x="6" y="10" width="36" height="28" rx="3" stroke-width="2"/>
@@ -1015,6 +1016,23 @@ body{
         <div class="upload-shortcut">
           <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste from clipboard
         </div>
+      </div>
+
+      <!-- SEARCH STATUS (hidden by default) -->
+      <div id="searchStatus" style="display:none;text-align:center;padding:32px 24px;">
+        <div style="width:48px;height:48px;margin:0 auto 16px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <p style="font-size:1.1rem;font-weight:600;color:var(--text);" id="statusText">Analyzing face...</p>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:8px;" id="statusSub">Searching 1M+ faces</p>
+      </div>
+
+      <!-- SEARCH RESULTS (hidden by default) -->
+      <div id="searchResults" style="display:none;padding:24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);">Search Results</h3>
+          <button id="newSearchBtn" style="background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;">New Search</button>
+        </div>
+        <div id="resultsList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;"></div>
+        <p id="noResults" style="display:none;text-align:center;color:var(--text-muted);padding:24px;font-size:.95rem;">No matching faces found. Try a different photo.</p>
       </div>
       
       <div class="action-buttons">
@@ -1199,6 +1217,7 @@ body{
 </section>
 
 
+<style>@keyframes spin{to{transform:rotate(360deg)}}.upload-box.dragover{border-color:var(--accent)!important;background:var(--accent-glow)!important}.result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s;cursor:pointer}.result-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.3)}.result-card img{width:100%;aspect-ratio:1;object-fit:cover}.result-card__info{padding:8px 10px}.result-card__score{font-size:.75rem;font-weight:600;color:var(--accent)}.result-card__domain{font-size:.7rem;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}</style>
 <script>
 (function(){
   var h=document.querySelector('.nav__hamburger'),
@@ -1215,6 +1234,157 @@ body{
   if(o)o.addEventListener('click',toggle);
   m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
 })();
+
+// ===== PROTEVIO FACE SEARCH =====
+const API = 'https://api.protevio.com/api';
+const uploadBox = document.getElementById('uploadBox');
+const fileInput = document.getElementById('fileInput');
+const searchStatus = document.getElementById('searchStatus');
+const searchResults = document.getElementById('searchResults');
+const resultsList = document.getElementById('resultsList');
+const noResults = document.getElementById('noResults');
+const statusText = document.getElementById('statusText');
+const statusSub = document.getElementById('statusSub');
+const newSearchBtn = document.getElementById('newSearchBtn');
+
+function getToken() { return localStorage.getItem('protevio_token'); }
+
+// Click to upload
+uploadBox.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', (e) => { if(e.target.files.length) handleFiles(e.target.files); });
+
+// Drag and drop
+uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
+uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
+uploadBox.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadBox.classList.remove('dragover');
+  if(e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+});
+
+// Paste from clipboard
+document.addEventListener('paste', (e) => {
+  const items = e.clipboardData.items;
+  for(let i=0; i<items.length; i++){
+    if(items[i].type.startsWith('image/')){
+      handleFiles([items[i].getAsFile()]);
+      break;
+    }
+  }
+});
+
+// New search button
+newSearchBtn.addEventListener('click', resetSearch);
+
+function resetSearch() {
+  uploadBox.style.display = '';
+  document.querySelector('.action-buttons').style.display = '';
+  searchStatus.style.display = 'none';
+  searchResults.style.display = 'none';
+  resultsList.innerHTML = '';
+  noResults.style.display = 'none';
+  fileInput.value = '';
+}
+
+async function handleFiles(files) {
+  const token = getToken();
+  if(!token) {
+    window.location.href = '/login';
+    return;
+  }
+
+  const file = files[0];
+  if(!file || !file.type.startsWith('image/')) return;
+
+  // Show loading
+  uploadBox.style.display = 'none';
+  document.querySelector('.action-buttons').style.display = 'none';
+  searchStatus.style.display = 'block';
+  searchResults.style.display = 'none';
+  statusText.textContent = 'Detecting faces...';
+  statusSub.textContent = 'Analyzing your photo';
+
+  try {
+    // Step 1: Upload image for face detection
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const uploadRes = await fetch(API + '/upload', {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer ' + token},
+      body: formData
+    });
+
+    if(uploadRes.status === 401) { window.location.href = '/login'; return; }
+    const uploadData = await uploadRes.json();
+
+    if(!uploadRes.ok || !uploadData.faces || uploadData.faces.length === 0) {
+      statusText.textContent = 'No face detected';
+      statusSub.textContent = 'Please upload a clear photo with a visible face.';
+      setTimeout(resetSearch, 3000);
+      return;
+    }
+
+    // Step 2: Search with the first detected face
+    statusText.textContent = 'Searching database...';
+    statusSub.textContent = 'Comparing against 1M+ faces';
+
+    const searchRes = await fetch(API + '/search', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ face_id: uploadData.faces[0].id || uploadData.faces[0].face_id })
+    });
+
+    if(!searchRes.ok) {
+      const errData = await searchRes.json();
+      statusText.textContent = 'Search failed';
+      statusSub.textContent = errData.error || 'Please try again.';
+      setTimeout(resetSearch, 3000);
+      return;
+    }
+
+    const searchData = await searchRes.json();
+    showResults(searchData);
+
+  } catch(err) {
+    statusText.textContent = 'Connection error';
+    statusSub.textContent = 'Please check your connection and try again.';
+    setTimeout(resetSearch, 3000);
+  }
+}
+
+function showResults(data) {
+  searchStatus.style.display = 'none';
+  searchResults.style.display = 'block';
+
+  const matches = data.results || data.matches || data || [];
+  if(!Array.isArray(matches) || matches.length === 0) {
+    noResults.style.display = 'block';
+    return;
+  }
+
+  resultsList.innerHTML = '';
+  matches.forEach(match => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    const similarity = Math.round((match.similarity || match.score || 0) * 100);
+    const domain = match.source_domain || match.domain || '';
+    const imgUrl = match.image_url || (API + '/image/' + (match.face_filename || ''));
+    card.innerHTML =
+      '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
+      '<div class="result-card__info">' +
+      '<div class="result-card__score">' + similarity + '% match</div>' +
+      '<div class="result-card__domain">' + domain + '</div>' +
+      '</div>';
+    if(match.source_url || match.page_url) {
+      card.addEventListener('click', () => window.open(match.source_url || match.page_url, '_blank'));
+    }
+    resultsList.appendChild(card);
+  });
+}
 </script>
 </body>
 </html>
