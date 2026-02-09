@@ -226,7 +226,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
       <div class="mpc__sub" data-sub="pro" data-m="149,99" data-a="119,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Pro</div><div class="mpc__sub-desc">400 takedowns / month</div></div><div class="mpc__sub-price">149,99 €</div></div>
       <div class="mpc__addon" id="mpAddon"><div class="mpc__addon-chk"></div><div class="mpc__addon-text">Takedown Agent Support</div><div class="mpc__addon-info" title="Our team handles takedown requests on your behalf.">i</div></div>
     </div>
-    <div class="mpc__cta"><button class="mpc__btn" onclick="location.href='signup.html'">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+    <div class="mpc__cta"><button class="mpc__btn" onclick="startCheckout(mPlan)">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
     <div class="mpc__feats" id="mpFeats"></div>
     <a class="mpc__learn" href="faq.html">Learn more about all features</a>
   </div>
@@ -314,7 +314,7 @@ function buildDesktop(){
     html += `<div class="pcard__price"><div class="pcard__amount"><span class="dpr" data-key="${key}">${price}</span> <span class="cur">€</span> <span class="per">/ month</span></div>`;
     html += annual ? `<div class="pcard__annual-note">Billed as ${annualAmt} € / year</div>` : '';
     html += `</div>`;
-    html += `<div class="pcard__cta"><button class="pcard__btn" onclick="location.href='signup.html'">${p.cta} <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
+    html += `<div class="pcard__cta"><button class="pcard__btn" onclick="startCheckout('${key}')">${p.cta} <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
     html += `<div class="pcard__ftitle">What's included</div>`;
     p.features.forEach(f => {
       if(f.div){html += '<hr class="pcard__fdiv">';return;}
@@ -395,6 +395,49 @@ document.querySelector('.nav__hamburger').addEventListener('click',()=>document.
 
 // Auth
 (function(){var t=localStorage.getItem("protevio_token"),u=JSON.parse(localStorage.getItem("protevio_user")||"null"),n=document.getElementById("navAuth"),m=document.getElementById("mobileAuth");if(t&&u){var f=(u.name||u.username||"Account").split(" ")[0];if(n){n.href="dashboard.html";n.innerHTML='<span>'+f+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}if(m){m.href="dashboard.html";m.textContent=f;}}})();
+// Stripe Checkout
+const PRICE_KEYS = {
+  open: { monthly: 'open_plus_monthly', annual: 'open_plus_annual' },
+  protect: { monthly: 'protect_monthly', annual: 'protect_annual' },
+  advanced: { monthly: 'advanced_monthly', annual: 'advanced_annual' },
+};
+const API = 'https://api.protevio.com';
+
+async function startCheckout(planKey) {
+  const token = localStorage.getItem('protevio_token');
+  if (!token) {
+    window.location.href = 'signup.html';
+    return;
+  }
+  const priceKey = PRICE_KEYS[planKey]?.[billing] || PRICE_KEYS[planKey]?.monthly;
+  if (!priceKey) return;
+
+  const btn = event.target.closest('button');
+  const origHTML = btn.innerHTML;
+  btn.innerHTML = '<span style="opacity:.7">Redirecting...</span>';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(API + '/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ price_key: priceKey })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert(data.error || 'Could not start checkout. Please try again.');
+      btn.innerHTML = origHTML;
+      btn.disabled = false;
+    }
+  } catch (err) {
+    alert('Connection error. Please try again.');
+    btn.innerHTML = origHTML;
+    btn.disabled = false;
+  }
+}
+
 </script>
 </body>
 </html>
