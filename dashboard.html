@@ -233,7 +233,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--accent)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>My Subscription</div><div class="badge" id="planBadge">Free</div></div>
         <div style="font-size:.88rem;color:var(--text2);margin-bottom:14px">Plan: <strong id="planName" style="color:var(--text)">Free</strong></div>
         <div class="irow"><div class="irow__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="irow__txt"><div class="irow__l" id="userEmail">—</div><div class="irow__s" id="userCreated">Created: —</div></div></div>
-        <div class="irow"><div class="irow__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div><div class="irow__txt"><div class="irow__l">Orders & Invoices</div><div class="irow__s">Manage your payment history</div></div><button class="irow__act" onclick="alert('Payment management coming soon.')">Manage →</button></div>
+        <div class="irow"><div class="irow__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div><div class="irow__txt"><div class="irow__l">Orders & Invoices</div><div class="irow__s">Manage your payment history</div></div><button class="irow__act" onclick="openBillingPortal()">Manage →</button></div>
         <div style="margin-top:16px"><a href="/pricing" class="abtn abtn--o"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Explore Pricing</a></div>
       </div>
       <div class="dcard">
@@ -629,6 +629,25 @@ async function exportPDF(searchId) {
   // Direct download via hidden link - avoids CORS issues with binary responses
   const url = API + '/exports/' + searchId + '/pdf?token=' + token;
   window.open(url, '_blank');
+}
+
+async function openBillingPortal() {
+  const token = localStorage.getItem('protevio_token');
+  if (!token) { window.location.href = 'login.html'; return; }
+  try {
+    const res = await fetch(API + '/billing/portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert(data.error || 'No active subscription found. Subscribe first from the Pricing page.');
+    }
+  } catch (e) {
+    alert('Connection error. Please try again.');
+  }
 }
 
 loadDashboard();
