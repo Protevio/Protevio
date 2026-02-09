@@ -150,12 +150,58 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .empty{text-align:center;padding:40px;color:var(--text3)}
 .empty svg{display:block;margin:0 auto 12px;width:48px;height:48px;stroke:var(--text3);stroke-width:1.5;fill:none}
 
-@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:16px}.dgrid{grid-template-columns:1fr}}
+/* MOBILE TOPBAR */
+.mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:56px;background:var(--bg2);border-bottom:1px solid var(--border);z-index:90;align-items:center;padding:0 16px;gap:12px}
+.mobile-topbar__hamburger{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px}
+.mobile-topbar__hamburger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.mobile-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.95rem;color:var(--text)}
+.mobile-topbar__logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:7px;display:flex;align-items:center;justify-content:center}
+.mobile-topbar__logo-icon svg{width:14px;height:14px;fill:#fff}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:95;backdrop-filter:blur(2px)}
+.sidebar-overlay.show{display:block}
+
+@media(max-width:768px){
+  .mobile-topbar{display:flex}
+  .sidebar{transform:translateX(-100%);transition:transform .3s ease;z-index:100;width:260px}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px;padding-top:72px}
+  .dgrid{grid-template-columns:1fr}
+  .dh__t{font-size:1.3rem}
+  .card{padding:16px}
+  .card__t{font-size:.8rem}
+  .card__v{font-size:1.4rem}
+  .hi{flex-wrap:wrap;gap:10px}
+  .hi__right{text-align:left}
+  .ai{flex-wrap:wrap;gap:10px}
+  .ai__actions{width:100%;justify-content:flex-end}
+  .ti__top{flex-direction:column;align-items:flex-start;gap:6px}
+  .si{flex-direction:column;align-items:flex-start;gap:10px}
+  .modal{max-width:calc(100vw - 32px);padding:20px}
+  .modal__btns{flex-direction:column}
+  .modal__btn{width:100%;text-align:center}
+}
+@media(max-width:400px){
+  .main{padding:12px;padding-top:68px}
+  .dh__t{font-size:1.15rem}
+  .card__v{font-size:1.2rem}
+}
 </style>
 </head>
 <body>
 
-<aside class="sidebar">
+<!-- Mobile Topbar -->
+<div class="mobile-topbar">
+  <button class="mobile-topbar__hamburger" id="dashHamburger">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-topbar__logo">
+    <div class="mobile-topbar__logo-icon"><svg viewBox="0 0 24 24"><path d="M15 3a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6 6 6 0 00-6-6zM3 21a9 9 0 0118 0"/></svg></div>
+    Protevio AI
+  </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="dashSidebar">
   <div class="sidebar__logo">
     <div class="sidebar__logo-icon"><svg viewBox="0 0 24 24"><path d="M15 3a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6 6 6 0 00-6-6zM3 21a9 9 0 0118 0"/></svg></div>
     <span class="sidebar__logo-text">Protevio AI</span>
@@ -297,6 +343,15 @@ document.getElementById('logoutBtn').onclick = () => {
   window.location.href = '/login';
 };
 
+// Mobile sidebar toggle
+const dashHamburger = document.getElementById('dashHamburger');
+const dashSidebar = document.getElementById('dashSidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+function openSidebar(){ dashSidebar.classList.add('open'); sidebarOverlay.classList.add('show'); document.body.style.overflow='hidden'; }
+function closeSidebar(){ dashSidebar.classList.remove('open'); sidebarOverlay.classList.remove('show'); document.body.style.overflow=''; }
+dashHamburger.addEventListener('click', openSidebar);
+sidebarOverlay.addEventListener('click', closeSidebar);
+
 document.querySelectorAll('.sidebar__link[data-page]').forEach(l => {
   l.onclick = e => {
     e.preventDefault();
@@ -304,6 +359,7 @@ document.querySelectorAll('.sidebar__link[data-page]').forEach(l => {
     l.classList.add('active');
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-'+l.dataset.page).classList.add('active');
+    closeSidebar();
   };
 });
 
