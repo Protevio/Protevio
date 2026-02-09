@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing — Protevio AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0c0f1a;--accent:#2563eb;--accent-light:#5b9aff;--green:#16a34a;--purple:#a78bfa;--text3:#8891a5;--glass-border:rgba(255,255,255,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;background:var(--bg);color:#fff;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 0%,rgba(91,154,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 100%,rgba(167,139,250,.06) 0%,transparent 50%)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;padding:14px 40px;z-index:100;background:rgba(12,15,26,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-border)}
+.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav__logo-mark{width:32px;height:32px}.nav__logo-mark svg{width:32px;height:32px}
+.nav__logo-text{font-size:1.15rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav__links{display:flex;gap:24px;margin:0 auto}
+.nav__link{color:var(--text3);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;position:relative}
+.nav__link:hover{color:#fff}.nav__link--active{color:var(--accent-light)}
+.nav__link--active::after{content:'';position:absolute;bottom:-6px;left:0;right:0;height:2px;background:var(--accent-light);border-radius:1px}
+.nav__right{display:flex;align-items:center;gap:14px}
+.nav__lang{display:flex;align-items:center;gap:6px;background:none;border:1px solid rgba(255,255,255,.15);color:var(--text3);padding:7px 14px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.nav__lang svg{width:16px;height:16px}.nav__lang:hover{border-color:var(--accent-light);color:var(--accent-light)}
+.nav__login{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent-light),var(--purple));color:#fff;padding:9px 22px;border-radius:12px;text-decoration:none;font-size:.88rem;font-weight:600;transition:all .2s;box-shadow:0 4px 16px rgba(91,154,255,.25)}
+.nav__login svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;fill:none}
+.nav__login:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(91,154,255,.35)}
+.nav__hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:10px;z-index:110;background:none;border:none;margin-left:auto}
+.nav__hamburger span{display:block;width:22px;height:2.5px;background:#fff;border-radius:2px;transition:all .3s}
+.nav__mobile-menu{position:fixed;top:0;right:-100%;width:280px;max-width:80vw;height:100vh;background:var(--bg);border-left:1px solid var(--glass-border);padding:80px 32px 32px;z-index:99;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:none}
+.nav__mobile-menu.active{right:0}
+.nav__mobile-menu .mobile-link{display:block;padding:16px 0;font-size:1.1rem;font-weight:600;color:var(--text3);text-decoration:none;border-bottom:1px solid var(--glass-border);transition:color .2s}
+.nav__mobile-menu .mobile-link:hover,.nav__mobile-menu .mobile-link--active{color:var(--accent-light)}
+.nav__mobile-menu .mobile-login{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:24px;padding:16px;background:linear-gradient(135deg,var(--accent-light),var(--purple));color:#fff;border-radius:12px;text-decoration:none;font-size:1rem;font-weight:600}
+
+.container{max-width:1140px;margin:0 auto;padding:110px 24px 60px;position:relative;z-index:1}
+.hero{text-align:center;margin-bottom:40px}
+.hero__title{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:12px}
+.hero__title span{background:linear-gradient(135deg,var(--accent-light),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero__sub{font-size:1rem;color:var(--text3);line-height:1.5}
+
+/* BILLING TOGGLE (desktop) */
+.billing-toggle{display:flex;justify-content:center;gap:0;margin-bottom:36px;position:relative}
+.billing-toggle__btn{padding:12px 32px;font-size:.95rem;font-weight:700;color:var(--text3);cursor:pointer;border:none;background:none;font-family:inherit;position:relative;transition:color .2s}
+.billing-toggle__btn.active{color:#fff}
+.billing-toggle__btn.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent-light)}
+.billing-toggle__btn .save{color:var(--green);font-size:.72rem;font-weight:700;margin-left:4px}
+.billing-toggle::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:1px;background:rgba(255,255,255,.1)}
+
+/* DESKTOP 3 CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pcard{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.25)}
+.pcard__header{padding:24px 28px 20px;text-align:center;font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+.pcard--open .pcard__header{background:#bfdbfe;color:#1e3a5f}
+.pcard--protect .pcard__header{background:var(--accent);color:#fff}
+.pcard--advanced .pcard__header{background:#1e293b;color:#fff}
+.pcard__body{padding:28px;flex:1;display:flex;flex-direction:column}
+.pcard__price{margin-bottom:20px}
+.pcard__amount{font-size:2.4rem;font-weight:800;color:#1a202c;letter-spacing:-.03em}
+.pcard__amount .cur{font-size:1.2rem;color:#64748b;margin-left:2px}
+.pcard__amount .per{font-size:.88rem;color:#94a3b8;font-weight:500;margin-left:2px}
+.pcard__annual-note{font-size:.75rem;color:#94a3b8;margin-top:4px}
+.pcard__cta{margin-bottom:24px}
+.pcard__btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:10px;font-size:.92rem;font-weight:700;cursor:pointer;transition:all .2s;border:none;font-family:inherit;text-decoration:none}
+.pcard__btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5}
+.pcard--open .pcard__btn{background:#fff;border:1.5px solid #cbd5e1;color:#1a202c}
+.pcard--open .pcard__btn:hover{border-color:var(--accent);color:var(--accent)}
+.pcard--protect .pcard__btn{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.3)}
+.pcard--protect .pcard__btn:hover{background:#1d4ed8}
+.pcard--advanced .pcard__btn{background:#1e293b;color:#fff;border:1px solid #475569}
+.pcard--advanced .pcard__btn:hover{background:#334155}
+.pcard__ftitle{font-size:.92rem;font-weight:800;color:#1a202c;margin-bottom:16px}
+.pcard__feature{margin-bottom:16px}
+.pcard__feature-row{display:flex;align-items:flex-start;gap:9px}
+.pcard__fcheck{width:17px;height:17px;flex-shrink:0;margin-top:2px}
+.fc-blue{color:var(--accent)}.fc-green{color:var(--green)}.fc-gray{color:#94a3b8}
+.pcard__fname{font-size:.88rem;font-weight:700;color:#1a202c}
+.pcard__fname em{font-weight:500;color:#64748b}
+.pcard__fdesc{font-size:.8rem;color:#64748b;line-height:1.55;margin-top:4px;padding-left:26px}
+.pcard__fdiv{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
+.pcard__learn{display:block;text-align:center;padding:16px 0 0;font-size:.82rem;color:var(--accent);text-decoration:underline;font-weight:600;border-top:1px solid #f1f5f9;margin-top:auto}
+
+/* MOBILE SINGLE CARD */
+.mobile-pricing{display:none;max-width:520px;margin:0 auto}
+.mpc{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0}
+.mpc__name{padding:20px 24px 0;font-size:1.15rem;font-weight:800;color:#1a202c}
+.mpc__tabs{display:flex;background:#f1f5f9;padding:5px;gap:3px;border-radius:12px;margin:16px 20px 0}
+.mpc__tab{flex:1;padding:11px 6px;text-align:center;font-size:.85rem;font-weight:700;color:#64748b;cursor:pointer;border-radius:9px;border:2px solid transparent;transition:all .2s;background:none;font-family:inherit}
+.mpc__tab:hover{color:#1a202c}
+.mpc__tab.active{background:#fff;color:#1a202c;border-color:#e2e8f0;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mpc__tab.active[data-plan="protect"]{border-color:var(--accent);color:var(--accent)}
+.mpc__tab.active[data-plan="advanced"]{border-color:#1e293b;color:#1e293b}
+.mpc__billing{display:flex;margin:16px 20px 0;border-bottom:2px solid #e2e8f0}
+.mpc__bbtn{flex:1;padding:11px;text-align:center;font-size:.88rem;font-weight:700;color:#94a3b8;cursor:pointer;border:none;background:none;font-family:inherit;position:relative;transition:color .2s}
+.mpc__bbtn.active{color:var(--accent)}
+.mpc__bbtn.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--accent)}
+.mpc__bbtn .save{color:var(--green);font-size:.68rem;font-weight:700}
+.mpc__price{padding:20px 24px 0}
+.mpc__amount{font-size:2.5rem;font-weight:800;color:#1a202c;letter-spacing:-.03em}
+.mpc__amount .cur{font-size:1.2rem;color:#64748b}.mpc__amount .per{font-size:.88rem;color:#94a3b8;font-weight:500}
+.mpc__anote{font-size:.75rem;color:#94a3b8;margin-top:4px}
+/* Sub-plans */
+.mpc__subs{padding:16px 20px 0;display:none}.mpc__subs.show{display:block}
+.mpc__sub{display:flex;align-items:center;gap:12px;padding:14px;border:2px solid #e2e8f0;border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all .2s}
+.mpc__sub:hover{border-color:#cbd5e1}
+.mpc__sub.active{border-color:var(--accent);background:rgba(37,99,235,.04)}
+.mpc__sub-radio{width:20px;height:20px;border-radius:5px;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.mpc__sub.active .mpc__sub-radio{border-color:var(--accent);background:var(--accent)}
+.mpc__sub.active .mpc__sub-radio::after{content:'';display:block;width:9px;height:9px;background:#fff;border-radius:2px}
+.mpc__sub-info{flex:1}.mpc__sub-name{font-size:.88rem;font-weight:700;color:#1a202c}.mpc__sub-desc{font-size:.75rem;color:#94a3b8}
+.mpc__sub-price{font-size:.95rem;font-weight:700;color:#1a202c;white-space:nowrap}
+.mpc__addon{display:flex;align-items:center;gap:12px;padding:14px;border:2px solid #e2e8f0;border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all .2s}
+.mpc__addon:hover{border-color:#cbd5e1}
+.mpc__addon.active{border-color:var(--accent);background:rgba(37,99,235,.04)}
+.mpc__addon-chk{width:20px;height:20px;border-radius:5px;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.mpc__addon.active .mpc__addon-chk{border-color:var(--accent);background:var(--accent)}
+.mpc__addon.active .mpc__addon-chk::after{content:'\2713';color:#fff;font-size:11px;font-weight:700}
+.mpc__addon-text{font-size:.88rem;font-weight:600;color:#1a202c;flex:1}
+.mpc__addon-info{width:22px;height:22px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:#94a3b8}
+.mpc__cta{padding:16px 20px}
+.mpc__btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;color:#fff;background:var(--accent);box-shadow:0 4px 16px rgba(37,99,235,.3);transition:all .2s}
+.mpc__btn:hover{background:#1d4ed8}
+.mpc__btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5}
+.mpc__feats{padding:8px 24px 28px}
+.mpc__ftitle{font-size:.92rem;font-weight:800;color:#1a202c;margin-bottom:16px}
+.mpc__feat{margin-bottom:16px}
+.mpc__feat-row{display:flex;align-items:flex-start;gap:9px}
+.mpc__feat-name{font-size:.88rem;font-weight:700;color:#1a202c}
+.mpc__feat-name em{font-weight:500;color:#64748b}
+.mpc__feat-desc{font-size:.8rem;color:#64748b;line-height:1.55;margin-top:4px;padding-left:26px}
+.mpc__feat-div{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
+.mpc__learn{display:block;text-align:center;padding:16px;font-size:.82rem;color:var(--accent);text-decoration:underline;font-weight:600;border-top:1px solid #f1f5f9}
+
+/* FREE TIER */
+.free-tier{margin-top:36px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.free-tier__title{font-size:1.02rem;font-weight:700;color:#1a202c;margin-bottom:3px}
+.free-tier__desc{font-size:.82rem;color:#64748b}
+.free-tier__feats{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap}
+.free-tier__f{font-size:.76rem;color:#64748b;display:flex;align-items:center;gap:5px}
+.free-tier__f svg{width:14px;height:14px;color:var(--green)}
+.free-tier__btn{background:#fff;border:1.5px solid #e2e8f0;color:#1a202c;padding:11px 24px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none;white-space:nowrap}
+.free-tier__btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* COMPARE */
+.compare{margin-top:60px}
+.compare__title{font-size:1.5rem;font-weight:800;text-align:center;margin-bottom:28px}
+.compare-wrap{overflow-x:auto;background:#fff;border-radius:14px;border:1px solid #e2e8f0}
+.ctbl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:520px}
+.ctbl th{text-align:left;padding:13px 14px;color:#94a3b8;font-weight:600;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid #e2e8f0;background:#f8fafc}
+.ctbl th:not(:first-child){text-align:center;min-width:90px}
+.ctbl td{padding:12px 14px;border-bottom:1px solid #f1f5f9;color:#64748b}
+.ctbl td:not(:first-child){text-align:center}
+.ctbl tr:hover td{background:#fafbff}
+.cy{color:var(--green);font-weight:700;font-size:1rem}.cn{color:#cbd5e1}.cv{font-weight:700;color:#1a202c}
+
+/* FAQ */
+.faq{margin-top:60px}.faq__title{font-size:1.5rem;font-weight:800;text-align:center;margin-bottom:28px}
+.faq-wrap{background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden}
+.faq-item{border-bottom:1px solid #e2e8f0}.faq-item:last-child{border-bottom:none}
+.faq-item__q{font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;color:#1a202c;transition:color .2s}
+.faq-item__q:hover{color:var(--accent)}
+.faq-item__q svg{width:16px;height:16px;color:#94a3b8;transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-item__q svg{transform:rotate(180deg)}
+.faq-item__a{max-height:0;overflow:hidden;transition:max-height .3s;font-size:.85rem;color:#64748b;line-height:1.6;padding:0 24px}
+.faq-item.open .faq-item__a{max-height:200px;padding:0 24px 16px}
+
+.footer{margin-top:60px;padding:32px 20px;border-top:1px solid rgba(255,255,255,.06);text-align:center}
+.footer__text{font-size:.75rem;color:var(--text3);margin-bottom:6px}
+.footer__links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.footer__link{font-size:.72rem;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer__link:hover{color:var(--accent-light)}
+
+/* RESPONSIVE */
+@media(max-width:860px){.cards-grid{display:none}.mobile-pricing{display:block}.billing-toggle{display:none}}
+@media(min-width:861px){.mobile-pricing{display:none !important}}
+@media(max-width:768px){
+  .nav{padding:12px 20px}.nav__hamburger{display:flex}.nav__mobile-menu{display:block}
+  .nav__links{display:none !important}.nav__lang{display:none !important}.nav__login{display:none !important}
+  .container{padding:90px 12px 40px}.hero__title{font-size:1.7rem}
+  .free-tier{flex-direction:column;text-align:center;padding:20px}.free-tier__feats{justify-content:center}
+}
+@media(max-width:420px){.hero__title{font-size:1.4rem}.mpc__tab{font-size:.78rem;padding:9px 4px}.mpc__amount{font-size:2.1rem}}
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+
+<nav class="nav">
+  <a href="testhomepage.html" class="nav__logo"><div class="nav__logo-mark"><svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#050608"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg></div><span class="nav__logo-text">PROTEVIO</span></a>
+  <div class="nav__links"><a href="testhomepage.html" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a><a href="pricing.html" class="nav__link nav__link--active">Pricing</a><a href="faq.html" class="nav__link">FAQ</a><a href="contact.html" class="nav__link">Contact</a></div>
+  <div class="nav__right"><button class="nav__lang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>EN</button><a href="login.html" class="nav__login" id="navAuth"><span>Log In</span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+  <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav__mobile-menu" id="mobileMenu">
+  <a href="testhomepage.html" class="mobile-link">Home</a><a href="about.html" class="mobile-link">About</a><a href="pricing.html" class="mobile-link mobile-link--active">Pricing</a><a href="faq.html" class="mobile-link">FAQ</a><a href="contact.html" class="mobile-link">Contact</a>
+  <a href="login.html" class="mobile-login" id="mobileAuth">Log In →</a>
+</div>
+
+<div class="container">
+<div class="hero"><h1 class="hero__title">Choose the plan that fits <span>your needs</span></h1><p class="hero__sub">Start free, upgrade when you need more. All plans include our core facial recognition search engine.</p></div>
+
+<div class="billing-toggle"><button class="billing-toggle__btn active" data-billing="monthly">Monthly</button><button class="billing-toggle__btn" data-billing="annual">Annually <span class="save">-20%</span></button></div>
+
+<!-- DESKTOP 3 CARDS -->
+<div class="cards-grid" id="desktopCards"></div>
+
+<!-- MOBILE SINGLE CARD -->
+<div class="mobile-pricing">
+  <div class="mpc">
+    <div class="mpc__name" id="mpName">Open Plus</div>
+    <div class="mpc__tabs"><button class="mpc__tab active" data-plan="open">Open Plus</button><button class="mpc__tab" data-plan="protect">PROtect</button><button class="mpc__tab" data-plan="advanced">Advanced</button></div>
+    <div class="mpc__billing"><button class="mpc__bbtn active" data-billing="monthly">Monthly</button><button class="mpc__bbtn" data-billing="annual">Annually <span class="save">-20%</span></button></div>
+    <div class="mpc__price"><div class="mpc__amount"><span id="mpPrice">24,99</span> <span class="cur">€</span> <span class="per">/ month</span></div><div class="mpc__anote" id="mpAnote" style="display:none"></div></div>
+    <div class="mpc__subs" id="mpSubs">
+      <div class="mpc__sub active" data-sub="base" data-m="34,99" data-a="27,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect</div><div class="mpc__sub-desc">100 takedowns / month</div></div><div class="mpc__sub-price">34,99 €</div></div>
+      <div class="mpc__sub" data-sub="plus" data-m="69,99" data-a="55,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Plus</div><div class="mpc__sub-desc">200 takedowns / month</div></div><div class="mpc__sub-price">69,99 €</div></div>
+      <div class="mpc__sub" data-sub="pro" data-m="149,99" data-a="119,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Pro</div><div class="mpc__sub-desc">400 takedowns / month</div></div><div class="mpc__sub-price">149,99 €</div></div>
+      <div class="mpc__addon" id="mpAddon"><div class="mpc__addon-chk"></div><div class="mpc__addon-text">Takedown Agent Support</div><div class="mpc__addon-info" title="Our team handles takedown requests on your behalf.">i</div></div>
+    </div>
+    <div class="mpc__cta"><button class="mpc__btn" onclick="location.href='signup.html'">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+    <div class="mpc__feats" id="mpFeats"></div>
+    <a class="mpc__learn" href="faq.html">Learn more about all features</a>
+  </div>
+</div>
+
+<!-- FREE -->
+<div class="free-tier"><div><div class="free-tier__title">Start with Free</div><div class="free-tier__desc">Try Protevio AI with limited features — no credit card required.</div><div class="free-tier__feats"><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>10 searches/day</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Basic results</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No credit card</span></div></div><a href="signup.html" class="free-tier__btn">Get started free →</a></div>
+
+<!-- COMPARE -->
+<div class="compare"><h2 class="compare__title">Compare all features</h2><div class="compare-wrap"><table class="ctbl"><thead><tr><th>Feature</th><th>Free</th><th>Open Plus</th><th>PROtect</th><th>Advanced</th></tr></thead><tbody>
+<tr><td>Daily searches</td><td class="cv">10</td><td class="cv">50</td><td class="cv">75</td><td class="cv">Unlimited</td></tr>
+<tr><td>Face Alerts</td><td class="cn">—</td><td class="cv">5</td><td class="cv">20</td><td class="cv">500</td></tr>
+<tr><td>PDF reports</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+<tr><td>Multi-photo upload</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+<tr><td>Search history</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+<tr><td>Result management</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+<tr><td>Takedown requests</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+<tr><td>Deep Search</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td></tr>
+<tr><td>API access</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td></tr>
+<tr><td>Dedicated support</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+</tbody></table></div></div>
+
+<!-- FAQ -->
+<div class="faq"><h2 class="faq__title">Frequently asked questions</h2><div class="faq-wrap">
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Can I cancel my subscription at any time?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Yes, cancel anytime from your dashboard. Your access continues until the end of the billing period.</div></div>
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What payment methods do you accept?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Visa, Mastercard, Amex, SEPA, iDEAL, Bancontact, and more through our secure payment processor.</div></div>
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Can I switch between plans?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Yes. Upgrade anytime (prorated). Downgrade takes effect at the next billing cycle.</div></div>
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What is a Face Alert?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Face Alerts monitor our database for new appearances of a face. You get notified when new matches are found — great for tracking unauthorized photo use.</div></div>
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Is my data safe?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Uploaded photos are processed temporarily and not stored permanently. We use encryption in transit and at rest.</div></div>
+</div></div>
+</div>
+
+<div class="footer"><p class="footer__text">© 2026 Protevio AI. All rights reserved.</p><div class="footer__links"><a href="privacy-policy.html" class="footer__link">Privacy Policy</a><a href="terms-of-service.html" class="footer__link">Terms of Service</a><a href="about.html" class="footer__link">About</a><a href="contact.html" class="footer__link">Contact</a></div></div>
+
+<script>
+const PLANS = {
+  open: {name:'Open Plus', headerClass:'pcard--open', headerBg:'#bfdbfe', headerColor:'#1e3a5f',
+    m:'24,99', a:'19,99', cta:'Buy access', ctaType:'outline',
+    features:[
+      {n:'Up to 50 searches daily', d:'With the Open Plus plan, you can perform up to 50 face searches per day. Subscribers get full access to all sources of their results: website addresses and direct links to source images.', c:'blue'},
+      {n:'Up to 5 Protevio Alerts', d:'A Protevio Alert is the notification you get when we find a new photo of you. With Open Plus you can set up to 5 Alerts.', c:'blue'},
+      {n:'Dedicated support', d:'Get priority access to our support team for any questions or issues with your account.', c:'blue'},
+      {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results — perfect for documentation, evidence collection, or sharing with legal teams.', c:'blue'},
+    ]
+  },
+  protect: {name:'PROtect', headerClass:'pcard--protect', headerBg:'#2563eb', headerColor:'#fff',
+    m:'34,99', a:'27,99', cta:'See options', ctaType:'primary',
+    features:[
+      {n:'Up to 75 searches daily', d:'With the PROtect plan, you can perform up to 75 face searches daily. PROtect subscribers have access to all the sources of their results: website addresses containing photos and links to source images.', c:'blue'},
+      {n:'Up to 20 Protevio Alerts', d:'A Protevio Alert is the notification you get when we find a photo of you. With the PROtect plan you can set up to 20 Alerts.', c:'blue'},
+      {n:'Dedicated support', d:'Get priority access to our support team for any questions or issues.', c:'blue'},
+      {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results.', c:'blue'},
+      {div:true},
+      {n:'Managing current and future results', d:'Take control of where your face appears online. Monitor, track, and manage both existing results and new matches.', c:'green'},
+      {n:'Different packages based on your needs', d:'Choose PROtect (100), PROtect Plus (200), or PROtect Pro (400) takedowns per month.', c:'green'},
+      {n:'Optional: Takedown Agent Support', d:'Our dedicated team handles takedown requests on your behalf, contacting websites directly to remove your images.', c:'gray', italic:true},
+    ]
+  },
+  advanced: {name:'Advanced', headerClass:'pcard--advanced', headerBg:'#1e293b', headerColor:'#fff',
+    m:'299,99', a:'239,99', cta:'Buy access', ctaType:'dark',
+    features:[
+      {n:'Unlimited searches daily', d:'No limits. Search as much as you need with our full database of over 1.1 million indexed faces and growing.', c:'blue'},
+      {n:'Up to 500 Protevio Alerts', d:'Set up to 500 face alerts for comprehensive monitoring. Ideal for agencies, legal teams, and professionals.', c:'blue'},
+      {n:'Dedicated support', d:'Get priority access to our support team for any questions or issues.', c:'blue'},
+      {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results.', c:'blue'},
+      {div:true},
+      {n:'All in PROtect PRO', d:'Includes all PROtect features: result management, takedown requests (400/month), and takedown agent support.', c:'green'},
+      {n:'Deep Search', d:'Extended search across our full database including archived and deep-indexed sources for the most comprehensive results.', c:'green'},
+    ]
+  }
+};
+
+const chk = c => {const cl={blue:'#2563eb',green:'#16a34a',gray:'#94a3b8'};return `<svg class="pcard__fcheck fc-${c}" viewBox="0 0 24 24" fill="none" stroke="${cl[c]||cl.blue}" stroke-width="2.5" style="width:17px;height:17px;flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>`};
+let billing = 'monthly';
+const b = () => billing === 'monthly' ? 'm' : 'a';
+
+// BUILD DESKTOP CARDS
+function buildDesktop(){
+  let html = '';
+  for(const [key, p] of Object.entries(PLANS)){
+    const price = p[b()];
+    const annual = billing !== 'monthly';
+    const annualAmt = (parseFloat(p.a.replace(',','.'))*12).toFixed(2).replace('.',',');
+    html += `<div class="pcard ${p.headerClass}"><div class="pcard__header">${p.name}</div><div class="pcard__body">`;
+    html += `<div class="pcard__price"><div class="pcard__amount"><span class="dpr" data-key="${key}">${price}</span> <span class="cur">€</span> <span class="per">/ month</span></div>`;
+    html += annual ? `<div class="pcard__annual-note">Billed as ${annualAmt} € / year</div>` : '';
+    html += `</div>`;
+    html += `<div class="pcard__cta"><button class="pcard__btn" onclick="location.href='signup.html'">${p.cta} <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
+    html += `<div class="pcard__ftitle">What's included</div>`;
+    p.features.forEach(f => {
+      if(f.div){html += '<hr class="pcard__fdiv">';return;}
+      html += `<div class="pcard__feature"><div class="pcard__feature-row">${chk(f.c)}<span class="pcard__fname">${f.italic?'<em>'+f.n+'</em>':f.n}</span></div><div class="pcard__fdesc">${f.d}</div></div>`;
+    });
+    html += `<a class="pcard__learn" href="faq.html">Learn more about all features</a></div></div>`;
+  }
+  document.getElementById('desktopCards').innerHTML = html;
+}
+
+// DESKTOP BILLING
+document.querySelectorAll('.billing-toggle__btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.billing-toggle__btn').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    billing = btn.dataset.billing;
+    buildDesktop();
+    document.querySelectorAll('.mpc__bbtn').forEach(x => x.classList.toggle('active', x.dataset.billing === billing));
+    updateMobile();
+  });
+});
+
+// MOBILE
+let mPlan = 'open';
+const mpSubs = document.getElementById('mpSubs');
+
+document.querySelectorAll('.mpc__tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mpc__tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    mPlan = tab.dataset.plan;
+    updateMobile();
+  });
+});
+document.querySelectorAll('.mpc__bbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mpc__bbtn').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    billing = btn.dataset.billing;
+    document.querySelectorAll('.billing-toggle__btn').forEach(x => x.classList.toggle('active', x.dataset.billing === billing));
+    buildDesktop();
+    updateMobile();
+  });
+});
+mpSubs.querySelectorAll('.mpc__sub').forEach(sp => {
+  sp.addEventListener('click', () => {
+    mpSubs.querySelectorAll('.mpc__sub').forEach(s => s.classList.remove('active'));
+    sp.classList.add('active');
+    updateMobile();
+  });
+});
+document.getElementById('mpAddon').addEventListener('click', function(){ this.classList.toggle('active'); });
+
+function updateMobile(){
+  const p = PLANS[mPlan];
+  document.getElementById('mpName').textContent = p.name;
+  let price = p[b()];
+  if(mPlan==='protect'){const as=mpSubs.querySelector('.mpc__sub.active');if(as)price=as.dataset[b()];}
+  document.getElementById('mpPrice').textContent = price;
+  const an = document.getElementById('mpAnote');
+  if(billing!=='monthly'){const mo=parseFloat(price.replace(',','.'));an.textContent=`Billed as ${(mo*12).toFixed(2).replace('.',',')} € / year`;an.style.display='block';}else{an.style.display='none';}
+  mpSubs.classList.toggle('show', mPlan==='protect');
+  mpSubs.querySelectorAll('.mpc__sub').forEach(sp=>{sp.querySelector('.mpc__sub-price').textContent=sp.dataset[b()]+' €';});
+  document.querySelector('.mpc__btn').innerHTML = (mPlan==='protect'?'See options':'Buy access')+' <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  let html = '<div class="mpc__ftitle">What\'s included</div>';
+  p.features.forEach(f=>{
+    if(f.div){html+='<hr class="mpc__feat-div">';return;}
+    html+=`<div class="mpc__feat"><div class="mpc__feat-row">${chk(f.c)}<span class="mpc__feat-name">${f.italic?'<em>'+f.n+'</em>':f.n}</span></div><div class="mpc__feat-desc">${f.d}</div></div>`;
+  });
+  document.getElementById('mpFeats').innerHTML = html;
+}
+
+buildDesktop();
+updateMobile();
+
+// Hamburger
+document.querySelector('.nav__hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('active'));
+
+// Auth
+(function(){var t=localStorage.getItem("protevio_token"),u=JSON.parse(localStorage.getItem("protevio_user")||"null"),n=document.getElementById("navAuth"),m=document.getElementById("mobileAuth");if(t&&u){var f=(u.name||u.username||"Account").split(" ")[0];if(n){n.href="dashboard.html";n.innerHTML='<span>'+f+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}if(m){m.href="dashboard.html";m.textContent=f;}}})();
+</script>
+</body>
+</html>
