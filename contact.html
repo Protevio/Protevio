@@ -602,24 +602,60 @@ body{
 
 <script>
 // Form submission
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   
   const btn = this.querySelector('.form__btn');
+  const origText = btn.textContent;
   btn.textContent = 'Sending...';
   btn.classList.add('loading');
+  btn.disabled = true;
   
-  setTimeout(function() {
-    btn.textContent = '✓ Message Sent!';
-    btn.classList.remove('loading');
-    btn.style.background = 'linear-gradient(135deg, var(--green), var(--accent))';
+  const data = {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    subject: document.getElementById('subject').value.trim(),
+    message: document.getElementById('message').value.trim()
+  };
+  
+  try {
+    const res = await fetch('https://api.protevio.com/api/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
     
-    setTimeout(function() {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
+    if(res.ok) {
+      btn.textContent = '✓ Message Sent!';
+      btn.classList.remove('loading');
+      btn.style.background = 'linear-gradient(135deg, var(--green), var(--accent))';
       document.getElementById('contactForm').reset();
+      
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    } else {
+      btn.textContent = result.error || 'Failed to send';
+      btn.classList.remove('loading');
+      btn.style.background = 'linear-gradient(135deg, #f87171, #ef4444)';
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }
+  } catch(err) {
+    btn.textContent = 'Connection error';
+    btn.classList.remove('loading');
+    setTimeout(function() {
+      btn.textContent = origText;
+      btn.style.background = '';
+      btn.disabled = false;
     }, 3000);
-  }, 1500);
+  }
 });
 </script>
 
