@@ -457,7 +457,7 @@ body{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       EN
     </button>
-    <a href="login.html" class="nav__login">
+    <a href="login.html" class="nav__login" id="navAuth">
       <span>Log In</span>
       <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -470,7 +470,7 @@ body{
     <a href="about.html" class="mobile-link mobile-link--active">About</a>
     <a href="faq.html" class="mobile-link">FAQ</a>
     <a href="contact.html" class="mobile-link">Contact</a>
-    <a href="login.html" class="mobile-login">Log In</a>
+    <a href="login.html" class="mobile-login" id="mobileAuth">Log In</a>
 </div>
 
 
@@ -619,6 +619,26 @@ body{
   h.addEventListener('click',toggle);
   if(o)o.addEventListener('click',toggle);
   m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
+})();
+</script>
+<script>
+(function(){
+  var token = localStorage.getItem("protevio_token");
+  var user = JSON.parse(localStorage.getItem("protevio_user") || "null");
+  var navAuth = document.getElementById("navAuth");
+  var mobileAuth = document.getElementById("mobileAuth");
+  if(token && user) {
+    var name = user.name || user.username || "Account";
+    var first = name.split(" ")[0];
+    if(navAuth){
+      navAuth.href = "dashboard.html";
+      navAuth.innerHTML = '<span>' + first + '</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';
+    }
+    if(mobileAuth){
+      mobileAuth.href = "dashboard.html";
+      mobileAuth.textContent = first;
+    }
+  }
 })();
 </script>
 </body>

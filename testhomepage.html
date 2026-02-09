@@ -1050,7 +1050,7 @@ body{
             <div id="termsPreview" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0;border:2px solid var(--accent);"><img style="width:100%;height:100%;object-fit:cover;"></div>
             <div>
               <p style="font-size:.95rem;font-weight:600;color:var(--text);">Searching for this face</p>
-              <p style="font-size:.8rem;color:var(--text-muted);" id="termsDetection">Age ~25 · Female</p>
+              <p style="font-size:.8rem;color:var(--text-muted);" id="termsDetection">Face detected</p>
             </div>
           </div>
           <div style="font-size:.82rem;color:var(--text-secondary);line-height:1.7;max-height:160px;overflow-y:auto;padding-right:8px;">
@@ -1492,7 +1492,7 @@ function showFaceSelection() {
     thumb.className = 'face-thumb';
     thumb.dataset.faceId = face.id;
 
-    const info = face.age ? (face.gender + ' · ~' + face.age + 'y') : ('Face ' + (i+1));
+    const info = 'Face ' + (i+1);
 
     thumb.innerHTML =
       '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
@@ -1528,7 +1528,7 @@ function showTermsStep() {
   if(face) {
     document.querySelector('#termsPreview img').src = face.thumbnail;
     document.getElementById('termsDetection').textContent =
-      (face.gender || '') + (face.age ? ' · ~' + face.age + ' years old' : '') +
+      'Face detected' +
       (face.confidence ? ' · ' + Math.round(face.confidence * 100) + '% confidence' : '');
   }
 }
@@ -1619,7 +1619,6 @@ function showResults(data) {
       '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
       '<div class="result-card__lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap to see</div>' +
       '<div class="result-card__info">' +
-      '<div class="result-card__score">' + similarity + '% match</div>' +
       '<div class="result-card__domain">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '</div>';
 
@@ -1640,7 +1639,7 @@ function openResultModal(match, locked) {
   document.getElementById('modalImage').src = imgUrl;
   document.getElementById('modalImage').className = 'result-modal__image' + (locked ? ' result-modal__image--locked' : '');
   document.getElementById('modalDomain').textContent = locked ? '••••••.com' : (match.domain || 'Unknown source');
-  document.getElementById('modalSimilarity').textContent = similarity + '% match';
+  document.getElementById('modalSimilarity').textContent = domain;
   document.getElementById('modalNsfw').style.display = 'none'; // can enable per-result later
 
   // Action states based on lock
@@ -1716,7 +1715,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       <img id="modalImage" class="result-modal__image" src="" alt="Result" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%232a3349%22 width=%22400%22 height=%22300%22/><text x=%22200%22 y=%22155%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2216%22>Image unavailable</text></svg>'">
       <div class="result-modal__domain" id="modalDomain">domain.com</div>
     </div>
-    <div style="padding:12px 20px 4px;font-size:.82rem;font-weight:600;color:var(--accent);" id="modalSimilarity">85% match</div>
+    <div style="padding:12px 20px 4px;font-size:.82rem;font-weight:600;color:var(--accent);display:none;" id="modalSimilarity"></div>
     <div class="result-modal__actions">
       <button class="result-modal__action" id="modalOpenWebsite" data-requires-paid="true">
         <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
