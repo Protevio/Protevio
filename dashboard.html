@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard — Protevio AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1a1f2e;
+  --bg-elevated:#232a3d;
+  --bg-card:#2a3349;
+  --border:#3a4562;
+  --border-light:#4a5678;
+  --text:#f8fafc;
+  --text-secondary:#d1d5e0;
+  --text-muted:#9ca3b8;
+  --accent:#5b9aff;
+  --accent-light:#85b4ff;
+  --accent-glow:rgba(91,154,255,.15);
+  --green:#4ade80;
+  --purple:#a78bfa;
+  --gold:#ffb020;
+  --red:#f87171;
+  --glass:rgba(255,255,255,.04);
+  --glass-border:rgba(255,255,255,.08);
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(26,31,46,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:100}
+.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.nav__logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center}
+.nav__logo-icon svg{width:20px;height:20px;fill:white}
+.nav__logo-text{font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.nav__links{display:flex;align-items:center;gap:24px}
+.nav__links a{color:var(--text-muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
+.nav__links a:hover,.nav__links a.active{color:var(--text)}
+.nav__logout{background:none;border:1px solid var(--border);color:var(--red);padding:8px 20px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.nav__logout:hover{background:rgba(248,113,113,.1);border-color:var(--red)}
+
+/* LAYOUT */
+.container{max-width:960px;margin:0 auto;padding:32px 24px}
+.page-title{font-size:1.8rem;font-weight:800;margin-bottom:8px}
+.page-sub{color:var(--text-muted);font-size:.95rem;margin-bottom:32px}
+
+/* STATS GRID */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px}
+.stat-card{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:16px;padding:24px;text-align:center;transition:all .25s}
+.stat-card:hover{transform:translateY(-2px);border-color:var(--border-light)}
+.stat-card__icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.stat-card__icon svg{width:24px;height:24px;stroke-width:2;fill:none}
+.stat-card__value{font-size:1.6rem;font-weight:800;margin-bottom:4px}
+.stat-card__label{font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* SECTIONS */
+.section{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:16px;padding:28px;margin-bottom:24px}
+.section__title{font-size:1.1rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section__title svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+
+/* PROFILE INFO */
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.profile-item{padding:16px;background:var(--bg-card);border-radius:12px}
+.profile-item__label{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.profile-item__value{font-size:1rem;font-weight:600}
+
+/* PLAN BADGE */
+.plan-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.plan-badge--free{background:rgba(156,163,184,.15);color:var(--text-muted)}
+.plan-badge--basic{background:rgba(91,154,255,.15);color:var(--accent-light)}
+.plan-badge--pro{background:rgba(167,139,250,.15);color:var(--purple)}
+.plan-badge--unlimited{background:rgba(255,176,32,.15);color:var(--gold)}
+
+/* USAGE BAR */
+.usage-bar-wrap{margin-top:16px}
+.usage-bar__header{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:8px}
+.usage-bar__header span:first-child{color:var(--text-secondary)}
+.usage-bar__header span:last-child{color:var(--text-muted)}
+.usage-bar{height:8px;background:var(--bg-card);border-radius:4px;overflow:hidden}
+.usage-bar__fill{height:100%;border-radius:4px;transition:width .5s ease}
+
+/* SEARCH BTN */
+.search-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:14px 32px;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .25s;text-decoration:none;margin-top:8px}
+.search-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,154,255,.3)}
+.search-btn svg{width:20px;height:20px;stroke:white;stroke-width:2;fill:none}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--text-muted)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+
+@media(max-width:640px){
+  .nav{padding:14px 16px}
+  .container{padding:24px 16px}
+  .stats{grid-template-columns:1fr 1fr}
+  .profile-grid{grid-template-columns:1fr}
+  .nav__links a:not(.active){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="testhomepage.html" class="nav__logo">
+    <div class="nav__logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M15 3a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6 6 6 0 00-6-6zM3 21a9 9 0 0118 0"/></svg>
+    </div>
+    <span class="nav__logo-text">Protevio AI</span>
+  </a>
+  <div class="nav__links">
+    <a href="testhomepage.html">Search</a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <button class="nav__logout" id="logoutBtn">Log Out</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="dashContent">
+    <div class="loading"><div class="spinner"></div>Loading your dashboard...</div>
+  </div>
+</div>
+
+<script>
+const API = 'https://api.protevio.com/api';
+const token = localStorage.getItem('protevio_token');
+
+if(!token) { window.location.href = '/login'; }
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('protevio_token');
+  localStorage.removeItem('protevio_user');
+  window.location.href = '/login';
+});
+
+async function loadDashboard() {
+  try {
+    const res = await fetch(API + '/auth/me', {
+      headers: {'Authorization': 'Bearer ' + token}
+    });
+
+    if(res.status === 401) { window.location.href = '/login'; return; }
+    const user = await res.json();
+
+    // Update stored user data
+    localStorage.setItem('protevio_user', JSON.stringify(user));
+
+    const plan = user.plan || 'free';
+    const limits = {free: 10, basic: 50, pro: 200, unlimited: -1};
+    const limit = limits[plan] || 10;
+    const used = user.searches_today || 0;
+    const total = user.total_searches || 0;
+    const pct = limit === -1 ? 5 : Math.min(100, Math.round((used / limit) * 100));
+    const barColor = pct > 80 ? 'var(--red)' : pct > 50 ? 'var(--gold)' : 'var(--green)';
+
+    document.getElementById('dashContent').innerHTML = `
+      <h1 class="page-title">Welcome back, ${user.name || user.username}</h1>
+      <p class="page-sub">Here's your Protevio AI account overview</p>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-card__icon" style="background:rgba(91,154,255,.15)">
+            <svg viewBox="0 0 24 24" stroke="var(--accent)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <div class="stat-card__value">${total}</div>
+          <div class="stat-card__label">Total Searches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon" style="background:rgba(74,222,128,.15)">
+            <svg viewBox="0 0 24 24" stroke="var(--green)"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="stat-card__value">${used}</div>
+          <div class="stat-card__label">Today's Searches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon" style="background:rgba(167,139,250,.15)">
+            <svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="stat-card__value">${limit === -1 ? '∞' : limit}</div>
+          <div class="stat-card__label">Daily Limit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon" style="background:rgba(255,176,32,.15)">
+            <svg viewBox="0 0 24 24" stroke="var(--gold)"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/></svg>
+          </div>
+          <div class="stat-card__value"><span class="plan-badge plan-badge--${plan}">${plan}</span></div>
+          <div class="stat-card__label">Current Plan</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section__title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+          Account Details
+        </div>
+        <div class="profile-grid">
+          <div class="profile-item">
+            <div class="profile-item__label">Username</div>
+            <div class="profile-item__value">${user.username}</div>
+          </div>
+          <div class="profile-item">
+            <div class="profile-item__label">Email</div>
+            <div class="profile-item__value">${user.email || '—'}</div>
+          </div>
+          <div class="profile-item">
+            <div class="profile-item__label">Name</div>
+            <div class="profile-item__value">${user.name || '—'}</div>
+          </div>
+          <div class="profile-item">
+            <div class="profile-item__label">Role</div>
+            <div class="profile-item__value" style="text-transform:capitalize">${user.role}</div>
+          </div>
+        </div>
+
+        <div class="usage-bar-wrap">
+          <div class="usage-bar__header">
+            <span>Daily Usage</span>
+            <span>${limit === -1 ? used + ' / Unlimited' : used + ' / ' + limit + ' searches'}</span>
+          </div>
+          <div class="usage-bar">
+            <div class="usage-bar__fill" style="width:${pct}%;background:${barColor}"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="text-align:center;padding:40px 28px">
+        <div class="section__title" style="justify-content:center">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          Ready to search?
+        </div>
+        <p style="color:var(--text-muted);margin-bottom:20px">Upload a photo and find matching faces across our database</p>
+        <a href="testhomepage.html" class="search-btn">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Start Face Search
+        </a>
+      </div>
+    `;
+  } catch(err) {
+    document.getElementById('dashContent').innerHTML =
+      '<div class="section" style="text-align:center;padding:40px"><p style="color:var(--red)">Failed to load dashboard. Please try again.</p><br><a href="/login" style="color:var(--accent)">Re-login</a></div>';
+  }
+}
+
+loadDashboard();
+</script>
+</body>
+</html>

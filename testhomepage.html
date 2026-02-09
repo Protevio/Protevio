@@ -934,7 +934,7 @@ body{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       EN
     </button>
-    <a href="login.html" class="nav__login">
+    <a href="login.html" class="nav__login" id="navAuth">
       <span>Log In</span>
       <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -947,7 +947,7 @@ body{
     <a href="about.html" class="mobile-link">About</a>
     <a href="faq.html" class="mobile-link">FAQ</a>
     <a href="contact.html" class="mobile-link">Contact</a>
-    <a href="login.html" class="mobile-login">Log In</a>
+    <a href="login.html" class="mobile-login" id="mobileAuth">Log In</a>
 </div>
 
 
@@ -1235,6 +1235,21 @@ body{
   m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
 })();
 
+// ===== AUTH STATE FOR NAV =====
+(function(){
+  const token = localStorage.getItem('protevio_token');
+  const user = JSON.parse(localStorage.getItem('protevio_user') || 'null');
+  const navAuth = document.getElementById('navAuth');
+  const mobileAuth = document.getElementById('mobileAuth');
+  if(token && user) {
+    const name = user.name || user.username || 'Account';
+    navAuth.href = 'dashboard.html';
+    navAuth.innerHTML = '<span>' + name.split(' ')[0] + '</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+    mobileAuth.href = 'dashboard.html';
+    mobileAuth.textContent = name.split(' ')[0];
+  }
+})();
+
 // ===== PROTEVIO FACE SEARCH =====
 const API = 'https://api.protevio.com/api';
 const uploadBox = document.getElementById('uploadBox');
@@ -1335,7 +1350,7 @@ async function handleFiles(files) {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ face_id: uploadData.faces[0].id || uploadData.faces[0].face_id })
+      body: JSON.stringify({ faces: [uploadData.faces[0].id] })
     });
 
     if(!searchRes.ok) {
@@ -1370,17 +1385,17 @@ function showResults(data) {
   matches.forEach(match => {
     const card = document.createElement('div');
     card.className = 'result-card';
-    const similarity = Math.round((match.similarity || match.score || 0) * 100);
-    const domain = match.source_domain || match.domain || '';
-    const imgUrl = match.image_url || (API + '/image/' + (match.face_filename || ''));
+    const similarity = Math.round(match.similarity || 0);
+    const domain = match.domain || '';
+    const imgUrl = API + '/image/' + (match.filename || '');
     card.innerHTML =
       '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
       '<div class="result-card__info">' +
       '<div class="result-card__score">' + similarity + '% match</div>' +
       '<div class="result-card__domain">' + domain + '</div>' +
       '</div>';
-    if(match.source_url || match.page_url) {
-      card.addEventListener('click', () => window.open(match.source_url || match.page_url, '_blank'));
+    if(match.url) {
+      card.addEventListener('click', () => window.open(match.url, '_blank'));
     }
     resultsList.appendChild(card);
   });
