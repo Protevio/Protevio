@@ -1666,7 +1666,7 @@ function openResultModal(match, locked) {
   };
   document.getElementById('modalOpenImage').onclick = () => {
     if(locked) { alert('Upgrade to view full images.'); return; }
-    window.open(imgUrl, '_blank');
+    if(match.url) window.open(match.url, '_blank');
   };
   document.getElementById('modalSearchThis').onclick = () => {
     modal.querySelector('.result-modal-overlay').classList.remove('active');
