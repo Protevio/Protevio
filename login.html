@@ -363,6 +363,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       localStorage.setItem('protevio_token', data.token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
       window.location.href = '/dashboard';
+    } else if (res.status === 403 && data.requires_verification) {
+      localStorage.setItem('protevio_verify_email', data.email || email);
+      window.location.href = '/check-email?email=' + encodeURIComponent(data.email || email);
     } else {
       showError(data.error || 'Invalid email or password');
     }

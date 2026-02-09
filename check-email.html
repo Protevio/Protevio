@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Check Your Email — Protevio AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0c0f1a;--accent:#5b9aff;--accent-light:#85b4ff;--purple:#a78bfa;--text3:#8891a5;--glass-border:rgba(255,255,255,.08);--green:#4ade80}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
+.bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 0%,rgba(91,154,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 100%,rgba(167,139,250,.06) 0%,transparent 50%)}
+
+.card{position:relative;z-index:1;max-width:480px;width:calc(100% - 32px);text-align:center;padding:48px 36px;background:rgba(26,31,46,.8);border:1px solid var(--glass-border);border-radius:24px;backdrop-filter:blur(20px)}
+
+/* Logo */
+.logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px;text-decoration:none}
+.logo svg{width:36px;height:36px}
+.logo span{font-size:1.2rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* Icon */
+.email-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,rgba(91,154,255,.15),rgba(167,139,250,.15));display:flex;align-items:center;justify-content:center;animation:pulse 2s ease-in-out infinite}
+.email-icon svg{width:40px;height:40px;color:var(--accent)}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(91,154,255,.2)}50%{transform:scale(1.05);box-shadow:0 0 20px 10px rgba(91,154,255,.1)}}
+
+.title{font-size:1.6rem;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
+.subtitle{font-size:.92rem;color:var(--text3);line-height:1.6;margin-bottom:8px}
+.email-display{font-size:.95rem;font-weight:700;color:var(--accent-light);margin-bottom:28px}
+
+/* Steps */
+.steps{text-align:left;background:rgba(255,255,255,.03);border:1px solid var(--glass-border);border-radius:14px;padding:20px;margin-bottom:28px}
+.step{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+.step:last-child{margin-bottom:0}
+.step__num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step__text{font-size:.85rem;color:#c8ced8;line-height:1.5}
+.step__text strong{color:#fff}
+
+/* Resend */
+.resend-row{margin-bottom:20px}
+.resend-text{font-size:.82rem;color:var(--text3);margin-bottom:8px}
+.resend-btn{background:none;border:1.5px solid rgba(91,154,255,.3);color:var(--accent);padding:10px 24px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.resend-btn:hover{border-color:var(--accent);background:rgba(91,154,255,.08)}
+.resend-btn:disabled{opacity:.5;cursor:not-allowed}
+.resend-msg{font-size:.78rem;margin-top:8px;min-height:18px}
+.resend-msg.success{color:var(--green)}
+.resend-msg.error{color:#f87171}
+
+/* Login link */
+.login-link{display:inline-flex;align-items:center;gap:6px;color:var(--text3);font-size:.85rem;text-decoration:none;transition:color .2s}
+.login-link:hover{color:var(--accent)}
+.login-link svg{width:14px;height:14px}
+
+/* Spam note */
+.spam-note{margin-top:20px;font-size:.75rem;color:var(--text3);line-height:1.5;padding-top:20px;border-top:1px solid var(--glass-border)}
+
+@media(max-width:480px){
+  .card{padding:36px 24px}
+  .title{font-size:1.35rem}
+  .email-icon{width:64px;height:64px}
+  .email-icon svg{width:32px;height:32px}
+}
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+
+<div class="card">
+  <a href="testhomepage.html" class="logo">
+    <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#050608"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg>
+    <span>PROTEVIO</span>
+  </a>
+
+  <div class="email-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="2" y="4" width="20" height="16" rx="3"/>
+      <path d="M22 4L12 13 2 4"/>
+    </svg>
+  </div>
+
+  <h1 class="title">Check your email</h1>
+  <p class="subtitle">We've sent a verification link to</p>
+  <p class="email-display" id="emailDisplay">your email address</p>
+
+  <div class="steps">
+    <div class="step"><div class="step__num">1</div><div class="step__text">Open the email from <strong>noreply@protevio.com</strong></div></div>
+    <div class="step"><div class="step__num">2</div><div class="step__text">Click the <strong>"Verify Email Address"</strong> button</div></div>
+    <div class="step"><div class="step__num">3</div><div class="step__text">You'll be redirected to <strong>log in</strong> to your new account</div></div>
+  </div>
+
+  <div class="resend-row">
+    <p class="resend-text">Didn't receive the email?</p>
+    <button class="resend-btn" id="resendBtn" onclick="resendEmail()">Resend verification email</button>
+    <div class="resend-msg" id="resendMsg"></div>
+  </div>
+
+  <a href="login.html" class="login-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to login
+  </a>
+
+  <div class="spam-note">
+    💡 Check your spam or junk folder if you don't see the email within a few minutes. Add noreply@protevio.com to your contacts to ensure delivery.
+  </div>
+</div>
+
+<script>
+const API = "https://api.protevio.com";
+
+// Get email from URL params or localStorage
+const params = new URLSearchParams(window.location.search);
+const email = params.get('email') || localStorage.getItem('protevio_verify_email') || '';
+if (email) {
+  document.getElementById('emailDisplay').textContent = email;
+}
+
+let cooldown = 0;
+function resendEmail() {
+  if (cooldown > 0 || !email) return;
+  
+  const btn = document.getElementById('resendBtn');
+  const msg = document.getElementById('resendMsg');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  msg.textContent = '';
+  msg.className = 'resend-msg';
+
+  fetch(API + '/api/auth/resend-verification', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
+  })
+  .then(r => r.json())
+  .then(data => {
+    msg.textContent = data.message || 'Verification email sent!';
+    msg.className = 'resend-msg success';
+    
+    // 60s cooldown
+    cooldown = 60;
+    const tick = setInterval(() => {
+      cooldown--;
+      btn.textContent = `Resend (${cooldown}s)`;
+      if (cooldown <= 0) {
+        clearInterval(tick);
+        btn.textContent = 'Resend verification email';
+        btn.disabled = false;
+      }
+    }, 1000);
+  })
+  .catch(() => {
+    msg.textContent = 'Failed to send. Please try again.';
+    msg.className = 'resend-msg error';
+    btn.textContent = 'Resend verification email';
+    btn.disabled = false;
+  });
+}
+</script>
+</body>
+</html>

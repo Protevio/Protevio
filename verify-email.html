@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Email Verified — Protevio AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0c0f1a;--accent:#5b9aff;--purple:#a78bfa;--text3:#8891a5;--glass-border:rgba(255,255,255,.08);--green:#4ade80;--red:#f87171}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
+.bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 0%,rgba(91,154,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 100%,rgba(167,139,250,.06) 0%,transparent 50%)}
+
+.card{position:relative;z-index:1;max-width:480px;width:calc(100% - 32px);text-align:center;padding:48px 36px;background:rgba(26,31,46,.8);border:1px solid var(--glass-border);border-radius:24px;backdrop-filter:blur(20px)}
+
+.logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px;text-decoration:none}
+.logo svg{width:36px;height:36px}
+.logo span{font-size:1.2rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* States */
+.state{display:none}
+.state.active{display:block}
+
+/* Loading */
+.loader{width:48px;height:48px;border:3px solid rgba(91,154,255,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Success icon */
+.success-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(74,222,128,.05));display:flex;align-items:center;justify-content:center;animation:pop .5s cubic-bezier(.175,.885,.32,1.275)}
+.success-icon svg{width:40px;height:40px;color:var(--green)}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+
+/* Error icon */
+.error-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:rgba(248,113,113,.1);display:flex;align-items:center;justify-content:center}
+.error-icon svg{width:40px;height:40px;color:var(--red)}
+
+.title{font-size:1.6rem;font-weight:800;margin-bottom:10px;letter-spacing:-.02em}
+.subtitle{font-size:.92rem;color:var(--text3);line-height:1.6;margin-bottom:24px}
+.email-tag{color:var(--accent);font-weight:600}
+
+/* CTA */
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;padding:14px 36px;border-radius:12px;text-decoration:none;font-size:.95rem;font-weight:700;transition:all .2s;box-shadow:0 4px 16px rgba(91,154,255,.3)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,154,255,.4)}
+.cta-btn svg{width:16px;height:16px}
+
+/* Redirect note */
+.redirect-note{font-size:.78rem;color:var(--text3);margin-top:16px}
+
+/* Error btn */
+.retry-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid rgba(248,113,113,.3);color:var(--red);padding:10px 24px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none}
+.retry-btn:hover{border-color:var(--red);background:rgba(248,113,113,.08)}
+.home-link{display:block;margin-top:12px;font-size:.82rem;color:var(--text3);text-decoration:none;transition:color .2s}
+.home-link:hover{color:var(--accent)}
+
+/* Confetti */
+.confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:hidden}
+.confetti{position:absolute;width:10px;height:10px;top:-10px;opacity:0;animation:confetti-fall 3s ease-in forwards}
+@keyframes confetti-fall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+
+@media(max-width:480px){
+  .card{padding:36px 24px}
+  .title{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+<div class="confetti-container" id="confetti"></div>
+
+<div class="card">
+  <a href="testhomepage.html" class="logo">
+    <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#050608"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg>
+    <span>PROTEVIO</span>
+  </a>
+
+  <!-- LOADING STATE -->
+  <div class="state active" id="stateLoading">
+    <div class="loader"></div>
+    <h1 class="title">Verifying your email...</h1>
+    <p class="subtitle">Please wait a moment.</p>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="state" id="stateSuccess">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h1 class="title">Email verified!</h1>
+    <p class="subtitle">Your email <span class="email-tag" id="verifiedEmail"></span> has been verified successfully. Your account is now active and ready to use.</p>
+    <a href="login.html" class="cta-btn">
+      Log in to your account
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <p class="redirect-note">You'll be redirected to login in <span id="countdown">5</span> seconds...</p>
+  </div>
+
+  <!-- ALREADY VERIFIED STATE -->
+  <div class="state" id="stateAlready">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h1 class="title">Already verified</h1>
+    <p class="subtitle">This email address has already been verified. You can go ahead and log in.</p>
+    <a href="login.html" class="cta-btn">
+      Go to login
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <!-- ERROR STATE -->
+  <div class="state" id="stateError">
+    <div class="error-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+    </div>
+    <h1 class="title">Verification failed</h1>
+    <p class="subtitle" id="errorMsg">This verification link is invalid or has expired. Please request a new verification email.</p>
+    <a href="check-email.html" class="retry-btn">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 105.64-8.36L1 10"/></svg>
+      Request new verification email
+    </a>
+    <a href="testhomepage.html" class="home-link">← Go to homepage</a>
+  </div>
+</div>
+
+<script>
+const API = "https://api.protevio.com";
+
+// Get token from URL
+const params = new URLSearchParams(window.location.search);
+const token = params.get('token');
+
+function showState(id) {
+  document.querySelectorAll('.state').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function launchConfetti() {
+  const container = document.getElementById('confetti');
+  const colors = ['#5b9aff', '#a78bfa', '#4ade80', '#ffb020', '#f87171', '#00e5ff'];
+  for (let i = 0; i < 50; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDelay = Math.random() * 2 + 's';
+    el.style.animationDuration = (2 + Math.random() * 2) + 's';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    el.style.width = (6 + Math.random() * 8) + 'px';
+    el.style.height = (6 + Math.random() * 8) + 'px';
+    container.appendChild(el);
+  }
+}
+
+function startCountdown() {
+  let count = 5;
+  const el = document.getElementById('countdown');
+  const timer = setInterval(() => {
+    count--;
+    el.textContent = count;
+    if (count <= 0) {
+      clearInterval(timer);
+      window.location.href = 'login.html';
+    }
+  }, 1000);
+}
+
+// Verify
+if (!token) {
+  showState('stateError');
+  document.getElementById('errorMsg').textContent = 'No verification token found. Please check your email for the correct link.';
+} else {
+  fetch(API + '/api/auth/verify/' + token)
+    .then(r => r.json().then(data => ({ status: r.status, data })))
+    .then(({ status, data }) => {
+      if (status === 200) {
+        if (data.already_verified) {
+          showState('stateAlready');
+        } else {
+          document.getElementById('verifiedEmail').textContent = data.email || '';
+          showState('stateSuccess');
+          launchConfetti();
+          startCountdown();
+        }
+      } else {
+        showState('stateError');
+        document.getElementById('errorMsg').textContent = data.error || 'Verification failed. Please try again.';
+      }
+    })
+    .catch(() => {
+      showState('stateError');
+      document.getElementById('errorMsg').textContent = 'Could not connect to the server. Please try again later.';
+    });
+}
+</script>
+</body>
+</html>

@@ -303,11 +303,21 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     });
     const data = await res.json();
     if (res.ok) {
-      if (data.token) {
+      if (data.requires_verification) {
+        // Email verification required — redirect to check-email page
+        localStorage.setItem('protevio_verify_email', email);
+        window.location.href = '/check-email?email=' + encodeURIComponent(email);
+      } else if (data.token) {
         localStorage.setItem('protevio_token', data.token);
         localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
+        window.location.href = '/login';
+      } else {
+        window.location.href = '/login';
       }
-      window.location.href = '/login';
+    } else if (res.status === 403 && data.requires_verification) {
+      // Account exists but not verified
+      localStorage.setItem('protevio_verify_email', email);
+      window.location.href = '/check-email?email=' + encodeURIComponent(email);
     } else {
       showError(data.error || 'Registration failed. Try a different email.');
     }
