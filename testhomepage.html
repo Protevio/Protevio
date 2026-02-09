@@ -1639,7 +1639,7 @@ function openResultModal(match, locked) {
 
   document.getElementById('modalImage').src = imgUrl;
   document.getElementById('modalImage').className = 'result-modal__image' + (locked ? ' result-modal__image--locked' : '');
-  document.getElementById('modalDomain').textContent = locked ? '••••••.com' : domain;
+  document.getElementById('modalDomain').textContent = locked ? '••••••.com' : (match.domain || 'Unknown source');
   document.getElementById('modalSimilarity').textContent = similarity + '% match';
   document.getElementById('modalNsfw').style.display = 'none'; // can enable per-result later
 
@@ -1661,7 +1661,8 @@ function openResultModal(match, locked) {
   // Set up action handlers for unlocked
   document.getElementById('modalOpenWebsite').onclick = () => {
     if(locked) { alert('Upgrade to access source websites.'); return; }
-    if(match.url) window.open(match.url, '_blank');
+    if(match.page_url) window.open(match.page_url, '_blank');
+    else if(match.url) window.open(match.url, '_blank');
   };
   document.getElementById('modalOpenImage').onclick = () => {
     if(locked) { alert('Upgrade to view full images.'); return; }
