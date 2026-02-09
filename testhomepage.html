@@ -1025,17 +1025,73 @@ body{
         <p style="font-size:.85rem;color:var(--text-muted);margin-top:8px;" id="statusSub">Searching 1M+ faces</p>
       </div>
 
-      <!-- SEARCH RESULTS (hidden by default) -->
+      <!-- STEP 2: FACE SELECTION (hidden by default) -->
+      <div id="faceSelection" style="display:none;padding:24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);">Select a Face to Search</h3>
+          <button id="backToUpload" class="step-back-btn">← Back</button>
+        </div>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:20px;">We detected the following faces. Tap one to search for it.</p>
+        <div id="faceGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px;"></div>
+        <button id="searchSelectedBtn" class="step-next-btn" disabled style="margin-top:20px;width:100%;">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          Select a face to continue
+        </button>
+      </div>
+
+      <!-- STEP 3: TERMS AGREEMENT (hidden by default) -->
+      <div id="termsStep" style="display:none;padding:24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);">Before We Search</h3>
+          <button id="backToFaces" class="step-back-btn">← Back</button>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+            <div id="termsPreview" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0;border:2px solid var(--accent);"><img style="width:100%;height:100%;object-fit:cover;"></div>
+            <div>
+              <p style="font-size:.95rem;font-weight:600;color:var(--text);">Searching for this face</p>
+              <p style="font-size:.8rem;color:var(--text-muted);" id="termsDetection">Age ~25 · Female</p>
+            </div>
+          </div>
+          <div style="font-size:.82rem;color:var(--text-secondary);line-height:1.7;max-height:160px;overflow-y:auto;padding-right:8px;">
+            <p style="margin-bottom:10px;">By proceeding with this search, you acknowledge and agree to the following:</p>
+            <p style="margin-bottom:8px;">• You confirm that you have a <strong style="color:var(--text);">legitimate reason</strong> for conducting this facial recognition search and that you are not using it for stalking, harassment, or any unlawful purpose.</p>
+            <p style="margin-bottom:8px;">• You understand that search results are generated using <strong style="color:var(--text);">AI-based facial similarity matching</strong> and may include false positives. Results do not confirm identity.</p>
+            <p style="margin-bottom:8px;">• You agree to comply with our <a href="/terms-of-service" target="_blank" style="color:var(--accent);">Terms of Service</a> and <a href="/privacy-policy" target="_blank" style="color:var(--accent);">Privacy Policy</a>, including all applicable laws regarding biometric data (GDPR, BIPA).</p>
+            <p>• Your uploaded image will be <strong style="color:var(--text);">processed temporarily</strong> and not stored permanently on our servers.</p>
+          </div>
+        </div>
+        <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;transition:border-color .2s;" id="termsLabel">
+          <input type="checkbox" id="termsCheckbox" style="width:20px;height:20px;accent-color:var(--accent);cursor:pointer;">
+          <span style="font-size:.9rem;color:var(--text-secondary);">I agree to the Terms of Service and Privacy Policy</span>
+        </label>
+        <button id="agreeSearchBtn" class="step-next-btn" disabled style="width:100%;background:linear-gradient(135deg,#4ade80,#22c55e);">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Agree & Search
+        </button>
+      </div>
+
+      <!-- STEP 4: SEARCH RESULTS (hidden by default) -->
       <div id="searchResults" style="display:none;padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
           <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);">Search Results</h3>
-          <button id="newSearchBtn" style="background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;">New Search</button>
+          <button id="newSearchBtn" class="step-back-btn">New Search</button>
         </div>
         <div id="resultsList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;"></div>
         <p id="noResults" style="display:none;text-align:center;color:var(--text-muted);padding:24px;font-size:.95rem;">No matching faces found. Try a different photo.</p>
+        <!-- UPGRADE OVERLAY for free tier -->
+        <div id="upgradeOverlay" style="display:none;margin-top:24px;background:linear-gradient(135deg,rgba(91,154,255,.1),rgba(167,139,250,.1));border:1px solid rgba(91,154,255,.3);border-radius:16px;padding:28px;text-align:center;">
+          <svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:var(--accent);stroke-width:1.5;fill:none;margin-bottom:12px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Unlock Full Results</h4>
+          <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Free accounts see blurred previews. Upgrade to reveal full results with source links and high-resolution images.</p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="/dashboard" class="upgrade-btn" style="background:linear-gradient(135deg,var(--accent),var(--purple));">Upgrade Plan</a>
+            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — €15</button>
+          </div>
+        </div>
       </div>
       
-      <div class="action-buttons">
+      <div class="action-buttons" id="actionButtons">
         <button class="action-btn">
           <svg viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10"/>
@@ -1217,7 +1273,33 @@ body{
 </section>
 
 
-<style>@keyframes spin{to{transform:rotate(360deg)}}.upload-box.dragover{border-color:var(--accent)!important;background:var(--accent-glow)!important}.result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s;cursor:pointer}.result-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.3)}.result-card img{width:100%;aspect-ratio:1;object-fit:cover}.result-card__info{padding:8px 10px}.result-card__score{font-size:.75rem;font-weight:600;color:var(--accent)}.result-card__domain{font-size:.7rem;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}</style>
+<style>
+@keyframes spin{to{transform:rotate(360deg)}}
+.upload-box.dragover{border-color:var(--accent)!important;background:var(--accent-glow)!important}
+.step-back-btn{background:none;border:1px solid var(--border);color:var(--text-muted);padding:8px 18px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.step-back-btn:hover{border-color:var(--border-light);color:var(--text)}
+.step-next-btn{background:linear-gradient(135deg,var(--accent),#7c6bf0);color:#fff;border:none;padding:14px 24px;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .25s}
+.step-next-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.3)}
+.step-next-btn:disabled{opacity:.4;cursor:not-allowed}
+.face-thumb{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;border:3px solid transparent;transition:all .2s;aspect-ratio:1}
+.face-thumb img{width:100%;height:100%;object-fit:cover}
+.face-thumb:hover{border-color:var(--border-light);transform:scale(1.03)}
+.face-thumb.selected{border-color:var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3)}
+.face-thumb.selected::after{content:'✓';position:absolute;top:6px;right:6px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.face-thumb__info{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.7rem;color:#fff}
+.result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s;position:relative}
+.result-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.result-card img{width:100%;aspect-ratio:1;object-fit:cover}
+.result-card--blurred img{filter:blur(12px)}
+.result-card--blurred .result-card__info{filter:blur(4px)}
+.result-card--blurred::after{content:'🔒';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;z-index:2}
+.result-card__info{padding:8px 10px}
+.result-card__score{font-size:.75rem;font-weight:600;color:var(--accent)}
+.result-card__domain{font-size:.7rem;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upgrade-btn{display:inline-flex;align-items:center;color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
+.upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+#termsLabel:has(input:checked){border-color:var(--accent);background:rgba(91,154,255,.08)}
+</style>
 <script>
 (function(){
   var h=document.querySelector('.nav__hamburger'),
@@ -1255,20 +1337,59 @@ const API = 'https://api.protevio.com/api';
 const uploadBox = document.getElementById('uploadBox');
 const fileInput = document.getElementById('fileInput');
 const searchStatus = document.getElementById('searchStatus');
+const faceSelection = document.getElementById('faceSelection');
+const faceGrid = document.getElementById('faceGrid');
+const termsStep = document.getElementById('termsStep');
 const searchResults = document.getElementById('searchResults');
 const resultsList = document.getElementById('resultsList');
 const noResults = document.getElementById('noResults');
 const statusText = document.getElementById('statusText');
 const statusSub = document.getElementById('statusSub');
-const newSearchBtn = document.getElementById('newSearchBtn');
+const actionButtons = document.getElementById('actionButtons');
+const searchSelectedBtn = document.getElementById('searchSelectedBtn');
+const agreeSearchBtn = document.getElementById('agreeSearchBtn');
+const termsCheckbox = document.getElementById('termsCheckbox');
+const upgradeOverlay = document.getElementById('upgradeOverlay');
+
+let detectedFaces = [];
+let selectedFaceId = null;
+let userPlan = 'free';
+
+// Get user plan
+try {
+  const u = JSON.parse(localStorage.getItem('protevio_user') || '{}');
+  userPlan = u.plan || 'free';
+} catch(e){}
 
 function getToken() { return localStorage.getItem('protevio_token'); }
 
-// Click to upload
+function hideAll() {
+  uploadBox.style.display = 'none';
+  actionButtons.style.display = 'none';
+  searchStatus.style.display = 'none';
+  faceSelection.style.display = 'none';
+  termsStep.style.display = 'none';
+  searchResults.style.display = 'none';
+}
+
+function resetSearch() {
+  hideAll();
+  uploadBox.style.display = '';
+  actionButtons.style.display = '';
+  resultsList.innerHTML = '';
+  noResults.style.display = 'none';
+  upgradeOverlay.style.display = 'none';
+  fileInput.value = '';
+  detectedFaces = [];
+  selectedFaceId = null;
+  termsCheckbox.checked = false;
+  agreeSearchBtn.disabled = true;
+}
+
+// ===== STEP 1: UPLOAD =====
 uploadBox.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => { if(e.target.files.length) handleFiles(e.target.files); });
 
-// Drag and drop
 uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
 uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
 uploadBox.addEventListener('drop', (e) => {
@@ -1277,7 +1398,6 @@ uploadBox.addEventListener('drop', (e) => {
   if(e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
 });
 
-// Paste from clipboard
 document.addEventListener('paste', (e) => {
   const items = e.clipboardData.items;
   for(let i=0; i<items.length; i++){
@@ -1288,80 +1408,152 @@ document.addEventListener('paste', (e) => {
   }
 });
 
-// New search button
-newSearchBtn.addEventListener('click', resetSearch);
-
-function resetSearch() {
-  uploadBox.style.display = '';
-  document.querySelector('.action-buttons').style.display = '';
-  searchStatus.style.display = 'none';
-  searchResults.style.display = 'none';
-  resultsList.innerHTML = '';
-  noResults.style.display = 'none';
-  fileInput.value = '';
-}
-
 async function handleFiles(files) {
   const token = getToken();
-  if(!token) {
-    window.location.href = '/login';
-    return;
-  }
+  if(!token) { window.location.href = '/login'; return; }
 
   const file = files[0];
   if(!file || !file.type.startsWith('image/')) return;
 
-  // Show loading
-  uploadBox.style.display = 'none';
-  document.querySelector('.action-buttons').style.display = 'none';
+  hideAll();
   searchStatus.style.display = 'block';
-  searchResults.style.display = 'none';
   statusText.textContent = 'Detecting faces...';
-  statusSub.textContent = 'Analyzing your photo';
+  statusSub.textContent = 'Analyzing your photo with AI';
 
   try {
-    // Step 1: Upload image for face detection
     const formData = new FormData();
     formData.append('file', file);
 
-    const uploadRes = await fetch(API + '/upload', {
+    const res = await fetch(API + '/upload', {
       method: 'POST',
       headers: {'Authorization': 'Bearer ' + token},
       body: formData
     });
 
-    if(uploadRes.status === 401) { window.location.href = '/login'; return; }
-    const uploadData = await uploadRes.json();
+    if(res.status === 401) { window.location.href = '/login'; return; }
+    const data = await res.json();
 
-    if(!uploadRes.ok || !uploadData.faces || uploadData.faces.length === 0) {
+    if(!res.ok || !data.faces || data.faces.length === 0) {
       statusText.textContent = 'No face detected';
       statusSub.textContent = 'Please upload a clear photo with a visible face.';
       setTimeout(resetSearch, 3000);
       return;
     }
 
-    // Step 2: Search with the first detected face
-    statusText.textContent = 'Searching database...';
-    statusSub.textContent = 'Comparing against 1M+ faces';
+    detectedFaces = data.faces;
+    showFaceSelection();
 
-    const searchRes = await fetch(API + '/search', {
+  } catch(err) {
+    statusText.textContent = 'Connection error';
+    statusSub.textContent = 'Please check your connection and try again.';
+    setTimeout(resetSearch, 3000);
+  }
+}
+
+// ===== STEP 2: FACE SELECTION =====
+function showFaceSelection() {
+  hideAll();
+  faceSelection.style.display = 'block';
+  faceGrid.innerHTML = '';
+  selectedFaceId = null;
+  searchSelectedBtn.disabled = true;
+  searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select a face to continue';
+
+  detectedFaces.forEach((face, i) => {
+    const thumb = document.createElement('div');
+    thumb.className = 'face-thumb';
+    thumb.dataset.faceId = face.id;
+
+    const info = face.age ? (face.gender + ' · ~' + face.age + 'y') : ('Face ' + (i+1));
+
+    thumb.innerHTML =
+      '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
+      '<div class="face-thumb__info">' + info + '</div>';
+
+    thumb.addEventListener('click', () => {
+      document.querySelectorAll('.face-thumb').forEach(t => t.classList.remove('selected'));
+      thumb.classList.add('selected');
+      selectedFaceId = face.id;
+      searchSelectedBtn.disabled = false;
+      searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Continue with this face';
+    });
+
+    faceGrid.appendChild(thumb);
+  });
+}
+
+document.getElementById('backToUpload').addEventListener('click', resetSearch);
+
+searchSelectedBtn.addEventListener('click', () => {
+  if(!selectedFaceId) return;
+  showTermsStep();
+});
+
+// ===== STEP 3: TERMS AGREEMENT =====
+function showTermsStep() {
+  hideAll();
+  termsStep.style.display = 'block';
+  termsCheckbox.checked = false;
+  agreeSearchBtn.disabled = true;
+
+  const face = detectedFaces.find(f => f.id === selectedFaceId);
+  if(face) {
+    document.querySelector('#termsPreview img').src = face.thumbnail;
+    document.getElementById('termsDetection').textContent =
+      (face.gender || '') + (face.age ? ' · ~' + face.age + ' years old' : '') +
+      (face.confidence ? ' · ' + Math.round(face.confidence * 100) + '% confidence' : '');
+  }
+}
+
+document.getElementById('backToFaces').addEventListener('click', showFaceSelection);
+
+termsCheckbox.addEventListener('change', () => {
+  agreeSearchBtn.disabled = !termsCheckbox.checked;
+});
+
+agreeSearchBtn.addEventListener('click', () => {
+  if(!termsCheckbox.checked || !selectedFaceId) return;
+  runSearch();
+});
+
+// ===== STEP 4: SEARCH =====
+async function runSearch() {
+  hideAll();
+  searchStatus.style.display = 'block';
+  statusText.textContent = 'Searching database...';
+  statusSub.textContent = 'Comparing against 1M+ indexed faces';
+
+  const token = getToken();
+
+  try {
+    const res = await fetch(API + '/search', {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ faces: [uploadData.faces[0].id] })
+      body: JSON.stringify({ faces: [selectedFaceId] })
     });
 
-    if(!searchRes.ok) {
-      const errData = await searchRes.json();
+    if(!res.ok) {
+      const errData = await res.json();
       statusText.textContent = 'Search failed';
       statusSub.textContent = errData.error || 'Please try again.';
       setTimeout(resetSearch, 3000);
       return;
     }
 
-    const searchData = await searchRes.json();
+    // Refresh user plan from /auth/me
+    try {
+      const meRes = await fetch(API + '/auth/me', { headers: {'Authorization': 'Bearer ' + token} });
+      if(meRes.ok) {
+        const me = await meRes.json();
+        userPlan = me.plan || 'free';
+        localStorage.setItem('protevio_user', JSON.stringify(me));
+      }
+    } catch(e){}
+
+    const searchData = await res.json();
     showResults(searchData);
 
   } catch(err) {
@@ -1372,34 +1564,49 @@ async function handleFiles(files) {
 }
 
 function showResults(data) {
-  searchStatus.style.display = 'none';
+  hideAll();
   searchResults.style.display = 'block';
 
-  const matches = data.results || data.matches || data || [];
+  const matches = data.results || [];
+  const isFree = (userPlan === 'free');
+
   if(!Array.isArray(matches) || matches.length === 0) {
     noResults.style.display = 'block';
+    upgradeOverlay.style.display = 'none';
     return;
   }
 
   resultsList.innerHTML = '';
-  matches.forEach(match => {
+  matches.forEach((match, i) => {
     const card = document.createElement('div');
-    card.className = 'result-card';
+    card.className = 'result-card' + (isFree ? ' result-card--blurred' : '');
     const similarity = Math.round(match.similarity || 0);
     const domain = match.domain || '';
     const imgUrl = API + '/image/' + (match.filename || '');
+
     card.innerHTML =
       '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
       '<div class="result-card__info">' +
       '<div class="result-card__score">' + similarity + '% match</div>' +
-      '<div class="result-card__domain">' + domain + '</div>' +
+      '<div class="result-card__domain">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '</div>';
-    if(match.url) {
+
+    if(!isFree && match.url) {
+      card.style.cursor = 'pointer';
       card.addEventListener('click', () => window.open(match.url, '_blank'));
     }
     resultsList.appendChild(card);
   });
+
+  // Show upgrade overlay for free users
+  upgradeOverlay.style.display = isFree ? 'block' : 'none';
 }
+
+document.getElementById('newSearchBtn').addEventListener('click', resetSearch);
+
+document.getElementById('unlockOnceBtn').addEventListener('click', () => {
+  alert('Payment integration coming soon.\n\nFor now, contact admin to upgrade your account.');
+});
 </script>
 </body>
 </html>
