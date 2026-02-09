@@ -387,9 +387,71 @@ function showError(msg) {
   setTimeout(() => el.remove(), 5000);
 }
 
+const GOOGLE_CLIENT_ID = '902178578189-e5gmfnandrvgkqs5aeotq3vn612vc3jf.apps.googleusercontent.com';
+
+// Load Google Identity Services
+const gsiScript = document.createElement('script');
+gsiScript.src = 'https://accounts.google.com/gsi/client';
+gsiScript.async = true;
+gsiScript.defer = true;
+document.head.appendChild(gsiScript);
+
+gsiScript.onload = () => {
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: handleGoogleResponse
+  });
+};
+
 document.getElementById('googleBtn').addEventListener('click', function() {
-  alert('Google Sign-In will be available soon.');
+  if (!window.google?.accounts) {
+    showError('Google Sign-In is loading, please try again.');
+    return;
+  }
+  // Trigger One Tap / popup
+  google.accounts.id.prompt((n) => {
+    if (n.isNotDisplayed()) {
+      // Fallback: render hidden Google button and click it
+      const div = document.createElement('div');
+      div.id = 'g_btn_fallback';
+      div.style.cssText = 'position:fixed;top:-9999px';
+      document.body.appendChild(div);
+      google.accounts.id.renderButton(div, {type:'standard', theme:'filled_black', size:'large'});
+      setTimeout(() => {
+        const inner = div.querySelector('div[role=button]') || div.querySelector('iframe');
+        if (inner) inner.click();
+        else showError('Please allow popups for Google Sign-In');
+      }, 300);
+    }
+  });
 });
+
+async function handleGoogleResponse(response) {
+  const btn = document.getElementById('googleBtn');
+  btn.querySelector('span').textContent = 'Signing in...';
+  btn.disabled = true;
+  
+  try {
+    const res = await fetch(API + '/auth/google', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ credential: response.credential })
+    });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      localStorage.setItem('protevio_token', data.token);
+      localStorage.setItem('protevio_user', JSON.stringify(data.user || {}));
+      window.location.href = '/dashboard';
+    } else {
+      showError(data.error || 'Google sign-in failed');
+    }
+  } catch(err) {
+    showError('Connection error. Please try again.');
+  } finally {
+    btn.querySelector('span').textContent = 'Continue with Google';
+    btn.disabled = false;
+  }
+}
 </script>
 
 </body>
