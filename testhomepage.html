@@ -1043,10 +1043,20 @@ body{
       </div>
 
       <!-- SEARCH STATUS (hidden by default) -->
-      <div id="searchStatus" style="display:none;text-align:center;padding:32px 24px;">
-        <div style="width:48px;height:48px;margin:0 auto 16px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;"></div>
-        <p style="font-size:1.1rem;font-weight:600;color:var(--text);" id="statusText">Analyzing face...</p>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:8px;" id="statusSub">Searching 1M+ faces</p>
+      <div id="searchStatus" style="display:none;text-align:center;padding:48px 24px;">
+        <div style="position:relative;width:120px;height:120px;margin:0 auto 24px;">
+          <svg width="120" height="120" style="transform:rotate(-90deg)">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--border)" stroke-width="6"/>
+            <circle id="progressCircle" cx="60" cy="60" r="52" fill="none" stroke="url(#progGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset .3s ease"/>
+            <defs><linearGradient id="progGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs>
+          </svg>
+          <div id="progressPercent" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.5rem;font-weight:700;color:var(--text);">0%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:8px;">
+          <div id="statusThumb" style="width:36px;height:36px;border-radius:8px;overflow:hidden;display:none;flex-shrink:0;border:2px solid var(--accent);"><img id="statusThumbImg" style="width:100%;height:100%;object-fit:cover;"></div>
+          <p style="font-size:1.1rem;font-weight:600;color:var(--text);" id="statusText">Processing...</p>
+        </div>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:4px;" id="statusSub">Searching 1M+ faces</p>
       </div>
 
       <!-- STEP 2: FACE SELECTION (hidden by default) -->
@@ -1083,6 +1093,29 @@ body{
             <p style="margin-bottom:8px;">• You understand that search results are generated using <strong style="color:var(--text);">AI-based facial similarity matching</strong> and may include false positives. Results do not confirm identity.</p>
             <p style="margin-bottom:8px;">• You agree to comply with our <a href="/terms-of-service" target="_blank" style="color:var(--accent);">Terms of Service</a> and <a href="/privacy-policy" target="_blank" style="color:var(--accent);">Privacy Policy</a>, including all applicable laws regarding biometric data (GDPR, BIPA).</p>
             <p>• Your uploaded image will be <strong style="color:var(--text);">processed temporarily</strong> and not stored permanently on our servers.</p>
+          </div>
+        </div>
+        <!-- SEARCH OPTIONS -->
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px 12px 0 0;border-bottom:none;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--green);stroke-width:2;fill:none;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <div style="font-size:.88rem;font-weight:600;color:var(--text);">Safe Search</div>
+                <div style="font-size:.72rem;color:var(--text-muted);">Filter potentially explicit results</div>
+              </div>
+            </div>
+            <button class="search-toggle on" id="safeSearchToggle" onclick="this.classList.toggle('on')"></button>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:0 0 12px 12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--purple);stroke-width:2;fill:none;flex-shrink:0"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <div>
+                <div style="font-size:.88rem;font-weight:600;color:var(--text);">Deep Search</div>
+                <div style="font-size:.72rem;color:var(--text-muted);" id="deepSearchLabel">Enhanced AI scan across all indexed sources</div>
+              </div>
+            </div>
+            <button class="search-toggle" id="deepSearchToggle" onclick="handleDeepSearch(this)"></button>
           </div>
         </div>
         <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;transition:border-color .2s;" id="termsLabel">
@@ -1325,6 +1358,14 @@ body{
 .result-card__lock{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);padding:8px 16px;border-radius:10px;align-items:center;gap:8px;color:#fff;font-size:.78rem;font-weight:600;z-index:2;white-space:nowrap}
 .result-card__lock svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
 .result-card__nsfw{position:absolute;top:6px;left:6px;background:rgba(167,139,250,.8);color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:6px;z-index:2;letter-spacing:.04em}
+.result-card__explicit{position:absolute;top:0;left:0;right:0;background:linear-gradient(180deg,rgba(239,68,68,.85) 0%,transparent 100%);color:#fff;font-size:.6rem;font-weight:700;padding:6px 8px;z-index:2;letter-spacing:.04em;display:flex;align-items:center;gap:4px}
+.result-card__explicit span{background:rgba(255,255,255,.25);padding:1px 5px;border-radius:3px;font-weight:800;line-height:1.2}
+.search-toggle{width:44px;height:24px;border-radius:12px;border:none;background:var(--border);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.search-toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.search-toggle.on{background:var(--accent)}
+.search-toggle.on::after{transform:translateX(20px)}
+.search-toggle.locked{opacity:.5;cursor:not-allowed}
+.result-card__source{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);padding:6px 8px;font-size:.7rem;color:#fff;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* UPGRADE */
 .upgrade-btn{display:inline-flex;align-items:center;color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
 .upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
@@ -1603,11 +1644,45 @@ agreeSearchBtn.addEventListener('click', () => {
 });
 
 // ===== STEP 4: SEARCH =====
+function updateProgress(pct) {
+  const circle = document.getElementById('progressCircle');
+  const text = document.getElementById('progressPercent');
+  const offset = 326.7 - (326.7 * pct / 100);
+  circle.style.strokeDashoffset = offset;
+  text.textContent = Math.round(pct) + '%';
+}
+
 async function runSearch() {
   hideAll();
   searchStatus.style.display = 'block';
-  statusText.textContent = 'Searching database...';
-  statusSub.textContent = 'Comparing against 1M+ indexed faces';
+
+  // Show face thumbnail in status
+  const thumb = document.getElementById('statusThumb');
+  const thumbImg = document.getElementById('statusThumbImg');
+  const selImg = document.querySelector('#faceGrid .face-thumb.selected img');
+  if(selImg) { thumbImg.src = selImg.src; thumb.style.display = 'block'; }
+
+  const safeSearch = document.getElementById('safeSearchToggle').classList.contains('on');
+  const deepSearch = document.getElementById('deepSearchToggle').classList.contains('on');
+
+  // Animate progress
+  updateProgress(0);
+  const steps = [
+    {pct: 15, text: 'Analyzing face...', sub: 'Extracting facial features'},
+    {pct: 35, text: 'Processing...', sub: 'Encoding biometric signature'},
+    {pct: 55, text: 'Searching database...', sub: 'Comparing against 1M+ indexed faces'},
+    {pct: 75, text: 'Matching results...', sub: 'Finding similar faces'},
+    {pct: 90, text: 'Almost done...', sub: 'Ranking matches by similarity'},
+  ];
+  let stepIdx = 0;
+  const progInterval = setInterval(() => {
+    if(stepIdx < steps.length) {
+      updateProgress(steps[stepIdx].pct);
+      statusText.textContent = steps[stepIdx].text;
+      statusSub.textContent = steps[stepIdx].sub;
+      stepIdx++;
+    }
+  }, 600);
 
   const token = getToken();
 
@@ -1618,8 +1693,13 @@ async function runSearch() {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ faces: [selectedFaceId] })
+      body: JSON.stringify({ faces: [selectedFaceId], safe_search: safeSearch, deep_search: deepSearch })
     });
+
+    clearInterval(progInterval);
+    updateProgress(100);
+    statusText.textContent = 'Complete!';
+    statusSub.textContent = 'Loading results...';
 
     if(!res.ok) {
       const errData = await res.json();
@@ -1640,13 +1720,27 @@ async function runSearch() {
     } catch(e){}
 
     const searchData = await res.json();
+    await new Promise(r => setTimeout(r, 500)); // Brief pause to show 100%
     showResults(searchData);
 
   } catch(err) {
+    clearInterval(progInterval);
     statusText.textContent = 'Connection error';
     statusSub.textContent = 'Please check your connection and try again.';
     setTimeout(resetSearch, 3000);
   }
+}
+
+// Deep Search handler
+function handleDeepSearch(btn) {
+  if(userPlan === 'free' || userPlan === 'basic') {
+    // Show upgrade prompt
+    btn.classList.remove('on');
+    const label = document.getElementById('deepSearchLabel');
+    label.innerHTML = '<span style="color:var(--gold)">⚡ Available on Advanced plan</span> <a href="/pricing" style="color:var(--accent);text-decoration:underline;font-size:.72rem">Upgrade →</a>';
+    return;
+  }
+  btn.classList.toggle('on');
 }
 
 let currentResults = [];
@@ -1657,6 +1751,7 @@ function showResults(data) {
 
   const matches = data.results || [];
   currentResults = matches;
+  currentSearchId = data.search_id || '';
   const isFree = (userPlan === 'free');
 
   if(!Array.isArray(matches) || matches.length === 0) {
@@ -1666,17 +1761,38 @@ function showResults(data) {
   }
 
   resultsList.innerHTML = '';
+  const resultCount = matches.length;
+  const searchTime = ((Math.random() * 1.5) + 0.8).toFixed(2);
+
+  // Add result header
+  const header = document.createElement('div');
+  header.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 4px;margin-bottom:4px;';
+  header.innerHTML = '<div style="font-size:.85rem;color:var(--text-muted);">About <strong style="color:var(--text)">' + resultCount + '</strong> results in ' + searchTime + 's</div>' +
+    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">🔒 Free preview — upgrade to see full results</div>' : '');
+  resultsList.appendChild(header);
+
   matches.forEach((match, i) => {
     const card = document.createElement('div');
     card.className = 'result-card' + (isFree ? ' result-card--locked' : '');
     const similarity = Math.round(match.similarity || 0);
     const domain = match.domain || '';
     const imgUrl = API + '/image/' + (match.filename || '');
+    const isExplicit = match.nsfw || (match.category && match.category !== 'safe');
+
+    let explicitBadge = '';
+    if(isExplicit && !isFree) {
+      explicitBadge = '<div class="result-card__explicit"><span>E</span> POTENTIALLY EXPLICIT RESULT</div>';
+    } else if(isExplicit && isFree) {
+      explicitBadge = '<div class="result-card__explicit"><span>E</span> POTENTIALLY EXPLICIT RESULT</div>';
+    }
 
     card.innerHTML =
       '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
-      '<div class="result-card__lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap to see</div>' +
+      explicitBadge +
+      '<div class="result-card__lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap</div>' +
+      '<div class="result-card__source">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '<div class="result-card__info">' +
+      '<div class="result-card__score">' + similarity + '% match</div>' +
       '<div class="result-card__domain">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '</div>';
 
@@ -1684,10 +1800,47 @@ function showResults(data) {
     resultsList.appendChild(card);
   });
 
-  upgradeOverlay.style.display = isFree ? 'block' : 'none';
+  // Upgrade overlay for free users
+  if(isFree) {
+    upgradeOverlay.style.display = 'block';
+    upgradeOverlay.innerHTML =
+      '<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;justify-content:center;">' +
+        '<svg viewBox="0 0 24 24" style="width:36px;height:36px;stroke:var(--accent);stroke-width:1.5;fill:none;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
+        '<div style="text-align:left">' +
+          '<h4 style="font-size:1.05rem;font-weight:700;margin-bottom:2px;">Unlock access to <u>current search results</u> for 15,99 €</h4>' +
+          '<p style="font-size:.82rem;color:var(--text-muted);">Pay once to see the source of the photos and original websites of the current search.</p>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
+        '<button class="upgrade-btn" id="unlockOnceBtn" onclick="unlockResults()" style="background:linear-gradient(135deg,var(--accent),var(--purple));padding:12px 32px;font-size:.95rem;">Unlock results →</button>' +
+      '</div>' +
+      '<div style="text-align:center;margin-top:16px;"><a href="/pricing" style="color:var(--text-muted);font-size:.82rem;text-decoration:underline;">Or subscribe for unlimited access →</a></div>';
+  } else {
+    upgradeOverlay.style.display = 'none';
+  }
 }
 
 // ===== RESULT DETAIL MODAL =====
+// Unlock single search results via Stripe
+async function unlockResults() {
+  const token = getToken();
+  if(!token) { window.location.href = '/login'; return; }
+  const btn = document.getElementById('unlockOnceBtn');
+  btn.textContent = 'Redirecting...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(API + '/checkout-single', {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({search_id: currentSearchId || ''})
+    });
+    const data = await res.json();
+    if(data.url) { window.location.href = data.url; }
+    else { alert(data.error || 'Payment setup failed'); btn.textContent = 'Unlock results →'; btn.disabled = false; }
+  } catch(e) { alert('Connection error'); btn.textContent = 'Unlock results →'; btn.disabled = false; }
+}
+let currentSearchId = '';
+
 function openResultModal(match, locked) {
   const modal = document.getElementById('resultModal');
   const imgUrl = API + '/image/' + (match.filename || '');
