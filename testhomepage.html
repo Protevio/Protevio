@@ -1447,12 +1447,35 @@ const upgradeOverlay = document.getElementById('upgradeOverlay');
 let detectedFaces = [];
 let selectedFaceId = null;
 let userPlan = 'free';
+let isSearchUnlocked = false;
 
 // Get user plan
 try {
   const u = JSON.parse(localStorage.getItem('protevio_user') || '{}');
   userPlan = u.plan || 'free';
 } catch(e){}
+
+// Check if returning from single unlock payment
+(function checkUnlockReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const unlockedId = params.get('unlocked');
+  if(unlockedId) {
+    isSearchUnlocked = true;
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+    // Restore saved results
+    try {
+      const saved = JSON.parse(localStorage.getItem('protevio_pending_unlock') || 'null');
+      if(saved && saved.results) {
+        localStorage.removeItem('protevio_pending_unlock');
+        // Wait for DOM to be ready then show results
+        setTimeout(() => {
+          showResults({ results: saved.results, search_id: saved.search_id });
+        }, 300);
+      }
+    } catch(e) { console.error('Failed to restore results:', e); }
+  }
+})();
 
 function getToken() { return localStorage.getItem('protevio_token'); }
 
@@ -1752,7 +1775,7 @@ function showResults(data) {
   const matches = data.results || [];
   currentResults = matches;
   currentSearchId = data.search_id || '';
-  const isFree = (userPlan === 'free');
+  const isFree = (userPlan === 'free') && !isSearchUnlocked;
 
   if(!Array.isArray(matches) || matches.length === 0) {
     noResults.style.display = 'block';
@@ -1825,6 +1848,13 @@ function showResults(data) {
 async function unlockResults() {
   const token = getToken();
   if(!token) { window.location.href = '/login'; return; }
+  // Save current results so we can restore after payment
+  if(currentResults.length && currentSearchId) {
+    localStorage.setItem('protevio_pending_unlock', JSON.stringify({
+      search_id: currentSearchId,
+      results: currentResults
+    }));
+  }
   const btn = document.getElementById('unlockOnceBtn');
   btn.textContent = 'Redirecting...';
   btn.disabled = true;
