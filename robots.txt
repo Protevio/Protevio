@@ -1,0 +1,26 @@
+# Protevio AI - robots.txt
+# https://protevio.com
+
+User-agent: *
+Allow: /
+
+# Block internal/utility pages from indexing
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /check-email.html
+Disallow: /verify-email.html
+Disallow: /reset-password.html
+Disallow: /thankyou.html
+
+# Block duplicate/old versions
+Disallow: /login__1_.html
+Disallow: /signup__1_.html
+Disallow: /forgot-password__1_.html
+Disallow: /reset-password__1_.html
+Disallow: /privacy-policy__1_.html
+Disallow: /terms-of-service__1_.html
+Disallow: /test.html
+Disallow: /index.html
+
+# Sitemap
+Sitemap: https://protevio.com/sitemap.xml
