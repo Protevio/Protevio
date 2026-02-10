@@ -20,7 +20,6 @@ Disallow: /reset-password__1_.html
 Disallow: /privacy-policy__1_.html
 Disallow: /terms-of-service__1_.html
 Disallow: /test.html
-Disallow: /index.html
 
 # Sitemap
 Sitemap: https://protevio.com/sitemap.xml
