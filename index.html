@@ -934,19 +934,33 @@ body{
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
-{
+[{
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Protevio AI",
-  "description": "Reverse face search engine. Find where your photos appear online across 1.1M+ indexed faces.",
+  "description": "Reverse face search engine. Find where your photos appear online across 1M+ indexed faces. Protect your digital identity with facial recognition technology.",
   "url": "https://protevio.com",
   "applicationCategory": "SecurityApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR"
-  }
-}
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "offers": [
+    {"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "EUR", "description": "10 searches per day"},
+    {"@type": "Offer", "name": "Starter", "price": "25", "priceCurrency": "EUR", "description": "50 searches per month"},
+    {"@type": "Offer", "name": "Advanced", "price": "35", "priceCurrency": "EUR", "description": "75 searches per month"},
+    {"@type": "Offer", "name": "Professional", "price": "300", "priceCurrency": "EUR", "description": "Unlimited searches"}
+  ],
+  "featureList": ["Reverse face search", "Photo monitoring", "DMCA takedown support", "PDF evidence reports", "Opt-out removal"]
+},
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Protevio AI",
+  "url": "https://protevio.com",
+  "logo": "https://protevio.com/assets/logo.png",
+  "description": "Facial recognition search platform helping individuals protect their digital identity and privacy.",
+  "contactPoint": {"@type": "ContactPoint", "email": "support@protevio.com", "contactType": "customer support"},
+  "sameAs": []
+}]
 </script>
 </head>
 <body>
@@ -1161,7 +1175,13 @@ body{
       <div id="searchResults" style="display:none;padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
           <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);">Search Results</h3>
-          <button id="newSearchBtn" class="step-back-btn">New Search</button>
+          <div style="display:flex;gap:8px;">
+            <button id="downloadReportBtn" style="display:none;padding:8px 16px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s;" title="Download PDF Evidence Report">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PDF Report
+            </button>
+            <button id="newSearchBtn" class="step-back-btn">New Search</button>
+          </div>
         </div>
         <div id="resultsList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;"></div>
         <p id="noResults" style="display:none;text-align:center;color:var(--text-muted);padding:24px;font-size:.95rem;">No matching faces found. Try a different photo.</p>
@@ -1809,6 +1829,12 @@ function showResults(data) {
   currentSearchId = data.search_id || '';
   const isFree = (userPlan === 'free') && !isSearchUnlocked;
 
+  // Show/hide download report button (paid users only)
+  const dlBtn = document.getElementById('downloadReportBtn');
+  if(dlBtn) {
+    dlBtn.style.display = (!isFree && matches.length > 0) ? 'flex' : 'none';
+  }
+
   if(!Array.isArray(matches) || matches.length === 0) {
     noResults.style.display = 'block';
     upgradeOverlay.style.display = 'none';
@@ -1973,6 +1999,37 @@ function closeResultModal() {
 
 document.getElementById('newSearchBtn').addEventListener('click', resetSearch);
 
+document.getElementById('downloadReportBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('downloadReportBtn');
+  const origHTML = btn.innerHTML;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;animation:spin 1s linear infinite;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Generating...';
+  btn.disabled = true;
+  try {
+    const token = localStorage.getItem('protevio_token');
+    const resp = await fetch('/api/generate-report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({
+        results: currentResults,
+        search_date: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC',
+        email: (JSON.parse(localStorage.getItem('protevio_user') || '{}')).email || ''
+      })
+    });
+    if(!resp.ok) throw new Error('Failed');
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'protevio_evidence_report_' + new Date().toISOString().slice(0,10) + '.pdf';
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch(e) {
+    alert('Failed to generate report. Please try again.');
+  }
+  btn.innerHTML = origHTML;
+  btn.disabled = false;
+});
+
 document.getElementById('unlockOnceBtn').addEventListener('click', () => {
   alert('Payment integration coming soon.\n\nFor now, contact admin to upgrade your account.');
 });
@@ -2098,6 +2155,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       <a href="/about" style="color:var(--accent);text-decoration:none;margin:0 12px">About</a>
       <a href="/contact" style="color:var(--accent);text-decoration:none;margin:0 12px">Contact</a>
       <a href="/csr" style="color:var(--accent);text-decoration:none;margin:0 12px">CSR</a>
+      <a href="dmca-templates.html" style="color:var(--accent);text-decoration:none;margin:0 12px">DMCA Templates</a>
     </div>
     <p>© 2026 Protevio AI. All rights reserved.</p>
   </div>

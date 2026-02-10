@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DMCA Takedown Templates & Image Removal Guide — Protevio AI</title>
+<meta name="description" content="Free DMCA takedown letter templates and GDPR erasure request templates. Step-by-step guide to remove unauthorized photos and protect your image rights online."/>
+<meta name="keywords" content="DMCA takedown template, DMCA notice, image removal request, GDPR erasure request, remove my photos, unauthorized image use, copyright takedown, photo removal letter"/>
+<meta property="og:title" content="DMCA Takedown Templates & Image Removal Guide — Protevio AI"/>
+<meta property="og:description" content="Free DMCA takedown and GDPR erasure request templates. Remove unauthorized photos from the internet."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://protevio.com/dmca-templates.html"/>
+<meta property="og:site_name" content="Protevio AI"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DMCA Takedown Templates & Image Removal Guide — Protevio AI"/>
+<meta name="twitter:description" content="Free DMCA takedown and GDPR erasure request templates. Remove unauthorized photos from the internet."/>
+<link rel="canonical" href="https://protevio.com/dmca-templates.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#1a1f2e;
+  --bg-elevated:#232a3d;
+  --bg-card:#2a3349;
+  --border:#3a4562;
+  --border-light:#4a5678;
+  --text:#f8fafc;
+  --text-secondary:#d1d5e0;
+  --text-muted:#9ca3b8;
+  --accent:#5b9aff;
+  --accent-light:#85b4ff;
+  --accent-glow:rgba(91,154,255,.15);
+  --gold:#ffb020;
+  --green:#4ade80;
+  --purple:#a78bfa;
+  --glass:rgba(42,51,73,.6);
+  --glass-border:rgba(255,255,255,.08);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.bg-gradient{
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(91,154,255,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(74,222,128,.05) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+.dot-pattern{
+  position:fixed;inset:0;
+  background-image:radial-gradient(rgba(91,154,255,.15) 1px, transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(26,31,46,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:100}
+.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav__logo-mark{width:36px;height:36px}.nav__logo-mark svg{width:100%;height:100%}
+.nav__logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.22em;color:var(--text)}
+.nav__links{display:flex;align-items:center;gap:32px}
+.nav__link{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .25s;position:relative}
+.nav__link:hover{color:var(--text)}
+.nav__link--active{color:var(--text)}
+.nav__link--active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px}
+.nav__right{display:flex;align-items:center;gap:12px}
+.nav__lang{display:flex;align-items:center;gap:6px;padding:9px 14px;border:1px solid var(--border);border-radius:10px;font-size:.85rem;font-weight:500;color:var(--text-secondary);background:var(--glass);backdrop-filter:blur(10px);cursor:pointer;transition:all .25s}
+.nav__lang:hover{border-color:var(--border-light);background:var(--bg-card);transform:translateY(-1px)}
+.nav__lang svg{width:16px;height:16px;opacity:.7}
+.nav__login{padding:9px 20px;font-size:.85rem;font-weight:600;color:white;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:10px;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .25s;border:none;cursor:pointer}
+.nav__login:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(91,154,255,.3)}
+.nav__login svg{width:16px;height:16px;stroke:white;stroke-width:2;fill:none}
+.nav__hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.nav__hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:65px;left:0;right:0;bottom:0;background:rgba(26,31,46,.98);backdrop-filter:blur(20px);z-index:99;flex-direction:column;padding:24px}
+.mobile-menu.active{display:flex}
+.mobile-menu a{padding:14px 0;font-size:1.1rem;font-weight:600;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border)}
+
+/* HERO */
+.dmca-hero-UNUSED{position:relative;z-index:1;text-align:center;padding:80px 24px 48px;max-width:800px;margin:0 auto}
+.csr-hero__tag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:20px;text-transform:uppercase;letter-spacing:.06em}
+.csr-hero__title{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:16px}
+.csr-hero__sub{font-size:1.02rem;color:var(--text-muted);max-width:620px;margin:0 auto;line-height:1.75}
+.csr-hero__version{font-size:.8rem;color:var(--text-muted);margin-top:16px;opacity:.7}
+
+/* CONTENT */
+.csr{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 24px 80px}
+
+.csr-section{margin-bottom:56px}
+.csr-section__header{display:flex;align-items:flex-start;gap:18px;margin-bottom:20px}
+.csr-section__icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.csr-section__icon svg{width:24px;height:24px;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.csr-section__icon--blue{background:rgba(91,154,255,.12);border:1px solid rgba(91,154,255,.2)}
+.csr-section__icon--blue svg{stroke:var(--accent)}
+.csr-section__icon--green{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.2)}
+.csr-section__icon--green svg{stroke:var(--green)}
+.csr-section__icon--purple{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.2)}
+.csr-section__icon--purple svg{stroke:var(--purple)}
+.csr-section__icon--gold{background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.2)}
+.csr-section__icon--gold svg{stroke:var(--gold)}
+.csr-section__icon--pink{background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.2)}
+.csr-section__icon--pink svg{stroke:#f472b6}
+.csr-section__icon--teal{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.2)}
+.csr-section__icon--teal svg{stroke:#2dd4bf}
+
+.csr-section__title{font-size:1.4rem;font-weight:700;line-height:1.3;padding-top:6px}
+.csr-section__body{font-size:.98rem;line-height:1.85;color:var(--text-secondary)}
+.csr-section__body p{margin-bottom:16px}
+.csr-section__body strong{color:var(--text);font-weight:600}
+
+.csr-principles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:24px 0}
+.csr-principle{padding:18px 20px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;font-size:.88rem;color:var(--text-secondary);line-height:1.6;display:flex;align-items:flex-start;gap:10px}
+.csr-principle__dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+
+.csr-commitment{margin:24px 0;padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px}
+.csr-commitment__title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.csr-commitment__text{font-size:.88rem;color:var(--text-muted);line-height:1.7}
+
+.csr-divider{height:1px;background:var(--border);margin:56px 0}
+
+/* CONTACT */
+.csr-contact{text-align:center;padding:40px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;margin-top:56px}
+.csr-contact__title{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.csr-contact__text{font-size:.9rem;color:var(--text-muted);margin-bottom:20px;line-height:1.7}
+.csr-contact__link{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-weight:700;border-radius:12px;text-decoration:none;font-size:.92rem;transition:all .25s}
+.csr-contact__link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.3)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;text-align:center;padding:32px 24px;border-top:1px solid var(--border)}
+.footer__text{font-size:.8rem;color:var(--text-muted)}
+.footer__link{color:var(--text-muted);text-decoration:none;transition:color .2s}
+.footer__link:hover{color:var(--accent)}
+
+@media(max-width:768px){
+  .nav{padding:12px 16px}
+  .nav__links,.nav__right{display:none}
+  .nav__hamburger{display:flex}
+  .dmca-hero-UNUSED{padding:48px 16px 32px}
+  .csr{padding:0 16px 60px}
+  .csr-principles{grid-template-columns:1fr}
+  .csr-contact{padding:28px 20px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to File a DMCA Takedown Notice","description":"Step-by-step guide to remove unauthorized photos from websites using DMCA takedown notices.","step":[{"@type":"HowToStep","name":"Find where your photos appear","text":"Use Protevio AI to search for your face across the internet and identify unauthorized usage."},{"@type":"HowToStep","name":"Document the evidence","text":"Generate a PDF evidence report with timestamps, URLs, and similarity scores."},{"@type":"HowToStep","name":"Send the DMCA takedown notice","text":"Use our free template to send a formal DMCA takedown notice to the website host."},{"@type":"HowToStep","name":"Follow up","text":"If the content is not removed within 10-14 business days, escalate to the hosting provider or search engines."}]}
+</script>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<div class="dot-pattern"></div>
+
+<nav class="nav">
+  <a href="/" class="nav__logo">
+    <div class="nav__logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
+        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
+        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <defs>
+          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
+            <stop offset="0%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span class="nav__logo-text">PROTEVIO</span>
+  </a>
+  <div class="nav__links">
+    <a href="/" class="nav__link">Home</a>
+    <a href="about.html" class="nav__link">About</a>
+    <a href="pricing.html" class="nav__link">Pricing</a>
+    <a href="faq.html" class="nav__link">FAQ</a>
+    <a href="blog.html" class="nav__link">Blog</a>
+    <a href="contact.html" class="nav__link">Contact</a><a href="opt-out.html" class="nav__link">Opt-Out</a>
+  </div>
+  <div class="nav__right">
+    <button class="nav__lang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      EN
+    </button>
+    <a href="login.html" class="nav__login" id="navAuth">
+      <span>Log In</span>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Page-specific styles -->
+<style>
+.dmca-hero{position:relative;z-index:1;text-align:center;padding:80px 24px 48px;max-width:800px;margin:0 auto}
+.dmca-hero__tag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);font-size:.78rem;font-weight:600;color:var(--red);margin-bottom:20px;text-transform:uppercase;letter-spacing:.06em}
+.dmca-hero__title{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:16px}
+.dmca-hero__sub{font-size:1.02rem;color:var(--text-muted);max-width:620px;margin:0 auto;line-height:1.75}
+.dmca-content{max-width:800px;margin:0 auto;padding:0 24px 60px}
+.dmca-section{margin-bottom:48px}
+.dmca-section h2{font-size:1.4rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.dmca-section h2 .icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dmca-section p{color:var(--text-muted);line-height:1.8;margin-bottom:12px;font-size:.95rem}
+.dmca-section ol,.dmca-section ul{color:var(--text-muted);line-height:1.8;margin:12px 0 20px 24px;font-size:.93rem}
+.dmca-section li{margin-bottom:8px}
+
+.template-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:20px 0;position:relative}
+.template-box__header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.template-box__title{font-weight:700;font-size:1rem;display:flex;align-items:center;gap:8px}
+.template-box__badge{font-size:.7rem;padding:3px 10px;border-radius:6px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.template-box__badge--dmca{background:rgba(248,113,113,.15);color:var(--red)}
+.template-box__badge--gdpr{background:rgba(91,154,255,.15);color:var(--accent)}
+.template-box__badge--hosting{background:rgba(74,222,128,.15);color:var(--green)}
+.template-box pre{background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:20px;font-size:.84rem;line-height:1.8;color:var(--text-secondary);white-space:pre-wrap;word-wrap:break-word;font-family:'Plus Jakarta Sans',sans-serif;max-height:400px;overflow-y:auto}
+.template-box__copy{padding:8px 18px;background:rgba(91,154,255,.15);color:var(--accent);border:1px solid rgba(91,154,255,.3);border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.template-box__copy:hover{background:rgba(91,154,255,.25)}
+.template-box__copy.copied{background:rgba(74,222,128,.15);color:var(--green);border-color:rgba(74,222,128,.3)}
+
+.cta-box{background:linear-gradient(135deg,rgba(91,154,255,.1),rgba(167,139,250,.1));border:1px solid rgba(91,154,255,.2);border-radius:16px;padding:32px;text-align:center;margin:40px 0}
+.cta-box h3{font-size:1.2rem;font-weight:700;margin-bottom:12px}
+.cta-box p{color:var(--text-muted);font-size:.92rem;margin-bottom:20px;line-height:1.7}
+.cta-box__btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:12px;font-size:.92rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.cta-box__btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.3)}
+
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0}
+.step-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.step-card__num{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;margin:0 auto 12px}
+.step-card h4{font-size:.92rem;font-weight:700;margin-bottom:6px}
+.step-card p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+</style>
+
+<div class="dmca-hero">
+  <div class="dmca-hero__tag">
+    <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Free Templates
+  </div>
+  <h1 class="dmca-hero__title">DMCA Takedown & <span style="background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Image Removal</span> Templates</h1>
+  <p class="dmca-hero__sub">Free, ready-to-use letter templates for removing unauthorized photos from websites. Works for DMCA takedown notices, GDPR right to erasure requests, and hosting provider complaints.</p>
+</div>
+
+<div class="dmca-content">
+
+  <!-- Step-by-step overview -->
+  <div class="dmca-section">
+    <h2><span class="icon" style="background:rgba(91,154,255,.12)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span> How to Remove Your Photos</h2>
+    
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-card__num">1</div>
+        <h4>Find Your Photos</h4>
+        <p>Use Protevio AI to search your face and discover every website where your photos appear.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-card__num">2</div>
+        <h4>Document Evidence</h4>
+        <p>Download a PDF evidence report with timestamps, URLs, and match scores for legal use.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-card__num">3</div>
+        <h4>Send Takedown Notice</h4>
+        <p>Use our templates below to send formal removal requests to websites and hosting providers.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-card__num">4</div>
+        <h4>Follow Up</h4>
+        <p>If ignored after 14 days, escalate to the hosting provider, search engines, or legal counsel.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>Don't know where your photos appear?</h3>
+    <p>Search your face across 1M+ indexed images and find every website using your photos — in seconds.</p>
+    <a href="/" class="cta-box__btn">
+      <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Search Your Face Now
+    </a>
+  </div>
+
+  <!-- Template 1: DMCA Takedown -->
+  <div class="dmca-section">
+    <h2><span class="icon" style="background:rgba(248,113,113,.12)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--red);stroke-width:2;fill:none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> DMCA Takedown Notice Template</h2>
+    <p>Use this template to send a formal DMCA takedown notice to any website hosting your photos without authorization. Under the Digital Millennium Copyright Act (17 U.S.C. § 512), website operators must remove infringing content within 10-14 business days of receiving a valid notice.</p>
+
+    <div class="template-box">
+      <div class="template-box__header">
+        <div class="template-box__title">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--red);stroke-width:2;fill:none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          DMCA Takedown Notice
+          <span class="template-box__badge template-box__badge--dmca">US Law</span>
+        </div>
+        <button class="template-box__copy" onclick="copyTemplate(this, 'dmca')">Copy Template</button>
+      </div>
+      <pre id="template-dmca">DMCA Takedown Notice
+Pursuant to 17 U.S.C. § 512(c)
+
+Date: [DATE]
+
+To: [WEBSITE NAME / HOSTING PROVIDER]
+DMCA Agent / Legal Department
+[EMAIL ADDRESS]
+
+RE: Copyright Infringement — Demand for Immediate Removal
+
+Dear Sir/Madam,
+
+I am writing to notify you of copyright infringement occurring on your platform, as outlined below. This letter constitutes a formal notification under the Digital Millennium Copyright Act (17 U.S.C. § 512).
+
+IDENTIFICATION OF COPYRIGHTED WORK:
+The copyrighted material consists of personal photographs/images of myself for which I am the sole copyright holder.
+
+IDENTIFICATION OF INFRINGING MATERIAL:
+The following URL(s) contain unauthorized copies of my copyrighted images:
+
+1. [URL OF INFRINGING IMAGE 1]
+2. [URL OF INFRINGING IMAGE 2]
+3. [URL OF INFRINGING IMAGE 3]
+
+[Attach Protevio AI Evidence Report if available]
+
+STATEMENT OF GOOD FAITH:
+I have a good faith belief that the use of the copyrighted material described above is not authorized by the copyright owner, its agent, or the law.
+
+STATEMENT OF ACCURACY:
+I swear, under penalty of perjury, that the information in this notification is accurate and that I am the copyright owner or am authorized to act on behalf of the copyright owner.
+
+CONTACT INFORMATION:
+Full Name: [YOUR FULL NAME]
+Address: [YOUR ADDRESS]
+Email: [YOUR EMAIL]
+Phone: [YOUR PHONE NUMBER]
+
+Signature: [YOUR SIGNATURE]
+
+This notice is sent in accordance with the provisions of the Digital Millennium Copyright Act.</pre>
+    </div>
+  </div>
+
+  <!-- Template 2: GDPR Right to Erasure -->
+  <div class="dmca-section">
+    <h2><span class="icon" style="background:rgba(91,154,255,.12)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span> GDPR Right to Erasure Request (EU)</h2>
+    <p>If you are an EU/EEA resident, you have the right to request erasure of your personal data under Article 17 of the General Data Protection Regulation. This includes photographs and biometric data. Controllers must respond within 30 days.</p>
+
+    <div class="template-box">
+      <div class="template-box__header">
+        <div class="template-box__title">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--accent);stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          GDPR Erasure Request
+          <span class="template-box__badge template-box__badge--gdpr">EU Law</span>
+        </div>
+        <button class="template-box__copy" onclick="copyTemplate(this, 'gdpr')">Copy Template</button>
+      </div>
+      <pre id="template-gdpr">Right to Erasure Request
+Pursuant to Article 17 of the General Data Protection Regulation (EU) 2016/679
+
+Date: [DATE]
+
+To: [COMPANY NAME]
+Data Protection Officer / Privacy Department
+[EMAIL ADDRESS]
+
+RE: Request for Erasure of Personal Data (Right to Be Forgotten)
+
+Dear Data Protection Officer,
+
+I am writing to request the erasure of my personal data held by your organization, as is my right under Article 17 of the General Data Protection Regulation (GDPR).
+
+PERSONAL DATA TO BE ERASED:
+I request the removal of all photographs, facial images, and biometric data associated with my identity from your platform, including but not limited to:
+
+1. [URL OF IMAGE 1]
+2. [URL OF IMAGE 2]
+3. [URL OF IMAGE 3]
+
+[Attach Protevio AI Evidence Report if available]
+
+GROUNDS FOR ERASURE:
+☐ The personal data is no longer necessary for the purpose it was collected (Art. 17(1)(a))
+☐ I withdraw my consent and there is no other legal ground for processing (Art. 17(1)(b))
+☐ I object to the processing and there are no overriding legitimate grounds (Art. 17(1)(c))
+☐ The personal data has been unlawfully processed (Art. 17(1)(d))
+
+I expect a response to this request within one calendar month, as required by Article 12(3) of the GDPR. Failure to comply may result in a complaint to the relevant supervisory authority.
+
+VERIFICATION OF IDENTITY:
+Full Name: [YOUR FULL NAME]
+Email: [YOUR EMAIL]
+Country of Residence: [YOUR COUNTRY]
+
+I am a resident of the European Economic Area and am exercising my rights under the GDPR.
+
+Regards,
+[YOUR FULL NAME]</pre>
+    </div>
+  </div>
+
+  <!-- Template 3: Hosting Provider Complaint -->
+  <div class="dmca-section">
+    <h2><span class="icon" style="background:rgba(74,222,128,.12)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--green);stroke-width:2;fill:none"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span> Hosting Provider Complaint Template</h2>
+    <p>When a website ignores your takedown request, escalate directly to their hosting provider. Most hosting providers have abuse teams that will act on valid complaints. You can find a website's hosting provider using tools like WHOIS lookup.</p>
+
+    <div class="template-box">
+      <div class="template-box__header">
+        <div class="template-box__title">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--green);stroke-width:2;fill:none"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Hosting Provider Abuse Complaint
+          <span class="template-box__badge template-box__badge--hosting">Escalation</span>
+        </div>
+        <button class="template-box__copy" onclick="copyTemplate(this, 'hosting')">Copy Template</button>
+      </div>
+      <pre id="template-hosting">Abuse Complaint — Unauthorized Use of Personal Images
+
+Date: [DATE]
+
+To: [HOSTING PROVIDER NAME]
+Abuse Department
+[ABUSE EMAIL — usually abuse@hostingprovider.com]
+
+RE: Abuse Report — Non-Consensual Image Hosting
+
+Dear Abuse Team,
+
+I am writing to report a website hosted on your infrastructure that is hosting my personal photographs without authorization.
+
+WEBSITE IN QUESTION:
+Domain: [WEBSITE DOMAIN]
+IP Address: [IP ADDRESS — optional]
+
+INFRINGING CONTENT:
+1. [URL OF INFRINGING IMAGE 1]
+2. [URL OF INFRINGING IMAGE 2]
+
+PRIOR ACTIONS TAKEN:
+- I sent a DMCA takedown notice to the website operator on [DATE]
+- The website operator has not responded/refused to comply after [NUMBER] days
+
+[Attach original DMCA notice and Protevio AI Evidence Report if available]
+
+This website is violating your Acceptable Use Policy by hosting stolen personal images. I request that you take appropriate action, which may include:
+- Forwarding this complaint to the website operator
+- Suspending the offending content
+- Suspending the account if they fail to comply
+
+CONTACT INFORMATION:
+Full Name: [YOUR FULL NAME]
+Email: [YOUR EMAIL]
+
+Thank you for your prompt attention to this matter.
+
+Regards,
+[YOUR FULL NAME]</pre>
+    </div>
+  </div>
+
+  <!-- Tips Section -->
+  <div class="dmca-section">
+    <h2><span class="icon" style="background:rgba(167,139,250,.12)"><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--purple);stroke-width:2;fill:none"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Tips for Successful Takedowns</h2>
+    
+    <ul>
+      <li><strong>Always include evidence.</strong> A Protevio AI evidence report with timestamps and URLs significantly increases your success rate.</li>
+      <li><strong>Send to the right person.</strong> Look for "DMCA Agent", "Legal", "Abuse", or "Privacy" contact info. Check the website's Terms of Service or WHOIS record.</li>
+      <li><strong>Be specific.</strong> Include exact URLs — don't just say "your website has my photos." Link to each individual image.</li>
+      <li><strong>Keep records.</strong> Save copies of every communication. If you need to escalate to court, you'll need proof of your attempts.</li>
+      <li><strong>Escalate if ignored.</strong> If the website doesn't respond in 14 days, file with their hosting provider, then Google (to deindex the URLs), then consider legal action.</li>
+      <li><strong>Use Google's removal tool.</strong> Google offers a <a href="https://support.google.com/websearch/troubleshooter/9685456" style="color:var(--accent)">content removal tool</a> for explicit images shared without consent.</li>
+      <li><strong>Report to NCMEC.</strong> If the images involve minors, report immediately to the <a href="https://www.missingkids.org/gethelpnow/cybertipline" style="color:var(--accent)">NCMEC CyberTipline</a>.</li>
+    </ul>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="cta-box">
+    <h3>Protect Your Digital Identity</h3>
+    <p>Protevio AI helps you discover where your face appears online, generate evidence reports for legal proceedings, and take control of your digital presence. Start with a free search.</p>
+    <a href="/" class="cta-box__btn">
+      <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Get Started Free
+    </a>
+  </div>
+
+</div>
+
+<script>
+function copyTemplate(btn, id) {
+  const pre = document.getElementById('template-' + id);
+  if(!pre) return;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Template';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+<footer class="footer">
+  <p class="footer__text">
+    © 2026 Protevio AI. All rights reserved. |
+    <a href="privacy-policy.html" class="footer__link">Privacy Policy</a> |
+    <a href="terms-of-service.html" class="footer__link">Terms of Service</a> |
+    <a href="csr.html" class="footer__link">CSR</a>
+  </p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.querySelector('.nav__hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('active'));
+(function(){var t=localStorage.getItem("protevio_token"),u=JSON.parse(localStorage.getItem("protevio_user")||"null"),n=document.getElementById("navAuth"),m=document.getElementById("mobileAuth");if(t&&u){var f=(u.name||u.username||"Account").split(" ")[0];if(n){n.href="dashboard.html";n.innerHTML='<span>'+f+'</span><svg 
