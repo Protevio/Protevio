@@ -607,6 +607,9 @@ const PRICE_KEYS = {
   protect: { monthly: 'protect_monthly', annual: 'protect_annual' },
   protect_plus: { monthly: 'protect_plus_monthly', annual: 'protect_plus_annual' },
   protect_pro: { monthly: 'protect_pro_monthly', annual: 'protect_pro_annual' },
+  protect_agent: { monthly: 'protect_agent_monthly', annual: 'protect_agent_annual' },
+  protect_plus_agent: { monthly: 'protect_plus_agent_monthly', annual: 'protect_plus_agent_annual' },
+  protect_pro_agent: { monthly: 'protect_pro_agent_monthly', annual: 'protect_pro_agent_annual' },
   advanced: { monthly: 'advanced_monthly', annual: 'advanced_annual' },
 };
 
@@ -663,8 +666,14 @@ function updateProtectCta() {
 
 function checkoutProtect() {
   document.getElementById('protectModal').classList.remove('active');
-  startCheckout(selectedProtect);
-  // Note: agent addon would need separate Stripe handling
+  let key = selectedProtect;
+  if (agentAddon) {
+    // Map to combined price key
+    if (key === 'protect') key = 'protect_agent';
+    else if (key === 'protect_plus') key = 'protect_plus_agent';
+    else if (key === 'protect_pro') key = 'protect_pro_agent';
+  }
+  startCheckout(key);
 }
 const API = 'https://api.protevio.com';
 
