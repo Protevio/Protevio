@@ -108,6 +108,17 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 .plan-modal__btn{display:inline-flex;align-items:center;gap:8px;padding:12px 32px;border-radius:12px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;color:#fff;transition:transform .15s}
 .plan-modal__btn:hover{transform:translateY(-2px)}
 @media(max-width:768px){.plan-modal{max-width:100%;max-height:90vh;border-radius:16px}.plan-modal__header,.plan-modal__body{padding:20px}}
+.protect-option{display:flex;align-items:center;gap:14px;padding:16px;border:2px solid #e2e8f0;border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all .2s}
+.protect-option:hover{border-color:#cbd5e1}
+.protect-option.active{border-color:#2563eb;background:rgba(37,99,235,.04)}
+.protect-option__radio{width:22px;height:22px;border-radius:6px;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.protect-option.active .protect-option__radio{border-color:#2563eb;background:#2563eb}
+.protect-option.active .protect-option__radio::after{content:'';display:block;width:10px;height:10px;background:#fff;border-radius:3px}
+.protect-option__info{flex:1}
+.protect-option__name{font-size:.92rem;font-weight:700;color:#0f172a}
+.protect-option__desc{font-size:.78rem;color:#94a3b8}
+.protect-option__price{font-size:1rem;font-weight:700;color:#0f172a;white-space:nowrap}
+.protect-option__price small{font-size:.7rem;font-weight:500;color:#94a3b8}
 
 /* MOBILE SINGLE CARD */
 .mobile-pricing{display:none;max-width:520px;margin:0 auto}
@@ -246,7 +257,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
       <div class="mpc__sub" data-sub="pro" data-m="149,99" data-a="119,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Pro</div><div class="mpc__sub-desc">400 takedowns / month</div></div><div class="mpc__sub-price">149,99 €</div></div>
       <div class="mpc__addon" id="mpAddon"><div class="mpc__addon-chk"></div><div class="mpc__addon-text">Takedown Agent Support</div><div class="mpc__addon-info" title="Our team handles takedown requests on your behalf.">i</div></div>
     </div>
-    <div class="mpc__cta"><button class="mpc__btn" onclick="startCheckout(mPlan)">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+    <div class="mpc__cta"><button class="mpc__btn" onclick="mPlan==='protect'?openProtectOptions():startCheckout(mPlan)">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
     <div class="mpc__feats" id="mpFeats"></div>
     <a class="mpc__learn" href="#" onclick="event.preventDefault();openPlanModal(mPlan)">Learn more about all features</a>
   </div>
@@ -277,6 +288,54 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What is a Face Alert?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Face Alerts monitor our database for new appearances of a face. You get notified when new matches are found — great for tracking unauthorized photo use.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Is my data safe?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Uploaded photos are processed temporarily and not stored permanently. We use encryption in transit and at rest.</div></div>
 </div></div>
+</div>
+
+<!-- PROTECT OPTIONS MODAL -->
+<div class="plan-modal-overlay" id="protectModal" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="plan-modal" style="max-width:500px">
+    <div class="plan-modal__header">
+      <button class="plan-modal__close" onclick="document.getElementById('protectModal').classList.remove('active')">✕</button>
+      <div class="plan-modal__name">Choose your PROtect plan</div>
+      <div class="plan-modal__tagline">Select the package that fits your needs</div>
+    </div>
+    <div class="plan-modal__body" style="padding:20px 28px">
+      <div class="protect-option active" data-key="protect" onclick="selectProtect(this)">
+        <div class="protect-option__radio"></div>
+        <div class="protect-option__info">
+          <div class="protect-option__name">PROtect</div>
+          <div class="protect-option__desc">100 takedowns / month</div>
+        </div>
+        <div class="protect-option__price"><span id="poPrice1">34,99</span> €<small>/mo</small></div>
+      </div>
+      <div class="protect-option" data-key="protect_plus" onclick="selectProtect(this)">
+        <div class="protect-option__radio"></div>
+        <div class="protect-option__info">
+          <div class="protect-option__name">PROtect Plus</div>
+          <div class="protect-option__desc">200 takedowns / month</div>
+        </div>
+        <div class="protect-option__price"><span id="poPrice2">69,99</span> €<small>/mo</small></div>
+      </div>
+      <div class="protect-option" data-key="protect_pro" onclick="selectProtect(this)">
+        <div class="protect-option__radio"></div>
+        <div class="protect-option__info">
+          <div class="protect-option__name">PROtect Pro <span style="background:#2563eb;color:#fff;font-size:.6rem;padding:2px 6px;border-radius:4px;font-weight:700;margin-left:6px">POPULAR</span></div>
+          <div class="protect-option__desc">400 takedowns / month</div>
+        </div>
+        <div class="protect-option__price"><span id="poPrice3">149,99</span> €<small>/mo</small></div>
+      </div>
+      <div class="protect-option" data-key="protect_agent" onclick="selectProtect(this)" style="border-style:dashed">
+        <div class="protect-option__radio"></div>
+        <div class="protect-option__info">
+          <div class="protect-option__name">➕ Takedown Agent Support</div>
+          <div class="protect-option__desc">Our team handles removals for you</div>
+        </div>
+        <div class="protect-option__price" style="color:#f59e0b">+50 €<small>/mo</small></div>
+      </div>
+    </div>
+    <div class="plan-modal__cta">
+      <button class="plan-modal__btn" id="protectCta" style="background:#2563eb" onclick="checkoutProtect()">Continue with PROtect — 34,99 €/mo</button>
+    </div>
+  </div>
 </div>
 
 <!-- PLAN DETAIL MODAL -->
@@ -349,7 +408,8 @@ function buildDesktop(){
     html += `<div class="pcard__price"><div class="pcard__amount"><span class="dpr" data-key="${key}">${price}</span> <span class="cur">€</span> <span class="per">/ month</span></div>`;
     html += annual ? `<div class="pcard__annual-note">Billed as ${annualAmt} € / year</div>` : '';
     html += `</div>`;
-    html += `<div class="pcard__cta"><button class="pcard__btn" onclick="startCheckout('${key}')">${p.cta} <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
+    const ctaAction = key==='protect' ? 'openProtectOptions()' : "startCheckout('" + key + "')";
+    html += `<div class="pcard__cta"><button class="pcard__btn" onclick="${ctaAction}">${p.cta} <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
     html += `<div class="pcard__ftitle">What's included</div>`;
     p.features.forEach(f => {
       if(f.div){html += '<hr class="pcard__fdiv">';return;}
@@ -528,7 +588,7 @@ function openPlanModal(planKey) {
   const cta = document.getElementById('pmCta');
   cta.style.background = detail.color;
   cta.textContent = `Get ${plan.name} — ${plan[b()]} € / month`;
-  cta.onclick = () => { document.getElementById('planModal').classList.remove('active'); startCheckout(planKey); };
+  cta.onclick = () => { document.getElementById('planModal').classList.remove('active'); if(planKey==='protect'){openProtectOptions();}else{startCheckout(planKey);} };
 
   document.getElementById('planModal').classList.add('active');
 }
@@ -545,8 +605,67 @@ document.querySelector('.nav__hamburger').addEventListener('click',()=>document.
 const PRICE_KEYS = {
   open: { monthly: 'open_plus_monthly', annual: 'open_plus_annual' },
   protect: { monthly: 'protect_monthly', annual: 'protect_annual' },
+  protect_plus: { monthly: 'protect_plus_monthly', annual: 'protect_plus_annual' },
+  protect_pro: { monthly: 'protect_pro_monthly', annual: 'protect_pro_annual' },
   advanced: { monthly: 'advanced_monthly', annual: 'advanced_annual' },
 };
+
+const PROTECT_PRICES = {
+  protect: {m:'34,99', a:'27,99'},
+  protect_plus: {m:'69,99', a:'55,99'},
+  protect_pro: {m:'149,99', a:'119,99'},
+  protect_agent: {m:'50', a:'50'}
+};
+
+let selectedProtect = 'protect';
+let agentAddon = false;
+
+function openProtectOptions() {
+  // Update prices based on billing
+  const p = PROTECT_PRICES;
+  const isA = billing !== 'monthly';
+  document.getElementById('poPrice1').textContent = isA ? p.protect.a : p.protect.m;
+  document.getElementById('poPrice2').textContent = isA ? p.protect_plus.a : p.protect_plus.m;
+  document.getElementById('poPrice3').textContent = isA ? p.protect_pro.a : p.protect_pro.m;
+  selectedProtect = 'protect';
+  agentAddon = false;
+  document.querySelectorAll('.protect-option').forEach(o => o.classList.remove('active'));
+  document.querySelector('.protect-option[data-key="protect"]').classList.add('active');
+  updateProtectCta();
+  document.getElementById('protectModal').classList.add('active');
+}
+
+function selectProtect(el) {
+  const key = el.dataset.key;
+  if (key === 'protect_agent') {
+    // Toggle addon
+    el.classList.toggle('active');
+    agentAddon = el.classList.contains('active');
+  } else {
+    // Select plan (exclusive)
+    document.querySelectorAll('.protect-option:not([data-key="protect_agent"])').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+    selectedProtect = key;
+  }
+  updateProtectCta();
+}
+
+function updateProtectCta() {
+  const isA = billing !== 'monthly';
+  const p = PROTECT_PRICES[selectedProtect];
+  const base = isA ? p.a : p.m;
+  const baseNum = parseFloat(base.replace(',','.'));
+  const total = agentAddon ? (baseNum + 50).toFixed(2).replace('.',',') : base;
+  const name = selectedProtect === 'protect' ? 'PROtect' : selectedProtect === 'protect_plus' ? 'PROtect Plus' : 'PROtect Pro';
+  const extra = agentAddon ? ' + Agent' : '';
+  document.getElementById('protectCta').textContent = `Continue with ${name}${extra} — ${total} €/mo`;
+}
+
+function checkoutProtect() {
+  document.getElementById('protectModal').classList.remove('active');
+  startCheckout(selectedProtect);
+  // Note: agent addon would need separate Stripe handling
+}
 const API = 'https://api.protevio.com';
 
 async function startCheckout(planKey) {
