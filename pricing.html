@@ -88,6 +88,26 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 .pcard__fdesc{font-size:.8rem;color:#64748b;line-height:1.55;margin-top:4px;padding-left:26px}
 .pcard__fdiv{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
 .pcard__learn{display:block;text-align:center;padding:16px 0 0;font-size:.82rem;color:var(--accent);text-decoration:underline;font-weight:600;border-top:1px solid #f1f5f9;margin-top:auto}
+.plan-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);z-index:1000;justify-content:center;align-items:center;padding:20px}
+.plan-modal-overlay.active{display:flex}
+.plan-modal{background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 24px 48px rgba(0,0,0,.15)}
+.plan-modal__header{padding:28px 28px 20px;border-bottom:1px solid #f1f5f9;position:sticky;top:0;background:#fff;border-radius:20px 20px 0 0;z-index:2}
+.plan-modal__close{position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1.3rem;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:background .2s}
+.plan-modal__close:hover{background:#f1f5f9;color:#1e293b}
+.plan-modal__name{font-size:1.3rem;font-weight:800;color:#0f172a;margin-bottom:4px}
+.plan-modal__tagline{font-size:.88rem;color:#64748b}
+.plan-modal__body{padding:24px 28px 28px}
+.plan-modal__section{margin-bottom:24px}
+.plan-modal__section-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:12px}
+.plan-modal__feat{display:flex;gap:12px;padding:14px;background:#f8fafc;border-radius:12px;margin-bottom:8px}
+.plan-modal__feat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.plan-modal__feat-icon svg{width:20px;height:20px;stroke-width:2;fill:none;stroke:currentColor}
+.plan-modal__feat-name{font-size:.9rem;font-weight:600;color:#0f172a;margin-bottom:2px}
+.plan-modal__feat-desc{font-size:.8rem;color:#64748b;line-height:1.5}
+.plan-modal__cta{text-align:center;padding:20px 28px 28px;border-top:1px solid #f1f5f9;position:sticky;bottom:0;background:#fff;border-radius:0 0 20px 20px}
+.plan-modal__btn{display:inline-flex;align-items:center;gap:8px;padding:12px 32px;border-radius:12px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;color:#fff;transition:transform .15s}
+.plan-modal__btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.plan-modal{max-width:100%;max-height:90vh;border-radius:16px}.plan-modal__header,.plan-modal__body{padding:20px}}
 
 /* MOBILE SINGLE CARD */
 .mobile-pricing{display:none;max-width:520px;margin:0 auto}
@@ -228,7 +248,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
     </div>
     <div class="mpc__cta"><button class="mpc__btn" onclick="startCheckout(mPlan)">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
     <div class="mpc__feats" id="mpFeats"></div>
-    <a class="mpc__learn" href="faq.html">Learn more about all features</a>
+    <a class="mpc__learn" href="#" onclick="event.preventDefault();openPlanModal(mPlan)">Learn more about all features</a>
   </div>
 </div>
 
@@ -257,6 +277,21 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What is a Face Alert?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Face Alerts monitor our database for new appearances of a face. You get notified when new matches are found — great for tracking unauthorized photo use.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Is my data safe?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Uploaded photos are processed temporarily and not stored permanently. We use encryption in transit and at rest.</div></div>
 </div></div>
+</div>
+
+<!-- PLAN DETAIL MODAL -->
+<div class="plan-modal-overlay" id="planModal" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="plan-modal">
+    <div class="plan-modal__header">
+      <button class="plan-modal__close" onclick="document.getElementById('planModal').classList.remove('active')">✕</button>
+      <div class="plan-modal__name" id="pmName"></div>
+      <div class="plan-modal__tagline" id="pmTagline"></div>
+    </div>
+    <div class="plan-modal__body" id="pmBody"></div>
+    <div class="plan-modal__cta">
+      <button class="plan-modal__btn" id="pmCta"></button>
+    </div>
+  </div>
 </div>
 
 <div class="footer"><p class="footer__text">© 2026 Protevio AI. All rights reserved.</p><div class="footer__links"><a href="privacy-policy.html" class="footer__link">Privacy Policy</a><a href="terms-of-service.html" class="footer__link">Terms of Service</a><a href="about.html" class="footer__link">About</a><a href="contact.html" class="footer__link">Contact</a></div></div>
@@ -320,7 +355,7 @@ function buildDesktop(){
       if(f.div){html += '<hr class="pcard__fdiv">';return;}
       html += `<div class="pcard__feature"><div class="pcard__feature-row">${chk(f.c)}<span class="pcard__fname">${f.italic?'<em>'+f.n+'</em>':f.n}</span></div><div class="pcard__fdesc">${f.d}</div></div>`;
     });
-    html += `<a class="pcard__learn" href="faq.html">Learn more about all features</a></div></div>`;
+    html += `<a class="pcard__learn" href="#" onclick="event.preventDefault();openPlanModal('${key}')">Learn more about all features</a></div></div>`;
   }
   document.getElementById('desktopCards').innerHTML = html;
 }
@@ -385,6 +420,117 @@ function updateMobile(){
     html+=`<div class="mpc__feat"><div class="mpc__feat-row">${chk(f.c)}<span class="mpc__feat-name">${f.italic?'<em>'+f.n+'</em>':f.n}</span></div><div class="mpc__feat-desc">${f.d}</div></div>`;
   });
   document.getElementById('mpFeats').innerHTML = html;
+}
+
+// PLAN DETAIL MODALS
+const PLAN_DETAILS = {
+  open: {
+    tagline: 'Perfect for individuals who want to find where their photos appear online.',
+    color: '#2563eb',
+    sections: [
+      { title: 'Search & Discovery', icon: 'search', items: [
+        {name: '50 searches per day', desc: 'Run up to 50 face searches daily across our entire database of 1.1M+ indexed faces. Each search scans every indexed source instantly.'},
+        {name: 'Full source access', desc: 'See the exact website addresses and direct links to every source image found. Know exactly where your photos appear online.'},
+        {name: 'Safe Search filter', desc: 'Toggle Safe Search to filter potentially explicit results from your searches.'},
+      ]},
+      { title: 'Monitoring & Alerts', icon: 'bell', items: [
+        {name: 'Up to 5 Protevio Alerts', desc: 'Set up automated monitoring for up to 5 different faces. Receive notifications whenever we find a new photo matching your alert.'},
+        {name: 'Email notifications', desc: 'Get notified via email as soon as new matches are detected for your monitored faces.'},
+      ]},
+      { title: 'Reporting & Support', icon: 'file', items: [
+        {name: 'PDF intelligence reports', desc: 'Generate professional PDF reports containing all matched faces, source URLs, similarity scores, and timestamps — ideal for documentation or evidence.'},
+        {name: 'Dedicated support', desc: 'Priority access to our support team via email. Typical response time under 24 hours.'},
+      ]},
+    ]
+  },
+  protect: {
+    tagline: 'For professionals who need to manage and remove unauthorized photos.',
+    color: '#2563eb',
+    sections: [
+      { title: 'Everything in Open Plus', icon: 'check', items: [
+        {name: '75 searches per day', desc: 'Increased daily search limit with full source access to all results including website addresses and direct image links.'},
+        {name: 'Up to 20 Protevio Alerts', desc: 'Monitor up to 20 different faces simultaneously with automated email notifications for new matches.'},
+        {name: 'PDF intelligence reports', desc: 'Generate and export professional reports for documentation, legal proceedings, or personal records.'},
+      ]},
+      { title: 'Content Protection', icon: 'shield', items: [
+        {name: 'Result management tools', desc: 'Take full control of your search results. Track, categorize, and manage where your face appears across the web.'},
+        {name: 'Takedown requests', desc: 'Send automated takedown requests to websites hosting your photos without consent. Choose from PROtect (100/mo), PROtect Plus (200/mo), or PROtect Pro (400/mo).'},
+        {name: 'Takedown Agent Support', desc: 'Our dedicated team personally handles takedown requests on your behalf — contacting websites directly, following up, and ensuring removal.'},
+      ]},
+      { title: 'Advanced Features', icon: 'star', items: [
+        {name: 'Dedicated priority support', desc: 'Get faster responses and personalized assistance from our expert support team.'},
+        {name: 'Detailed takedown tracking', desc: 'Monitor the status of every takedown request — see which have been sent, acknowledged, or completed.'},
+      ]},
+    ]
+  },
+  advanced: {
+    tagline: 'Maximum power for agencies, legal teams, and professionals.',
+    color: '#1e293b',
+    sections: [
+      { title: 'Unlimited Power', icon: 'zap', items: [
+        {name: 'Unlimited daily searches', desc: 'No daily limits whatsoever. Search as many faces as you need across our full database of over 1.1 million indexed faces and growing.'},
+        {name: 'Up to 500 Protevio Alerts', desc: 'Enterprise-grade monitoring with up to 500 simultaneous face alerts. Ideal for agencies managing multiple clients or cases.'},
+        {name: 'Deep Search technology', desc: 'Our most thorough search mode — scans archived content, deep-indexed sources, and hard-to-reach databases for the most comprehensive results possible.'},
+      ]},
+      { title: 'Everything in PROtect PRO', icon: 'shield', items: [
+        {name: '400 takedown requests/month', desc: 'The highest tier of content removal with 400 automated takedown requests per month, plus full takedown agent support included.'},
+        {name: 'Full result management', desc: 'Complete toolkit for tracking, categorizing, and managing all search results and takedown statuses.'},
+        {name: 'Takedown Agent Support included', desc: 'Our team handles complex takedown cases personally — contacting sites, following up, and reporting back to you.'},
+      ]},
+      { title: 'Premium Benefits', icon: 'crown', items: [
+        {name: 'API access (coming soon)', desc: 'Programmatic access to Protevio search capabilities for integration into your own tools and workflows.'},
+        {name: 'Dedicated account manager', desc: 'A personal point of contact for onboarding, support, and optimization of your usage.'},
+        {name: 'Priority PDF reports', desc: 'Generate unlimited professional reports with enhanced detail and branding options.'},
+      ]},
+    ]
+  }
+};
+
+const MODAL_ICONS = {
+  search: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
+  bell: '<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>',
+  file: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  check: '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>',
+  shield: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  star: '<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  zap: '<svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  crown: '<svg viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M3 20h18"/></svg>'
+};
+
+function openPlanModal(planKey) {
+  const plan = PLANS[planKey];
+  const detail = PLAN_DETAILS[planKey];
+  if (!plan || !detail) return;
+
+  document.getElementById('pmName').textContent = plan.name;
+  document.getElementById('pmTagline').textContent = detail.tagline;
+
+  let html = '';
+  detail.sections.forEach(section => {
+    html += `<div class="plan-modal__section">`;
+    html += `<div class="plan-modal__section-title">${section.title}</div>`;
+    section.items.forEach(item => {
+      html += `<div class="plan-modal__feat">
+        <div class="plan-modal__feat-icon" style="background:${detail.color}15;color:${detail.color}">
+          ${MODAL_ICONS[section.icon] || MODAL_ICONS.check}
+        </div>
+        <div>
+          <div class="plan-modal__feat-name">${item.name}</div>
+          <div class="plan-modal__feat-desc">${item.desc}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  document.getElementById('pmBody').innerHTML = html;
+
+  const cta = document.getElementById('pmCta');
+  cta.style.background = detail.color;
+  cta.textContent = `Get ${plan.name} — ${plan[b()]} € / month`;
+  cta.onclick = () => { document.getElementById('planModal').classList.remove('active'); startCheckout(planKey); };
+
+  document.getElementById('planModal').classList.add('active');
 }
 
 buildDesktop();
