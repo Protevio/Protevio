@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="theme-color" content="#1a1f2e"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Corporate Social Responsibility (CSR) — Protevio AI</title>
+<meta name="description" content="Protevio AI's commitment to ethical facial recognition, user privacy, GDPR compliance, and responsible AI development. Our CSR policy and principles."/>
+<meta name="keywords" content="Protevio CSR, ethical facial recognition, responsible AI, privacy commitment, GDPR compliance, facial recognition ethics"/>
+<meta property="og:title" content="Corporate Social Responsibility — Protevio AI"/>
+<meta property="og:description" content="Our commitment to ethical facial recognition technology, user privacy, and responsible AI development."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://protevio.com/csr.html"/>
+<meta property="og:site_name" content="Protevio AI"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Corporate Social Responsibility — Protevio AI"/>
+<meta name="twitter:description" content="Our commitment to ethical facial recognition technology, user privacy, and responsible AI development."/>
+<link rel="canonical" href="https://protevio.com/csr.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#1a1f2e;
+  --bg-elevated:#232a3d;
+  --bg-card:#2a3349;
+  --border:#3a4562;
+  --border-light:#4a5678;
+  --text:#f8fafc;
+  --text-secondary:#d1d5e0;
+  --text-muted:#9ca3b8;
+  --accent:#5b9aff;
+  --accent-light:#85b4ff;
+  --accent-glow:rgba(91,154,255,.15);
+  --gold:#ffb020;
+  --green:#4ade80;
+  --purple:#a78bfa;
+  --glass:rgba(42,51,73,.6);
+  --glass-border:rgba(255,255,255,.08);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.bg-gradient{
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(91,154,255,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(74,222,128,.05) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+.dot-pattern{
+  position:fixed;inset:0;
+  background-image:radial-gradient(rgba(91,154,255,.15) 1px, transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(26,31,46,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:100}
+.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav__logo-mark{width:36px;height:36px}.nav__logo-mark svg{width:100%;height:100%}
+.nav__logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.22em;color:var(--text)}
+.nav__links{display:flex;align-items:center;gap:32px}
+.nav__link{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .25s;position:relative}
+.nav__link:hover{color:var(--text)}
+.nav__link--active{color:var(--text)}
+.nav__link--active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px}
+.nav__right{display:flex;align-items:center;gap:12px}
+.nav__lang{display:flex;align-items:center;gap:6px;padding:9px 14px;border:1px solid var(--border);border-radius:10px;font-size:.85rem;font-weight:500;color:var(--text-secondary);background:var(--glass);backdrop-filter:blur(10px);cursor:pointer;transition:all .25s}
+.nav__lang:hover{border-color:var(--border-light);background:var(--bg-card);transform:translateY(-1px)}
+.nav__lang svg{width:16px;height:16px;opacity:.7}
+.nav__login{padding:9px 20px;font-size:.85rem;font-weight:600;color:white;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:10px;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .25s;border:none;cursor:pointer}
+.nav__login:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(91,154,255,.3)}
+.nav__login svg{width:16px;height:16px;stroke:white;stroke-width:2;fill:none}
+.nav__hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.nav__hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:65px;left:0;right:0;bottom:0;background:rgba(26,31,46,.98);backdrop-filter:blur(20px);z-index:99;flex-direction:column;padding:24px}
+.mobile-menu.active{display:flex}
+.mobile-menu a{padding:14px 0;font-size:1.1rem;font-weight:600;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border)}
+
+/* HERO */
+.csr-hero{position:relative;z-index:1;text-align:center;padding:80px 24px 48px;max-width:800px;margin:0 auto}
+.csr-hero__tag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:20px;text-transform:uppercase;letter-spacing:.06em}
+.csr-hero__title{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:16px}
+.csr-hero__sub{font-size:1.02rem;color:var(--text-muted);max-width:620px;margin:0 auto;line-height:1.75}
+.csr-hero__version{font-size:.8rem;color:var(--text-muted);margin-top:16px;opacity:.7}
+
+/* CONTENT */
+.csr{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 24px 80px}
+
+.csr-section{margin-bottom:56px}
+.csr-section__header{display:flex;align-items:flex-start;gap:18px;margin-bottom:20px}
+.csr-section__icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.csr-section__icon svg{width:24px;height:24px;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.csr-section__icon--blue{background:rgba(91,154,255,.12);border:1px solid rgba(91,154,255,.2)}
+.csr-section__icon--blue svg{stroke:var(--accent)}
+.csr-section__icon--green{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.2)}
+.csr-section__icon--green svg{stroke:var(--green)}
+.csr-section__icon--purple{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.2)}
+.csr-section__icon--purple svg{stroke:var(--purple)}
+.csr-section__icon--gold{background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.2)}
+.csr-section__icon--gold svg{stroke:var(--gold)}
+.csr-section__icon--pink{background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.2)}
+.csr-section__icon--pink svg{stroke:#f472b6}
+.csr-section__icon--teal{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.2)}
+.csr-section__icon--teal svg{stroke:#2dd4bf}
+
+.csr-section__title{font-size:1.4rem;font-weight:700;line-height:1.3;padding-top:6px}
+.csr-section__body{font-size:.98rem;line-height:1.85;color:var(--text-secondary)}
+.csr-section__body p{margin-bottom:16px}
+.csr-section__body strong{color:var(--text);font-weight:600}
+
+.csr-principles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:24px 0}
+.csr-principle{padding:18px 20px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;font-size:.88rem;color:var(--text-secondary);line-height:1.6;display:flex;align-items:flex-start;gap:10px}
+.csr-principle__dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+
+.csr-commitment{margin:24px 0;padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px}
+.csr-commitment__title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.csr-commitment__text{font-size:.88rem;color:var(--text-muted);line-height:1.7}
+
+.csr-divider{height:1px;background:var(--border);margin:56px 0}
+
+/* CONTACT */
+.csr-contact{text-align:center;padding:40px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;margin-top:56px}
+.csr-contact__title{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.csr-contact__text{font-size:.9rem;color:var(--text-muted);margin-bottom:20px;line-height:1.7}
+.csr-contact__link{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-weight:700;border-radius:12px;text-decoration:none;font-size:.92rem;transition:all .25s}
+.csr-contact__link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.3)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;text-align:center;padding:32px 24px;border-top:1px solid var(--border)}
+.footer__text{font-size:.8rem;color:var(--text-muted)}
+.footer__link{color:var(--text-muted);text-decoration:none;transition:color .2s}
+.footer__link:hover{color:var(--accent)}
+
+@media(max-width:768px){
+  .nav{padding:12px 16px}
+  .nav__links,.nav__right{display:none}
+  .nav__hamburger{display:flex}
+  .csr-hero{padding:48px 16px 32px}
+  .csr{padding:0 16px 60px}
+  .csr-principles{grid-template-columns:1fr}
+  .csr-contact{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<div class="dot-pattern"></div>
+
+<nav class="nav">
+  <a href="/" class="nav__logo">
+    <div class="nav__logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
+        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
+        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <defs>
+          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
+            <stop offset="0%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span class="nav__logo-text">PROTEVIO</span>
+  </a>
+  <div class="nav__links">
+    <a href="/" class="nav__link">Home</a>
+    <a href="about.html" class="nav__link">About</a>
+    <a href="pricing.html" class="nav__link">Pricing</a>
+    <a href="faq.html" class="nav__link">FAQ</a>
+    <a href="blog.html" class="nav__link">Blog</a>
+    <a href="contact.html" class="nav__link">Contact</a>
+  </div>
+  <div class="nav__right">
+    <button class="nav__lang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      EN
+    </button>
+    <a href="login.html" class="nav__login" id="navAuth">
+      <span>Log In</span>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="about.html">About</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html" id="mobileAuth">Log In</a>
+</div>
+
+<!-- HERO -->
+<section class="csr-hero">
+  <div class="csr-hero__tag">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Our Responsibility
+  </div>
+  <h1 class="csr-hero__title">Corporate Social Responsibility</h1>
+  <p class="csr-hero__sub">Facial recognition is a powerful technology. We believe the companies building it have a duty to ensure it serves people — not the other way around. This document outlines how Protevio AI upholds that duty.</p>
+  <div class="csr-hero__version">Version February 10th, 2026</div>
+</section>
+
+<!-- CONTENT -->
+<div class="csr">
+
+  <!-- 1. ETHICAL USE -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--blue">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h2 class="csr-section__title">Ethical Use of Facial Recognition</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>Protevio AI exists for one purpose: to <strong>empower individuals to protect their own digital identity</strong>. Our facial recognition search technology is designed to help people discover where their photos appear online, detect unauthorized use of their images, and take action to protect their privacy.</p>
+      <p>We are committed to ensuring our technology is never used to harm, stalk, harass, or surveil individuals. To uphold this commitment, we enforce strict usage policies and actively monitor for abuse.</p>
+
+      <div class="csr-principles">
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:var(--accent)"></div>We only index publicly available images from the open web</div>
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:var(--green)"></div>We do not provide services to governments for mass surveillance</div>
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:var(--purple)"></div>We actively detect and terminate accounts engaged in harassment or stalking</div>
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:var(--gold)"></div>We never sell or share facial recognition data with third parties</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. PRIVACY -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--green">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="csr-section__title">Privacy by Design</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>Privacy is not a feature we added — it is a foundational principle of how Protevio AI is built. Every system, process, and decision is evaluated through the lens of user privacy.</p>
+
+      <div class="csr-commitment">
+        <div class="csr-commitment__title">🔒 Data Minimization</div>
+        <div class="csr-commitment__text">We collect only the minimum data required to provide our service. Uploaded search photos are processed in memory and are never permanently stored. We do not build profiles of our users or track their search behavior for commercial purposes.</div>
+      </div>
+
+      <div class="csr-commitment">
+        <div class="csr-commitment__title">🗑️ Right to Removal</div>
+        <div class="csr-commitment__text">Any individual who finds their face in our database can request removal. We process opt-out requests promptly and free of charge. We also provide tools — including our PROtect plans — that allow users to proactively manage and remove their images from external websites.</div>
+      </div>
+
+      <div class="csr-commitment">
+        <div class="csr-commitment__title">🇪🇺 GDPR Compliance</div>
+        <div class="csr-commitment__text">Protevio AI is fully compliant with the European Union's General Data Protection Regulation (GDPR). We respect Article 17 (Right to Erasure), Article 15 (Right of Access), and Article 21 (Right to Object). As a company operating from Belgium, EU data protection law is at the core of our operations.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. TRANSPARENCY -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--purple">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </div>
+      <h2 class="csr-section__title">Transparency &amp; Accountability</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>We believe users have the right to understand how our technology works, what data we process, and how decisions are made. We are committed to clear, honest communication about our practices.</p>
+      <p><strong>How our indexing works:</strong> Protevio crawls publicly available photography from the open web. We do not access private accounts, password-protected content, or data behind paywalls. Our crawlers respect robots.txt directives and honor opt-out requests from website operators.</p>
+      <p><strong>How search works:</strong> When you upload a photo, our AI creates a temporary mathematical representation of the face (an embedding). This embedding is compared against our database. The uploaded photo itself is discarded after processing — we do not retain it.</p>
+      <p><strong>What we don't do:</strong> We do not identify individuals by name. Our system finds visually similar faces — it does not connect them to real identities, social media accounts, or personal information unless that information is publicly visible on the source website.</p>
+    </div>
+  </div>
+
+  <!-- 4. COMBATING ABUSE -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--gold">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+      </div>
+      <h2 class="csr-section__title">Combating Misuse &amp; Abuse</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>We recognize that facial recognition technology carries risks of misuse. Protevio AI takes a proactive approach to preventing abuse of our platform.</p>
+
+      <div class="csr-commitment">
+        <div class="csr-commitment__title">⚠️ Anti-Stalking Measures</div>
+        <div class="csr-commitment__text">Our systems include behavioral analysis to detect patterns consistent with stalking or harassment. Accounts flagged for suspicious activity are reviewed and, when warranted, permanently suspended. We cooperate with law enforcement when required by law to address criminal misuse.</div>
+      </div>
+
+      <div class="csr-commitment">
+        <div class="csr-commitment__title">🛡️ Rate Limiting & Access Controls</div>
+        <div class="csr-commitment__text">All search endpoints are rate-limited to prevent mass surveillance or scraping. Free accounts are limited to prevent automated abuse. We require email verification for all accounts and monitor for coordinated inauthentic behavior.</div>
+      </div>
+
+      <div class="csr-commitment">
+        <div class="csr-commitment__title">📋 Terms of Service Enforcement</div>
+        <div class="csr-commitment__text">Our Terms of Service explicitly prohibit using Protevio to stalk, harass, threaten, or discriminate against any individual. Violations result in immediate account termination and, where appropriate, reporting to the relevant authorities.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. VICTIM SUPPORT -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--pink">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h2 class="csr-section__title">Supporting Victims of Image Abuse</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>Protevio AI was built with victims in mind. We understand that unauthorized distribution of someone's photos — whether through catfishing, non-consensual intimate imagery, or identity theft — causes real harm.</p>
+      <p>We are committed to supporting affected individuals through <strong>free search access</strong> for victims of documented image abuse, <strong>expedited removal processing</strong> for non-consensual intimate imagery found through our platform, <strong>evidence documentation tools</strong> (PDF reports) that can be used in legal proceedings, and <strong>educational resources</strong> through our blog, including guides on GDPR rights, takedown procedures, and legal options.</p>
+      <p>If you are a victim of image abuse and need help, please contact us at <a href="mailto:support@protevio.com" style="color:var(--accent);text-decoration:underline">support@protevio.com</a> with the subject line "Victim Support" for prioritized assistance.</p>
+    </div>
+  </div>
+
+  <!-- 6. RESPONSIBLE AI -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--teal">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h2 class="csr-section__title">Responsible AI Development</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>We hold ourselves to high standards in how we develop and deploy AI systems.</p>
+
+      <div class="csr-principles">
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:#2dd4bf"></div><strong>Bias awareness</strong> — We continuously evaluate our models for demographic bias and work to ensure fair accuracy across all ethnicities, genders, and age groups</div>
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:#2dd4bf"></div><strong>Human oversight</strong> — Automated systems flag potential issues, but critical decisions about account suspensions and content removals involve human review</div>
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:#2dd4bf"></div><strong>Continuous improvement</strong> — We regularly audit our systems, update our models, and refine our policies based on real-world feedback and evolving best practices</div>
+        <div class="csr-principle"><div class="csr-principle__dot" style="background:#2dd4bf"></div><strong>Security first</strong> — All data is encrypted in transit and at rest. Our infrastructure is hardened against unauthorized access, with strict firewall rules and access controls</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. COMMUNITY -->
+  <div class="csr-section">
+    <div class="csr-section__header">
+      <div class="csr-section__icon csr-section__icon--blue">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h2 class="csr-section__title">Digital Privacy Education</h2>
+    </div>
+    <div class="csr-section__body">
+      <p>We believe that awareness is the first line of defense. Protevio AI is committed to educating the public about digital privacy risks, facial recognition technology, and the tools available to protect personal data.</p>
+      <p>Through our <a href="blog.html" style="color:var(--accent);text-decoration:underline">blog</a>, we publish free, in-depth guides on topics including how to find where your photos appear online, exercising your GDPR right to erasure, protecting yourself from catfishing and identity theft, and understanding how facial recognition technology works.</p>
+      <p>We are committed to making this knowledge accessible to everyone — not just our paying customers.</p>
+    </div>
+  </div>
+
+  <div class="csr-divider"></div>
+
+  <!-- COMMITMENT STATEMENT -->
+  <div style="text-align:center;max-width:600px;margin:0 auto">
+    <p style="font-size:1.08rem;font-weight:600;line-height:1.8;color:var(--text-secondary)">Protevio AI will continue to evolve its CSR commitments as the technology landscape and regulatory frameworks develop. We welcome feedback from our users, privacy advocates, regulators, and the broader public.</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="csr-contact">
+    <h2 class="csr-contact__title">Questions about our CSR commitments?</h2>
+    <p class="csr-contact__text">We're open to dialogue about our practices, policies, and responsibilities. Reach out to our team anytime.</p>
+    <a href="contact.html" class="csr-contact__link">Get in Touch →</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer__text">
+    © 2026 Protevio AI. All rights reserved. |
+    <a href="privacy-policy.html" class="footer__link">Privacy Policy</a> |
+    <a href="terms-of-service.html" class="footer__link">Terms of Service</a> |
+    <a href="csr.html" class="footer__link">CSR</a>
+  </p>
+</footer>
+
+<script>
+document.querySelector('.nav__hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('active'));
+(function(){var t=localStorage.getItem("protevio_token"),u=JSON.parse(localStorage.getItem("protevio_user")||"null"),n=document.getElementById("navAuth"),m=document.getElementById("mobileAuth");if(t&&u){var f=(u.name||u.username||"Account").split(" ")[0];if(n){n.href="dashboard.html";n.innerHTML='<span>'+f+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}if(m){m.href="dashboard.html";m.textContent=f;}}})();
+</script>
+</body>
+</html>
