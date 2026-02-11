@@ -2006,7 +2006,7 @@ document.getElementById('downloadReportBtn').addEventListener('click', async () 
   btn.disabled = true;
   try {
     const token = localStorage.getItem('protevio_token');
-    const resp = await fetch('/api/generate-report', {
+    const resp = await fetch(API + '/generate-report', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify({
