@@ -1192,7 +1192,7 @@ body{
           <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Free accounts see blurred previews. Upgrade to reveal full results with source links and high-resolution images.</p>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
             <a href="/dashboard" class="upgrade-btn" style="background:linear-gradient(135deg,var(--accent),var(--purple));">Upgrade Plan</a>
-            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — €15</button>
+            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — €10</button>
           </div>
         </div>
       </div>
@@ -1898,7 +1898,7 @@ function showResults(data) {
       '<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;justify-content:center;">' +
         '<svg viewBox="0 0 24 24" style="width:36px;height:36px;stroke:var(--accent);stroke-width:1.5;fill:none;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
         '<div style="text-align:left">' +
-          '<h4 style="font-size:1.05rem;font-weight:700;margin-bottom:2px;">Unlock access to <u>current search results</u> for 15,99 €</h4>' +
+          '<h4 style="font-size:1.05rem;font-weight:700;margin-bottom:2px;">Unlock access to <u>current search results</u> for 9,99 €</h4>' +
           '<p style="font-size:.82rem;color:var(--text-muted);">Pay once to see the source of the photos and original websites of the current search.</p>' +
         '</div>' +
       '</div>' +
@@ -1978,7 +1978,7 @@ function openResultModal(match, locked) {
       a.classList.add('result-modal__action--locked');
       a.onclick = (e) => {
         e.preventDefault();
-        alert('Upgrade your plan or unlock this search for €15 to access this feature.');
+        alert('Upgrade your plan or unlock this search for €10 to access this feature.');
       };
     } else {
       a.classList.remove('result-modal__action--locked');
