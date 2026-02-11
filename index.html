@@ -1401,9 +1401,11 @@ body{
 .result-card__score{font-size:.75rem;font-weight:600;color:var(--accent)}
 .result-card__domain{font-size:.7rem;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* BLURRED CARDS for free tier */
-.result-card--locked img{filter:blur(16px) saturate(0.5);transform:scale(1.1)}
+.result-card--locked img{filter:blur(8px) saturate(0.7);transform:scale(1.05);transition:filter .6s ease}
+.result-card--locked.tease img{filter:blur(2px) saturate(0.9);transition:filter .15s ease}
 .result-card--locked .result-card__info{filter:blur(4px)}
-.result-card--locked .result-card__lock{display:flex!important}
+.result-card--locked .result-card__lock{display:flex!important;transition:opacity .15s}
+.result-card--locked.tease .result-card__lock{opacity:0}
 .result-card__lock{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);padding:8px 16px;border-radius:10px;align-items:center;gap:8px;color:#fff;font-size:.78rem;font-weight:600;z-index:2;white-space:nowrap}
 .result-card__lock svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
 .result-card__nsfw{position:absolute;top:6px;left:6px;background:rgba(167,139,250,.8);color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:6px;z-index:2;letter-spacing:.04em}
@@ -1424,10 +1426,11 @@ body{
 .result-modal-overlay.active{display:flex}
 .result-modal{background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .25s ease}
 @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes blurTease{0%,100%{filter:blur(12px) saturate(0.5)}50%{filter:blur(6px) saturate(0.7)}}
 .result-modal__close{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(0,0,0,.5);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .result-modal__close:hover{background:rgba(0,0,0,.8)}
 .result-modal__image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px 20px 0 0}
-.result-modal__image--locked{filter:blur(20px) saturate(0.4);transform:scale(1.1)}
+.result-modal__image--locked{filter:blur(12px) saturate(0.5);transform:scale(1.1);animation:blurTease 3s ease-in-out infinite}
 .result-modal__nsfw{position:absolute;top:16px;left:16px;background:rgba(167,139,250,.85);color:#fff;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:8px;letter-spacing:.04em}
 .result-modal__domain{position:absolute;bottom:0;left:0;padding:8px 14px;background:rgba(255,255,255,.95);color:#1a1f2e;font-size:.8rem;font-weight:600;border-radius:0 10px 0 0}
 .result-modal__actions{padding:8px 0}
@@ -1873,10 +1876,18 @@ function showResults(data) {
       '<div class="result-card__lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap</div>' +
       '<div class="result-card__source">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '<div class="result-card__info">' +
+      '<div class="result-card__score">' + similarity + '% match</div>' +
       '<div class="result-card__domain">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '</div>';
 
-    card.addEventListener('click', () => openResultModal(match, isFree));
+    card.addEventListener('click', () => {
+      if(isFree) {
+        card.classList.add('tease');
+        setTimeout(() => { card.classList.remove('tease'); openResultModal(match, isFree); }, 400);
+      } else {
+        openResultModal(match, isFree);
+      }
+    });
     resultsList.appendChild(card);
   });
 
@@ -1936,6 +1947,25 @@ function openResultModal(match, locked) {
 
   document.getElementById('modalImage').src = imgUrl;
   document.getElementById('modalImage').className = 'result-modal__image' + (locked ? ' result-modal__image--locked' : '');
+  
+  // Add/remove unlock overlay on modal image
+  let unlockOverlay = document.getElementById('modalUnlockOverlay');
+  if(!unlockOverlay) {
+    unlockOverlay = document.createElement('div');
+    unlockOverlay.id = 'modalUnlockOverlay';
+    unlockOverlay.style.cssText = 'position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,.3);border-radius:20px 20px 0 0;z-index:2;pointer-events:none;';
+    unlockOverlay.innerHTML = '<svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:#fff;stroke-width:1.5;fill:none;opacity:.9;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
+      '<span style="color:#fff;font-size:.9rem;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.5);">Unlock to reveal</span>' +
+      '<span style="color:rgba(255,255,255,.7);font-size:.75rem;text-shadow:0 1px 4px rgba(0,0,0,.5);">' + similarity + '% match found</span>';
+    document.getElementById('modalImage').parentElement.insertBefore(unlockOverlay, document.getElementById('modalImage').nextSibling);
+  }
+  if(locked) {
+    unlockOverlay.style.display = 'flex';
+    unlockOverlay.querySelector('span:last-child').textContent = similarity + '% match found';
+  } else {
+    unlockOverlay.style.display = 'none';
+  }
+
   document.getElementById('modalDomain').textContent = locked ? '••••••.com' : (match.domain || 'Unknown source');
   document.getElementById('modalSimilarity').textContent = domain;
   document.getElementById('modalNsfw').style.display = 'none'; // can enable per-result later
