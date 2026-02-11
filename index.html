@@ -1192,7 +1192,7 @@ body{
           <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Free accounts see blurred previews. Upgrade to reveal full results with source links and high-resolution images.</p>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
             <a href="/dashboard" class="upgrade-btn" style="background:linear-gradient(135deg,var(--accent),var(--purple));">Upgrade Plan</a>
-            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — €10</button>
+            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — €9.99</button>
           </div>
         </div>
       </div>
@@ -1515,17 +1515,52 @@ try {
     isSearchUnlocked = true;
     // Clean URL
     window.history.replaceState({}, '', window.location.pathname);
-    // Restore saved results
+
+    // Try restore from localStorage first (fast path)
+    let restored = false;
     try {
       const saved = JSON.parse(localStorage.getItem('protevio_pending_unlock') || 'null');
-      if(saved && saved.results) {
+      if(saved && saved.results && saved.search_id == unlockedId) {
         localStorage.removeItem('protevio_pending_unlock');
-        // Wait for DOM to be ready then show results
+        restored = true;
         setTimeout(() => {
           showResults({ results: saved.results, search_id: saved.search_id });
         }, 300);
       }
     } catch(e) { console.error('Failed to restore results:', e); }
+
+    // Also verify unlock via API (confirms payment, handles webhook race)
+    const token = localStorage.getItem('protevio_token');
+    if(token) {
+      // Small delay to give webhook time to fire
+      setTimeout(async () => {
+        try {
+          const res = await fetch(API + '/search/unlocked/' + unlockedId, {
+            headers: {'Authorization': 'Bearer ' + token}
+          });
+          const data = await res.json();
+          if(data.unlocked) {
+            isSearchUnlocked = true;
+            // If we couldn't restore from localStorage, show a message
+            if(!restored) {
+              searchResults.style.display = 'block';
+              resultsList.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;">' +
+                '<svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--green);stroke-width:2;fill:none;margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+                '<h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Payment Confirmed!</h3>' +
+                '<p style="color:var(--text-muted);margin-bottom:20px;">Your search has been unlocked. Upload your photo again to see full results.</p>' +
+                '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again →</button>' +
+                '</div>';
+            }
+          }
+        } catch(e) { /* API check failed, rely on localStorage restore */ }
+      }, 2000);
+    }
+  }
+
+  // Handle cancelled payment
+  if(params.get('unlock_cancelled')) {
+    window.history.replaceState({}, '', window.location.pathname);
+    localStorage.removeItem('protevio_pending_unlock');
   }
 })();
 
@@ -1978,7 +2013,7 @@ function openResultModal(match, locked) {
       a.classList.add('result-modal__action--locked');
       a.onclick = (e) => {
         e.preventDefault();
-        alert('Upgrade your plan or unlock this search for €10 to access this feature.');
+        alert('Upgrade your plan or unlock this search for €9.99 to access this feature.');
       };
     } else {
       a.classList.remove('result-modal__action--locked');
