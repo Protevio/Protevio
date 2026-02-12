@@ -1844,12 +1844,14 @@ async function runSearch() {
     const searchData = await res.json();
     
     // Store results and redirect to dedicated results page
+    const faceThumbEl = document.querySelector('#faceGrid .face-thumb.selected img');
     sessionStorage.setItem('protevio_results', JSON.stringify({
       results: searchData.results || [],
       search_id: searchData.search_id || '',
       count: searchData.count || 0,
       userPlan: userPlan,
       isUnlocked: isSearchUnlocked,
+      faceThumb: faceThumbEl ? faceThumbEl.src : '',
       timestamp: Date.now()
     }));
     
