@@ -1524,26 +1524,29 @@ try {
   const unlockedId = params.get('unlocked');
   if(unlockedId) {
     isSearchUnlocked = true;
-    // Clean URL
     window.history.replaceState({}, '', window.location.pathname);
 
-    // Try restore from localStorage first (fast path)
-    let restored = false;
+    // Restore from localStorage and redirect to results page
     try {
       const saved = JSON.parse(localStorage.getItem('protevio_pending_unlock') || 'null');
       if(saved && saved.results && saved.search_id == unlockedId) {
         localStorage.removeItem('protevio_pending_unlock');
-        restored = true;
-        setTimeout(() => {
-          showResults({ results: saved.results, search_id: saved.search_id });
-        }, 300);
+        sessionStorage.setItem('protevio_results', JSON.stringify({
+          results: saved.results,
+          search_id: saved.search_id,
+          count: saved.results.length,
+          userPlan: userPlan,
+          isUnlocked: true,
+          timestamp: Date.now()
+        }));
+        window.location.href = '/results.html';
+        return;
       }
     } catch(e) { console.error('Failed to restore results:', e); }
 
-    // Also verify unlock via API (confirms payment, handles webhook race)
+    // API fallback
     const token = localStorage.getItem('protevio_token');
     if(token) {
-      // Small delay to give webhook time to fire
       setTimeout(async () => {
         try {
           const res = await fetch(API + '/search/unlocked/' + unlockedId, {
@@ -1551,24 +1554,19 @@ try {
           });
           const data = await res.json();
           if(data.unlocked) {
-            isSearchUnlocked = true;
-            // If we couldn't restore from localStorage, show a message
-            if(!restored) {
-              searchResults.style.display = 'block';
-              resultsList.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;">' +
-                '<svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--green);stroke-width:2;fill:none;margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
-                '<h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Payment Confirmed!</h3>' +
-                '<p style="color:var(--text-muted);margin-bottom:20px;">Your search has been unlocked. Upload your photo again to see full results.</p>' +
-                '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again →</button>' +
-                '</div>';
-            }
+            searchResults.style.display = 'block';
+            resultsList.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;">' +
+              '<svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--green);stroke-width:2;fill:none;margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+              '<h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Payment Confirmed!</h3>' +
+              '<p style="color:var(--text-muted);margin-bottom:20px;">Your search has been unlocked. Upload your photo again to see full results.</p>' +
+              '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again →</button>' +
+              '</div>';
           }
-        } catch(e) { /* API check failed, rely on localStorage restore */ }
+        } catch(e) {}
       }, 2000);
     }
   }
 
-  // Handle cancelled payment
   if(params.get('unlock_cancelled')) {
     window.history.replaceState({}, '', window.location.pathname);
     localStorage.removeItem('protevio_pending_unlock');
@@ -1844,8 +1842,19 @@ async function runSearch() {
     } catch(e){}
 
     const searchData = await res.json();
-    await new Promise(r => setTimeout(r, 500)); // Brief pause to show 100%
-    showResults(searchData);
+    
+    // Store results and redirect to dedicated results page
+    sessionStorage.setItem('protevio_results', JSON.stringify({
+      results: searchData.results || [],
+      search_id: searchData.search_id || '',
+      count: searchData.count || 0,
+      userPlan: userPlan,
+      isUnlocked: isSearchUnlocked,
+      timestamp: Date.now()
+    }));
+    
+    await new Promise(r => setTimeout(r, 400));
+    window.location.href = '/results.html';
 
   } catch(err) {
     clearInterval(progInterval);
