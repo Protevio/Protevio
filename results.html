@@ -8,173 +8,204 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0c1220;color:#e8ecf4;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh}
+body{background:#0f1318;color:#d1d5db;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh}
 a{color:#5b9aff;text-decoration:none}
 
-/* ===== NAVBAR ===== */
-.nav{background:#111827;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:100}
-.nav__inner{max-width:1360px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:20px}
-.nav__logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;color:#fff;text-decoration:none;flex-shrink:0}
-.nav__logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#5b9aff,#a78bfa);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff}
-.nav__links{display:flex;align-items:center;gap:6px;margin-left:auto}
-.nav__link{padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;color:#94a3b8;transition:all .2s;border:none;background:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px}
-.nav__link:hover{color:#e2e8f0;background:#1e293b}
-.nav__link svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.nav__link--report{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;box-shadow:0 2px 12px rgba(239,68,68,.2)}
-.nav__link--report:hover{box-shadow:0 4px 20px rgba(239,68,68,.35);color:#fff}
+/* ===== NAV ===== */
+.nav{background:linear-gradient(180deg,#15191f,#111518);border-bottom:1px solid #222830;position:sticky;top:0;z-index:100}
+.nav__inner{max-width:1200px;margin:0 auto;padding:0 32px;height:60px;display:flex;align-items:center}
+.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav__logo-mark{width:34px;height:34px}
+.nav__logo-mark svg{width:100%;height:100%}
+.nav__logo-text{font-weight:800;font-size:.95rem;letter-spacing:.08em;color:#f1f5f9;text-transform:uppercase}
+.nav__center{flex:1;display:flex;justify-content:center;gap:2px}
+.nav__link{padding:7px 16px;font-size:.82rem;color:#6b7280;text-decoration:none;font-weight:500;border-radius:6px;transition:all .15s;font-family:inherit}
+.nav__link:hover{color:#e5e7eb;background:rgba(255,255,255,.05)}
+.nav__right{width:140px;flex-shrink:0}
 
-/* ===== SEARCH INFO BAR ===== */
-.info-bar{background:#111827;border-bottom:1px solid #1e293b;padding:14px 24px}
-.info-bar__inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.info-bar__thumb{width:52px;height:52px;border-radius:12px;object-fit:cover;border:2px solid #2a3959;flex-shrink:0}
-.info-bar__meta{display:flex;flex-direction:column;gap:2px}
-.info-bar__plan{font-size:.78rem;font-weight:700;color:#5b9aff;text-transform:uppercase;letter-spacing:.05em}
+/* ===== INFO BAR ===== */
+.info-bar{background:#15191f;border-bottom:1px solid #222830;padding:14px 0}
+.info-bar__inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:16}
+.info-bar__thumb{width:50px;height:50px;border-radius:12px;object-fit:cover;border:2px solid #2a3040;flex-shrink:0;background:#1e2430}
+.info-bar__meta{flex:1}
+.info-bar__plan{font-size:.76rem;font-weight:700;color:#5b9aff;text-transform:uppercase;letter-spacing:.06em}
 .info-bar__plan--paid{color:#4ade80}
-.info-bar__stats{font-size:.88rem;color:#94a3b8}
-.info-bar__stats strong{color:#e2e8f0}
+.info-bar__stats{font-size:.86rem;color:#6b7280}
+.info-bar__stats strong{color:#e5e7eb}
+.info-bar__btn{padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;border:none;transition:all .15s}
+.info-bar__btn--outline{background:none;border:1px solid #2a3040;color:#9ca3af}
+.info-bar__btn--outline:hover{border-color:#3a4a60;color:#e2e8f0}
+.info-bar__btn--report{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;box-shadow:0 2px 8px rgba(220,38,38,.2)}
+.info-bar__btn--report:hover{box-shadow:0 4px 16px rgba(220,38,38,.35)}
+.info-bar__btn svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none}
 
 /* ===== UNLOCK BANNER ===== */
-.unlock-banner{background:linear-gradient(135deg,#2563eb,#3b82f6)}
-.unlock-banner__inner{max-width:1360px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.unlock-banner{background:linear-gradient(135deg,#1d4ed8,#2563eb);display:none}
+.unlock-banner__inner{max-width:1200px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:16;flex-wrap:wrap}
 .unlock-banner__text{color:#fff}
-.unlock-banner__title{font-size:1rem;font-weight:700}
-.unlock-banner__title u{text-decoration-color:rgba(255,255,255,.5)}
-.unlock-banner__sub{font-size:.85rem;color:rgba(255,255,255,.75);margin-top:2px}
-.unlock-btn{background:#fff;color:#2563eb;border:none;padding:12px 28px;border-radius:50px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.unlock-banner__title{font-weight:700;font-size:.95rem}
+.unlock-banner__title u{text-decoration-color:rgba(255,255,255,.4)}
+.unlock-banner__sub{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:2px}
+.unlock-btn{background:#fff;color:#1d4ed8;border:none;padding:10px 24px;border-radius:50px;font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 .unlock-btn:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,0,0,.25)}
-.unlock-btn svg{width:18px;height:18px;stroke:#2563eb;stroke-width:2;fill:none}
+.unlock-btn svg{width:16px;height:16px;stroke:#1d4ed8;stroke-width:2;fill:none}
 
-/* ===== RESULTS GRID ===== */
-.results{max-width:1360px;margin:0 auto;padding:24px}
-.results__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+/* ===== GRID ===== */
+.results{max-width:1200px;margin:0 auto;padding:24px 32px}
+.results__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;display:none}
 
-/* ===== RESULT CARD ===== */
-.card{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;background:#1a2235;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.card__img-wrap{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#111827}
+/* ===== CARD ===== */
+.card{border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;background:#1a1f28;border:1px solid transparent;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.4);border-color:#2a3959}
+.card__wrap{position:relative;width:100%;aspect-ratio:1;overflow:hidden;background:#12161e}
 .card__img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
 .card:hover .card__img{transform:scale(1.02)}
 
-/* Locked — noise + blur */
-.card--locked .card__img{filter:blur(12px) saturate(.5);transform:scale(1.08)}
-.card--locked:hover .card__img{filter:blur(10px) saturate(.6);transform:scale(1.1)}
+/* Locked */
+.card--locked .card__img{filter:blur(10px) saturate(.5);transform:scale(1.08)}
+.card--locked:hover .card__img{filter:blur(8px) saturate(.6);transform:scale(1.1)}
 .card--locked .card__noise{display:block}
-.card__noise{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");background-size:128px;opacity:.7;z-index:1;pointer-events:none}
+.card__noise{display:none;position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");background-size:128px;opacity:.5;z-index:1;pointer-events:none}
 
-/* Tap to see */
-.card__tap{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:8px;display:none;align-items:center;gap:6px;color:#fff;font-size:.78rem;font-weight:600;z-index:3}
-.card--locked .card__tap{display:flex}
-.card__tap svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
-
-/* Explicit badge */
-.card__explicit{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);color:#fff;font-size:.68rem;font-weight:700;padding:5px 12px;border-radius:8px;z-index:3;display:flex;align-items:center;gap:5px;letter-spacing:.03em}
+/* Badges */
+.card__explicit{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);padding:4px 10px;border-radius:6px;font-size:.66rem;font-weight:700;color:#fff;z-index:3;display:flex;align-items:center;gap:4px;letter-spacing:.02em}
 .card__explicit span{background:rgba(255,255,255,.2);padding:1px 5px;border-radius:3px;font-weight:800}
+.card__tap{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.08);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:7px;font-size:.74rem;font-weight:600;color:rgba(255,255,255,.8);z-index:3;display:none;align-items:center;gap:5px}
+.card--locked .card__tap{display:flex}
+.card__tap svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+.card__domain{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);padding:4px 10px;border-radius:5px;font-size:.72rem;color:#d1d5db;font-weight:500;z-index:3;max-width:calc(100% - 90px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card__sim{position:absolute;bottom:10px;right:10px;background:rgba(91,154,255,.12);border:1px solid rgba(91,154,255,.15);padding:4px 8px;border-radius:5px;font-size:.7rem;color:#5b9aff;font-weight:700;z-index:3}
 
-/* Domain badge */
-.card__domain{position:absolute;bottom:12px;left:12px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:6px;font-size:.75rem;color:#fff;font-weight:500;z-index:3;max-width:calc(100% - 80px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Tease animation */
+.card--locked.tease .card__img{filter:blur(3px) saturate(.8)!important;transition:filter .25s}
+.card--locked.tease .card__tap{opacity:0;transition:opacity .25s}
+.card--locked.tease .card__noise{opacity:.2;transition:opacity .25s}
 
-/* Similarity */
-.card__sim{position:absolute;bottom:12px;right:12px;background:rgba(91,154,255,.2);backdrop-filter:blur(8px);border:1px solid rgba(91,154,255,.2);padding:5px 10px;border-radius:6px;font-size:.72rem;color:#5b9aff;font-weight:700;z-index:3}
-
-/* Tease */
-.card--locked.tease .card__img{filter:blur(3px) saturate(.8)!important;transition:filter .2s}
-.card--locked.tease .card__tap{opacity:0;transition:opacity .2s}
-.card--locked.tease .card__noise{opacity:.3;transition:opacity .2s}
-
-/* ===== DETAIL MODAL ===== */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);z-index:1000;justify-content:center;align-items:center;padding:20px}
+/* ===== MODAL ===== */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:1000;justify-content:center;align-items:center;padding:20px}
 .modal-bg.open{display:flex}
-.modal{background:#1a2235;border:1px solid #2a3959;border-radius:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,.6);animation:pop .2s ease}
-@keyframes pop{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
-.modal__head{position:relative}
-.modal__close{position:absolute;top:14px;right:14px;width:36px;height:36px;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;color:#fff;font-size:16px;transition:all .2s}
-.modal__close:hover{background:rgba(255,255,255,.15)}
-.modal__img-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#111827;border-radius:20px 20px 0 0}
+.modal{background:linear-gradient(170deg,#1a1f2e 0%,#141820 40%,#111518 100%);border:1px solid #2a3050;border-radius:14px;width:450px;max-height:88vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.6),0 0 0 1px rgba(91,154,255,.06),inset 0 1px 0 rgba(255,255,255,.04);color:#d1d5db;position:relative}
+@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+.modal-bg.open .modal{animation:modalIn .2s ease}
+.modal__close{position:absolute;top:12px;right:12px;width:30px;height:30px;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#9ca3af;font-size:15px;font-weight:600;z-index:10;border:1px solid rgba(255,255,255,.08);transition:all .15s}
+.modal__close:hover{background:rgba(255,255,255,.1);color:#fff}
+.modal__img-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;border-radius:14px 14px 0 0;background:#12161e}
 .modal__img{width:100%;height:100%;object-fit:cover}
-.modal__img--locked{filter:blur(16px) saturate(.4);transform:scale(1.12)}
-.modal__lock{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:2}
-.modal__lock svg{width:48px;height:48px;stroke:rgba(255,255,255,.85);stroke-width:1.5;fill:none}
-.modal__lock-text{color:#fff;font-weight:700;font-size:1rem;text-shadow:0 2px 12px rgba(0,0,0,.5)}
-.modal__lock-sub{color:rgba(255,255,255,.6);font-size:.82rem;text-shadow:0 1px 6px rgba(0,0,0,.5)}
-.modal__body{padding:20px 24px 24px}
-.modal__meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.modal__domain{font-size:1.05rem;font-weight:700;color:#e2e8f0}
-.modal__similarity{font-size:.82rem;font-weight:700;color:#5b9aff;background:rgba(91,154,255,.12);padding:5px 14px;border-radius:8px}
-.modal__actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.modal__action{display:flex;align-items:center;gap:10px;padding:13px 14px;background:#111827;border:1px solid #1e293b;border-radius:12px;cursor:pointer;transition:all .2s}
-.modal__action:hover{border-color:#2a3959;background:#1e293b}
-.modal__action svg{width:20px;height:20px;stroke:#5b9aff;stroke-width:2;fill:none;flex-shrink:0}
-.modal__action-text{display:flex;flex-direction:column}
-.modal__action-title{font-size:.82rem;font-weight:600;color:#e2e8f0}
-.modal__action-sub{font-size:.7rem;color:#6b7280}
-.modal__action--locked{opacity:.35;cursor:not-allowed}
-.modal__action--locked:hover{border-color:#1e293b;background:#111827}
+.modal__img--locked{filter:blur(14px) saturate(.4);transform:scale(1.1)}
+.modal__lock{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:2}
+.modal__lock svg{width:40px;height:40px;stroke:rgba(255,255,255,.75);stroke-width:1.5;fill:none}
+.modal__lock-text{color:#fff;font-weight:700;font-size:.95rem;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.modal__lock-sub{color:rgba(255,255,255,.5);font-size:.78rem}
+.modal__domain-badge{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.08);padding:5px 12px;border-radius:6px;font-size:.78rem;color:#e2e8f0;font-weight:600;z-index:3}
+
+/* Action rows */
+.modal__action{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;transition:background .12s;border-bottom:1px solid rgba(255,255,255,.04)}
+.modal__action:hover{background:rgba(255,255,255,.03)}
+.modal__action--disabled{opacity:.3;cursor:not-allowed}
+.modal__action--disabled:hover{background:transparent}
+.modal__action-icon{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal__action-icon svg{width:20px;height:20px;fill:none}
+.modal__action-body{flex:1;min-width:0}
+.modal__action-title{font-size:.86rem;font-weight:600;color:#e2e8f0}
+.modal__action-sub{font-size:.74rem;color:#6b7280;margin-top:1px}
+.modal__action-chevron{width:18px;height:18px;stroke:#4b5563;stroke-width:2;fill:none;flex-shrink:0}
+.modal__footer{padding:12px 20px;font-size:.73rem;color:#4b5563;border-top:1px solid rgba(255,255,255,.04)}
 
 /* ===== EMPTY / LOADING ===== */
-.empty{text-align:center;padding:100px 24px}
+.empty{text-align:center;padding:100px 24px;display:none}
 .empty svg{width:64px;height:64px;stroke:#4b5563;stroke-width:1.5;fill:none;margin-bottom:20px}
-.empty h3{font-size:1.15rem;margin-bottom:6px}
+.empty h3{font-size:1.15rem;margin-bottom:6px;color:#e2e8f0}
 .empty p{color:#6b7280;font-size:.88rem;margin-bottom:20px}
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px;gap:16px}
 .spinner{width:40px;height:40px;border:3px solid #1e293b;border-top-color:#5b9aff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:1024px){.results__grid{grid-template-columns:repeat(3,1fr);gap:12px}}
-@media(max-width:768px){
+@media(max-width:900px){
+  .results__grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .nav__center{gap:0}
+  .nav__link{padding:6px 10px;font-size:.78rem}
+  .nav__right{width:60px}
+  .info-bar__btn span{display:none}
+}
+@media(max-width:600px){
   .results__grid{grid-template-columns:repeat(2,1fr);gap:10px}
-  .nav__link span{display:none}
-  .unlock-banner__inner{flex-direction:column;text-align:center}
-  .info-bar__inner{justify-content:center;text-align:center;flex-direction:column}
-  .modal{max-width:95%}
-  .modal__actions{grid-template-columns:1fr}
+  .results{padding:16px}
+  .nav__inner{padding:0 16px}
+  .nav__link{padding:5px 8px;font-size:.72rem}
+  .nav__right{width:20px}
+  .info-bar__inner{padding:0 16px;gap:10px}
+  .unlock-banner__inner{padding:14px 16px;flex-direction:column;text-align:center}
+  .modal{width:95%;max-width:none}
+  .card__explicit{font-size:.58rem;padding:3px 7px}
+  .card__tap{font-size:.66rem;padding:4px 8px}
+  .card__domain{font-size:.64rem;padding:3px 7px;max-width:calc(100% - 70px)}
+  .card__sim{font-size:.62rem;padding:3px 6px}
 }
-@media(max-width:480px){
-  .results__grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .card__domain,.card__sim{font-size:.65rem;padding:3px 8px}
-  .results{padding:12px}
+@media(max-width:400px){
+  .nav__center a:nth-child(n+5){display:none}
 }
+
+/* Scrollbar */
+.modal::-webkit-scrollbar{width:6px}
+.modal::-webkit-scrollbar-track{background:transparent}
+.modal::-webkit-scrollbar-thumb{background:#2a3050;border-radius:3px}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav__inner">
     <a href="/" class="nav__logo">
-      <div class="nav__logo-icon">P</div>
-      Protevio
+      <div class="nav__logo-mark">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
+          <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
+          <circle cx="18" cy="18" r="2" fill="#0f1318"/>
+          <defs>
+            <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
+              <stop offset="0%" stop-color="#00e5ff"/>
+              <stop offset="100%" stop-color="#7c4dff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="nav__logo-text">PROTEVIO</span>
     </a>
-    <div class="nav__links">
-      <a href="/" class="nav__link">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <span>New Search</span>
-      </a>
-      <button class="nav__link nav__link--report" id="pdfBtn" style="display:none">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span>Generate report</span>
-      </button>
-      <button class="nav__link" id="shareBtn" style="display:none">
-        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        <span>Share</span>
-      </button>
+    <div class="nav__center">
+      <a href="/" class="nav__link">Search</a>
+      <a href="/pricing.html" class="nav__link">Pricing</a>
+      <a href="/blog.html" class="nav__link">Blog</a>
+      <a href="/opt-out.html" class="nav__link">Opt-out</a>
+      <a href="/faq.html" class="nav__link">FAQ</a>
+      <a href="/contact.html" class="nav__link">Contact</a>
     </div>
+    <div class="nav__right"></div>
   </div>
 </nav>
 
-<!-- SEARCH INFO BAR -->
+<!-- INFO BAR -->
 <div class="info-bar">
   <div class="info-bar__inner">
-    <img class="info-bar__thumb" id="faceThumb" src="" alt="" style="display:none">
+    <img class="info-bar__thumb" id="faceThumb" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><rect fill='%231e2430' width='50' height='50'/><text x='25' y='30' text-anchor='middle' fill='%234b5563' font-size='18'>👤</text></svg>" alt="">
     <div class="info-bar__meta">
       <div class="info-bar__plan" id="planLabel">Free Search</div>
       <div class="info-bar__stats">About <strong id="statCount">—</strong> results in <strong id="statTime">—</strong></div>
     </div>
+    <a href="/" class="info-bar__btn info-bar__btn--outline">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>New Search</span>
+    </a>
+    <button class="info-bar__btn info-bar__btn--report" id="pdfBtn" style="display:none">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Generate report</span>
+    </button>
   </div>
 </div>
 
 <!-- UNLOCK BANNER -->
-<div class="unlock-banner" id="unlockBanner" style="display:none">
+<div class="unlock-banner" id="unlockBanner">
   <div class="unlock-banner__inner">
     <div class="unlock-banner__text">
       <div class="unlock-banner__title">Unlock access to <u>current search results</u> for <strong>9,99 €</strong></div>
@@ -193,8 +224,8 @@ a{color:#5b9aff;text-decoration:none}
     <div class="spinner"></div>
     <div style="font-size:.85rem;color:#6b7280">Loading results...</div>
   </div>
-  <div class="results__grid" id="grid" style="display:none"></div>
-  <div class="empty" id="noResults" style="display:none">
+  <div class="results__grid" id="grid"></div>
+  <div class="empty" id="noResults">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
     <h3>No Matches Found</h3>
     <p>We didn't find any matching faces in our database. Try a clearer photo.</p>
@@ -202,54 +233,95 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 </main>
 
-<!-- DETAIL MODAL -->
+<!-- MODAL -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
-    <div class="modal__head">
-      <div class="modal__close" id="modalClose">✕</div>
-      <div class="modal__img-wrap">
-        <img class="modal__img" id="modalImg" src="" alt="Match">
-        <div class="modal__lock" id="modalLock">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          <div class="modal__lock-text">Unlock to reveal</div>
-          <div class="modal__lock-sub" id="modalLockPct"></div>
+    <div class="modal__close" id="modalClose">✕</div>
+    <div class="modal__img-wrap">
+      <img class="modal__img" id="modalImg" src="" alt="Match">
+      <div class="modal__lock" id="modalLock">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <div class="modal__lock-text">Unlock to reveal</div>
+        <div class="modal__lock-sub" id="modalLockPct"></div>
+      </div>
+      <div class="modal__domain-badge" id="modalDomainBadge">—</div>
+    </div>
+
+    <!-- Action rows -->
+    <div id="modalActions">
+      <div class="modal__action" id="actWebsite">
+        <div class="modal__action-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#3b82f6" stroke-width="1.8"/><path d="M2 12h20" stroke="#3b82f6" stroke-width="1.2" opacity=".4"/><path d="M12 2c2.5 2.5 4 6 4 10s-1.5 7.5-4 10c-2.5-2.5-4-6-4-10s1.5-7.5 4-10z" stroke="#3b82f6" stroke-width="1.2" fill="none"/></svg>
         </div>
+        <div class="modal__action-body">
+          <div class="modal__action-title">Open website</div>
+          <div class="modal__action-sub">Click to go to the website that this image appears on.</div>
+        </div>
+        <svg class="modal__action-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="modal__action" id="actImage">
+        <div class="modal__action-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#8b5cf6" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.5" fill="#8b5cf6"/><path d="M21 15l-5-5L5 21" stroke="#8b5cf6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="modal__action-body">
+          <div class="modal__action-title">Open image</div>
+          <div class="modal__action-sub">Click to access the source image (unblurred version).</div>
+        </div>
+        <svg class="modal__action-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="modal__action" id="actSearch">
+        <div class="modal__action-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke="#06b6d4" stroke-width="1.8"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#06b6d4" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="modal__action-body">
+          <div class="modal__action-title">Perform search with this image</div>
+          <div class="modal__action-sub">Click to start a new search with this image.</div>
+        </div>
+        <svg class="modal__action-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="modal__action" id="actCopy">
+        <div class="modal__action-icon">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" stroke="#6366f1" stroke-width="1.8"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="#6366f1" stroke-width="1.8"/></svg>
+        </div>
+        <div class="modal__action-body">
+          <div class="modal__action-title">Copy Result ID</div>
+          <div class="modal__action-sub">Copy the ID of this result for further actions.</div>
+        </div>
+        <svg class="modal__action-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="modal__action" id="actExclude">
+        <div class="modal__action-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#10b981" stroke-width="1.8"/><polyline points="9 12 11 14 15 10" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="modal__action-body">
+          <div class="modal__action-title">Exclude from public results</div>
+          <div class="modal__action-sub">Remove the photo from Protevio's public search.</div>
+        </div>
+        <svg class="modal__action-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="modal__action" id="actShare">
+        <div class="modal__action-icon">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" stroke="#ef4444" stroke-width="1.8"/><circle cx="6" cy="12" r="3" stroke="#ef4444" stroke-width="1.8"/><circle cx="18" cy="19" r="3" stroke="#ef4444" stroke-width="1.8"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="#ef4444" stroke-width="1.8"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="#ef4444" stroke-width="1.8"/></svg>
+        </div>
+        <div class="modal__action-body">
+          <div class="modal__action-title">Share</div>
+          <div class="modal__action-sub">Let the world and your friends know about Protevio.</div>
+        </div>
+        <svg class="modal__action-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
     </div>
-    <div class="modal__body">
-      <div class="modal__meta">
-        <div class="modal__domain" id="modalDomain">—</div>
-        <div class="modal__similarity" id="modalSim">—%</div>
-      </div>
-      <div class="modal__actions">
-        <div class="modal__action" id="actVisit">
-          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          <div class="modal__action-text"><span class="modal__action-title">Visit Website</span><span class="modal__action-sub">Open source page</span></div>
-        </div>
-        <div class="modal__action" id="actImage">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <div class="modal__action-text"><span class="modal__action-title">View Image</span><span class="modal__action-sub">Full resolution</span></div>
-        </div>
-        <div class="modal__action" id="actCopy">
-          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          <div class="modal__action-text"><span class="modal__action-title">Copy ID</span><span class="modal__action-sub">Reference number</span></div>
-        </div>
-        <div class="modal__action" id="actTakedown">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <div class="modal__action-text"><span class="modal__action-title">Request Takedown</span><span class="modal__action-sub">File removal request</span></div>
-        </div>
-      </div>
-    </div>
+    <div class="modal__footer" id="modalFooter">Indexed on —</div>
   </div>
 </div>
 
 <script>
-const API = 'https://api.protevio.com/api';
+const API='https://api.protevio.com/api';
 function encImg(f){if(!f)return '';return API+'/img/'+btoa(f).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
 function getToken(){return localStorage.getItem('protevio_token')}
 
-let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true;
+let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true,currentMatch=null;
 
+// ===== INIT =====
 (function init(){
   const raw=sessionStorage.getItem('protevio_results');
   if(!raw){window.location.href='/';return}
@@ -258,7 +330,7 @@ let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true;
     if(Date.now()-d.timestamp>30*60*1000){sessionStorage.removeItem('protevio_results');window.location.href='/';return}
     results=d.results||[];searchId=d.search_id||'';userPlan=d.userPlan||'free';isUnlocked=d.isUnlocked||false;
     isFree=(userPlan==='free')&&!isUnlocked;
-    if(d.faceThumb){const t=document.getElementById('faceThumb');t.src=d.faceThumb;t.style.display='block'}
+    if(d.faceThumb){document.getElementById('faceThumb').src=d.faceThumb}
   }catch(e){window.location.href='/';return}
   render();
 })();
@@ -269,15 +341,19 @@ function render(){
   if(!results.length){document.getElementById('noResults').style.display='block';return}
   grid.style.display='grid';
 
+  // Stats
   document.getElementById('statCount').textContent=results.length;
   document.getElementById('statTime').textContent=((Math.random()*1.5)+.8).toFixed(2)+'s';
 
+  // Plan label
   const pl=document.getElementById('planLabel');
   if(!isFree){pl.textContent='Full Access';pl.classList.add('info-bar__plan--paid')}
+
+  // Buttons
   if(!isFree)document.getElementById('pdfBtn').style.display='flex';
-  if(results.length)document.getElementById('shareBtn').style.display='flex';
   if(isFree)document.getElementById('unlockBanner').style.display='block';
 
+  // Cards
   results.forEach((m,i)=>{
     const card=document.createElement('div');
     card.className='card'+(isFree?' card--locked':'');
@@ -287,8 +363,8 @@ function render(){
     const explicit=m.nsfw||(m.category&&m.category!=='safe');
 
     card.innerHTML=
-      '<div class="card__img-wrap">'+
-        '<img class="card__img" src="'+imgUrl+'" alt="Match" loading="lazy" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23111827%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%234b5563%22 font-size=%2210%22>No image</text></svg>\'">' +
+      '<div class="card__wrap">'+
+        '<img class="card__img" src="'+imgUrl+'" alt="Match" loading="lazy" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2312161e%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%234b5563%22 font-size=%2210%22>No image</text></svg>\'">' +
         '<div class="card__noise"></div>'+
         (explicit?'<div class="card__explicit"><span>E</span> POTENTIALLY EXPLICIT RESULT</div>':'')+
         '<div class="card__tap"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap to see</div>'+
@@ -310,30 +386,65 @@ function render(){
 
 // ===== MODAL =====
 function openModal(m){
-  const bg=document.getElementById('modalBg');
+  currentMatch=m;
   const sim=Math.round(m.similarity||0);
   const domain=m.domain||'Unknown';
   document.getElementById('modalImg').src=encImg(m.filename||'');
   document.getElementById('modalImg').className='modal__img'+(isFree?' modal__img--locked':'');
-  document.getElementById('modalDomain').textContent=isFree?'••••••.com':domain;
-  document.getElementById('modalSim').textContent=sim+'% match';
+  document.getElementById('modalDomainBadge').textContent=isFree?'••••••.com':domain;
   document.getElementById('modalLock').style.display=isFree?'flex':'none';
-  document.getElementById('modalLockPct').textContent=sim+'% match found';
-  document.querySelectorAll('.modal__action').forEach(a=>a.classList.toggle('modal__action--locked',isFree));
+  document.getElementById('modalLockPct').textContent=sim+'% match';
+  document.getElementById('modalFooter').textContent='Indexed on '+(m.indexed_at||new Date().toISOString().slice(0,10));
 
-  document.getElementById('actVisit').onclick=()=>{if(isFree)return alert('Unlock results to access source websites.');const u=m.page_url||m.url;if(u)window.open(u,'_blank')};
-  document.getElementById('actImage').onclick=()=>{if(isFree)return alert('Unlock results to view full images.');if(m.url)window.open(m.url,'_blank')};
-  document.getElementById('actCopy').onclick=()=>{navigator.clipboard.writeText(m.id||'').then(()=>{const t=document.querySelector('#actCopy .modal__action-title');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy ID',1500)})};
-  document.getElementById('actTakedown').onclick=()=>{if(isFree)return alert('Unlock results to file takedown requests.');alert('Takedown request submitted for '+domain)};
-  bg.classList.add('open');
+  // Lock paid actions
+  ['actWebsite','actImage','actExclude'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.classList.toggle('modal__action--disabled',isFree);
+  });
+  document.getElementById('modalBg').classList.add('open');
 }
-document.getElementById('modalClose').onclick=()=>document.getElementById('modalBg').classList.remove('open');
-document.getElementById('modalBg').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open')};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modalBg').classList.remove('open')});
+
+function closeModal(){document.getElementById('modalBg').classList.remove('open');currentMatch=null}
+document.getElementById('modalClose').onclick=closeModal;
+document.getElementById('modalBg').onclick=e=>{if(e.target===e.currentTarget)closeModal()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Modal action handlers
+document.getElementById('actWebsite').onclick=()=>{
+  if(isFree||!currentMatch)return;
+  const u=currentMatch.page_url||currentMatch.url;if(u)window.open(u,'_blank');
+};
+document.getElementById('actImage').onclick=()=>{
+  if(isFree||!currentMatch)return;
+  if(currentMatch.url)window.open(currentMatch.url,'_blank');
+};
+document.getElementById('actSearch').onclick=()=>{
+  // Could redirect to search with this image
+  window.location.href='/';
+};
+document.getElementById('actCopy').onclick=()=>{
+  if(!currentMatch)return;
+  navigator.clipboard.writeText(currentMatch.id||currentMatch.filename||'').then(()=>{
+    const t=document.querySelector('#actCopy .modal__action-title');
+    t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Result ID',1500);
+  });
+};
+document.getElementById('actExclude').onclick=()=>{
+  if(isFree||!currentMatch)return;
+  alert('Exclusion request submitted for '+(currentMatch.domain||'this result'));
+};
+document.getElementById('actShare').onclick=()=>{
+  const text='I found my face online using Protevio AI!\nCheck where YOUR face appears → https://protevio.com';
+  if(navigator.share){navigator.share({text,url:'https://protevio.com'}).catch(()=>{})}
+  else{navigator.clipboard.writeText(text).then(()=>{
+    const t=document.querySelector('#actShare .modal__action-title');
+    t.textContent='Link copied!';setTimeout(()=>t.textContent='Share',1500);
+  })}
+};
 
 // ===== UNLOCK =====
 document.getElementById('unlockBtn').addEventListener('click',async()=>{
-  const token=getToken();if(!token){window.location.href='/login';return}
+  const token=getToken();if(!token){window.location.href='/';return}
   localStorage.setItem('protevio_pending_unlock',JSON.stringify({search_id:searchId,results}));
   const btn=document.getElementById('unlockBtn');btn.textContent='Redirecting...';btn.disabled=true;
   try{
@@ -353,18 +464,6 @@ document.getElementById('pdfBtn').addEventListener('click',async()=>{
     if(!r.ok)throw 0;const b=await r.blob();const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='protevio_report_'+new Date().toISOString().slice(0,10)+'.pdf';a.click();
   }catch(e){alert('Failed to generate report.')}
   btn.innerHTML=orig;btn.disabled=false;
-});
-
-// ===== SHARE =====
-document.getElementById('shareBtn').addEventListener('click',async()=>{
-  const btn=document.getElementById('shareBtn');const orig=btn.innerHTML;
-  const doms=new Set(results.map(r=>r.domain).filter(Boolean));
-  const text='I found '+results.length+' photos of myself on '+doms.size+' websites.\nCheck where YOUR face appears → https://protevio.com';
-  if(navigator.share){try{
-    const tk=getToken();if(tk&&searchId){btn.innerHTML='<div class="spinner" style="width:16px;height:16px;border-width:2px"></div>';const r=await fetch(API+'/share/preview/'+searchId,{headers:{'Authorization':'Bearer '+tk}});if(r.ok){const b=await r.blob();await navigator.share({text,files:[new File([b],'protevio.png',{type:'image/png'})]});btn.innerHTML=orig;return}}
-    await navigator.share({text,url:'https://protevio.com'});btn.innerHTML=orig;return;
-  }catch(e){if(e.name==='AbortError'){btn.innerHTML=orig;return}}}
-  try{await navigator.clipboard.writeText(text);btn.innerHTML='<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Copied!</span>';setTimeout(()=>btn.innerHTML=orig,2000)}catch(e){btn.innerHTML=orig}
 });
 
 // ===== UNLOCK RETURN =====
