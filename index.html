@@ -1180,6 +1180,10 @@ body{
               <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               PDF Report
             </button>
+            <button id="shareResultsBtn" style="display:none;padding:8px 16px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;align-items:center;gap:6px;transition:opacity .2s;" title="Share Results">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;display:inline;vertical-align:middle;margin-right:4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share
+            </button>
             <button id="newSearchBtn" class="step-back-btn">New Search</button>
           </div>
         </div>
@@ -1479,6 +1483,13 @@ body{
 
 // ===== PROTEVIO FACE SEARCH =====
 const API = 'https://api.protevio.com/api';
+
+// Encode image filenames to avoid ad-blocker triggers from domain names in URL
+function encImg(filename) {
+  if(!filename) return API + '/image/';
+  const b64 = btoa(filename).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  return API + '/img/' + b64;
+}
 const uploadBox = document.getElementById('uploadBox');
 const fileInput = document.getElementById('fileInput');
 const searchStatus = document.getElementById('searchStatus');
@@ -1872,6 +1883,11 @@ function showResults(data) {
   if(dlBtn) {
     dlBtn.style.display = (!isFree && matches.length > 0) ? 'flex' : 'none';
   }
+  // Show share button for everyone (even free users — it's marketing)
+  const shareBtn = document.getElementById('shareResultsBtn');
+  if(shareBtn) {
+    shareBtn.style.display = (matches.length > 0) ? 'flex' : 'none';
+  }
 
   if(!Array.isArray(matches) || matches.length === 0) {
     noResults.style.display = 'block';
@@ -1895,7 +1911,7 @@ function showResults(data) {
     card.className = 'result-card' + (isFree ? ' result-card--locked' : '');
     const similarity = Math.round(match.similarity || 0);
     const domain = match.domain || '';
-    const imgUrl = API + '/image/' + (match.filename || '');
+    const imgUrl = encImg(match.filename || '');
     const isExplicit = match.nsfw || (match.category && match.category !== 'safe');
 
     let explicitBadge = '';
@@ -1976,7 +1992,7 @@ let currentSearchId = '';
 
 function openResultModal(match, locked) {
   const modal = document.getElementById('resultModal');
-  const imgUrl = API + '/image/' + (match.filename || '');
+  const imgUrl = encImg(match.filename || '');
   const domain = match.domain || 'Unknown source';
   const similarity = Math.round(match.similarity || 0);
 
@@ -2093,6 +2109,78 @@ document.getElementById('downloadReportBtn').addEventListener('click', async () 
   }
   btn.innerHTML = origHTML;
   btn.disabled = false;
+});
+
+// Share results
+document.getElementById('shareResultsBtn').addEventListener('click', async () => {
+  const shareBtn = document.getElementById('shareResultsBtn');
+  const origHTML = shareBtn.innerHTML;
+
+  if(!currentSearchId) {
+    alert('No results to share yet.');
+    return;
+  }
+
+  const resultCount = currentResults.length || 0;
+  const domains = new Set(currentResults.map(r => r.domain).filter(Boolean));
+  const shareText = `I just found ${resultCount} photos of myself on ${domains.size} websites I never knew about 😱\n\nCheck where YOUR face appears online →`;
+  const shareUrl = 'https://protevio.com';
+
+  // Try Web Share API first (mobile-friendly)
+  if(navigator.share) {
+    try {
+      // Try to get the share image
+      const token = getToken();
+      if(token) {
+        shareBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;animation:spin 1s linear infinite;display:inline;vertical-align:middle;margin-right:4px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Sharing...';
+        const imgResp = await fetch(API + '/share/preview/' + currentSearchId, {
+          headers: {'Authorization': 'Bearer ' + token}
+        });
+        if(imgResp.ok) {
+          const blob = await imgResp.blob();
+          const file = new File([blob], 'protevio_results.png', {type: 'image/png'});
+          await navigator.share({ text: shareText + '\n' + shareUrl, files: [file] });
+          shareBtn.innerHTML = origHTML;
+          return;
+        }
+      }
+      // Fallback: share without image
+      await navigator.share({ text: shareText, url: shareUrl });
+      shareBtn.innerHTML = origHTML;
+      return;
+    } catch(e) {
+      if(e.name === 'AbortError') { shareBtn.innerHTML = origHTML; return; }
+    }
+  }
+
+  // Desktop fallback: download share image + copy text
+  const token = getToken();
+  if(token) {
+    shareBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;animation:spin 1s linear infinite;display:inline;vertical-align:middle;margin-right:4px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Generating...';
+    try {
+      const imgResp = await fetch(API + '/share/preview/' + currentSearchId, {
+        headers: {'Authorization': 'Bearer ' + token}
+      });
+      if(imgResp.ok) {
+        const blob = await imgResp.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'protevio_results.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch(e) { /* ignore */ }
+  }
+
+  // Copy share text to clipboard
+  try {
+    await navigator.clipboard.writeText(shareText + '\n' + shareUrl);
+    shareBtn.innerHTML = '✅ Copied!';
+    setTimeout(() => { shareBtn.innerHTML = origHTML; }, 2000);
+  } catch(e) {
+    shareBtn.innerHTML = origHTML;
+  }
 });
 
 document.getElementById('unlockOnceBtn').addEventListener('click', () => {
