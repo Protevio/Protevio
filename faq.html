@@ -478,6 +478,7 @@ body{
   <div class="nav__links">
     <a href="/" class="nav__link">Home</a>
     <a href="about.html" class="nav__link">About</a>
+    <a href="pricing.html" class="nav__link">Pricing</a>
     <a href="faq.html" class="nav__link nav__link--active">FAQ</a>
     <a href="blog.html" class="nav__link">Blog</a>
     <a href="contact.html" class="nav__link">Contact</a><a href="opt-out.html" class="nav__link">Opt-Out</a>
@@ -498,6 +499,7 @@ body{
 <div class="nav__mobile-menu">
     <a href="/" class="mobile-link">Home</a>
     <a href="about.html" class="mobile-link">About</a>
+    <a href="pricing.html" class="mobile-link">Pricing</a>
     <a href="faq.html" class="mobile-link mobile-link--active">FAQ</a>
     <a href="blog.html" class="mobile-link">Blog</a>
     <a href="contact.html" class="mobile-link">Contact</a><a href="opt-out.html" class="mobile-link">Opt-Out</a>
@@ -712,7 +714,7 @@ body{
         </svg>
       </button>
       <div class="faq-answer">
-        <p>Yes! We provide an opt-out mechanism. Contact us at <strong>privacy@protevio.com</strong> with a photo of yourself, and we'll remove all matching faces from our index within 48 hours.</p>
+        <p>Yes! We provide an opt-out mechanism. Contact us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="48383a213e292b3108383a273c2d3e2127662b2725">[email&#160;protected]</a></strong> with a photo of yourself, and we'll remove all matching faces from our index within 48 hours.</p>
         <p>This is a core part of our GDPR compliance and your right to be forgotten.</p>
       </div>
     </div>
@@ -752,7 +754,7 @@ body{
   </p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // FAQ accordion
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -836,14 +838,4 @@ searchInput.addEventListener('input', (e) => {
     var first = name.split(" ")[0];
     if(navAuth){
       navAuth.href = "dashboard.html";
-      navAuth.innerHTML = '<span>' + first + '</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';
-    }
-    if(mobileAuth){
-      mobileAuth.href = "dashboard.html";
-      mobileAuth.textContent = first;
-    }
-  }
-})();
-</script>
-</body>
-</html>
+      navAuth.innerHTML = '<span>' + first + '</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fil
