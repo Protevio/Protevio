@@ -206,7 +206,23 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 .mpc__learn{display:block;text-align:center;padding:16px;font-size:.82rem;color:var(--accent);text-decoration:underline;font-weight:600;border-top:1px solid #2a3349}
 
 /* FREE TIER */
-.free-tier{margin-top:36px;background:#1a1f2e;border:1px solid #2a3349;border-radius:14px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.trial-banner{margin-top:36px;background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(124,77,255,.12));border:1.5px solid rgba(91,154,255,.25);border-radius:14px;padding:28px;text-align:center;display:none;position:relative;overflow:hidden}
+.trial-banner::before{content:'';position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:radial-gradient(circle,rgba(91,154,255,.1) 0%,transparent 70%);pointer-events:none}
+.trial-banner__badge{display:inline-flex;align-items:center;gap:6px;background:rgba(91,154,255,.15);border:1px solid rgba(91,154,255,.2);padding:5px 14px;border-radius:50px;font-size:.72rem;font-weight:700;color:var(--accent-light);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
+.trial-banner__badge svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none}
+.trial-banner__title{font-size:1.25rem;font-weight:800;color:#f0f2f7;margin-bottom:6px}
+.trial-banner__title span{background:linear-gradient(135deg,var(--accent-light),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.trial-banner__desc{font-size:.88rem;color:#8891a5;margin-bottom:18px;line-height:1.5}
+.trial-banner__btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent-light),var(--purple));color:#fff;padding:13px 32px;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:all .2s;box-shadow:0 4px 20px rgba(91,154,255,.3)}
+.trial-banner__btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,154,255,.4)}
+.trial-banner__btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.trial-banner__btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5;fill:none}
+.trial-banner__note{font-size:.75rem;color:#6b7280;margin-top:12px}
+.trial-banner--active{border-color:rgba(74,222,128,.3);background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(16,185,129,.08))}
+.trial-banner--active .trial-banner__badge{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.2);color:#4ade80}
+.trial-banner--expired{border-color:rgba(239,68,68,.2);background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(220,38,38,.05))}
+.trial-banner--expired .trial-banner__badge{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.2);color:#f87171}
+.free-tier{margin-top:20px;background:#1a1f2e;border:1px solid #2a3349;border-radius:14px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .free-tier__title{font-size:1.02rem;font-weight:700;color:#f0f2f7;margin-bottom:3px}
 .free-tier__desc{font-size:.82rem;color:#8891a5}
 .free-tier__feats{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap}
@@ -347,6 +363,14 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
     <div class="mpc__feats" id="mpFeats"></div>
     <a class="mpc__learn" href="#" onclick="event.preventDefault();openPlanModal(mPlan)">Learn more about all features</a>
   </div>
+</div>
+
+<div class="trial-banner" id="trialBanner">
+  <div class="trial-banner__badge" id="trialBadge"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span id="trialBadgeText">Limited Time</span></div>
+  <div class="trial-banner__title" id="trialTitle">Try <span>Full Access</span> free for 3 days</div>
+  <div class="trial-banner__desc" id="trialDesc">See unblurred results, source URLs, and full website details — no credit card needed. Experience the full power of Protevio before you commit.</div>
+  <button class="trial-banner__btn" id="trialBtn" onclick="activateTrial()"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span id="trialBtnText">Start Free Trial</span></button>
+  <div class="trial-banner__note" id="trialNote">No credit card required · One trial per account · Full access to all features</div>
 </div>
 
 <div class="free-tier"><div><div class="free-tier__title">Start with Free</div><div class="free-tier__desc">Try Protevio AI with limited features — no credit card required.</div><div class="free-tier__feats"><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>10 searches/day</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Basic results</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No credit card</span></div></div><a href="signup.html" class="free-tier__btn">Get started free →</a></div>
@@ -791,6 +815,84 @@ async function startCheckout(planKey) {
     alert('Connection error. Please try again.');
     btn.innerHTML = origHTML;
     btn.disabled = false;
+  }
+}
+
+// ===== FREE TRIAL =====
+(async function checkTrial(){
+  const token = localStorage.getItem('protevio_token');
+  if (!token) {
+    const tb = document.getElementById('trialBanner');
+    tb.style.display = 'block';
+    document.getElementById('trialBtn').onclick = () => { window.location.href = 'signup.html'; };
+    document.getElementById('trialBtnText').textContent = 'Sign up to start trial';
+    return;
+  }
+  try {
+    const res = await fetch(API + '/api/trial/status', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const tb = document.getElementById('trialBanner');
+    
+    if (data.plan && data.plan !== 'free') return;
+    
+    tb.style.display = 'block';
+    
+    if (data.trial_active) {
+      tb.className = 'trial-banner trial-banner--active';
+      document.getElementById('trialBadgeText').textContent = 'Trial Active';
+      document.getElementById('trialTitle').innerHTML = '<span>' + data.days_left + ' day' + (data.days_left !== 1 ? 's' : '') + '</span> left on your free trial';
+      document.getElementById('trialDesc').textContent = 'You have full access to all Protevio features. Search results include unblurred photos, source URLs, and website details.';
+      document.getElementById('trialBtnText').textContent = 'Search now';
+      document.getElementById('trialBtn').onclick = () => { window.location.href = '/'; };
+      document.getElementById('trialNote').textContent = 'Subscribe before your trial ends to keep full access';
+    } else if (data.trial_used) {
+      tb.className = 'trial-banner trial-banner--expired';
+      document.getElementById('trialBadgeText').textContent = 'Trial Ended';
+      document.getElementById('trialTitle').innerHTML = 'Your free trial has <span>expired</span>';
+      document.getElementById('trialDesc').textContent = 'Upgrade to a paid plan to continue seeing unblurred results, source URLs, and full access to all features.';
+      document.getElementById('trialBtnText').textContent = 'Choose a plan above';
+      document.getElementById('trialBtn').onclick = () => { window.scrollTo({top: 0, behavior: 'smooth'}); };
+      document.getElementById('trialNote').textContent = 'Plans start at €24.99/month';
+    }
+  } catch(e) {}
+})();
+
+async function activateTrial() {
+  const token = localStorage.getItem('protevio_token');
+  if (!token) { window.location.href = 'signup.html'; return; }
+  const btn = document.getElementById('trialBtn');
+  const origText = document.getElementById('trialBtnText').textContent;
+  document.getElementById('trialBtnText').textContent = 'Activating...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(API + '/api/trial/activate', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await res.json();
+    if (data.success) {
+      const user = JSON.parse(localStorage.getItem('protevio_user') || '{}');
+      user.trial_active = true; user.trial_days_left = 3; user.trial_used = true; user.trial_available = false;
+      localStorage.setItem('protevio_user', JSON.stringify(user));
+      const tb = document.getElementById('trialBanner');
+      tb.className = 'trial-banner trial-banner--active';
+      document.getElementById('trialBadgeText').textContent = 'Trial Active';
+      document.getElementById('trialTitle').innerHTML = '<span>3 days</span> of full access activated!';
+      document.getElementById('trialDesc').textContent = 'You now have full access to all Protevio features. Go search and see unblurred results with source URLs!';
+      document.getElementById('trialBtnText').textContent = 'Start searching →';
+      btn.disabled = false;
+      btn.onclick = () => { window.location.href = '/'; };
+      document.getElementById('trialNote').textContent = 'Your trial expires in 3 days · Subscribe anytime to keep full access';
+    } else {
+      alert(data.error || 'Could not activate trial');
+      document.getElementById('trialBtnText').textContent = origText; btn.disabled = false;
+    }
+  } catch(e) {
+    alert('Connection error. Please try again.');
+    document.getElementById('trialBtnText').textContent = origText; btn.disabled = false;
   }
 }
 
