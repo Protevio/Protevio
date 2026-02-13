@@ -24,7 +24,15 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 *{-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0c0f1a;--accent:#2563eb;--accent-light:#5b9aff;--green:#16a34a;--purple:#a78bfa;--text3:#8891a5;--glass-border:rgba(255,255,255,.08);
+  /* Added --text to match index.html */
+  --text:#f8fafc;
+  --bg:#0c0f1a;
+  --accent:#2563eb;
+  --accent-light:#5b9aff;
+  --green:#16a34a;
+  --purple:#a78bfa;
+  --text3:#8891a5;
+  --glass-border:rgba(255,255,255,.08);
 }
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;background:var(--bg);color:#fff;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -32,9 +40,23 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;padding:14px 40px;z-index:100;background:rgba(12,15,26,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-border)}
-.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav__logo-mark{width:36px;height:36px}.nav__logo-mark svg{width:100%;height:100%}
-.nav__logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.22em;color:var(--text)}
+
+/* Updated Logo Styles to Match Index */
+.nav__logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.nav__logo-mark{width:36px;height:36px}
+.nav__logo-mark svg{width:100%;height:100%}
+.nav__logo-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.55rem;
+  letter-spacing:.22em;
+  color:var(--text);
+}
+
 .nav__links{display:flex;gap:24px;margin:0 auto}
 .nav__link{color:var(--text3);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;position:relative}
 .nav__link:hover{color:#fff}.nav__link--active{color:var(--accent-light)}
@@ -277,7 +299,22 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="bg-gradient"></div>
 
 <nav class="nav">
-  <a href="/" class="nav__logo"><div class="nav__logo-mark"><svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#050608"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg></div><span class="nav__logo-text">PROTEVIO</span></a>
+  <a href="/" class="nav__logo">
+    <div class="nav__logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
+        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
+        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <defs>
+          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
+            <stop offset="0%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#7c4dff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span class="nav__logo-text">PROTEVIO</span>
+  </a>
   <div class="nav__links"><a href="/" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a><a href="pricing.html" class="nav__link nav__link--active">Pricing</a><a href="faq.html" class="nav__link">FAQ</a><a href="blog.html" class="nav__link">Blog</a><a href="contact.html" class="nav__link">Contact</a><a href="opt-out.html" class="nav__link">Opt-Out</a></div>
   <div class="nav__right"><button class="nav__lang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>EN</button><a href="login.html" class="nav__login" id="navAuth"><span>Log In</span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
   <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -292,10 +329,8 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 
 <div class="billing-toggle"><button class="billing-toggle__btn active" data-billing="monthly">Monthly</button><button class="billing-toggle__btn" data-billing="annual">Annually <span class="save">-20%</span></button></div>
 
-<!-- DESKTOP 3 CARDS -->
 <div class="cards-grid" id="desktopCards"></div>
 
-<!-- MOBILE SINGLE CARD -->
 <div class="mobile-pricing">
   <div class="mpc">
     <div class="mpc__name" id="mpName">Open Plus</div>
@@ -314,10 +349,8 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
   </div>
 </div>
 
-<!-- FREE -->
 <div class="free-tier"><div><div class="free-tier__title">Start with Free</div><div class="free-tier__desc">Try Protevio AI with limited features — no credit card required.</div><div class="free-tier__feats"><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>10 searches/day</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Basic results</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No credit card</span></div></div><a href="signup.html" class="free-tier__btn">Get started free →</a></div>
 
-<!-- COMPARE -->
 <div class="compare"><h2 class="compare__title">Compare all features</h2><div class="compare-wrap"><table class="ctbl"><thead><tr><th>Feature</th><th>Free</th><th>Open Plus</th><th>PROtect</th><th>Advanced</th></tr></thead><tbody>
 <tr><td>Daily searches</td><td class="cv">10</td><td class="cv">50</td><td class="cv">75</td><td class="cv">Unlimited</td></tr>
 <tr><td>Face Alerts</td><td class="cn">—</td><td class="cv">5</td><td class="cv">20</td><td class="cv">500</td></tr>
@@ -331,7 +364,6 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <tr><td>Dedicated support</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
 </tbody></table></div></div>
 
-<!-- FAQ -->
 <div class="faq"><h2 class="faq__title">Frequently asked questions</h2><div class="faq-wrap">
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Can I cancel my subscription at any time?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Yes, cancel anytime from your dashboard. Your access continues until the end of the billing period.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What payment methods do you accept?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Visa, Mastercard, Amex, SEPA, iDEAL, Bancontact, and more through our secure payment processor.</div></div>
@@ -341,7 +373,6 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 </div></div>
 </div>
 
-<!-- PROTECT OPTIONS MODAL -->
 <div class="plan-modal-overlay" id="protectModal" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="plan-modal" style="max-width:500px">
     <div class="plan-modal__header">
@@ -389,7 +420,6 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
   </div>
 </div>
 
-<!-- PLAN DETAIL MODAL -->
 <div class="plan-modal-overlay" id="planModal" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="plan-modal">
     <div class="plan-modal__header">
@@ -542,7 +572,7 @@ const PLAN_DETAILS = {
     sections: [
       { title: 'Search & Discovery', icon: 'search', items: [
         {name: '50 searches per day', desc: 'Run up to 50 face searches daily across our entire database of 1.1M+ indexed faces. Each search scans every indexed source instantly.'},
-        {name: 'Full source access', desc: 'See the exact website addresses and direct links to every source image found. Know exactly where your photos appear online.'},
+        {name: 'Full source access', desc: 'See the exact website addresses and direct links to source images found. Know exactly where your photos appear online.'},
         {name: 'Safe Search filter', desc: 'Toggle Safe Search to filter potentially explicit results from your searches.'},
       ]},
       { title: 'Monitoring & Alerts', icon: 'bell', items: [
