@@ -50,7 +50,7 @@ a{color:#5b9aff;text-decoration:none}
 .unlock-btn:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,0,0,.25)}
 .unlock-btn svg{width:16px;height:16px;stroke:#1d4ed8;stroke-width:2;fill:none}
 
-/* ===== TRIAL BANNER (results) ===== */
+/* ===== TRIAL BANNER ===== */
 .trial-bar{background:linear-gradient(135deg,#7c3aed,#6d28d9);display:none}
 .trial-bar__inner{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .trial-bar__text{color:#fff}
@@ -60,7 +60,6 @@ a{color:#5b9aff;text-decoration:none}
 .trial-bar__btn:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(0,0,0,.25)}
 .trial-bar__btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .trial-bar__btn svg{width:16px;height:16px;stroke:#6d28d9;stroke-width:2;fill:none}
-.trial-active-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.2);padding:3px 10px;border-radius:6px;font-size:.72rem;font-weight:700;color:#4ade80;letter-spacing:.03em}
 
 /* ===== GRID ===== */
 .results{max-width:1200px;margin:0 auto;padding:24px 32px}
@@ -235,8 +234,8 @@ a{color:#5b9aff;text-decoration:none}
 <div class="trial-bar" id="trialBar">
   <div class="trial-bar__inner">
     <div class="trial-bar__text">
-      <div class="trial-bar__title" id="trialBarTitle">Want to see all results? Start your <strong>3-day free trial</strong></div>
-      <div class="trial-bar__sub" id="trialBarSub">Full access to source URLs, unblurred photos, and website details — no card required.</div>
+      <div class="trial-bar__title" id="trialBarTitle">Or try <strong>3 days of full access free</strong> — see all results, unblurred</div>
+      <div class="trial-bar__sub" id="trialBarSub">Credit card required · Cancel anytime · €24.99/mo after trial</div>
     </div>
     <button class="trial-bar__btn" id="trialBarBtn">
       <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -346,7 +345,7 @@ const API='https://api.protevio.com/api';
 function encImg(f){if(!f)return '';return API+'/img/'+btoa(f).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
 function getToken(){return localStorage.getItem('protevio_token')}
 
-let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true,currentMatch=null,trialActive=false,trialAvailable=false;
+let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true,currentMatch=null,trialAvailable=false;
 
 // ===== INIT =====
 (async function init(){
@@ -356,45 +355,17 @@ let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true,currentM
     const d=JSON.parse(raw);
     if(Date.now()-d.timestamp>30*60*1000){sessionStorage.removeItem('protevio_results');window.location.href='/';return}
     results=d.results||[];searchId=d.search_id||'';userPlan=d.userPlan||'free';isUnlocked=d.isUnlocked||false;
-    trialActive=d.trialActive||false;
-    isFree=(userPlan==='free')&&!isUnlocked&&!trialActive;
+    isFree=(userPlan==='free')&&!isUnlocked;
     if(d.faceThumb){document.getElementById('faceThumb').src=d.faceThumb}
   }catch(e){window.location.href='/';return}
-
-  // Check trial status from API if we're a free user
-  if (userPlan === 'free' && !isUnlocked) {
-    const token = getToken();
-    if (token) {
-      try {
-        const res = await fetch(API + '/trial/status', { headers: { 'Authorization': 'Bearer ' + token } });
-        if (res.ok) {
-          const ts = await res.json();
-          trialActive = ts.trial_active || false;
-          trialAvailable = ts.trial_available || false;
-          if (trialActive) {
-            isFree = false;
-            // Re-fetch full results if we have trial but got limited results
-            if (results.length && !results[0].url && !results[0].page_url) {
-              try {
-                const rr = await fetch(API + '/search/unlock-results/' + searchId, { headers: { 'Authorization': 'Bearer ' + token } });
-                if (rr.ok) {
-                  const rd = await rr.json();
-                  if (rd.results && rd.results.length) {
-                    results = rd.results;
-                    sessionStorage.setItem('protevio_results', JSON.stringify({
-                      results, search_id: searchId, count: results.length,
-                      userPlan, isUnlocked: false, trialActive: true, timestamp: Date.now()
-                    }));
-                  }
-                }
-              } catch(e) {}
-            }
-          }
-        }
-      } catch(e) {}
-    }
+  // Check trial availability for free users
+  if(isFree){
+    const token=getToken();
+    if(token){try{
+      const res=await fetch(API+'/trial/status',{headers:{'Authorization':'Bearer '+token}});
+      if(res.ok){const ts=await res.json();trialAvailable=ts.trial_available||false}
+    }catch(e){}}
   }
-
   render();
 })();
 
@@ -410,17 +381,13 @@ function render(){
 
   // Plan label
   const pl=document.getElementById('planLabel');
-  if(trialActive){pl.innerHTML='Trial Active <span class="trial-active-badge">⚡ Free Trial</span>';pl.classList.add('info-bar__plan--paid')}
-  else if(!isFree){pl.textContent='Full Access';pl.classList.add('info-bar__plan--paid')}
+  if(!isFree){pl.textContent='Full Access';pl.classList.add('info-bar__plan--paid')}
 
   // Buttons
   if(!isFree)document.getElementById('pdfBtn').style.display='flex';
   if(isFree){
     document.getElementById('unlockBanner').style.display='block';
-    // Show trial banner if available
-    if(trialAvailable){
-      document.getElementById('trialBar').style.display='block';
-    }
+    if(trialAvailable)document.getElementById('trialBar').style.display='block';
   }
 
   // Cards
@@ -512,39 +479,18 @@ document.getElementById('actShare').onclick=()=>{
   })}
 };
 
-// ===== TRIAL ACTIVATION (from results page) =====
-document.getElementById('trialBarBtn').addEventListener('click', async()=>{
+// ===== TRIAL (Stripe checkout) =====
+document.getElementById('trialBarBtn').addEventListener('click',async()=>{
   const token=getToken();
   if(!token){window.location.href='/login.html';return}
   const btn=document.getElementById('trialBarBtn');
-  document.getElementById('trialBarBtnText').textContent='Activating...';
+  document.getElementById('trialBarBtnText').textContent='Redirecting to checkout...';
   btn.disabled=true;
   try{
-    const res=await fetch(API+'/trial/activate',{method:'POST',headers:{'Authorization':'Bearer '+token}});
+    const res=await fetch(API+'/checkout-trial',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'}});
     const data=await res.json();
-    if(data.success){
-      // Update local user
-      const user=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-      user.trial_active=true;user.trial_days_left=3;user.trial_used=true;user.trial_available=false;
-      localStorage.setItem('protevio_user',JSON.stringify(user));
-      // Reload page to re-render with full results
-      trialActive=true;isFree=false;trialAvailable=false;
-      document.getElementById('trialBar').style.display='none';
-      document.getElementById('unlockBanner').style.display='none';
-      // Fetch full results
-      try{
-        const rr=await fetch(API+'/search/unlock-results/'+searchId,{headers:{'Authorization':'Bearer '+token}});
-        if(rr.ok){const rd=await rr.json();if(rd.results&&rd.results.length){results=rd.results;
-          sessionStorage.setItem('protevio_results',JSON.stringify({results,search_id:searchId,count:results.length,userPlan:'free',isUnlocked:false,trialActive:true,timestamp:Date.now()}));
-        }}
-      }catch(e){}
-      // Re-render
-      document.getElementById('grid').innerHTML='';
-      render();
-    }else{
-      alert(data.error||'Could not activate trial');
-      document.getElementById('trialBarBtnText').textContent='Start Free Trial';btn.disabled=false;
-    }
+    if(data.url){window.location.href=data.url}
+    else{alert(data.error||'Could not start trial');document.getElementById('trialBarBtnText').textContent='Start Free Trial';btn.disabled=false}
   }catch(e){alert('Connection error');document.getElementById('trialBarBtnText').textContent='Start Free Trial';btn.disabled=false}
 });
 

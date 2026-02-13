@@ -368,9 +368,9 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="trial-banner" id="trialBanner">
   <div class="trial-banner__badge" id="trialBadge"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span id="trialBadgeText">Limited Time</span></div>
   <div class="trial-banner__title" id="trialTitle">Try <span>Full Access</span> free for 3 days</div>
-  <div class="trial-banner__desc" id="trialDesc">See unblurred results, source URLs, and full website details — no credit card needed. Experience the full power of Protevio before you commit.</div>
-  <button class="trial-banner__btn" id="trialBtn" onclick="activateTrial()"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span id="trialBtnText">Start Free Trial</span></button>
-  <div class="trial-banner__note" id="trialNote">No credit card required · One trial per account · Full access to all features</div>
+  <div class="trial-banner__desc" id="trialDesc">See unblurred results, source URLs, and full website details. Experience the full power of Protevio before you commit.</div>
+  <button class="trial-banner__btn" id="trialBtn" onclick="startTrial()"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span id="trialBtnText">Start Free Trial</span></button>
+  <div class="trial-banner__note" id="trialNote">Credit card required · Cancel anytime · Automatically charges €24.99/mo after 3 days</div>
 </div>
 
 <div class="free-tier"><div><div class="free-tier__title">Start with Free</div><div class="free-tier__desc">Try Protevio AI with limited features — no credit card required.</div><div class="free-tier__feats"><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>10 searches/day</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Basic results</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No credit card</span></div></div><a href="signup.html" class="free-tier__btn">Get started free →</a></div>
@@ -818,81 +818,78 @@ async function startCheckout(planKey) {
   }
 }
 
-// ===== FREE TRIAL =====
+// ===== FREE TRIAL (Stripe-powered) =====
 (async function checkTrial(){
   const token = localStorage.getItem('protevio_token');
   if (!token) {
-    const tb = document.getElementById('trialBanner');
-    tb.style.display = 'block';
-    document.getElementById('trialBtn').onclick = () => { window.location.href = 'signup.html'; };
+    // Not logged in — show banner, redirect to signup
+    document.getElementById('trialBanner').style.display = 'block';
     document.getElementById('trialBtnText').textContent = 'Sign up to start trial';
+    window._trialNoAuth = true;
     return;
   }
   try {
-    const res = await fetch(API + '/api/trial/status', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
+    const res = await fetch(API + '/api/trial/status', { headers: { 'Authorization': 'Bearer ' + token } });
     if (!res.ok) return;
-    const data = await res.json();
+    const d = await res.json();
     const tb = document.getElementById('trialBanner');
-    
-    if (data.plan && data.plan !== 'free') return;
-    
+    if (d.is_paid && !d.trial_active) return; // Paid subscriber, no banner needed
     tb.style.display = 'block';
-    
-    if (data.trial_active) {
+    if (d.trial_active) {
       tb.className = 'trial-banner trial-banner--active';
       document.getElementById('trialBadgeText').textContent = 'Trial Active';
-      document.getElementById('trialTitle').innerHTML = '<span>' + data.days_left + ' day' + (data.days_left !== 1 ? 's' : '') + '</span> left on your free trial';
+      document.getElementById('trialTitle').innerHTML = '<span>' + d.trial_days_left + ' day' + (d.trial_days_left !== 1 ? 's' : '') + '</span> left on your free trial';
       document.getElementById('trialDesc').textContent = 'You have full access to all Protevio features. Search results include unblurred photos, source URLs, and website details.';
       document.getElementById('trialBtnText').textContent = 'Search now';
       document.getElementById('trialBtn').onclick = () => { window.location.href = '/'; };
-      document.getElementById('trialNote').textContent = 'Subscribe before your trial ends to keep full access';
-    } else if (data.trial_used) {
+      document.getElementById('trialNote').textContent = 'Subscribe to a plan above before your trial ends to keep full access';
+    } else if (d.trial_used) {
       tb.className = 'trial-banner trial-banner--expired';
       document.getElementById('trialBadgeText').textContent = 'Trial Ended';
       document.getElementById('trialTitle').innerHTML = 'Your free trial has <span>expired</span>';
-      document.getElementById('trialDesc').textContent = 'Upgrade to a paid plan to continue seeing unblurred results, source URLs, and full access to all features.';
+      document.getElementById('trialDesc').textContent = 'Upgrade to a paid plan to continue seeing unblurred results and source URLs.';
       document.getElementById('trialBtnText').textContent = 'Choose a plan above';
       document.getElementById('trialBtn').onclick = () => { window.scrollTo({top: 0, behavior: 'smooth'}); };
       document.getElementById('trialNote').textContent = 'Plans start at €24.99/month';
     }
-  } catch(e) {}
-})();
-
-async function activateTrial() {
-  const token = localStorage.getItem('protevio_token');
-  if (!token) { window.location.href = 'signup.html'; return; }
-  const btn = document.getElementById('trialBtn');
-  const origText = document.getElementById('trialBtnText').textContent;
-  document.getElementById('trialBtnText').textContent = 'Activating...';
-  btn.disabled = true;
-  try {
-    const res = await fetch(API + '/api/trial/activate', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const data = await res.json();
-    if (data.success) {
-      const user = JSON.parse(localStorage.getItem('protevio_user') || '{}');
-      user.trial_active = true; user.trial_days_left = 3; user.trial_used = true; user.trial_available = false;
-      localStorage.setItem('protevio_user', JSON.stringify(user));
-      const tb = document.getElementById('trialBanner');
+    // else: trial_available — default "Start Free Trial" state
+    // Check for trial=success in URL
+    const params = new URLSearchParams(location.search);
+    if (params.get('trial') === 'success') {
+      history.replaceState({}, '', location.pathname);
       tb.className = 'trial-banner trial-banner--active';
       document.getElementById('trialBadgeText').textContent = 'Trial Active';
       document.getElementById('trialTitle').innerHTML = '<span>3 days</span> of full access activated!';
-      document.getElementById('trialDesc').textContent = 'You now have full access to all Protevio features. Go search and see unblurred results with source URLs!';
+      document.getElementById('trialDesc').textContent = 'Your free trial is now active. Search and see unblurred results with source URLs!';
       document.getElementById('trialBtnText').textContent = 'Start searching →';
-      btn.disabled = false;
-      btn.onclick = () => { window.location.href = '/'; };
-      document.getElementById('trialNote').textContent = 'Your trial expires in 3 days · Subscribe anytime to keep full access';
+      document.getElementById('trialBtn').onclick = () => { window.location.href = '/'; };
+      document.getElementById('trialNote').textContent = 'Your trial expires in 3 days · Cancel anytime from your dashboard';
+    }
+  } catch(e) {}
+})();
+
+async function startTrial() {
+  if (window._trialNoAuth) { window.location.href = 'signup.html'; return; }
+  const token = localStorage.getItem('protevio_token');
+  if (!token) { window.location.href = 'signup.html'; return; }
+  const btn = document.getElementById('trialBtn');
+  document.getElementById('trialBtnText').textContent = 'Redirecting to checkout...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(API + '/api/checkout-trial', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
     } else {
-      alert(data.error || 'Could not activate trial');
-      document.getElementById('trialBtnText').textContent = origText; btn.disabled = false;
+      alert(data.error || 'Could not start trial. Please try again.');
+      document.getElementById('trialBtnText').textContent = 'Start Free Trial'; btn.disabled = false;
     }
   } catch(e) {
     alert('Connection error. Please try again.');
-    document.getElementById('trialBtnText').textContent = origText; btn.disabled = false;
+    document.getElementById('trialBtnText').textContent = 'Start Free Trial'; btn.disabled = false;
   }
 }
 
