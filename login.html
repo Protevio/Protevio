@@ -372,6 +372,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const data = await res.json();
     if (res.ok && data.token) {
       localStorage.setItem('protevio_token', data.token);
+      if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
       window.location.href = '/dashboard';
     } else if (res.status === 403 && data.requires_verification) {
@@ -454,6 +455,7 @@ async function handleGoogleResponse(response) {
     const data = await res.json();
     if (res.ok && data.token) {
       localStorage.setItem('protevio_token', data.token);
+      if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {}));
       window.location.href = '/dashboard';
     } else {
