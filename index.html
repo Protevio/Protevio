@@ -930,6 +930,24 @@ body{
   .nav__lang{display:none !important}
   .nav__login{display:none !important}
 }
+
+/* ===== MINOR WARNING MODAL ===== */
+.minor-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:9999;justify-content:center;align-items:center;padding:20px}
+.minor-modal-bg.open{display:flex}
+.minor-modal{background:#1a1f2e;border:2px solid #dc2626;border-radius:20px;max-width:460px;width:100%;box-shadow:0 30px 80px rgba(220,38,38,.3),0 0 0 1px rgba(220,38,38,.2);position:relative;overflow:hidden}
+.minor-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#dc2626,#ef4444,#dc2626)}
+.minor-modal__icon{width:64px;height:64px;margin:32px auto 16px;background:rgba(220,38,38,.15);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.minor-modal__icon svg{width:32px;height:32px;stroke:#ef4444;stroke-width:2;fill:none}
+.minor-modal__title{font-size:1.3rem;font-weight:800;color:#fca5a5;text-align:center;margin-bottom:8px;padding:0 24px}
+.minor-modal__text{font-size:.88rem;color:#9ca3af;text-align:center;line-height:1.6;padding:0 28px;margin-bottom:20px}
+.minor-modal__text strong{color:#f87171}
+.minor-modal__warning{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);border-radius:12px;padding:16px 20px;margin:0 24px 24px;font-size:.82rem;color:#fca5a5;line-height:1.6}
+.minor-modal__warning b{color:#fff}
+.minor-modal__btn{display:block;width:calc(100% - 48px);margin:0 24px 24px;padding:14px;border-radius:12px;background:#dc2626;color:#fff;border:none;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s}
+.minor-modal__btn:hover{background:#b91c1c}
+.minor-badge{position:absolute;top:4px;right:4px;background:#dc2626;color:#fff;font-size:.56rem;font-weight:800;padding:2px 6px;border-radius:4px;z-index:2;letter-spacing:.03em;text-transform:uppercase}
+.face-thumb--minor{opacity:.5;pointer-events:none;position:relative}
+.face-thumb--minor img{filter:grayscale(.6)}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
@@ -1712,23 +1730,39 @@ function showFaceSelection() {
     const thumb = document.createElement('div');
     thumb.className = 'face-thumb';
     thumb.dataset.faceId = face.id;
+    const isMinor = face.is_minor === true;
+    if(isMinor) thumb.classList.add('face-thumb--minor');
 
     const info = face._totalPhotos > 1 ? ('Photo ' + face._photoIndex + ' · Face ' + (i+1)) : ('Face ' + (i+1));
 
     thumb.innerHTML =
       '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
-      '<div class="face-thumb__info">' + info + '</div>';
+      (isMinor ? '<div class="minor-badge">MINOR</div>' : '') +
+      '<div class="face-thumb__info">' + info + (isMinor ? ' · Under 18' : '') + '</div>';
 
-    thumb.addEventListener('click', () => {
-      document.querySelectorAll('.face-thumb').forEach(t => t.classList.remove('selected'));
-      thumb.classList.add('selected');
-      selectedFaceId = face.id;
-      searchSelectedBtn.disabled = false;
-      searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Continue with this face';
-    });
+    if(!isMinor) {
+      thumb.addEventListener('click', () => {
+        document.querySelectorAll('.face-thumb').forEach(t => t.classList.remove('selected'));
+        thumb.classList.add('selected');
+        selectedFaceId = face.id;
+        searchSelectedBtn.disabled = false;
+        searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Continue with this face';
+      });
+    }
 
     faceGrid.appendChild(thumb);
   });
+
+  // If ALL faces are minors, show warning
+  const allMinors = detectedFaces.every(f => f.is_minor === true);
+  if(allMinors) {
+    searchSelectedBtn.disabled = true;
+    searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#ef4444;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> <span style="color:#fca5a5">Search unavailable — minors detected</span>';
+    const notice = document.createElement('div');
+    notice.style.cssText = 'background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);border-radius:12px;padding:14px 16px;margin-top:16px;font-size:.82rem;color:#fca5a5;line-height:1.5;text-align:center';
+    notice.innerHTML = 'All detected faces appear to be under 18. Protevio does not allow searches involving minors.';
+    faceGrid.parentElement.insertBefore(notice, searchSelectedBtn);
+  }
 }
 
 document.getElementById('backToUpload').addEventListener('click', resetSearch);
@@ -1825,6 +1859,12 @@ async function runSearch() {
 
     if(!res.ok) {
       const errData = await res.json();
+      // Minor detected — show warning modal
+      if(res.status === 451 || errData.error === 'minor_detected') {
+        clearInterval(progInterval);
+        document.getElementById('minorModalBg').classList.add('open');
+        return;
+      }
       statusText.textContent = 'Search failed';
       statusSub.textContent = errData.error || 'Please try again.';
       setTimeout(resetSearch, 3000);
@@ -2307,6 +2347,23 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       </button>
     </div>
     <div class="result-modal__footer">Powered by Protevio AI · Results generated by facial similarity matching</div>
+  </div>
+</div>
+
+<!-- MINOR WARNING MODAL -->
+<div class="minor-modal-bg" id="minorModalBg" onclick="if(event.target===this){this.classList.remove('open');resetSearch()}">
+  <div class="minor-modal">
+    <div class="minor-modal__icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="minor-modal__title">Search Blocked — Minor Detected</div>
+    <div class="minor-modal__text">
+      Our AI has detected that the uploaded photo appears to contain a <strong>person under the age of 18</strong>. Protevio does not allow facial recognition searches involving minors.
+    </div>
+    <div class="minor-modal__warning">
+      <b>This attempt has been logged.</b> Repeated attempts to search for minors will result in account suspension. Protevio takes child safety extremely seriously and cooperates with law enforcement authorities when necessary.
+    </div>
+    <button class="minor-modal__btn" onclick="document.getElementById('minorModalBg').classList.remove('open');resetSearch()">I Understand</button>
   </div>
 </div>
 

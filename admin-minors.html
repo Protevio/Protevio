@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minor Faces Review — Protevio Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#0c0f1a;color:#e2e8f0;min-height:100vh}
+a{color:#5b9aff;text-decoration:none}
+
+/* Header */
+.header{background:#141825;border-bottom:1px solid #1e2538;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.header__title{font-size:1.1rem;font-weight:800;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+.header__title svg{width:22px;height:22px;stroke:#ef4444;stroke-width:2;fill:none}
+.header__back{font-size:.82rem;color:#6b7280;padding:7px 16px;border:1px solid #2a3349;border-radius:8px;background:none;cursor:pointer;font-family:inherit;transition:all .15s}
+.header__back:hover{border-color:#5b9aff;color:#5b9aff}
+
+/* Stats bar */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:24px 32px 0}
+.stat{background:#141825;border:1px solid #1e2538;border-radius:12px;padding:16px}
+.stat__label{font-size:.72rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px}
+.stat__val{font-size:1.6rem;font-weight:800;color:#f1f5f9}
+.stat--danger .stat__val{color:#ef4444}
+.stat--warn .stat__val{color:#f59e0b}
+
+/* Controls */
+.controls{padding:20px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.controls select,.controls input{background:#141825;border:1px solid #2a3349;color:#e2e8f0;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:.85rem}
+.controls select:focus,.controls input:focus{outline:none;border-color:#5b9aff}
+.btn{padding:8px 18px;border-radius:8px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+.btn--primary{background:#2563eb;color:#fff}.btn--primary:hover{background:#1d4ed8}
+.btn--danger{background:#dc2626;color:#fff}.btn--danger:hover{background:#b91c1c}
+.btn--outline{background:none;border:1px solid #2a3349;color:#9ca3af}.btn--outline:hover{border-color:#5b9aff;color:#5b9aff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.selected-count{font-size:.85rem;color:#9ca3af;margin-left:auto}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:12px 32px 32px}
+.face-card{background:#141825;border:1px solid #1e2538;border-radius:12px;overflow:hidden;position:relative;transition:all .15s;cursor:pointer}
+.face-card:hover{border-color:#3a4a60}
+.face-card.selected{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.3)}
+.face-card__check{position:absolute;top:8px;left:8px;width:22px;height:22px;border-radius:6px;border:2px solid #3a4a60;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:2;transition:all .15s}
+.face-card.selected .face-card__check{border-color:#2563eb;background:#2563eb}
+.face-card.selected .face-card__check::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.face-card__age{position:absolute;top:8px;right:8px;background:rgba(220,38,38,.85);color:#fff;font-size:.66rem;font-weight:800;padding:3px 8px;border-radius:5px;z-index:2}
+.face-card__img{width:100%;aspect-ratio:1;object-fit:cover;background:#1a1f2e;display:block}
+.face-card__info{padding:10px 12px}
+.face-card__domain{font-size:.75rem;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.face-card__meta{font-size:.7rem;color:#4b5563;margin-top:3px}
+
+/* Pagination */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px 32px 40px}
+.page-btn{padding:7px 14px;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid #2a3349;background:none;color:#9ca3af;font-family:inherit}
+.page-btn:hover{border-color:#5b9aff;color:#5b9aff}
+.page-btn.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.page-btn:disabled{opacity:.3;cursor:not-allowed}
+
+/* Loading / Empty */
+.loading{text-align:center;padding:80px;color:#6b7280;font-size:.9rem}
+.spinner{width:32px;height:32px;border:3px solid #1e293b;border-top-color:#5b9aff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Confirm modal */
+.confirm-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:1000;justify-content:center;align-items:center}
+.confirm-bg.open{display:flex}
+.confirm{background:#141825;border:1px solid #2a3349;border-radius:16px;max-width:420px;width:90%;padding:28px}
+.confirm__title{font-size:1.1rem;font-weight:800;color:#fca5a5;margin-bottom:8px}
+.confirm__text{font-size:.88rem;color:#9ca3af;line-height:1.6;margin-bottom:20px}
+.confirm__text strong{color:#ef4444}
+.confirm__actions{display:flex;gap:10px;justify-content:flex-end}
+
+@media(max-width:600px){
+  .stats{padding:16px 16px 0;grid-template-columns:repeat(2,1fr)}
+  .controls{padding:16px}
+  .grid{padding:8px 16px 32px;grid-template-columns:repeat(2,1fr);gap:8px}
+  .header{padding:14px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header__title">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Minor Faces Review Tool
+  </div>
+  <button class="header__back" onclick="window.location.href='/dashboard.html'">← Back to Dashboard</button>
+</div>
+
+<div class="stats" id="statsBar">
+  <div class="loading"><div class="spinner"></div>Loading stats...</div>
+</div>
+
+<div class="controls" id="controls" style="display:none">
+  <label style="font-size:.82rem;color:#9ca3af">Max age:</label>
+  <select id="ageFilter" onchange="loadFaces()">
+    <option value="13">Under 13</option>
+    <option value="16">Under 16</option>
+    <option value="18" selected>Under 18</option>
+  </select>
+  <button class="btn btn--outline" onclick="selectAll()">Select All</button>
+  <button class="btn btn--outline" onclick="deselectAll()">Deselect All</button>
+  <button class="btn btn--danger" id="deleteBtn" disabled onclick="confirmDelete()">Delete Selected (0)</button>
+  <span class="selected-count" id="selectedCount"></span>
+</div>
+
+<div class="grid" id="faceGrid">
+  <div class="loading"><div class="spinner"></div>Loading faces...</div>
+</div>
+
+<div class="pagination" id="pagination" style="display:none"></div>
+
+<!-- Confirm Modal -->
+<div class="confirm-bg" id="confirmBg" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="confirm">
+    <div class="confirm__title" id="confirmTitle">Confirm Deletion</div>
+    <div class="confirm__text" id="confirmText"></div>
+    <div class="confirm__actions">
+      <button class="btn btn--outline" onclick="document.getElementById('confirmBg').classList.remove('open')">Cancel</button>
+      <button class="btn btn--danger" id="confirmBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://api.protevio.com/api';
+const token = localStorage.getItem('protevio_token');
+if(!token) window.location.href = '/login.html';
+
+let currentPage = 1;
+let selectedIds = new Set();
+let allFaces = [];
+
+async function apiFetch(url) {
+  const res = await fetch(API + url, { headers: { 'Authorization': 'Bearer ' + token } });
+  if(res.status === 403) { alert('Admin access required'); window.location.href = '/'; return null; }
+  return res.ok ? await res.json() : null;
+}
+
+// ===== STATS =====
+async function loadStats() {
+  const data = await apiFetch('/admin/minor-faces/stats');
+  if(!data) return;
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat stat--danger"><div class="stat__label">Under 13</div><div class="stat__val">${data.under_13.toLocaleString()}</div></div>
+    <div class="stat stat--danger"><div class="stat__label">Age 13-15</div><div class="stat__val">${data.age_13_15.toLocaleString()}</div></div>
+    <div class="stat stat--warn"><div class="stat__label">Age 16-17</div><div class="stat__val">${data.age_16_17.toLocaleString()}</div></div>
+    <div class="stat"><div class="stat__label">Total Minors</div><div class="stat__val">${data.minor_total.toLocaleString()}</div></div>
+    <div class="stat"><div class="stat__label">Adults (18+)</div><div class="stat__val">${data.adult.toLocaleString()}</div></div>
+    <div class="stat"><div class="stat__label">Total Faces</div><div class="stat__val">${data.total.toLocaleString()}</div></div>
+  `;
+}
+
+// ===== FACE GRID =====
+async function loadFaces(page) {
+  currentPage = page || 1;
+  selectedIds.clear();
+  updateDeleteBtn();
+  const maxAge = document.getElementById('ageFilter').value;
+  const grid = document.getElementById('faceGrid');
+  grid.innerHTML = '<div class="loading"><div class="spinner"></div>Loading faces...</div>';
+  
+  const data = await apiFetch(`/admin/minor-faces?page=${currentPage}&per_page=60&max_age=${maxAge}`);
+  if(!data) return;
+  
+  allFaces = data.faces;
+  document.getElementById('controls').style.display = 'flex';
+  document.getElementById('selectedCount').textContent = `${data.total.toLocaleString()} faces total · Page ${data.page} of ${data.total_pages}`;
+  
+  if(!allFaces.length) {
+    grid.innerHTML = '<div class="loading" style="grid-column:1/-1">No faces found matching this filter.</div>';
+    document.getElementById('pagination').style.display = 'none';
+    return;
+  }
+  
+  grid.innerHTML = '';
+  allFaces.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'face-card';
+    card.dataset.id = f.face_id;
+    const imgUrl = API + '/img/' + btoa(f.filename).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    card.innerHTML = `
+      <div class="face-card__check"></div>
+      <div class="face-card__age">Age ~${f.age}</div>
+      <img class="face-card__img" src="${imgUrl}" alt="Face" loading="lazy"
+        onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%231a1f2e%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%234b5563%22 font-size=%2210%22>No img</text></svg>'">
+      <div class="face-card__info">
+        <div class="face-card__domain">${f.domain || 'Unknown'}</div>
+        <div class="face-card__meta">${f.gender || ''} · ${f.created_at ? f.created_at.slice(0,10) : ''}</div>
+      </div>`;
+    card.addEventListener('click', () => toggleSelect(card, f.face_id));
+    grid.appendChild(card);
+  });
+  
+  // Pagination
+  buildPagination(data.page, data.total_pages);
+}
+
+function toggleSelect(card, id) {
+  if(selectedIds.has(id)) { selectedIds.delete(id); card.classList.remove('selected'); }
+  else { selectedIds.add(id); card.classList.add('selected'); }
+  updateDeleteBtn();
+}
+
+function selectAll() {
+  allFaces.forEach(f => selectedIds.add(f.face_id));
+  document.querySelectorAll('.face-card').forEach(c => c.classList.add('selected'));
+  updateDeleteBtn();
+}
+
+function deselectAll() {
+  selectedIds.clear();
+  document.querySelectorAll('.face-card').forEach(c => c.classList.remove('selected'));
+  updateDeleteBtn();
+}
+
+function updateDeleteBtn() {
+  const btn = document.getElementById('deleteBtn');
+  const n = selectedIds.size;
+  btn.disabled = n === 0;
+  btn.textContent = `Delete Selected (${n})`;
+}
+
+function buildPagination(current, total) {
+  const el = document.getElementById('pagination');
+  if(total <= 1) { el.style.display = 'none'; return; }
+  el.style.display = 'flex';
+  let html = `<button class="page-btn" ${current<=1?'disabled':''} onclick="loadFaces(${current-1})">← Prev</button>`;
+  const start = Math.max(1, current - 3);
+  const end = Math.min(total, current + 3);
+  if(start > 1) html += `<button class="page-btn" onclick="loadFaces(1)">1</button>`;
+  if(start > 2) html += `<span style="color:#4b5563">…</span>`;
+  for(let i = start; i <= end; i++) {
+    html += `<button class="page-btn ${i===current?'active':''}" onclick="loadFaces(${i})">${i}</button>`;
+  }
+  if(end < total-1) html += `<span style="color:#4b5563">…</span>`;
+  if(end < total) html += `<button class="page-btn" onclick="loadFaces(${total})">${total}</button>`;
+  html += `<button class="page-btn" ${current>=total?'disabled':''} onclick="loadFaces(${current+1})">Next →</button>`;
+  el.innerHTML = html;
+}
+
+// ===== DELETE =====
+function confirmDelete() {
+  const n = selectedIds.size;
+  if(!n) return;
+  document.getElementById('confirmText').innerHTML = `You are about to permanently delete <strong>${n} face${n>1?'s':''}</strong> from the database. This cannot be undone. Are you sure?`;
+  document.getElementById('confirmBtn').onclick = doDelete;
+  document.getElementById('confirmBg').classList.add('open');
+}
+
+async function doDelete() {
+  const btn = document.getElementById('confirmBtn');
+  btn.textContent = 'Deleting...'; btn.disabled = true;
+  try {
+    const res = await fetch(API + '/admin/minor-faces/delete', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ face_ids: Array.from(selectedIds) })
+    });
+    const data = await res.json();
+    if(data.success) {
+      document.getElementById('confirmBg').classList.remove('open');
+      loadStats();
+      loadFaces(currentPage);
+    } else {
+      alert(data.error || 'Delete failed');
+    }
+  } catch(e) { alert('Connection error'); }
+  btn.textContent = 'Delete'; btn.disabled = false;
+}
+
+// ===== INIT =====
+loadStats();
+loadFaces();
+</script>
+</body>
+</html>
