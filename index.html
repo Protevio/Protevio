@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 *{-webkit-tap-highlight-color:transparent}
@@ -1183,6 +1184,10 @@ body{
           <input type="checkbox" id="termsCheckbox" style="width:20px;height:20px;accent-color:var(--accent);cursor:pointer;">
           <span style="font-size:.9rem;color:var(--text-secondary);">I agree to the Terms of Service and Privacy Policy</span>
         </label>
+        <!-- Cloudflare Turnstile CAPTCHA (renders only if enabled) -->
+        <div id="turnstileBox" style="display:none;margin-bottom:16px;min-height:65px;display:flex;align-items:center;justify-content:center;">
+          <div id="turnstileWidget"></div>
+        </div>
         <button id="agreeSearchBtn" class="step-next-btn" disabled style="width:100%;background:linear-gradient(135deg,#4ade80,#22c55e);">
           <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           Agree & Search
@@ -1530,6 +1535,24 @@ let selectedFaceId = null;
 let userPlan = 'free';
 let isSearchUnlocked = false;
 
+// Turnstile CAPTCHA state
+let turnstileEnabled = false;
+let turnstileSiteKey = '';
+let turnstileToken = '';
+let turnstileWidgetId = null;
+
+// Load CAPTCHA config from backend
+(async function loadConfig() {
+  try {
+    const res = await fetch(API + '/config');
+    if(res.ok) {
+      const cfg = await res.json();
+      turnstileEnabled = cfg.captcha_enabled || false;
+      turnstileSiteKey = cfg.captcha_site_key || '';
+    }
+  } catch(e){}
+})();
+
 // Get user plan
 try {
   const u = JSON.parse(localStorage.getItem('protevio_user') || '{}');
@@ -1592,6 +1615,48 @@ try {
 })();
 
 function getToken() { return localStorage.getItem('protevio_token'); }
+
+// ===== TOKEN AUTO-REFRESH =====
+// Access tokens expire in 2h. This refreshes them automatically so users don't get logged out.
+(function tokenRefreshLoop() {
+  async function refreshIfNeeded() {
+    const token = localStorage.getItem('protevio_token');
+    const refreshToken = localStorage.getItem('protevio_refresh');
+    if(!token || !refreshToken) return;
+    
+    // Decode JWT to check expiry (no verification needed client-side)
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiresAt = payload.exp * 1000; // ms
+      const now = Date.now();
+      const timeLeft = expiresAt - now;
+      
+      // Refresh if less than 15 minutes left
+      if(timeLeft > 15 * 60 * 1000) return;
+      
+      const res = await fetch(API + '/auth/refresh', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({refresh_token: refreshToken})
+      });
+      
+      if(res.ok) {
+        const data = await res.json();
+        localStorage.setItem('protevio_token', data.token);
+        if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
+      } else if(res.status === 401) {
+        // Refresh token expired — must re-login
+        localStorage.removeItem('protevio_token');
+        localStorage.removeItem('protevio_refresh');
+        localStorage.removeItem('protevio_user');
+      }
+    } catch(e) {}
+  }
+  
+  // Check every 5 minutes
+  refreshIfNeeded();
+  setInterval(refreshIfNeeded, 5 * 60 * 1000);
+})();
 
 function hideAll() {
   uploadBox.style.display = 'none';
@@ -1778,6 +1843,7 @@ function showTermsStep() {
   termsStep.style.display = 'block';
   termsCheckbox.checked = false;
   agreeSearchBtn.disabled = true;
+  turnstileToken = '';
 
   const face = detectedFaces.find(f => f.id === selectedFaceId);
   if(face) {
@@ -1786,13 +1852,42 @@ function showTermsStep() {
       'Face detected' +
       (face.confidence ? ' · ' + Math.round(face.confidence * 100) + '% confidence' : '');
   }
+
+  // Render Turnstile CAPTCHA if enabled
+  const box = document.getElementById('turnstileBox');
+  if(turnstileEnabled && turnstileSiteKey && typeof turnstile !== 'undefined') {
+    box.style.display = 'flex';
+    // Remove old widget if exists
+    if(turnstileWidgetId !== null) {
+      try { turnstile.remove(turnstileWidgetId); } catch(e){}
+      turnstileWidgetId = null;
+    }
+    turnstileWidgetId = turnstile.render('#turnstileWidget', {
+      sitekey: turnstileSiteKey,
+      theme: 'dark',
+      callback: function(token) {
+        turnstileToken = token;
+        updateAgreeBtn();
+      },
+      'expired-callback': function() {
+        turnstileToken = '';
+        updateAgreeBtn();
+      }
+    });
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function updateAgreeBtn() {
+  const termsOk = termsCheckbox.checked;
+  const captchaOk = !turnstileEnabled || turnstileToken;
+  agreeSearchBtn.disabled = !(termsOk && captchaOk);
 }
 
 document.getElementById('backToFaces').addEventListener('click', showFaceSelection);
 
-termsCheckbox.addEventListener('change', () => {
-  agreeSearchBtn.disabled = !termsCheckbox.checked;
-});
+termsCheckbox.addEventListener('change', updateAgreeBtn);
 
 agreeSearchBtn.addEventListener('click', () => {
   if(!termsCheckbox.checked || !selectedFaceId) return;
@@ -1849,7 +1944,7 @@ async function runSearch() {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ faces: [selectedFaceId], safe_search: safeSearch, deep_search: deepSearch })
+      body: JSON.stringify({ faces: [selectedFaceId], safe_search: safeSearch, deep_search: deepSearch, captcha_token: turnstileToken || '' })
     });
 
     clearInterval(progInterval);
@@ -1863,6 +1958,35 @@ async function runSearch() {
       if(res.status === 451 || errData.error === 'minor_detected') {
         clearInterval(progInterval);
         document.getElementById('minorModalBg').classList.add('open');
+        return;
+      }
+      // Face data expired — need to re-upload
+      if(res.status === 410) {
+        statusText.textContent = 'Session expired';
+        statusSub.textContent = 'Please upload your photo again.';
+        setTimeout(resetSearch, 3000);
+        return;
+      }
+      // CAPTCHA failed — go back to terms step to retry
+      if(res.status === 403 && errData.captcha_required) {
+        statusText.textContent = 'Verification failed';
+        statusSub.textContent = 'Please complete the CAPTCHA and try again.';
+        turnstileToken = '';
+        setTimeout(() => showTermsStep(), 2000);
+        return;
+      }
+      // Service unavailable (DB down)
+      if(res.status === 503) {
+        statusText.textContent = 'Service busy';
+        statusSub.textContent = 'Our servers are under heavy load. Please try again in a few seconds.';
+        setTimeout(resetSearch, 5000);
+        return;
+      }
+      // Rate limited
+      if(res.status === 429) {
+        statusText.textContent = 'Too many requests';
+        statusSub.textContent = 'Please wait a moment before searching again.';
+        setTimeout(resetSearch, 5000);
         return;
       }
       statusText.textContent = 'Search failed';
