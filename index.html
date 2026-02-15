@@ -235,6 +235,13 @@ body{
   0%,100%{opacity:1;transform:scale(1)}
   50%{opacity:.6;transform:scale(.9)}
 }
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
 .hero__title{
   font-size:2.85rem;
   font-weight:800;
@@ -1418,7 +1425,7 @@ body{
 .face-thumb img{width:100%;height:100%;object-fit:cover}
 .face-thumb:hover{border-color:var(--border-light);transform:scale(1.03)}
 .face-thumb.selected{border-color:var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3)}
-.face-thumb.selected::after{content:'✓';position:absolute;top:6px;right:6px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.face-thumb.selected::after{content:attr(data-sel-num);position:absolute;top:6px;right:6px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
 .face-thumb__info{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.7rem;color:#fff}
 /* RESULT CARDS */
 .result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s;position:relative;cursor:pointer}
@@ -1531,7 +1538,7 @@ const termsCheckbox = document.getElementById('termsCheckbox');
 const upgradeOverlay = document.getElementById('upgradeOverlay');
 
 let detectedFaces = [];
-let selectedFaceId = null;
+let selectedFaceIds = [];
 let userPlan = 'free';
 let isSearchUnlocked = false;
 
@@ -1676,7 +1683,7 @@ function resetSearch() {
   upgradeOverlay.style.display = 'none';
   fileInput.value = '';
   detectedFaces = [];
-  selectedFaceId = null;
+  selectedFaceIds = [];
   termsCheckbox.checked = false;
   agreeSearchBtn.disabled = true;
 }
@@ -1781,13 +1788,35 @@ function showFaceSelection() {
   hideAll();
   faceSelection.style.display = 'block';
   faceGrid.innerHTML = '';
-  selectedFaceId = null;
+  selectedFaceIds = [];
   searchSelectedBtn.disabled = true;
-  searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select a face to continue';
+  searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select face(s) to continue';
 
   // Update count text
   const countText = faceSelection.querySelector('p');
-  if(countText) countText.textContent = 'We detected ' + detectedFaces.length + ' face' + (detectedFaces.length > 1 ? 's' : '') + '. Tap one to search for it.';
+  if(countText) countText.textContent = 'We detected ' + detectedFaces.length + ' face' + (detectedFaces.length > 1 ? 's' : '') + '. Select up to 5 of the same person for better accuracy.';
+
+  function updateSelectionUI() {
+    const count = selectedFaceIds.length;
+    // Update number badges on all thumbs
+    document.querySelectorAll('.face-thumb').forEach(t => {
+      const fid = t.dataset.faceId;
+      const idx = selectedFaceIds.indexOf(fid);
+      if(idx > -1) {
+        t.dataset.selNum = idx + 1;
+      } else {
+        t.dataset.selNum = '';
+      }
+    });
+    if(count === 0) {
+      searchSelectedBtn.disabled = true;
+      searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select face(s) to continue';
+    } else {
+      searchSelectedBtn.disabled = false;
+      const label = count === 1 ? 'Continue with 1 face' : 'Continue with ' + count + ' faces (better accuracy)';
+      searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ' + label;
+    }
+  }
 
   detectedFaces.forEach((face, i) => {
     const thumb = document.createElement('div');
@@ -1805,11 +1834,22 @@ function showFaceSelection() {
 
     if(!isMinor) {
       thumb.addEventListener('click', () => {
-        document.querySelectorAll('.face-thumb').forEach(t => t.classList.remove('selected'));
-        thumb.classList.add('selected');
-        selectedFaceId = face.id;
-        searchSelectedBtn.disabled = false;
-        searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Continue with this face';
+        const idx = selectedFaceIds.indexOf(face.id);
+        if(idx > -1) {
+          // Deselect
+          selectedFaceIds.splice(idx, 1);
+          thumb.classList.remove('selected');
+        } else if(selectedFaceIds.length < 5) {
+          // Select
+          selectedFaceIds.push(face.id);
+          thumb.classList.add('selected');
+        } else {
+          // Max 5 — shake the button
+          searchSelectedBtn.style.animation = 'none';
+          searchSelectedBtn.offsetHeight;
+          searchSelectedBtn.style.animation = 'shake 0.4s ease';
+        }
+        updateSelectionUI();
       });
     }
 
@@ -1831,7 +1871,7 @@ function showFaceSelection() {
 document.getElementById('backToUpload').addEventListener('click', resetSearch);
 
 searchSelectedBtn.addEventListener('click', () => {
-  if(!selectedFaceId) return;
+  if(!selectedFaceIds.length) return;
   showTermsStep();
 });
 
@@ -1843,11 +1883,12 @@ function showTermsStep() {
   agreeSearchBtn.disabled = true;
   turnstileToken = '';
 
-  const face = detectedFaces.find(f => f.id === selectedFaceId);
+  const face = detectedFaces.find(f => f.id === selectedFaceIds[0]);
   if(face) {
     document.querySelector('#termsPreview img').src = face.thumbnail;
+    const countLabel = selectedFaceIds.length > 1 ? selectedFaceIds.length + ' faces selected · ' : '';
     document.getElementById('termsDetection').textContent =
-      'Face detected' +
+      countLabel + 'Face detected' +
       (face.confidence ? ' · ' + Math.round(face.confidence * 100) + '% confidence' : '');
   }
 
@@ -1888,7 +1929,7 @@ document.getElementById('backToFaces').addEventListener('click', showFaceSelecti
 termsCheckbox.addEventListener('change', updateAgreeBtn);
 
 agreeSearchBtn.addEventListener('click', () => {
-  if(!termsCheckbox.checked || !selectedFaceId) return;
+  if(!termsCheckbox.checked || !selectedFaceIds.length) return;
   runSearch();
 });
 
@@ -1908,17 +1949,18 @@ async function runSearch() {
   // Show face thumbnail in status
   const thumb = document.getElementById('statusThumb');
   const thumbImg = document.getElementById('statusThumbImg');
-  const selImg = document.querySelector('#faceGrid .face-thumb.selected img');
-  if(selImg) { thumbImg.src = selImg.src; thumb.style.display = 'block'; }
+  const selThumb = selectedFaceIds[0] ? detectedFaces.find(f => f.id === selectedFaceIds[0]) : null;
+  if(selThumb) { thumbImg.src = selThumb.thumbnail; thumb.style.display = 'block'; }
 
   const safeSearch = document.getElementById('safeSearchToggle').classList.contains('on');
   const deepSearch = document.getElementById('deepSearchToggle').classList.contains('on');
 
   // Animate progress
   updateProgress(0);
+  const multiLabel = selectedFaceIds.length > 1 ? ' (' + selectedFaceIds.length + ' photos)' : '';
   const steps = [
-    {pct: 15, text: 'Analyzing face...', sub: 'Extracting facial features'},
-    {pct: 35, text: 'Processing...', sub: 'Encoding biometric signature'},
+    {pct: 15, text: 'Analyzing face' + multiLabel + '...', sub: 'Extracting facial features'},
+    {pct: 35, text: 'Processing...', sub: selectedFaceIds.length > 1 ? 'Averaging embeddings for better accuracy' : 'Encoding biometric signature'},
     {pct: 55, text: 'Searching database...', sub: 'Comparing against 1M+ indexed faces'},
     {pct: 75, text: 'Matching results...', sub: 'Finding similar faces'},
     {pct: 90, text: 'Almost done...', sub: 'Ranking matches by similarity'},
@@ -1942,7 +1984,7 @@ async function runSearch() {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ faces: [selectedFaceId], safe_search: safeSearch, deep_search: deepSearch, captcha_token: turnstileToken || '' })
+      body: JSON.stringify({ faces: selectedFaceIds, safe_search: safeSearch, deep_search: deepSearch, captcha_token: turnstileToken || '' })
     });
 
     clearInterval(progInterval);
@@ -1956,6 +1998,14 @@ async function runSearch() {
       if(res.status === 451 || errData.error === 'minor_detected') {
         clearInterval(progInterval);
         document.getElementById('minorModalBg').classList.add('open');
+        return;
+      }
+      // Different faces selected — go back to selection
+      if(errData.error === 'different_faces') {
+        clearInterval(progInterval);
+        statusText.textContent = 'Different people detected';
+        statusSub.textContent = errData.message || 'Please select photos of the same person.';
+        setTimeout(showFaceSelection, 2500);
         return;
       }
       // Face data expired — need to re-upload
@@ -2006,14 +2056,15 @@ async function runSearch() {
     const searchData = await res.json();
     
     // Store results and redirect to dedicated results page
-    const faceThumbEl = document.querySelector('#faceGrid .face-thumb.selected img');
+    const firstSelectedFace = detectedFaces.find(f => f.id === selectedFaceIds[0]);
+    const faceThumbSrc = firstSelectedFace ? firstSelectedFace.thumbnail : '';
     sessionStorage.setItem('protevio_results', JSON.stringify({
       results: searchData.results || [],
       search_id: searchData.search_id || '',
       count: searchData.count || 0,
       userPlan: userPlan,
       isUnlocked: isSearchUnlocked,
-      faceThumb: faceThumbEl ? faceThumbEl.src : '',
+      faceThumb: faceThumbSrc,
       timestamp: Date.now()
     }));
     
@@ -2041,7 +2092,7 @@ async function runSearch() {
       searchResults.innerHTML = `
         <div style="text-align:center;padding:40px 20px;">
           <div style="width:80px;height:80px;margin:0 auto 24px;border-radius:50%;overflow:hidden;border:3px solid var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3);">
-            <img src="${faceThumbEl ? faceThumbEl.src : ''}" style="width:100%;height:100%;object-fit:cover;" alt="">
+            <img src="${faceThumbSrc}" style="width:100%;height:100%;object-fit:cover;" alt="">
           </div>
           <div style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">
             ${matchCount}
