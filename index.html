@@ -1713,7 +1713,6 @@ document.addEventListener('paste', (e) => {
 
 async function handleFiles(fileList) {
   const token = getToken();
-  if(!token) { window.location.href = '/login'; return; }
 
   // Filter valid images, max 5
   const validFiles = Array.from(fileList).filter(f => f.type.startsWith('image/')).slice(0, 5);
@@ -1742,7 +1741,6 @@ async function handleFiles(fileList) {
         body: formData
       });
 
-      if(res.status === 401) { window.location.href = '/login'; return; }
       const data = await res.json();
 
       if(res.ok && data.faces && data.faces.length > 0) {
