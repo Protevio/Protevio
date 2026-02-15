@@ -2020,6 +2020,71 @@ async function runSearch() {
     }));
     
     await new Promise(r => setTimeout(r, 400));
+
+    // GUEST WALL: If not logged in, show signup prompt instead of results
+    if(!getToken()) {
+      const matchCount = searchData.count || 0;
+      hideAll();
+      searchResults.style.display = 'block';
+      
+      // No results — just show no matches, no signup wall
+      if(matchCount === 0) {
+        searchResults.innerHTML = `
+          <div style="text-align:center;padding:60px 20px;">
+            <svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--text-muted);stroke-width:1.5;fill:none;margin-bottom:16px;opacity:.5;"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:8px;">No Matches Found</h2>
+            <p style="color:var(--text-muted);margin-bottom:24px;">We didn't find any matching faces in our database. Try a clearer photo.</p>
+            <button onclick="resetSearch()" style="padding:12px 32px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem;">Try Another Search</button>
+          </div>
+        `;
+        return;
+      }
+      
+      searchResults.innerHTML = `
+        <div style="text-align:center;padding:40px 20px;">
+          <div style="width:80px;height:80px;margin:0 auto 24px;border-radius:50%;overflow:hidden;border:3px solid var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3);">
+            <img src="${faceThumbEl ? faceThumbEl.src : ''}" style="width:100%;height:100%;object-fit:cover;" alt="">
+          </div>
+          <div style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">
+            ${matchCount}
+          </div>
+          <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:8px;">Match${matchCount !== 1 ? 'es' : ''} Found</h2>
+          <p style="color:var(--text-muted);margin-bottom:32px;font-size:.95rem;line-height:1.6;">
+            We found <strong style="color:var(--accent);">${matchCount} face match${matchCount !== 1 ? 'es' : ''}</strong> across our database of 1M+ indexed faces.<br>
+            Create a free account to see where your face appears online.
+          </p>
+          <a href="/signup.html?redirect=results" style="display:inline-block;padding:16px 48px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border-radius:14px;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 24px rgba(91,154,255,.4);transition:all .3s;" 
+             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(91,154,255,.5)'"
+             onmouseout="this.style.transform='';this.style.boxShadow='0 6px 24px rgba(91,154,255,.4)'">
+            Create Free Account
+          </a>
+          <p style="margin-top:16px;font-size:.82rem;color:var(--text-muted);">
+            Already have an account? <a href="/login.html?redirect=results" style="color:var(--accent);text-decoration:none;font-weight:600;">Log in</a>
+          </p>
+          <div style="margin-top:32px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);stroke-width:2;fill:none;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Free to search
+            </span>
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);stroke-width:2;fill:none;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              10 searches/day
+            </span>
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);stroke-width:2;fill:none;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              No credit card needed
+            </span>
+          </div>
+          <button onclick="resetSearch()" style="margin-top:24px;padding:10px 24px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:10px;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;"
+                  onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--text)'"
+                  onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">
+            ← Try another photo
+          </button>
+        </div>
+      `;
+      return;
+    }
+
     window.location.href = '/results.html';
 
   } catch(err) {

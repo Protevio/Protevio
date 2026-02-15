@@ -263,6 +263,7 @@ body{
 
 <script>
 const API = 'https://api.protevio.com/api';
+const _redir = new URLSearchParams(window.location.search).get('redirect');
 
 // Password strength indicator
 document.getElementById('password').addEventListener('input', function(e) {
@@ -317,19 +318,21 @@ document.getElementById('signupForm').addEventListener('submit', async function(
       if (data.requires_verification) {
         // Email verification required — redirect to check-email page
         localStorage.setItem('protevio_verify_email', email);
-        window.location.href = '/check-email?email=' + encodeURIComponent(email);
+        const redirParam = _redir ? '&redirect=' + _redir : '';
+        window.location.href = '/check-email?email=' + encodeURIComponent(email) + redirParam;
       } else if (data.token) {
         localStorage.setItem('protevio_token', data.token);
         if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
         localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
-        window.location.href = '/login';
+        window.location.href = _redir === 'results' ? '/results.html' : '/login';
       } else {
-        window.location.href = '/login';
+        window.location.href = _redir === 'results' ? '/login.html?redirect=results' : '/login';
       }
     } else if (res.status === 403 && data.requires_verification) {
       // Account exists but not verified
       localStorage.setItem('protevio_verify_email', email);
-      window.location.href = '/check-email?email=' + encodeURIComponent(email);
+      const redirParam = _redir ? '&redirect=' + _redir : '';
+      window.location.href = '/check-email?email=' + encodeURIComponent(email) + redirParam;
     } else {
       showError(data.error || 'Registration failed. Try a different email.');
     }
@@ -405,7 +408,7 @@ async function handleGoogleResponse(response) {
       localStorage.setItem('protevio_token', data.token);
         if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {}));
-      window.location.href = '/dashboard';
+      window.location.href = _redir === 'results' ? '/results.html' : '/dashboard';
     } else {
       showError(data.error || 'Google sign-up failed');
     }

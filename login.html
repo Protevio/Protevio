@@ -351,6 +351,7 @@ body{
 
 <script>
 const API = 'https://api.protevio.com/api';
+const _redir = new URLSearchParams(window.location.search).get('redirect');
 
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -374,7 +375,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       localStorage.setItem('protevio_token', data.token);
       if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
-      window.location.href = '/dashboard';
+      window.location.href = _redir === 'results' ? '/results.html' : '/dashboard';
     } else if (res.status === 403 && data.requires_verification) {
       localStorage.setItem('protevio_verify_email', data.email || email);
       window.location.href = '/check-email?email=' + encodeURIComponent(data.email || email);
@@ -457,7 +458,7 @@ async function handleGoogleResponse(response) {
       localStorage.setItem('protevio_token', data.token);
       if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {}));
-      window.location.href = '/dashboard';
+      window.location.href = _redir === 'results' ? '/results.html' : '/dashboard';
     } else {
       showError(data.error || 'Google sign-in failed');
     }
