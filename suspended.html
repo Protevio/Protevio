@@ -13,20 +13,18 @@ body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background: #08090f;
     color: #e2e8f0;
+    /* This ensures full height but allows scrolling */
     min-height: 100vh;
-    min-height: 100dvh; /* Better mobile support */
+    min-height: 100dvh; 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    /* Removed overflow:hidden to allow scrolling on small screens */
-    overflow-x: hidden; 
-    padding: 20px; /* Crucial for mobile edge spacing */
+    overflow-x: hidden;
+    /* IMPORTANT: Padding prevents content from touching edges */
+    padding: 40px 20px 20px; 
 }
 
 /* --- BACKGROUND FX --- */
-/* Fixed position prevents background from scrolling with content */
 .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
 
 .bg-pulse {
@@ -52,23 +50,25 @@ body {
 
 @keyframes dangerPulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
 
-/* --- CONTAINER --- */
+/* --- CONTAINER (The Safe Center Fix) --- */
 .container {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 500px; /* Optimal reading width */
+    max-width: 500px;
     text-align: center;
     animation: fadeUp 0.8s ease-out;
-    margin: auto; /* Centers vertically if height allows, scrolls if not */
+    /* This is the magic fix: margin: auto centers vertically AND horizontally,
+       but safely falls back to top-align if content overflows. */
+    margin: auto; 
 }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- ELEMENTS --- */
-.shield { width: 100px; height: 100px; margin: 0 auto 28px; position: relative; }
+.shield { width: 90px; height: 90px; margin: 0 auto 24px; position: relative; }
 .shield__icon { width: 100%; height: 100%; animation: shieldPulse 2s ease-in-out infinite; }
 @keyframes shieldPulse { 0%, 100% { filter: drop-shadow(0 0 20px rgba(220,38,38,0.3)); } 50% { filter: drop-shadow(0 0 40px rgba(220,38,38,0.5)); } }
-.shield__x { position: absolute; top: 50%; left: 50%; width: 36px; height: 36px; animation: xAppear 0.6s ease-out 0.4s both; }
+.shield__x { position: absolute; top: 50%; left: 50%; width: 32px; height: 32px; animation: xAppear 0.6s ease-out 0.4s both; }
 @keyframes xAppear { from { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(-90deg); } to { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); } }
 
 .status-badge {
@@ -77,23 +77,23 @@ body {
     gap: 8px;
     background: rgba(220,38,38,0.12);
     border: 1px solid rgba(220,38,38,0.25);
-    padding: 8px 16px;
+    padding: 6px 14px;
     border-radius: 99px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 800;
     color: #fca5a5;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     box-shadow: 0 0 15px rgba(220, 38, 38, 0.1);
 }
 .status-badge__dot { width: 6px; height: 6px; background: #ef4444; border-radius: 50%; animation: dotBlink 1.5s ease-in-out infinite; }
 @keyframes dotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-h1 { font-size: 2.25rem; font-weight: 900; color: #f1f5f9; margin-bottom: 16px; line-height: 1.1; letter-spacing: -0.02em; }
-h1 span { color: #ef4444; display: inline-block; } /* inline-block prevents word break mid-highlight */
+h1 { font-size: 2rem; font-weight: 900; color: #f1f5f9; margin-bottom: 12px; line-height: 1.1; letter-spacing: -0.02em; }
+h1 span { color: #ef4444; display: inline-block; }
 
-.subtitle { font-size: 1rem; color: #94a3b8; line-height: 1.6; margin-bottom: 32px; padding: 0 10px; }
+.subtitle { font-size: 0.95rem; color: #94a3b8; line-height: 1.6; margin-bottom: 28px; padding: 0 10px; }
 
 /* --- CARDS --- */
 .info-card {
@@ -108,27 +108,27 @@ h1 span { color: #ef4444; display: inline-block; } /* inline-block prevents word
     box-shadow: 0 4px 24px rgba(0,0,0,0.2);
 }
 
-.info-card__row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.info-card__row { display: flex; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 .info-card__row:last-child { border-bottom: none; padding-bottom: 0; }
 .info-card__row:first-child { padding-top: 0; }
 .info-card__icon { flex-shrink: 0; margin-top: 2px; }
-.info-card__icon svg { width: 20px; height: 20px; stroke-width: 2; fill: none; }
-.info-card__text { font-size: 0.9rem; color: #94a3b8; line-height: 1.5; }
-.info-card__text strong { display: block; color: #f1f5f9; font-weight: 700; margin-bottom: 4px; font-size: 0.95rem; }
+.info-card__icon svg { width: 18px; height: 18px; stroke-width: 2; fill: none; }
+.info-card__text { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
+.info-card__text strong { display: block; color: #f1f5f9; font-weight: 700; margin-bottom: 3px; font-size: 0.9rem; }
 
 .warning-box {
     background: rgba(220,38,38,0.08);
     border: 1px solid rgba(220,38,38,0.25);
     border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 32px;
+    padding: 16px;
+    margin-bottom: 24px;
     display: flex;
     gap: 12px;
     text-align: left;
 }
 .warning-box__icon { flex-shrink: 0; margin-top: 1px; }
 .warning-box__icon svg { width: 20px; height: 20px; stroke: #ef4444; stroke-width: 2; fill: none; }
-.warning-box__text { font-size: 0.85rem; color: #fca5a5; line-height: 1.6; }
+.warning-box__text { font-size: 0.8rem; color: #fca5a5; line-height: 1.5; }
 .warning-box__text b { color: #fff; font-weight: 700; }
 
 /* --- ACTIONS --- */
@@ -140,16 +140,15 @@ h1 span { color: #ef4444; display: inline-block; } /* inline-block prevents word
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #e2e8f0;
-    padding: 16px 32px;
+    padding: 14px 28px;
     border-radius: 12px;
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
-    width: 100%; /* Full width on mobile looks better */
-    max-width: 280px;
+    width: 100%;
 }
 .contact-btn:hover {
     border-color: #ef4444;
@@ -159,7 +158,7 @@ h1 span { color: #ef4444; display: inline-block; } /* inline-block prevents word
     box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
 }
 
-.ref-id { margin-top: 24px; font-size: 0.75rem; color: #475569; font-family: 'SF Mono', 'Roboto Mono', monospace; opacity: 0.8; }
+.ref-id { margin-top: 20px; font-size: 0.7rem; color: #475569; font-family: 'SF Mono', 'Roboto Mono', monospace; opacity: 0.6; }
 
 .footer {
     width: 100%;
@@ -167,26 +166,20 @@ h1 span { color: #ef4444; display: inline-block; } /* inline-block prevents word
     text-align: center;
     font-size: 0.75rem;
     color: #334155;
-    margin-top: auto; /* Pushes to bottom if space permits */
+    /* margin-top: 0; Auto margin handles the push now */
 }
 .footer a { color: #475569; text-decoration: none; transition: color 0.2s; }
 .footer a:hover { color: #64748b; }
 
 /* --- RESPONSIVE TWEAKS --- */
 @media (max-width: 480px) {
+    body { padding: 30px 16px; }
     h1 { font-size: 1.75rem; }
-    .subtitle { font-size: 0.9rem; margin-bottom: 24px; }
+    .subtitle { font-size: 0.9rem; }
     .info-card { padding: 20px; }
     .info-card__row { flex-direction: column; gap: 8px; }
     .info-card__icon { margin-top: 0; }
-    .contact-btn { width: 100%; max-width: 100%; } /* Full width buttons on mobile */
-    .warning-box { padding: 16px; }
-}
-
-/* Fix for landscape mobile (short screens) */
-@media (max-height: 700px) {
-    body { padding: 40px 20px; justify-content: flex-start; }
-    .container { margin-top: 20px; margin-bottom: 20px; }
+    .contact-btn { width: 100%; }
 }
 </style>
 </head>
@@ -201,62 +194,4 @@ h1 span { color: #ef4444; display: inline-block; } /* inline-block prevents word
     <svg class="shield__icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
       <path d="M50 8L12 24v24c0 26 16.5 44 38 52 21.5-8 38-26 38-52V24L50 8z" fill="rgba(220,38,38,.1)" stroke="#dc2626" stroke-width="2.5"/>
       <path d="M50 8L12 24v24c0 26 16.5 44 38 52 21.5-8 38-26 38-52V24L50 8z" fill="url(#shieldGrad)" stroke="none"/>
-      <defs><linearGradient id="shieldGrad" x1="50" y1="8" x2="50" y2="84"><stop offset="0" stop-color="rgba(220,38,38,.15)"/><stop offset="1" stop-color="rgba(220,38,38,.02)"/></linearGradient></defs>
-    </svg>
-    <svg class="shield__x" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <line x1="10" y1="10" x2="26" y2="26" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
-      <line x1="26" y1="10" x2="10" y2="26" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
-    </svg>
-  </div>
-
-  <div class="status-badge"><span class="status-badge__dot"></span> Account Suspended</div>
-
-  <h1>Account <span>Suspended</span></h1>
-  <p class="subtitle">Your access to Protevio has been revoked due to a Terms of Service violation. All search capabilities are disabled.</p>
-
-  <div class="info-card">
-    <div class="info-card__row">
-      <div class="info-card__icon"><svg viewBox="0 0 24 24" stroke="#ef4444" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="info-card__text"><strong>Policy Violation Detected</strong>Our automated systems flagged activity regarding the protection of minors.</div>
-    </div>
-    <div class="info-card__row">
-      <div class="info-card__icon"><svg viewBox="0 0 24 24" stroke="#f59e0b" aria-hidden="true"><path d="M12 9v4m0 4h.01M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/></svg></div>
-      <div class="info-card__text"><strong>Activity Logged</strong>Search history and uploads have been preserved in accordance with data retention laws.</div>
-    </div>
-    <div class="info-card__row">
-      <div class="info-card__icon"><svg viewBox="0 0 24 24" stroke="#6b7280" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-      <div class="info-card__text"><strong>Account Restrictions</strong>New account creation is prohibited. Circumvention attempts will result in IP blocking.</div>
-    </div>
-  </div>
-
-  <div class="warning-box">
-    <div class="warning-box__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-    <div class="warning-box__text">Protevio cooperates fully with <b>law enforcement agencies</b>. Serious violations may be referred to relevant authorities.</div>
-  </div>
-
-  <a href="mailto:support@protevio.com?subject=Account Suspension Appeal" class="contact-btn">
-    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    Contact Support to Appeal
-  </a>
-
-  <div class="ref-id" id="refId">...</div>
-
-  <div class="footer">&copy; 2026 Protevio AI &mdash; <a href="#">Terms</a> &middot; <a href="#">Privacy</a></div>
-</div>
-
-<script>
-// Safer reference generation that won't crash if localStorage is blocked
-(function(){
-  try {
-    const user = JSON.parse(localStorage.getItem('protevio_user') || '{}');
-    const input = user.username || user.email || navigator.userAgent;
-    const hash = Array.from(input).reduce((a, c) => ((a << 5) - a + c.charCodeAt(0)) | 0, 0);
-    const hex = Math.abs(hash).toString(16).toUpperCase();
-    document.getElementById('refId').textContent = 'REF: SUS-' + hex.slice(0, 8).padStart(8, '0');
-  } catch (e) {
-    document.getElementById('refId').textContent = 'REF: SUS-ERR-01'; // Fallback
-  }
-})();
-</script>
-</body>
-</html>
+      <defs><linearGradient id="shieldGrad" x1="50" y1="8" x2="
