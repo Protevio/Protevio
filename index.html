@@ -1564,6 +1564,7 @@ let turnstileWidgetId = null;
 try {
   const u = JSON.parse(localStorage.getItem('protevio_user') || '{}');
   userPlan = u.plan || 'free';
+  if(userPlan === 'suspended') window.location.href = '/suspended.html';
 } catch(e){}
 
 // Check if returning from single unlock payment
@@ -1651,6 +1652,10 @@ function getToken() { return localStorage.getItem('protevio_token'); }
         const data = await res.json();
         localStorage.setItem('protevio_token', data.token);
         if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
+      } else if(res.status === 403) {
+        // Account suspended
+        try { const u = JSON.parse(localStorage.getItem('protevio_user') || '{}'); u.plan = 'suspended'; localStorage.setItem('protevio_user', JSON.stringify(u)); } catch(e){}
+        window.location.href = '/suspended.html';
       } else if(res.status === 401) {
         // Refresh token expired — must re-login
         localStorage.removeItem('protevio_token');
@@ -2023,6 +2028,12 @@ async function runSearch() {
         setTimeout(() => showTermsStep(), 2000);
         return;
       }
+      // Account suspended — redirect to suspension page
+      if(res.status === 403 && (errData.error || '').toLowerCase().includes('suspended')) {
+        try { const u = JSON.parse(localStorage.getItem('protevio_user') || '{}'); u.plan = 'suspended'; localStorage.setItem('protevio_user', JSON.stringify(u)); } catch(e){}
+        window.location.href = '/suspended.html';
+        return;
+      }
       // Service unavailable (DB down)
       if(res.status === 503) {
         statusText.textContent = 'Service busy';
@@ -2050,6 +2061,7 @@ async function runSearch() {
         const me = await meRes.json();
         userPlan = me.plan || 'free';
         localStorage.setItem('protevio_user', JSON.stringify(me));
+        if(userPlan === 'suspended') { window.location.href = '/suspended.html'; return; }
       }
     } catch(e){}
 

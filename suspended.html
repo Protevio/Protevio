@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account Suspended — Protevio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#08090f;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative}
+
+/* Animated danger background */
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse 600px 400px at 50% 30%, rgba(220,38,38,.08) 0%, transparent 70%),
+  radial-gradient(ellipse 400px 300px at 20% 80%, rgba(220,38,38,.04) 0%, transparent 60%),
+  radial-gradient(ellipse 400px 300px at 80% 70%, rgba(185,28,28,.04) 0%, transparent 60%);
+  animation:dangerPulse 4s ease-in-out infinite alternate;z-index:0}
+@keyframes dangerPulse{0%{opacity:.6}100%{opacity:1}}
+
+/* Scan line effect */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(220,38,38,.015) 2px,rgba(220,38,38,.015) 4px);pointer-events:none;z-index:1}
+
+/* Grid background */
+.grid-bg{position:fixed;inset:0;background-image:
+  linear-gradient(rgba(220,38,38,.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(220,38,38,.03) 1px, transparent 1px);
+  background-size:60px 60px;z-index:0}
+
+.container{position:relative;z-index:10;max-width:520px;width:90%;text-align:center;animation:fadeUp .8s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* Shield icon */
+.shield{width:100px;height:100px;margin:0 auto 28px;position:relative}
+.shield__icon{width:100px;height:100px;animation:shieldPulse 2s ease-in-out infinite}
+@keyframes shieldPulse{0%,100%{filter:drop-shadow(0 0 20px rgba(220,38,38,.3))}50%{filter:drop-shadow(0 0 40px rgba(220,38,38,.5))}}
+.shield__x{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;animation:xAppear .6s ease-out .4s both}
+@keyframes xAppear{from{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-90deg)}to{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}}
+
+/* Status badge */
+.status-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);padding:6px 16px;border-radius:20px;font-size:.72rem;font-weight:800;color:#fca5a5;text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px;animation:badgePulse 3s ease-in-out infinite}
+@keyframes badgePulse{0%,100%{border-color:rgba(220,38,38,.25)}50%{border-color:rgba(220,38,38,.5)}}
+.status-badge__dot{width:6px;height:6px;background:#ef4444;border-radius:50%;animation:dotBlink 1.5s ease-in-out infinite}
+@keyframes dotBlink{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{font-size:2rem;font-weight:900;color:#f1f5f9;margin-bottom:12px;line-height:1.2}
+h1 span{color:#ef4444}
+
+.subtitle{font-size:1rem;color:#9ca3af;line-height:1.6;margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto}
+
+/* Info card */
+.info-card{background:rgba(20,24,37,.8);border:1px solid rgba(220,38,38,.15);border-radius:16px;padding:28px;text-align:left;margin-bottom:24px;backdrop-filter:blur(8px)}
+.info-card__row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(42,51,73,.4)}
+.info-card__row:last-child{border-bottom:none;padding-bottom:0}
+.info-card__row:first-child{padding-top:0}
+.info-card__icon{width:20px;height:20px;flex-shrink:0;margin-top:2px}
+.info-card__icon svg{width:20px;height:20px;stroke-width:2;fill:none}
+.info-card__text{font-size:.85rem;color:#9ca3af;line-height:1.6}
+.info-card__text strong{color:#f1f5f9;font-weight:700}
+
+/* Warning box */
+.warning-box{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:20px 24px;margin-bottom:28px;display:flex;align-items:flex-start;gap:12px;text-align:left}
+.warning-box__icon{width:20px;height:20px;flex-shrink:0;margin-top:1px}
+.warning-box__icon svg{width:20px;height:20px;stroke:#ef4444;stroke-width:2;fill:none}
+.warning-box__text{font-size:.82rem;color:#fca5a5;line-height:1.6}
+.warning-box__text b{color:#fff}
+
+/* Contact button */
+.contact-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(30,37,56,.8);border:1px solid #2a3349;color:#e2e8f0;padding:14px 28px;border-radius:12px;font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
+.contact-btn:hover{border-color:#5b9aff;color:#5b9aff;background:rgba(91,154,255,.05)}
+.contact-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* Reference ID */
+.ref-id{margin-top:20px;font-size:.72rem;color:#4b5563;font-family:'SF Mono',Monaco,monospace}
+
+/* Footer */
+.footer{position:fixed;bottom:0;left:0;right:0;padding:16px;text-align:center;font-size:.72rem;color:#2a3349;z-index:10}
+.footer a{color:#3a4a60;text-decoration:none}
+
+@media(max-width:600px){
+  h1{font-size:1.5rem}
+  .subtitle{font-size:.9rem}
+  .container{width:92%}
+  .info-card{padding:20px}
+  .shield{width:80px;height:80px}
+  .shield__icon{width:80px;height:80px}
+  .shield__x{width:28px;height:28px}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<div class="container">
+  <div class="shield">
+    <svg class="shield__icon" viewBox="0 0 100 100" fill="none">
+      <path d="M50 8L12 24v24c0 26 16.5 44 38 52 21.5-8 38-26 38-52V24L50 8z" fill="rgba(220,38,38,.1)" stroke="#dc2626" stroke-width="2.5"/>
+      <path d="M50 8L12 24v24c0 26 16.5 44 38 52 21.5-8 38-26 38-52V24L50 8z" fill="url(#shieldGrad)" stroke="none"/>
+      <defs><linearGradient id="shieldGrad" x1="50" y1="8" x2="50" y2="84"><stop offset="0" stop-color="rgba(220,38,38,.15)"/><stop offset="1" stop-color="rgba(220,38,38,.02)"/></linearGradient></defs>
+    </svg>
+    <svg class="shield__x" viewBox="0 0 36 36" fill="none">
+      <line x1="10" y1="10" x2="26" y2="26" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="26" y1="10" x2="10" y2="26" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="status-badge"><span class="status-badge__dot"></span> Account Suspended</div>
+
+  <h1>Your Account Has Been <span>Suspended</span></h1>
+  <p class="subtitle">Your access to Protevio has been revoked due to a violation of our Terms of Service. All search capabilities have been disabled.</p>
+
+  <div class="info-card">
+    <div class="info-card__row">
+      <div class="info-card__icon"><svg viewBox="0 0 24 24" stroke="#ef4444"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="info-card__text"><strong>Policy Violation Detected</strong><br>Our automated systems have flagged activity on your account that violates our Acceptable Use Policy, specifically regarding the protection of minors.</div>
+    </div>
+    <div class="info-card__row">
+      <div class="info-card__icon"><svg viewBox="0 0 24 24" stroke="#f59e0b"><path d="M12 9v4m0 4h.01M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/></svg></div>
+      <div class="info-card__text"><strong>All Activity Logged</strong><br>Your search history, uploaded images, and associated metadata have been recorded and preserved in accordance with applicable data retention laws.</div>
+    </div>
+    <div class="info-card__row">
+      <div class="info-card__icon"><svg viewBox="0 0 24 24" stroke="#6b7280"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="info-card__text"><strong>Account Restrictions</strong><br>You may not create new accounts. Attempts to circumvent this suspension will result in permanent IP-level blocking and may be reported to relevant authorities.</div>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    <div class="warning-box__icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div class="warning-box__text">Protevio takes the protection of minors extremely seriously and <b>cooperates fully with law enforcement agencies</b> upon request. Repeated violations may be referred to the relevant authorities in your jurisdiction.</div>
+  </div>
+
+  <a href="mailto:support@protevio.com?subject=Account Suspension Appeal" class="contact-btn">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Contact Support to Appeal
+  </a>
+
+  <div class="ref-id" id="refId"></div>
+</div>
+
+<div class="footer">&copy; 2026 Protevio AI &mdash; <a href="/terms.html">Terms of Service</a> &middot; <a href="/privacy.html">Privacy Policy</a></div>
+
+<script>
+// Generate reference ID from username
+const user = JSON.parse(localStorage.getItem('protevio_user') || '{}');
+const username = user.username || user.email || 'unknown';
+const hash = Array.from(username).reduce((a, c) => ((a << 5) - a + c.charCodeAt(0)) | 0, 0);
+document.getElementById('refId').textContent = 'Reference: SUS-' + Math.abs(hash).toString(16).toUpperCase().slice(0, 8).padStart(8, '0');
+</script>
+</body>
+</html>
