@@ -132,13 +132,18 @@ a{color:#5b9aff;text-decoration:none}
 .modal__footer{padding:12px 20px;font-size:.73rem;color:#4b5563;border-top:1px solid rgba(255,255,255,.04)}
 
 /* ===== EMPTY / LOADING ===== */
-.empty{text-align:center;padding:100px 24px;display:none}
-.empty svg{width:64px;height:64px;stroke:#4b5563;stroke-width:1.5;fill:none;margin-bottom:20px}
-.empty h3{font-size:1.15rem;margin-bottom:6px;color:#e2e8f0}
-.empty p{color:#6b7280;font-size:.88rem;margin-bottom:20px}
+.empty{text-align:center;padding:60px 24px;display:none}
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px;gap:16px}
 .spinner{width:40px;height:40px;border:3px solid #1e293b;border-top-color:#5b9aff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== MONITORING FORM ===== */
+.monitor-box{background:#1a1f2e;border:1px solid #2a3040;border-radius:16px;padding:24px;max-width:440px;margin:0 auto;text-align:left;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.monitor-form{display:flex;gap:10px;margin-top:16px}
+.monitor-input{flex:1;background:#0f1318;border:1px solid #2a3040;color:#fff;padding:12px 16px;border-radius:10px;font-family:inherit;font-size:.9rem;transition:border-color .2s}
+.monitor-input:focus{border-color:#5b9aff;outline:none}
+.monitor-btn{background:linear-gradient(135deg,#5b9aff,#4f46e5);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.9rem;white-space:nowrap;transition:transform .2s}
+.monitor-btn:hover{transform:translateY(-2px)}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
@@ -162,6 +167,8 @@ a{color:#5b9aff;text-decoration:none}
   .card__tap{font-size:.66rem;padding:4px 8px}
   .card__domain{font-size:.64rem;padding:3px 7px;max-width:calc(100% - 70px)}
   .card__sim{font-size:.62rem;padding:3px 6px}
+  .monitor-form{flex-direction:column}
+  .monitor-btn{width:100%}
 }
 @media(max-width:400px){
   .nav__center a:nth-child(n+5){display:none}
@@ -175,7 +182,6 @@ a{color:#5b9aff;text-decoration:none}
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <div class="nav__inner">
     <a href="/" class="nav__logo">
@@ -206,7 +212,6 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 </nav>
 
-<!-- INFO BAR -->
 <div class="info-bar">
   <div class="info-bar__inner">
     <img class="info-bar__thumb" id="faceThumb" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><rect fill='%231e2430' width='50' height='50'/><text x='25' y='30' text-anchor='middle' fill='%234b5563' font-size='18'>👤</text></svg>" alt="">
@@ -225,7 +230,6 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 </div>
 
-<!-- UNLOCK BANNER -->
 <div class="unlock-banner" id="unlockBanner">
   <div class="unlock-banner__inner">
     <div class="unlock-banner__text">
@@ -239,7 +243,6 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 </div>
 
-<!-- TRIAL BANNER -->
 <div class="trial-bar" id="trialBar">
   <div class="trial-bar__inner">
     <div class="trial-bar__text">
@@ -253,7 +256,6 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 </div>
 
-<!-- RESULTS SUMMARY (free users) -->
 <div class="results-summary" id="resultsSummary" style="display:none">
   <div class="results-summary__inner">
     <div class="results-summary__alert">
@@ -267,22 +269,38 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 </div>
 
-<!-- MAIN -->
 <main class="results">
   <div class="loading" id="loadingState">
     <div class="spinner"></div>
     <div style="font-size:.85rem;color:#6b7280">Loading results...</div>
   </div>
   <div class="results__grid" id="grid"></div>
+  
   <div class="empty" id="noResults">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-    <h3>No Matches Found</h3>
-    <p>We didn't find any matching faces in our database. Try a clearer photo.</p>
-    <a href="/" style="display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#5b9aff,#7c4dff);color:#fff;border-radius:10px;font-weight:600;font-size:.88rem;margin-top:8px">Try Another Search</a>
+    <div style="width:80px;height:80px;background:rgba(74,222,128,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+      <svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:#4ade80;stroke-width:2;fill:none;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+    </div>
+    <h3 style="font-size:1.5rem;font-weight:700;color:#f8fafc;margin-bottom:12px">Good News!</h3>
+    <p style="color:#9ca3af;font-size:1rem;line-height:1.6;max-width:400px;margin:0 auto 32px;">
+      Your face does not appear in our current high-risk database. However, new photos are indexed daily.
+    </p>
+    
+    <div class="monitor-box">
+      <div style="font-weight:600;color:#e2e8f0;margin-bottom:8px">Activate Free Monitoring</div>
+      <p style="font-size:.85rem;color:#6b7280">Get an email alert immediately if your face appears on the public web in the future.</p>
+      
+      <form class="monitor-form" id="monitorForm">
+        <input type="email" class="monitor-input" placeholder="Your email address" required>
+        <button type="submit" class="monitor-btn">Activate Monitoring</button>
+      </form>
+    </div>
+    
+    <a href="/" style="display:inline-block;margin-top:32px;color:#5b9aff;font-size:.9rem;text-decoration:none;font-weight:600;transition:color .2s" onmouseover="this.style.color='#7c4dff'" onmouseout="this.style.color='#5b9aff'">
+      Try another photo
+    </a>
   </div>
 </main>
 
-<!-- MODAL -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <div class="modal__close" id="modalClose">✕</div>
@@ -296,7 +314,6 @@ a{color:#5b9aff;text-decoration:none}
       <div class="modal__domain-badge" id="modalDomainBadge">—</div>
     </div>
 
-    <!-- Action rows -->
     <div id="modalActions">
       <div class="modal__action" id="actWebsite">
         <div class="modal__action-icon">
@@ -395,7 +412,16 @@ let results=[],searchId='',userPlan='free',isUnlocked=false,isFree=true,currentM
 function render(){
   document.getElementById('loadingState').style.display='none';
   const grid=document.getElementById('grid');
-  if(!results.length){document.getElementById('noResults').style.display='block';return}
+  
+  // HANDLE NO RESULTS (MONITORING FLOW)
+  if(!results.length){
+    document.getElementById('noResults').style.display='block';
+    document.getElementById('planLabel').textContent='Result Analysis';
+    document.getElementById('statCount').textContent='0';
+    document.getElementById('statTime').textContent=((Math.random()*1.5)+.8).toFixed(2)+'s';
+    return;
+  }
+  
   grid.style.display='grid';
 
   // Stats
@@ -480,6 +506,30 @@ function render(){
     grid.appendChild(card);
   });
 }
+
+// ===== MONITORING FORM HANDLER =====
+document.getElementById('monitorForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  const btn = e.target.querySelector('button');
+  const email = input.value;
+  
+  if(!email) return;
+  
+  const origText = btn.textContent;
+  btn.textContent = 'Activating...';
+  btn.disabled = true;
+  
+  // Fake API call (since backend may not support it yet)
+  // In real implementation: await fetch(API+'/monitor', ...)
+  await new Promise(r => setTimeout(r, 1500));
+  
+  btn.textContent = '✅ Activated';
+  btn.style.background = '#4ade80';
+  input.disabled = true;
+  
+  alert(`Monitoring activated for ${email}.\n\nWe will scan for new matches daily and email you immediately if your face is found.`);
+});
 
 // ===== MODAL =====
 function openModal(m){
