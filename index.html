@@ -1148,13 +1148,13 @@ body{
         </div>
       </div>
 
-      <!-- SEARCH STATUS (hidden by default) -->
+      <!-- SEARCH STATUS (inline fallback - hidden by default) -->
       <div id="searchStatus" style="display:none;text-align:center;padding:48px 24px;">
         <div style="position:relative;width:120px;height:120px;margin:0 auto 24px;">
           <svg width="120" height="120" style="transform:rotate(-90deg)">
             <circle cx="60" cy="60" r="52" fill="none" stroke="var(--border)" stroke-width="6"/>
             <circle id="progressCircle" cx="60" cy="60" r="52" fill="none" stroke="url(#progGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset .3s ease"/>
-            <defs><lineargradient id="progGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs>
+            <defs><linearGradient id="progGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs>
           </svg>
           <div id="progressPercent" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.5rem;font-weight:700;color:var(--text);">0%</div>
         </div>
@@ -1165,80 +1165,8 @@ body{
         <p style="font-size:.85rem;color:var(--text-muted);margin-top:4px;" id="statusSub">Searching the internet</p>
       </div>
 
-      <!-- STEP 2: FACE SELECTION (hidden by default) -->
-      <div id="faceSelection" style="display:none;padding:24px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-          <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);">Select a Face to Search</h3>
-          <button id="backToUpload" class="step-back-btn">â† Back</button>
-        </div>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:20px;">We detected the following faces. Tap one to search for it.</p>
-        <div id="faceGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px;"></div>
-        <button id="searchSelectedBtn" class="step-next-btn" disabled="" style="margin-top:20px;width:100%;">
-          <svg viewbox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          Select a face to continue
-        </button>
-      </div>
 
-      <!-- STEP 3: TERMS AGREEMENT (hidden by default) -->
-      <div id="termsStep" style="display:none;padding:24px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-          <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);">Before We Search</h3>
-          <button id="backToFaces" class="step-back-btn">â† Back</button>
-        </div>
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-            <div id="termsPreview" style="width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0;border:2px solid var(--accent);"><img style="width:100%;height:100%;object-fit:cover;"></div>
-            <div>
-              <p style="font-size:.95rem;font-weight:600;color:var(--text);">Searching for this face</p>
-              <p style="font-size:.8rem;color:var(--text-muted);" id="termsDetection">Face detected</p>
-            </div>
-          </div>
-          <div style="font-size:.82rem;color:var(--text-secondary);line-height:1.7;max-height:160px;overflow-y:auto;padding-right:8px;">
-            <p style="margin-bottom:10px;">By proceeding with this search, you acknowledge and agree to the following:</p>
-            <p style="margin-bottom:8px;">â€¢ You confirm that you have a <strong style="color:var(--text);">legitimate reason</strong> for conducting this facial recognition search and that you are not using it for stalking, harassment, or any unlawful purpose.</p>
-            <p style="margin-bottom:8px;">â€¢ You understand that search results are generated using <strong style="color:var(--text);">AI-based facial similarity matching</strong> and may include false positives. Results do not confirm identity.</p>
-            <p style="margin-bottom:8px;">â€¢ You agree to comply with our <a href="/terms-of-service" target="_blank" style="color:var(--accent);">Terms of Service</a> and <a href="/privacy-policy" target="_blank" style="color:var(--accent);">Privacy Policy</a>, including all applicable laws regarding biometric data (GDPR, BIPA).</p>
-            <p>â€¢ Your uploaded image will be <strong style="color:var(--text);">processed temporarily</strong> and not stored permanently on our servers.</p>
-          </div>
-        </div>
-        <!-- SEARCH OPTIONS -->
-        <div style="margin-bottom:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px 12px 0 0;border-bottom:none;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg viewbox="0 0 24 24" style="width:18px;height:18px;stroke:var(--green);stroke-width:2;fill:none;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <div>
-                <div style="font-size:.88rem;font-weight:600;color:var(--text);">Safe Search</div>
-                <div style="font-size:.72rem;color:var(--text-muted);">Filter potentially explicit results</div>
-              </div>
-            </div>
-            <button class="search-toggle on" id="safeSearchToggle" onclick="this.classList.toggle(&#39;on&#39;)"></button>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:0 0 12px 12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg viewbox="0 0 24 24" style="width:18px;height:18px;stroke:var(--purple);stroke-width:2;fill:none;flex-shrink:0"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              <div>
-                <div style="font-size:.88rem;font-weight:600;color:var(--text);">Deep Search</div>
-                <div style="font-size:.72rem;color:var(--text-muted);" id="deepSearchLabel">Enhanced AI scan across all indexed sources</div>
-              </div>
-            </div>
-            <button class="search-toggle" id="deepSearchToggle" onclick="handleDeepSearch(this)"></button>
-          </div>
-        </div>
-        <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;transition:border-color .2s;" id="termsLabel">
-          <input type="checkbox" id="termsCheckbox" style="width:20px;height:20px;accent-color:var(--accent);cursor:pointer;">
-          <span style="font-size:.9rem;color:var(--text-secondary);">I agree to the Terms of Service and Privacy Policy</span>
-        </label>
-        <!-- Cloudflare Turnstile CAPTCHA (renders only if enabled) -->
-        <div id="turnstileBox" style="display:none;margin-bottom:16px;min-height:65px;display:flex;align-items:center;justify-content:center;">
-          <div id="turnstileWidget"></div>
-        </div>
-        <button id="agreeSearchBtn" class="step-next-btn" disabled="" style="width:100%;background:linear-gradient(135deg,#4ade80,#22c55e);">
-          <svg viewbox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-          Agree & Search
-        </button>
-      </div>
-
-      <!-- STEP 4: SEARCH RESULTS (hidden by default) -->
+<!-- STEP 4: SEARCH RESULTS (hidden by default) -->
       <div id="searchResults" style="display:none;padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
           <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);">Search Results</h3>
@@ -1449,9 +1377,282 @@ body{
   </div>
 </section>
 
+    <!-- ===== SEARCH FLOW MODAL (PimEyes-style) ===== -->
+    <div class="sfm-overlay" id="sfmOverlay">
+      <div class="sfm-modal" id="sfmModal">
+        <button class="sfm-close" id="sfmClose">&times;</button>
+
+        <!-- VIEW 1: Processing -->
+        <div class="sfm-view" id="sfmProcessing">
+          <div class="sfm-progress-ring">
+            <svg width="100" height="100" viewBox="0 0 100 100" style="transform:rotate(-90deg)">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="5"/>
+              <circle class="sfm-progress-arc" id="sfmArc" cx="50" cy="50" r="42" fill="none" stroke="url(#sfmGrad)" stroke-width="5" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+              <defs><linearGradient id="sfmGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--purple)"/></linearGradient></defs>
+            </svg>
+            <div class="sfm-progress-pct" id="sfmPct">0%</div>
+          </div>
+          <div class="sfm-processing-info">
+            <div class="sfm-processing-thumb" id="sfmProcThumb"></div>
+            <span class="sfm-processing-label" id="sfmProcLabel">Processing...</span>
+          </div>
+          <p class="sfm-processing-sub" id="sfmProcSub">Detecting faces in your photo</p>
+        </div>
+
+        <!-- VIEW 2: Choose your face -->
+        <div class="sfm-view" id="sfmChoose" style="display:none">
+          <div class="sfm-header">
+            <button class="sfm-back" id="sfmBackToUpload"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <h3 class="sfm-title">Choose your face</h3>
+          </div>
+          <div class="sfm-face-grid" id="sfmFaceGrid"></div>
+          <p class="sfm-hint" id="sfmFaceHint">Select photo(s) of your face to proceed with the search</p>
+          <button class="sfm-btn sfm-btn--inactive" id="sfmProceedBtn" disabled>Proceed to the Face Search</button>
+        </div>
+
+        <!-- VIEW 3: Face search (merged terms + options) -->
+        <div class="sfm-view" id="sfmSearch" style="display:none">
+          <div class="sfm-header">
+            <button class="sfm-back" id="sfmBackToChoose"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <h3 class="sfm-title">Face search</h3>
+            <button class="sfm-edit-link" id="sfmEditPhotos">edit photo(s)</button>
+          </div>
+
+          <!-- Selected faces row -->
+          <div class="sfm-selected-row" id="sfmSelectedRow"></div>
+
+          <!-- Progress bar (thin) -->
+          <div class="sfm-thin-bar"><div class="sfm-thin-bar__fill" id="sfmSearchBar"></div></div>
+
+          <!-- Quality tip -->
+          <div class="sfm-tip" id="sfmTip">
+            <svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="none" stroke="#d97706" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="#d97706" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Try to upload a better quality image or add more photos to get better search results.</span>
+          </div>
+
+          <!-- Search time filter -->
+          <div class="sfm-option-row">
+            <div class="sfm-option-left">
+              <svg viewBox="0 0 24 24" width="16" height="16" style="flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Choose Search Time:</span>
+            </div>
+            <select class="sfm-select" id="sfmTimeFilter">
+              <option value="any">Any Time</option>
+              <option value="24h">Last 24 Hours</option>
+              <option value="week">Last Week</option>
+              <option value="month">Last Month</option>
+              <option value="year">Last Year</option>
+            </select>
+          </div>
+
+          <!-- Toggles row -->
+          <div class="sfm-toggles">
+            <div class="sfm-toggle-item">
+              <button class="search-toggle on" id="sfmSafeToggle" onclick="this.classList.toggle('on')"></button>
+              <span>Safe Search</span>
+            </div>
+            <div class="sfm-toggle-item">
+              <button class="search-toggle" id="sfmDeepToggle" onclick="handleDeepSearch(this)"></button>
+              <span>Deep Search</span>
+            </div>
+          </div>
+
+          <!-- Terms checkbox -->
+          <label class="sfm-terms" id="sfmTermsLabel">
+            <input type="checkbox" id="sfmTermsCheck">
+            <span>I agree to the <a href="/terms-of-service" target="_blank">Terms of Service</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a></span>
+          </label>
+
+          <!-- Cloudflare Turnstile CAPTCHA -->
+          <div class="sfm-captcha" id="sfmCaptchaBox" style="display:none">
+            <div id="sfmTurnstileWidget"></div>
+          </div>
+
+          <!-- Start Search button -->
+          <button class="sfm-btn sfm-btn--search" id="sfmStartBtn" disabled>Start Search</button>
+
+          <!-- Remaining searches -->
+          <p class="sfm-remaining" id="sfmRemaining"></p>
+        </div>
+
+      </div>
+    </div>
+
+      
+
+
 
 <style>
-@keyframes spin{to{transform:rotate(360deg)}}
+/* ===== SEARCH FLOW MODAL (SFM) ===== */
+.sfm-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(12px);
+  z-index:2000;justify-content:center;align-items:center;padding:20px;
+}
+.sfm-overlay.active{display:flex}
+.sfm-modal{
+  background:var(--bg-elevated,#1e2538);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  width:100%;max-width:520px;max-height:90vh;
+  overflow-y:auto;position:relative;
+  animation:sfmIn .25s ease;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.1) transparent;
+}
+@keyframes sfmIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
+.sfm-close{
+  position:absolute;top:12px;right:12px;width:32px;height:32px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;color:var(--text-muted);font-size:20px;cursor:pointer;
+  z-index:3;display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.sfm-close:hover{background:rgba(255,255,255,.12);color:var(--text)}
+.sfm-view{padding:28px 24px}
+
+/* Processing view */
+.sfm-progress-ring{position:relative;width:100px;height:100px;margin:0 auto 20px}
+.sfm-progress-arc{transition:stroke-dashoffset .3s ease}
+.sfm-progress-pct{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:1.4rem;font-weight:700;color:var(--text);
+}
+.sfm-processing-info{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
+.sfm-processing-thumb{
+  width:32px;height:32px;border-radius:8px;overflow:hidden;flex-shrink:0;
+  border:2px solid var(--accent);display:none;
+}
+.sfm-processing-thumb.show{display:block}
+.sfm-processing-thumb img{width:100%;height:100%;object-fit:cover}
+.sfm-processing-label{font-size:1rem;font-weight:600;color:var(--text)}
+.sfm-processing-sub{font-size:.82rem;color:var(--text-muted);text-align:center}
+
+/* Header with back + title */
+.sfm-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-right:28px}
+.sfm-back{
+  width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+  background:none;color:var(--text-muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;
+}
+.sfm-back:hover{border-color:var(--accent);color:var(--accent)}
+.sfm-title{font-size:1.1rem;font-weight:700;color:var(--text);flex:1}
+.sfm-edit-link{
+  background:rgba(91,154,255,.1);border:1px solid rgba(91,154,255,.2);
+  color:var(--accent);font-size:.75rem;font-weight:600;padding:4px 12px;
+  border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .2s;
+}
+.sfm-edit-link:hover{background:rgba(91,154,255,.2)}
+
+/* Face grid */
+.sfm-face-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+  gap:10px;margin-bottom:16px;
+}
+.sfm-hint{font-size:.82rem;color:var(--text-muted);text-align:center;margin-bottom:16px}
+
+/* Buttons */
+.sfm-btn{
+  display:block;width:100%;padding:14px;border-radius:12px;
+  font-family:inherit;font-size:.95rem;font-weight:700;
+  cursor:pointer;border:none;transition:all .25s;text-align:center;
+}
+.sfm-btn:disabled{opacity:.4;cursor:not-allowed}
+.sfm-btn--inactive{background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border)}
+.sfm-btn--active{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;box-shadow:0 4px 16px rgba(91,154,255,.3)}
+.sfm-btn--active:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.4)}
+.sfm-btn--search{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;box-shadow:0 4px 16px rgba(91,154,255,.3)}
+.sfm-btn--search:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.4)}
+.sfm-btn--searching{background:var(--bg-card);color:var(--text-muted);cursor:wait;opacity:.7}
+
+/* Selected faces row */
+.sfm-selected-row{
+  display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:4px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent;
+}
+.sfm-sel-face{
+  position:relative;flex-shrink:0;width:120px;height:120px;border-radius:12px;overflow:hidden;
+  border:2px solid var(--accent);
+}
+.sfm-sel-face img{width:100%;height:100%;object-fit:cover}
+.sfm-sel-face__remove{
+  position:absolute;top:4px;right:4px;width:22px;height:22px;
+  background:rgba(0,0,0,.7);border:none;border-radius:50%;color:#fff;
+  font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+.sfm-sel-face__remove:hover{background:rgba(220,38,38,.8)}
+.sfm-sel-face__badge{
+  position:absolute;bottom:4px;left:4px;width:20px;height:20px;
+  background:rgba(234,179,8,.9);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+}
+.sfm-sel-face__badge svg{width:12px;height:12px;stroke:#fff;stroke-width:2.5;fill:none}
+
+/* Thin progress bar */
+.sfm-thin-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:16px;overflow:hidden}
+.sfm-thin-bar__fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px;transition:width .3s ease}
+
+/* Tip banner */
+.sfm-tip{
+  display:flex;align-items:flex-start;gap:10px;
+  background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);
+  border-radius:10px;padding:12px 14px;margin-bottom:16px;
+  font-size:.8rem;color:#d97706;line-height:1.5;
+}
+
+/* Option row */
+.sfm-option-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;margin-bottom:10px;
+}
+.sfm-option-left{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--text)}
+.sfm-select{
+  background:var(--bg);border:1px solid var(--border);color:var(--accent);
+  padding:6px 12px;border-radius:8px;font-family:inherit;font-size:.82rem;
+  font-weight:700;cursor:pointer;outline:none;
+}
+.sfm-select:focus{border-color:var(--accent)}
+
+/* Toggles row */
+.sfm-toggles{
+  display:flex;gap:8px;margin-bottom:14px;
+}
+.sfm-toggle-item{
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;
+}
+.sfm-toggle-item span{font-size:.82rem;font-weight:600;color:var(--text)}
+
+/* Terms */
+.sfm-terms{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:12px 14px;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;margin-bottom:14px;transition:border-color .2s;
+}
+.sfm-terms:has(input:checked){border-color:var(--accent);background:rgba(91,154,255,.06)}
+.sfm-terms input{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.sfm-terms span{font-size:.82rem;color:var(--text-secondary);line-height:1.4}
+.sfm-terms a{color:var(--accent)}
+
+/* Captcha */
+.sfm-captcha{display:flex;align-items:center;justify-content:center;margin-bottom:14px;min-height:65px}
+
+/* Remaining searches */
+.sfm-remaining{
+  text-align:center;font-size:.78rem;color:var(--text-muted);margin-top:12px;
+}
+.sfm-remaining strong{color:var(--accent);font-weight:700}
+
+/* Responsive */
+@media(max-width:600px){
+  .sfm-modal{max-width:100%;border-radius:16px;margin:8px}
+  .sfm-view{padding:20px 16px}
+  .sfm-face-grid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:8px}
+  .sfm-sel-face{width:95px;height:95px}
+  .sfm-toggles{flex-direction:column;gap:6px}
+}
+
 .upload-box.dragover{border-color:var(--accent)!important;background:var(--accent-glow)!important}
 .step-back-btn{background:none;border:1px solid var(--border);color:var(--text-muted);padding:8px 18px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
 .step-back-btn:hover{border-color:var(--border-light);color:var(--text)}
@@ -1491,7 +1692,6 @@ body{
 /* UPGRADE */
 .upgrade-btn{display:inline-flex;align-items:center;color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
 .upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
-#termsLabel:has(input:checked){border-color:var(--accent);background:rgba(91,154,255,.08)}
 /* RESULT MODAL */
 .result-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:1000;justify-content:center;align-items:center;padding:20px}
 .result-modal-overlay.active{display:flex}
@@ -1560,18 +1760,12 @@ function encImg(filename) {
 const uploadBox = document.getElementById('uploadBox');
 const fileInput = document.getElementById('fileInput');
 const searchStatus = document.getElementById('searchStatus');
-const faceSelection = document.getElementById('faceSelection');
-const faceGrid = document.getElementById('faceGrid');
-const termsStep = document.getElementById('termsStep');
 const searchResults = document.getElementById('searchResults');
 const resultsList = document.getElementById('resultsList');
 const noResults = document.getElementById('noResults');
 const statusText = document.getElementById('statusText');
 const statusSub = document.getElementById('statusSub');
 const actionButtons = document.getElementById('actionButtons');
-const searchSelectedBtn = document.getElementById('searchSelectedBtn');
-const agreeSearchBtn = document.getElementById('agreeSearchBtn');
-const termsCheckbox = document.getElementById('termsCheckbox');
 const upgradeOverlay = document.getElementById('upgradeOverlay');
 
 let detectedFaces = [];
@@ -1707,35 +1901,82 @@ function getToken() { return localStorage.getItem('protevio_token'); }
   setInterval(refreshIfNeeded, 5 * 60 * 1000);
 })();
 
+// ===== SEARCH FLOW MODAL SYSTEM =====
+const sfmOverlay = document.getElementById('sfmOverlay');
+const sfmModal = document.getElementById('sfmModal');
+const PLAN_LIMITS = {free:10, trial:10, basic:50, pro:200, unlimited:-1, admin:-1};
+let searchesRemaining = null;
+
+// Fetch remaining searches
+async function fetchRemaining() {
+  try {
+    const token = getToken();
+    if(!token) return;
+    const res = await fetch(API + '/auth/me', {headers:{'Authorization':'Bearer '+token}});
+    if(res.ok) {
+      const me = await res.json();
+      userPlan = me.plan || 'free';
+      localStorage.setItem('protevio_user', JSON.stringify(me));
+      const limit = PLAN_LIMITS[userPlan] || 10;
+      if(limit === -1) { searchesRemaining = -1; }
+      else { searchesRemaining = Math.max(0, limit - (me.searches_today||0)); }
+    }
+  } catch(e){}
+}
+
+function sfmShow(viewId) {
+  sfmOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  sfmModal.querySelectorAll('.sfm-view').forEach(v => v.style.display = 'none');
+  document.getElementById(viewId).style.display = '';
+}
+
+function sfmHide() {
+  sfmOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function sfmProgress(pct) {
+  const arc = document.getElementById('sfmArc');
+  const pctEl = document.getElementById('sfmPct');
+  arc.style.strokeDashoffset = 263.9 - (263.9 * pct / 100);
+  pctEl.textContent = Math.round(pct) + '%';
+}
+
+document.getElementById('sfmClose').addEventListener('click', () => {
+  sfmHide();
+  resetSearch();
+});
+sfmOverlay.addEventListener('click', (e) => {
+  if(e.target === sfmOverlay) { sfmHide(); resetSearch(); }
+});
+
 function hideAll() {
   uploadBox.style.display = 'none';
   actionButtons.style.display = 'none';
   searchStatus.style.display = 'none';
-  faceSelection.style.display = 'none';
-  termsStep.style.display = 'none';
   searchResults.style.display = 'none';
+  sfmHide();
 }
 
 function resetSearch() {
-  hideAll();
+  sfmHide();
   uploadBox.style.display = '';
   actionButtons.style.display = '';
+  searchStatus.style.display = 'none';
+  searchResults.style.display = 'none';
   resultsList.innerHTML = '';
   noResults.style.display = 'none';
   upgradeOverlay.style.display = 'none';
   fileInput.value = '';
   detectedFaces = [];
   selectedFaceIds = [];
-  termsCheckbox.checked = false;
-  agreeSearchBtn.disabled = true;
 }
 
 // ===== STEP 1: UPLOAD =====
 uploadBox.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => {
-  if(e.target.files.length > 5) {
-    alert('Maximum 5 photos allowed. Only the first 5 will be processed.');
-  }
+  if(e.target.files.length > 5) alert('Maximum 5 photos allowed. Only the first 5 will be processed.');
   if(e.target.files.length) handleFiles(e.target.files);
 });
 document.getElementById('cameraInput').addEventListener('change', (e) => {
@@ -1745,366 +1986,350 @@ document.getElementById('cameraInput').addEventListener('change', (e) => {
 uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
 uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
 uploadBox.addEventListener('drop', (e) => {
-  e.preventDefault();
-  uploadBox.classList.remove('dragover');
+  e.preventDefault(); uploadBox.classList.remove('dragover');
   if(e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
 });
 
 document.addEventListener('paste', (e) => {
   const items = e.clipboardData.items;
-  for(let i=0; i<items.length; i++){
-    if(items[i].type.startsWith('image/')){
-      handleFiles([items[i].getAsFile()]);
-      break;
-    }
+  for(let i=0;i<items.length;i++){
+    if(items[i].type.startsWith('image/')){handleFiles([items[i].getAsFile()]);break;}
   }
 });
 
+// ===== PROCESSING (Modal View 1) =====
 async function handleFiles(fileList) {
   const token = getToken();
+  const validFiles = Array.from(fileList).filter(f => f.type.startsWith('image/')).slice(0,5);
+  if(!validFiles.length) return;
 
-  // Filter valid images, max 5
-  const validFiles = Array.from(fileList).filter(f => f.type.startsWith('image/')).slice(0, 5);
-  if(validFiles.length === 0) return;
+  // Show processing modal
+  sfmShow('sfmProcessing');
+  sfmProgress(0);
+  const label = document.getElementById('sfmProcLabel');
+  const sub = document.getElementById('sfmProcSub');
+  const thumb = document.getElementById('sfmProcThumb');
+  thumb.innerHTML = '';
+  thumb.classList.remove('show');
 
-  hideAll();
-  searchStatus.style.display = 'block';
-  statusText.textContent = 'Detecting faces...';
-  statusSub.textContent = 'Analyzing ' + validFiles.length + ' photo' + (validFiles.length > 1 ? 's' : '') + ' with AI';
+  // Also fetch remaining searches in parallel
+  fetchRemaining();
 
   try {
     let allFaces = [];
-    let faceIdCounter = 0;
-
     for(let i = 0; i < validFiles.length; i++) {
-      if(validFiles.length > 1) {
-        statusSub.textContent = 'Processing photo ' + (i+1) + ' of ' + validFiles.length + '...';
+      const pct = Math.round(((i) / validFiles.length) * 80);
+      sfmProgress(pct);
+      label.textContent = 'Processing' + (validFiles.length > 1 ? '  (' + (i+1) + '/' + validFiles.length + ')' : '...');
+      sub.textContent = 'Detecting faces in ' + (validFiles.length > 1 ? 'photo ' + (i+1) : 'your photo');
+
+      // Show thumbnail of first image
+      if(i === 0) {
+        try {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            thumb.innerHTML = '<img src="' + ev.target.result + '" style="width:100%;height:100%;object-fit:cover">';
+            thumb.classList.add('show');
+          };
+          reader.readAsDataURL(validFiles[0]);
+        } catch(e){}
       }
 
       const formData = new FormData();
       formData.append('file', validFiles[i]);
 
       const res = await fetch(API + '/upload', {
-        method: 'POST',
-        headers: {'Authorization': 'Bearer ' + token},
-        body: formData
+        method:'POST',
+        headers:{'Authorization':'Bearer '+token},
+        body:formData
       });
-
       const data = await res.json();
 
       if(res.ok && data.faces && data.faces.length > 0) {
-        // Add photo index to each face for labeling
         data.faces.forEach(face => {
           face._photoIndex = i + 1;
           face._totalPhotos = validFiles.length;
           allFaces.push(face);
         });
       }
-
-      // Stop if we already have 8 faces
-      if(allFaces.length >= 8) {
-        allFaces = allFaces.slice(0, 8);
-        break;
-      }
+      if(allFaces.length >= 8) { allFaces = allFaces.slice(0,8); break; }
     }
 
-    if(allFaces.length === 0) {
-      statusText.textContent = 'No face detected';
-      statusSub.textContent = 'Please upload clear photos with visible faces.';
-      setTimeout(resetSearch, 3000);
+    sfmProgress(100);
+
+    if(!allFaces.length) {
+      label.textContent = 'No face detected';
+      sub.textContent = 'Please upload clear photos with visible faces.';
+      setTimeout(() => { sfmHide(); resetSearch(); }, 2500);
       return;
     }
 
     detectedFaces = allFaces;
-    showFaceSelection();
+    setTimeout(() => showFaceSelection(), 300);
 
   } catch(err) {
-    statusText.textContent = 'Connection error';
-    statusSub.textContent = 'Please check your connection and try again.';
-    setTimeout(resetSearch, 3000);
+    label.textContent = 'Connection error';
+    sub.textContent = 'Please check your connection and try again.';
+    setTimeout(() => { sfmHide(); resetSearch(); }, 3000);
   }
 }
 
-// ===== STEP 2: FACE SELECTION =====
+// ===== CHOOSE FACE (Modal View 2) =====
 function showFaceSelection() {
-  hideAll();
-  faceSelection.style.display = 'block';
-  faceGrid.innerHTML = '';
+  sfmShow('sfmChoose');
+  const grid = document.getElementById('sfmFaceGrid');
+  const hint = document.getElementById('sfmFaceHint');
+  const btn = document.getElementById('sfmProceedBtn');
+  grid.innerHTML = '';
   selectedFaceIds = [];
-  searchSelectedBtn.disabled = true;
-  searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select face(s) to continue';
+  btn.disabled = true;
+  btn.className = 'sfm-btn sfm-btn--inactive';
+  btn.textContent = 'Proceed to the Face Search';
 
-  // Update count text
-  const countText = faceSelection.querySelector('p');
-  if(countText) countText.textContent = 'We detected ' + detectedFaces.length + ' face' + (detectedFaces.length > 1 ? 's' : '') + '. Select up to 5 of the same person for better accuracy.';
+  hint.textContent = detectedFaces.length === 1
+    ? 'Select photo of your face to proceed with the search'
+    : 'We detected ' + detectedFaces.length + ' faces. Select up to 5 of the same person for better accuracy.';
 
-  function updateSelectionUI() {
+  function updateUI() {
     const count = selectedFaceIds.length;
-    // Update number badges on all thumbs
-    document.querySelectorAll('.face-thumb').forEach(t => {
+    document.querySelectorAll('#sfmFaceGrid .face-thumb').forEach(t => {
       const fid = t.dataset.faceId;
       const idx = selectedFaceIds.indexOf(fid);
-      if(idx > -1) {
-        t.dataset.selNum = idx + 1;
-      } else {
-        t.dataset.selNum = '';
-      }
+      t.dataset.selNum = idx > -1 ? idx + 1 : '';
     });
     if(count === 0) {
-      searchSelectedBtn.disabled = true;
-      searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Select face(s) to continue';
+      btn.disabled = true;
+      btn.className = 'sfm-btn sfm-btn--inactive';
+      btn.textContent = 'Proceed to the Face Search';
     } else {
-      searchSelectedBtn.disabled = false;
-      const label = count === 1 ? 'Continue with 1 face' : 'Continue with ' + count + ' faces (better accuracy)';
-      searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ' + label;
+      btn.disabled = false;
+      btn.className = 'sfm-btn sfm-btn--active';
+      btn.textContent = count === 1 ? 'Proceed to the Face Search' : 'Proceed with ' + count + ' faces (better accuracy)';
     }
   }
 
   detectedFaces.forEach((face, i) => {
-    const thumb = document.createElement('div');
-    thumb.className = 'face-thumb';
-    thumb.dataset.faceId = face.id;
+    const t = document.createElement('div');
+    t.className = 'face-thumb';
+    t.dataset.faceId = face.id;
     const isMinor = face.is_minor === true;
-    if(isMinor) thumb.classList.add('face-thumb--minor');
+    if(isMinor) t.classList.add('face-thumb--minor');
 
-    const info = face._totalPhotos > 1 ? ('Photo ' + face._photoIndex + ' Â· Face ' + (i+1)) : ('Face ' + (i+1));
-
-    thumb.innerHTML =
-      '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
+    const info = face._totalPhotos > 1 ? 'Photo ' + face._photoIndex : 'Face ' + (i+1);
+    t.innerHTML = '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
       (isMinor ? '<div class="minor-badge">MINOR</div>' : '') +
-      '<div class="face-thumb__info">' + info + (isMinor ? ' Â· Under 18' : '') + '</div>';
+      '<div class="face-thumb__info">' + info + (isMinor ? ' · Under 18' : '') + '</div>';
 
     if(!isMinor) {
-      thumb.addEventListener('click', () => {
+      t.addEventListener('click', () => {
         const idx = selectedFaceIds.indexOf(face.id);
-        if(idx > -1) {
-          // Deselect
-          selectedFaceIds.splice(idx, 1);
-          thumb.classList.remove('selected');
-        } else if(selectedFaceIds.length < 5) {
-          // Select
-          selectedFaceIds.push(face.id);
-          thumb.classList.add('selected');
-        } else {
-          // Max 5 â€” shake the button
-          searchSelectedBtn.style.animation = 'none';
-          searchSelectedBtn.offsetHeight;
-          searchSelectedBtn.style.animation = 'shake 0.4s ease';
-        }
-        updateSelectionUI();
+        if(idx > -1) { selectedFaceIds.splice(idx,1); t.classList.remove('selected'); }
+        else if(selectedFaceIds.length < 5) { selectedFaceIds.push(face.id); t.classList.add('selected'); }
+        else { btn.style.animation='none'; btn.offsetHeight; btn.style.animation='shake 0.4s ease'; }
+        updateUI();
       });
     }
-
-    faceGrid.appendChild(thumb);
+    grid.appendChild(t);
   });
 
-  // If ALL faces are minors, show warning
-  const allMinors = detectedFaces.every(f => f.is_minor === true);
-  if(allMinors) {
-    searchSelectedBtn.disabled = true;
-    searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#ef4444;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> <span style="color:#fca5a5">Search unavailable â€” minors detected</span>';
-    const notice = document.createElement('div');
-    notice.style.cssText = 'background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);border-radius:12px;padding:14px 16px;margin-top:16px;font-size:.82rem;color:#fca5a5;line-height:1.5;text-align:center';
-    notice.innerHTML = 'All detected faces appear to be under 18. Protevio does not allow searches involving minors.';
-    faceGrid.parentElement.insertBefore(notice, searchSelectedBtn);
+  // All minors check
+  if(detectedFaces.every(f => f.is_minor === true)) {
+    btn.disabled = true;
+    btn.className = 'sfm-btn sfm-btn--inactive';
+    btn.innerHTML = '<span style="color:#fca5a5">Search unavailable — minors detected</span>';
+    hint.textContent = 'All detected faces appear to be under 18. Protevio does not allow searches involving minors.';
+    hint.style.color = '#fca5a5';
   }
 }
 
-document.getElementById('backToUpload').addEventListener('click', resetSearch);
+document.getElementById('sfmBackToUpload').addEventListener('click', () => { sfmHide(); resetSearch(); });
 
-searchSelectedBtn.addEventListener('click', () => {
+document.getElementById('sfmProceedBtn').addEventListener('click', () => {
   if(!selectedFaceIds.length) return;
-  showTermsStep();
+  showSearchStep();
 });
 
-// ===== STEP 3: TERMS AGREEMENT =====
-function showTermsStep() {
-  hideAll();
-  termsStep.style.display = 'block';
-  termsCheckbox.checked = false;
-  agreeSearchBtn.disabled = true;
+// ===== FACE SEARCH (Modal View 3) =====
+function showSearchStep() {
+  sfmShow('sfmSearch');
+
+  // Reset state
+  const termsCheck = document.getElementById('sfmTermsCheck');
+  const startBtn = document.getElementById('sfmStartBtn');
+  termsCheck.checked = false;
+  startBtn.disabled = true;
+  startBtn.textContent = 'Start Search';
+  startBtn.className = 'sfm-btn sfm-btn--search';
   turnstileToken = '';
 
-  const face = detectedFaces.find(f => f.id === selectedFaceIds[0]);
-  if(face) {
-    document.querySelector('#termsPreview img').src = face.thumbnail;
-    const countLabel = selectedFaceIds.length > 1 ? selectedFaceIds.length + ' faces selected Â· ' : '';
-    document.getElementById('termsDetection').textContent =
-      countLabel + 'Face detected' +
-      (face.confidence ? ' Â· ' + Math.round(face.confidence * 100) + '% confidence' : '');
-  }
+  // Populate selected faces row
+  const row = document.getElementById('sfmSelectedRow');
+  row.innerHTML = '';
+  selectedFaceIds.forEach(fid => {
+    const face = detectedFaces.find(f => f.id === fid);
+    if(!face) return;
+    const el = document.createElement('div');
+    el.className = 'sfm-sel-face';
+    el.innerHTML = '<img src="' + face.thumbnail + '" alt="">' +
+      '<button class="sfm-sel-face__remove" data-fid="' + fid + '">&times;</button>' +
+      '<div class="sfm-sel-face__badge"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01" stroke-linecap="round"/></svg></div>';
+    el.querySelector('.sfm-sel-face__remove').addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectedFaceIds = selectedFaceIds.filter(id => id !== fid);
+      el.remove();
+      if(!selectedFaceIds.length) showFaceSelection();
+    });
+    row.appendChild(el);
+  });
 
-  // Render Turnstile CAPTCHA if enabled
-  const box = document.getElementById('turnstileBox');
+  // Render Turnstile CAPTCHA
+  const box = document.getElementById('sfmCaptchaBox');
   if(turnstileEnabled && turnstileSiteKey && typeof turnstile !== 'undefined') {
     box.style.display = 'flex';
-    // Remove old widget if exists
-    if(turnstileWidgetId !== null) {
-      try { turnstile.remove(turnstileWidgetId); } catch(e){}
-      turnstileWidgetId = null;
-    }
-    turnstileWidgetId = turnstile.render('#turnstileWidget', {
-      sitekey: turnstileSiteKey,
-      theme: 'dark',
-      callback: function(token) {
-        turnstileToken = token;
-        updateAgreeBtn();
-      },
-      'expired-callback': function() {
-        turnstileToken = '';
-        updateAgreeBtn();
-      }
+    if(turnstileWidgetId !== null) { try{turnstile.remove(turnstileWidgetId)}catch(e){} turnstileWidgetId=null; }
+    turnstileWidgetId = turnstile.render('#sfmTurnstileWidget', {
+      sitekey: turnstileSiteKey, theme:'dark',
+      callback: function(token) { turnstileToken = token; updateStartBtn(); },
+      'expired-callback': function() { turnstileToken = ''; updateStartBtn(); }
     });
+  } else { box.style.display = 'none'; }
+
+  // Show remaining searches
+  const remEl = document.getElementById('sfmRemaining');
+  if(searchesRemaining !== null && searchesRemaining !== -1) {
+    const limit = PLAN_LIMITS[userPlan] || 10;
+    remEl.innerHTML = 'You have <strong>' + searchesRemaining + '</strong> of ' + limit + ' searches remaining today';
+    remEl.style.display = '';
+  } else if(searchesRemaining === -1) {
+    remEl.innerHTML = '<strong>Unlimited</strong> searches available';
+    remEl.style.display = '';
   } else {
-    box.style.display = 'none';
+    remEl.style.display = 'none';
   }
+
+  // Thin bar at 100% (processing done)
+  document.getElementById('sfmSearchBar').style.width = '100%';
 }
 
-function updateAgreeBtn() {
-  const termsOk = termsCheckbox.checked;
+function updateStartBtn() {
+  const termsOk = document.getElementById('sfmTermsCheck').checked;
   const captchaOk = !turnstileEnabled || turnstileToken;
-  agreeSearchBtn.disabled = !(termsOk && captchaOk);
+  document.getElementById('sfmStartBtn').disabled = !(termsOk && captchaOk);
 }
 
-document.getElementById('backToFaces').addEventListener('click', showFaceSelection);
+document.getElementById('sfmTermsCheck').addEventListener('change', updateStartBtn);
+document.getElementById('sfmBackToChoose').addEventListener('click', showFaceSelection);
+document.getElementById('sfmEditPhotos').addEventListener('click', showFaceSelection);
 
-termsCheckbox.addEventListener('change', updateAgreeBtn);
-
-agreeSearchBtn.addEventListener('click', () => {
-  if(!termsCheckbox.checked || !selectedFaceIds.length) return;
+document.getElementById('sfmStartBtn').addEventListener('click', () => {
+  if(!document.getElementById('sfmTermsCheck').checked || !selectedFaceIds.length) return;
   runSearch();
 });
 
-// ===== STEP 4: SEARCH =====
+// ===== RUN SEARCH =====
 function updateProgress(pct) {
   const circle = document.getElementById('progressCircle');
   const text = document.getElementById('progressPercent');
-  const offset = 326.7 - (326.7 * pct / 100);
-  circle.style.strokeDashoffset = offset;
-  text.textContent = Math.round(pct) + '%';
+  if(circle) { circle.style.strokeDashoffset = 326.7 - (326.7 * pct / 100); }
+  if(text) { text.textContent = Math.round(pct) + '%'; }
+  // Also update the thin bar in the search modal
+  const bar = document.getElementById('sfmSearchBar');
+  if(bar) bar.style.width = pct + '%';
 }
 
 async function runSearch() {
-  hideAll();
-  searchStatus.style.display = 'block';
+  // Switch button to searching state
+  const startBtn = document.getElementById('sfmStartBtn');
+  startBtn.disabled = true;
+  startBtn.className = 'sfm-btn sfm-btn--searching';
+  startBtn.innerHTML = 'Searching <svg width="18" height="18" viewBox="0 0 24 24" style="animation:spin 1s linear infinite;vertical-align:middle;margin-left:6px"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="32" stroke-linecap="round"/></svg>';
 
-  // Show face thumbnail in status
-  const thumb = document.getElementById('statusThumb');
-  const thumbImg = document.getElementById('statusThumbImg');
-  const selThumb = selectedFaceIds[0] ? detectedFaces.find(f => f.id === selectedFaceIds[0]) : null;
-  if(selThumb) { thumbImg.src = selThumb.thumbnail; thumb.style.display = 'block'; }
+  // Animate the thin bar
+  const bar = document.getElementById('sfmSearchBar');
+  bar.style.width = '0%';
+  bar.style.transition = 'width .3s ease';
 
-  const safeSearch = document.getElementById('safeSearchToggle').classList.contains('on');
-  const deepSearch = document.getElementById('deepSearchToggle').classList.contains('on');
+  const safeSearch = document.getElementById('sfmSafeToggle').classList.contains('on');
+  const deepSearch = document.getElementById('sfmDeepToggle').classList.contains('on');
+  const timeFilter = document.getElementById('sfmTimeFilter').value;
 
-  // Animate progress
-  updateProgress(0);
-  const multiLabel = selectedFaceIds.length > 1 ? ' (' + selectedFaceIds.length + ' photos)' : '';
-  const steps = [
-    {pct: 15, text: 'Analyzing face' + multiLabel + '...', sub: 'Extracting facial features'},
-    {pct: 35, text: 'Processing...', sub: selectedFaceIds.length > 1 ? 'Averaging embeddings for better accuracy' : 'Encoding biometric signature'},
-    {pct: 55, text: 'Searching database...', sub: 'Comparing against available faces'},
-    {pct: 75, text: 'Matching results...', sub: 'Finding similar faces'},
-    {pct: 90, text: 'Almost done...', sub: 'Ranking matches by similarity'},
-  ];
+  // Progress animation
+  const steps = [15, 35, 55, 75, 90];
   let stepIdx = 0;
   const progInterval = setInterval(() => {
-    if(stepIdx < steps.length) {
-      updateProgress(steps[stepIdx].pct);
-      statusText.textContent = steps[stepIdx].text;
-      statusSub.textContent = steps[stepIdx].sub;
-      stepIdx++;
-    }
+    if(stepIdx < steps.length) { bar.style.width = steps[stepIdx] + '%'; stepIdx++; }
   }, 600);
 
+  // Also show inline status as fallback
+  uploadBox.style.display = 'none';
+  actionButtons.style.display = 'none';
+
   const token = getToken();
+  const statusText = document.getElementById('statusText');
+  const statusSub = document.getElementById('statusSub');
 
   try {
     const res = await fetch(API + '/search', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ faces: selectedFaceIds, safe_search: safeSearch, deep_search: deepSearch, captcha_token: turnstileToken || '' })
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body: JSON.stringify({
+        faces: selectedFaceIds,
+        safe_search: safeSearch,
+        deep_search: deepSearch,
+        time_filter: timeFilter,
+        captcha_token: turnstileToken || ''
+      })
     });
 
     clearInterval(progInterval);
-    updateProgress(100);
-    statusText.textContent = 'Complete!';
-    statusSub.textContent = 'Loading results...';
+    bar.style.width = '100%';
 
     if(!res.ok) {
       const errData = await res.json();
-      // Minor detected â€” show warning modal
       if(res.status === 451 || errData.error === 'minor_detected') {
-        clearInterval(progInterval);
-        document.getElementById('minorModalBg').classList.add('open');
-        return;
+        sfmHide(); document.getElementById('minorModalBg').classList.add('open'); return;
       }
-      // Different faces selected â€” go back to selection
       if(errData.error === 'different_faces') {
-        clearInterval(progInterval);
-        statusText.textContent = 'Different people detected';
-        statusSub.textContent = errData.message || 'Please select photos of the same person.';
-        setTimeout(showFaceSelection, 2500);
-        return;
+        startBtn.textContent = 'Different people detected';
+        setTimeout(showFaceSelection, 2000); return;
       }
-      // Face data expired â€” need to re-upload
       if(res.status === 410) {
-        statusText.textContent = 'Session expired';
-        statusSub.textContent = 'Please upload your photo again.';
-        setTimeout(resetSearch, 3000);
-        return;
+        startBtn.textContent = 'Session expired — please re-upload';
+        setTimeout(() => { sfmHide(); resetSearch(); }, 2500); return;
       }
-      // CAPTCHA failed â€” go back to terms step to retry
       if(res.status === 403 && errData.captcha_required) {
-        statusText.textContent = 'Verification failed';
-        statusSub.textContent = 'Please complete the CAPTCHA and try again.';
+        startBtn.textContent = 'Verification failed — retrying...';
         turnstileToken = '';
-        setTimeout(() => showTermsStep(), 2000);
-        return;
+        setTimeout(() => showSearchStep(), 1500); return;
       }
-      // Account suspended â€” redirect to suspension page
-      if(res.status === 403 && (errData.error || '').toLowerCase().includes('suspended')) {
-        try { const u = JSON.parse(localStorage.getItem('protevio_user') || '{}'); u.plan = 'suspended'; localStorage.setItem('protevio_user', JSON.stringify(u)); } catch(e){}
-        window.location.href = '/suspended.html';
-        return;
+      if(res.status === 403 && (errData.error||'').toLowerCase().includes('suspended')) {
+        try{const u=JSON.parse(localStorage.getItem('protevio_user')||'{}');u.plan='suspended';localStorage.setItem('protevio_user',JSON.stringify(u))}catch(e){}
+        window.location.href='/suspended.html'; return;
       }
-      // Service unavailable (DB down)
       if(res.status === 503) {
-        statusText.textContent = 'Service busy';
-        statusSub.textContent = 'Our servers are under heavy load. Please try again in a few seconds.';
-        setTimeout(resetSearch, 5000);
-        return;
+        startBtn.textContent = 'Servers busy — please retry';
+        setTimeout(() => showSearchStep(), 3000); return;
       }
-      // Rate limited
       if(res.status === 429) {
-        statusText.textContent = 'Too many requests';
-        statusSub.textContent = 'Please wait a moment before searching again.';
-        setTimeout(resetSearch, 5000);
-        return;
+        startBtn.textContent = 'Too many requests — please wait';
+        setTimeout(() => showSearchStep(), 3000); return;
       }
-      statusText.textContent = 'Search failed';
-      statusSub.textContent = errData.error || 'Please try again.';
-      setTimeout(resetSearch, 3000);
-      return;
+      startBtn.textContent = errData.error || 'Search failed';
+      setTimeout(() => showSearchStep(), 2500); return;
     }
 
-    // Refresh user plan from /auth/me
+    // Refresh user plan
     try {
-      const meRes = await fetch(API + '/auth/me', { headers: {'Authorization': 'Bearer ' + token} });
+      const meRes = await fetch(API + '/auth/me', {headers:{'Authorization':'Bearer '+token}});
       if(meRes.ok) {
         const me = await meRes.json();
         userPlan = me.plan || 'free';
         localStorage.setItem('protevio_user', JSON.stringify(me));
-        if(userPlan === 'suspended') { window.location.href = '/suspended.html'; return; }
+        if(userPlan === 'suspended') { window.location.href='/suspended.html'; return; }
       }
     } catch(e){}
 
     const searchData = await res.json();
-    
-    // Store results and redirect to dedicated results page
     const firstSelectedFace = detectedFaces.find(f => f.id === selectedFaceIds[0]);
     const faceThumbSrc = firstSelectedFace ? firstSelectedFace.thumbnail : '';
     sessionStorage.setItem('protevio_results', JSON.stringify({
@@ -2116,90 +2341,44 @@ async function runSearch() {
       faceThumb: faceThumbSrc,
       timestamp: Date.now()
     }));
-    
+
+    startBtn.innerHTML = 'Complete! Redirecting...';
+
     await new Promise(r => setTimeout(r, 400));
 
-    // GUEST WALL: If not logged in, show signup prompt instead of results
+    // GUEST WALL
     if(!getToken()) {
+      sfmHide();
+      const searchResults = document.getElementById('searchResults');
       const matchCount = searchData.count || 0;
-      hideAll();
       searchResults.style.display = 'block';
       
-      // No results â€” just show no matches, no signup wall
       if(matchCount === 0) {
-        searchResults.innerHTML = `
-          <div style="text-align:center;padding:60px 20px;">
-            <svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--text-muted);stroke-width:1.5;fill:none;margin-bottom:16px;opacity:.5;"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:8px;">No Matches Found</h2>
-            <p style="color:var(--text-muted);margin-bottom:24px;">We didn't find any matching faces in our database. Try a clearer photo.</p>
-            <button onclick="resetSearch()" style="padding:12px 32px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem;">Try Another Search</button>
-          </div>
-        `;
+        searchResults.innerHTML = '<div style="text-align:center;padding:60px 20px;"><svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--text-muted);stroke-width:1.5;fill:none;margin-bottom:16px;opacity:.5;"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg><h2 style="font-size:1.3rem;font-weight:700;margin-bottom:8px;">No Matches Found</h2><p style="color:var(--text-muted);margin-bottom:24px;">We didn\'t find any matching faces. Try a clearer photo.</p><button onclick="resetSearch()" style="padding:12px 32px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem;">Try Another Search</button></div>';
         return;
       }
       
-      searchResults.innerHTML = `
-        <div style="text-align:center;padding:40px 20px;">
-          <div style="width:80px;height:80px;margin:0 auto 24px;border-radius:50%;overflow:hidden;border:3px solid var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3);">
-            <img src="${faceThumbSrc}" style="width:100%;height:100%;object-fit:cover;" alt="">
-          </div>
-          <div style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">
-            ${matchCount}
-          </div>
-          <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:8px;">Match${matchCount !== 1 ? 'es' : ''} Found</h2>
-          <p style="color:var(--text-muted);margin-bottom:32px;font-size:.95rem;line-height:1.6;">
-            We found <strong style="color:var(--accent);">${matchCount} face match${matchCount !== 1 ? 'es' : ''}</strong> across our database of indexed faces.<br>
-            Create a free account to see where your face appears online.
-          </p>
-          <a href="/signup.html?redirect=results" style="display:inline-block;padding:16px 48px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border-radius:14px;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 24px rgba(91,154,255,.4);transition:all .3s;" 
-             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(91,154,255,.5)'"
-             onmouseout="this.style.transform='';this.style.boxShadow='0 6px 24px rgba(91,154,255,.4)'">
-            Create Free Account
-          </a>
-          <p style="margin-top:16px;font-size:.82rem;color:var(--text-muted);">
-            Already have an account? <a href="/login.html?redirect=results" style="color:var(--accent);text-decoration:none;font-weight:600;">Log in</a>
-          </p>
-          <div style="margin-top:32px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
-            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);stroke-width:2;fill:none;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              Free to search
-            </span>
-            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);stroke-width:2;fill:none;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              10 searches/day
-            </span>
-            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);stroke-width:2;fill:none;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              No credit card needed
-            </span>
-          </div>
-          <button onclick="resetSearch()" style="margin-top:24px;padding:10px 24px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:10px;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;"
-                  onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--text)'"
-                  onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">
-            â† Try another photo
-          </button>
-        </div>
-      `;
+      searchResults.innerHTML = '<div style="text-align:center;padding:40px 20px;"><div style="width:80px;height:80px;margin:0 auto 24px;border-radius:50%;overflow:hidden;border:3px solid var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3);"><img src="' + faceThumbSrc + '" style="width:100%;height:100%;object-fit:cover;" alt=""></div><div style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">' + matchCount + '</div><h2 style="font-size:1.4rem;font-weight:700;margin-bottom:8px;">Match' + (matchCount!==1?'es':'') + ' Found</h2><p style="color:var(--text-muted);margin-bottom:32px;font-size:.95rem;line-height:1.6;">We found <strong style="color:var(--accent);">' + matchCount + ' face match' + (matchCount!==1?'es':'') + '</strong> across our database.<br>Create a free account to see where your face appears online.</p><a href="/signup.html?redirect=results" style="display:inline-block;padding:16px 48px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border-radius:14px;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 24px rgba(91,154,255,.4);">Create Free Account</a><p style="margin-top:16px;font-size:.82rem;color:var(--text-muted);">Already have an account? <a href="/login.html?redirect=results" style="color:var(--accent);text-decoration:none;font-weight:600;">Log in</a></p><button onclick="resetSearch()" style="margin-top:24px;padding:10px 24px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:10px;font-size:.85rem;cursor:pointer;font-family:inherit;">← Try another photo</button></div>';
       return;
     }
 
+    sfmHide();
     window.location.href = '/results.html';
 
   } catch(err) {
     clearInterval(progInterval);
-    statusText.textContent = 'Connection error';
-    statusSub.textContent = 'Please check your connection and try again.';
-    setTimeout(resetSearch, 3000);
+    startBtn.textContent = 'Connection error — please retry';
+    setTimeout(() => showSearchStep(), 3000);
   }
 }
+
 
 // Deep Search handler
 function handleDeepSearch(btn) {
   if(userPlan === 'free' || userPlan === 'basic') {
-    // Show upgrade prompt
     btn.classList.remove('on');
-    const label = document.getElementById('deepSearchLabel');
-    label.innerHTML = '<span style="color:var(--gold)">âš¡ Available on Advanced plan</span> <a href="/pricing" style="color:var(--accent);text-decoration:underline;font-size:.72rem">Upgrade â†’</a>';
+    const parent = btn.closest('.sfm-toggle-item');
+    if(parent) { const s = parent.querySelector('span'); s.dataset.orig = s.textContent; s.innerHTML = '<span style="color:var(--gold);font-size:.75rem">Advanced plan only</span>'; setTimeout(() => { s.textContent = s.dataset.orig; }, 2000); }
     return;
   }
   btn.classList.toggle('on');
