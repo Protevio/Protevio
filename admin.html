@@ -1029,29 +1029,23 @@ async function loadOptOut(status) {
   }).join('');
 }
 
-function viewIdPhoto(id) {
+async function viewIdPhoto(id) {
   const url = API + '/admin/opt-out-id-photo/' + id;
-  const w = window.open('', 'idphoto', 'width=600,height=450,scrollbars=yes');
-  w.document.write(`
-    <html><head><title>ID Photo - Request #${id}</title>
-    <style>body{margin:0;background:#1a1f2e;display:flex;align-items:center;justify-content:center;min-height:100vh}
-    img{max-width:95%;max-height:90vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
-    .warn{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#d97706;padding:8px 20px;border-radius:8px;font:13px/1.4 system-ui;text-align:center;z-index:2}</style></head>
-    <body>
-    <div class="warn">&#9888; Confidential - Verify face &amp; name match the request</div>
-    <img src="${url}" onerror="document.body.innerHTML='<p style=color:#f87171;text-align:center;margin-top:40vh;font:16px/1.4\ system-ui>ID photo not found or already deleted</p>'">
-    </body></html>
-  `);
-  // Set auth header via fetch + blob
-  fetch(url, {headers:{'Authorization':'Bearer '+token}})
-    .then(r => r.blob())
-    .then(blob => {
-      const objUrl = URL.createObjectURL(blob);
-      w.document.querySelector('img').src = objUrl;
-    })
-    .catch(() => {
-      w.document.body.innerHTML = '<p style="color:#f87171;text-align:center;margin-top:40vh;font:16px/1.4 system-ui">Failed to load ID photo</p>';
-    });
+  try {
+    const res = await fetch(url, {headers:{'Authorization':'Bearer '+token}});
+    if(!res.ok) throw new Error('Not found');
+    const blob = await res.blob();
+    const objUrl = URL.createObjectURL(blob);
+    const w = window.open('', 'idphoto_'+id, 'width=650,height=500,scrollbars=yes');
+    w.document.write('<html><head><title>ID Photo - Request #'+id+'</title>'+
+      '<style>body{margin:0;background:#1a1f2e;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:16px}'+
+      'img{max-width:95%;max-height:85vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)}'+
+      '.warn{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#d97706;padding:8px 20px;border-radius:8px;font:13px/1.4 system-ui;text-align:center;margin-top:16px}</style></head>'+
+      '<body><div class="warn">&#9888; Confidential &mdash; Verify face &amp; name match the request</div>'+
+      '<img src="'+objUrl+'"></body></html>');
+  } catch(e) {
+    alert('Failed to load ID photo. It may have been deleted or the request was already processed.');
+  }
 }
 
 async function approveOptOut(id, name, matchCount) {
