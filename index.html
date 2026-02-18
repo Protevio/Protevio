@@ -4,16 +4,16 @@
 <meta charset="UTF-8"/>
 <meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Protevio AI â€” Reverse Face Search Engine | Find Where Your Photos Appear Online</title>
+<title>Protevio AI &mdash; Reverse Face Search Engine | Find Where Your Photos Appear Online</title>
 <meta name="description" content="Search your face across 1.1 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <meta name="keywords" content="reverse face search, facial recognition search, find my photos online, face search engine, PimEyes alternative, photo protection, digital identity"/>
-<meta property="og:title" content="Protevio AI â€” Find Where Your Face Appears Online"/>
+<meta property="og:title" content="Protevio AI &mdash; Find Where Your Face Appears Online"/>
 <meta property="og:description" content="Search your face across 1.1 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://protevio.com/"/>
 <meta property="og:site_name" content="Protevio AI"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Protevio AI â€” Find Where Your Face Appears Online"/>
+<meta name="twitter:title" content="Protevio AI &mdash; Find Where Your Face Appears Online"/>
 <meta name="twitter:description" content="Search your face across 1.1 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <link rel="canonical" href="https://protevio.com/"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1191,7 +1191,7 @@ body{
           <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Free accounts see blurred previews. Upgrade to reveal full results with source links and high-resolution images.</p>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
             <a href="/dashboard" class="upgrade-btn" style="background:linear-gradient(135deg,var(--accent),var(--purple));">Upgrade Plan</a>
-            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search â€” â‚¬9.99</button>
+            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — â‚¬9.99</button>
           </div>
         </div>
       </div>
@@ -1888,7 +1888,7 @@ function getToken() { return localStorage.getItem('protevio_token'); }
         try { const u = JSON.parse(localStorage.getItem('protevio_user') || '{}'); u.plan = 'suspended'; localStorage.setItem('protevio_user', JSON.stringify(u)); } catch(e){}
         window.location.href = '/suspended.html';
       } else if(res.status === 401) {
-        // Refresh token expired â€” must re-login
+        // Refresh token expired — must re-login
         localStorage.removeItem('protevio_token');
         localStorage.removeItem('protevio_refresh');
         localStorage.removeItem('protevio_user');
@@ -2400,7 +2400,7 @@ function showResults(data) {
   if(dlBtn) {
     dlBtn.style.display = (!isFree && matches.length > 0) ? 'flex' : 'none';
   }
-  // Show share button for everyone (even free users â€” it's marketing)
+  // Show share button for everyone (even free users — it's marketing)
   const shareBtn = document.getElementById('shareResultsBtn');
   if(shareBtn) {
     shareBtn.style.display = (matches.length > 0) ? 'flex' : 'none';
@@ -2420,7 +2420,7 @@ function showResults(data) {
   const header = document.createElement('div');
   header.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 4px;margin-bottom:4px;';
   header.innerHTML = '<div style="font-size:.85rem;color:var(--text-muted);">About <strong style="color:var(--text)">' + resultCount + '</strong> results in ' + searchTime + 's</div>' +
-    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">ðŸ”’ Free preview â€” upgrade to see full results</div>' : '');
+    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">ðŸ”’ Free preview — upgrade to see full results</div>' : '');
   resultsList.appendChild(header);
 
   matches.forEach((match, i) => {
@@ -2733,7 +2733,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       <div style="font-size:.82rem;color:var(--text-muted);line-height:1.5;">
         <strong style="color:var(--text);">ðŸ’¡ Tips for best results:</strong><br>
         â€¢ Use a clear, front-facing photo with good lighting<br>
-        â€¢ Avoid group photos â€” crop to a single face<br>
+        â€¢ Avoid group photos — crop to a single face<br>
         â€¢ Higher resolution images give better matches
       </div>
     </div>
@@ -2812,7 +2812,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
         <span class="result-modal__action-arrow">â€º</span>
       </button>
     </div>
-    <div class="result-modal__footer">Powered by Protevio AI Â· Results generated by facial similarity matching</div>
+    <div class="result-modal__footer">Powered by Protevio AI · Results generated by facial similarity matching</div>
   </div>
 </div>
 
@@ -2822,7 +2822,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
     <div class="minor-modal__icon">
       <svg viewbox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
-    <div class="minor-modal__title">Search Blocked â€” Minor Detected</div>
+    <div class="minor-modal__title">Search Blocked — Minor Detected</div>
     <div class="minor-modal__text">
       Our AI has detected that the uploaded photo appears to contain a <strong>person under the age of 18</strong>. Protevio does not allow facial recognition searches involving minors.
     </div>
@@ -2844,7 +2844,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       <a href="/csr" style="color:var(--accent);text-decoration:none;margin:0 12px">CSR</a>
       <a href="dmca-templates.html" style="color:var(--accent);text-decoration:none;margin:0 12px">DMCA Templates</a>
     </div>
-    <p>Â© 2026 Protevio AI. All rights reserved.</p>
+    <p>© 2026 Protevio AI. All rights reserved.</p>
   </div>
 </footer>
 </body>
