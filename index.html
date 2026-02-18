@@ -4,16 +4,16 @@
 <meta charset="UTF-8"/>
 <meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Protevio AI — Reverse Face Search Engine | Find Where Your Photos Appear Online</title>
+<title>Protevio AI â€” Reverse Face Search Engine | Find Where Your Photos Appear Online</title>
 <meta name="description" content="Search your face across 1.1 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <meta name="keywords" content="reverse face search, facial recognition search, find my photos online, face search engine, PimEyes alternative, photo protection, digital identity"/>
-<meta property="og:title" content="Protevio AI — Find Where Your Face Appears Online"/>
+<meta property="og:title" content="Protevio AI â€” Find Where Your Face Appears Online"/>
 <meta property="og:description" content="Search your face across 1.1 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://protevio.com/"/>
 <meta property="og:site_name" content="Protevio AI"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Protevio AI — Find Where Your Face Appears Online"/>
+<meta name="twitter:title" content="Protevio AI â€” Find Where Your Face Appears Online"/>
 <meta name="twitter:description" content="Search your face across 1.1 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <link rel="canonical" href="https://protevio.com/"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -529,8 +529,8 @@ body{
 .phone{
   position:absolute;
   top:8%;
-  left:8%;
-  width:135px;
+  left:5%;
+  width:clamp(110px, 28%, 135px);
   background:var(--glass);
   backdrop-filter:blur(16px);
   border:1px solid var(--glass-border);
@@ -740,14 +740,14 @@ body{
   box-shadow:0 16px 48px rgba(0,0,0,.4);
 }
 .stats-badge--faces{
-  bottom:22%;
-  left:-2%;
+  bottom:18%;
+  left:-4%;
   animation:float 5s ease-in-out infinite;
   animation-delay:-2s;
 }
 .stats-badge--speed{
-  top:18%;
-  right:-2%;
+  top:12%;
+  right:-4%;
   animation:float 4.5s ease-in-out infinite;
   animation-delay:-3s;
 }
@@ -777,8 +777,8 @@ body{
 .character{
   position:absolute;
   bottom:3%;
-  right:6%;
-  width:54%;
+  right:2%;
+  width:clamp(140px, 48%, 250px);
   z-index:10;
   filter:drop-shadow(0 20px 40px rgba(0,0,0,.3));
 }
@@ -834,7 +834,7 @@ body{
   .hero__content{text-align:center}
   .hero__desc{margin-left:auto;margin-right:auto}
   .trust-row{justify-content:center}
-  .illustration-container{max-width:340px}
+  .illustration-container{max-width:400px}
 }
 @media(max-width:768px){
   .nav{padding:12px 20px}
@@ -864,15 +864,52 @@ body{
   .result-modal__action-icon{width:34px;height:34px}
   .result-modal__action-title{font-size:.82rem}
   .result-modal__action-sub{font-size:.7rem}
+
+  .illustration-container{max-width:340px}
+  .phone{left:3%;top:5%;padding:8px;border-radius:16px}
+  .phone__face-main{border-radius:8px}
+  .phone__face-icon{width:36px;height:36px}
+  .phone__face-icon svg{width:20px;height:20px}
+  .phone__match-label{font-size:.58rem}
+  .phone__face-thumb{border-radius:6px}
+  .stats-badge{padding:8px 12px;border-radius:10px;gap:8px;font-size:.72rem}
+  .stats-badge__icon{width:28px;height:28px;border-radius:7px}
+  .stats-badge__icon svg{width:14px;height:14px}
+  .stats-badge__text{font-size:.78rem}
+  .stats-badge__value{font-size:.62rem}
+  .stats-badge--faces{bottom:14%;left:0}
+  .stats-badge--speed{top:8%;right:0}
+  .float-element--sun{width:36px;height:36px;top:0;right:18%}
+  .float-element--shield{width:32px;height:32px;top:32%;right:2%}
+  .float-element--shield svg{width:14px;height:14px}
+  .float-element--search{width:32px;height:32px;bottom:30%;left:0}
+  .float-element--search svg{width:14px;height:14px}
 }
 @media(max-width:480px){
   .hero__title{font-size:1.5rem}
   .hero__desc{font-size:.85rem}
   .hero{padding:16px 12px}
   .step-next-btn{font-size:.85rem;padding:12px 16px}
+  .illustration-container{max-width:300px}
+  .character{right:0;width:clamp(120px, 45%, 180px)}
+  .phone{left:2%;width:clamp(95px, 28%, 110px);padding:6px;border-radius:12px}
+  .phone__notch{height:3px;margin-bottom:6px}
+  .phone__face-icon{width:28px;height:28px}
+  .phone__face-icon svg{width:16px;height:16px}
+  .phone__match-label{font-size:.52rem;margin-bottom:4px}
+  .phone__faces-row{gap:3px}
+  .phone__face-thumb svg{width:14px;height:14px}
+  .stats-badge{padding:6px 10px;border-radius:8px;gap:6px}
+  .stats-badge__icon{width:24px;height:24px;border-radius:6px}
+  .stats-badge__icon svg{width:12px;height:12px}
+  .stats-badge__text{font-size:.7rem}
+  .stats-badge__value{font-size:.56rem}
+  .float-element--sun{width:28px;height:28px}
+  .float-element--shield,.float-element--search{width:26px;height:26px}
+  .float-element--shield svg,.float-element--search svg{width:12px;height:12px}
 }
 
-/* ── Hamburger Menu ── */
+/* â”€â”€ Hamburger Menu â”€â”€ */
 .nav__hamburger{
   display:none;
   flex-direction:column;
@@ -1132,7 +1169,7 @@ body{
       <div id="faceSelection" style="display:none;padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
           <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);">Select a Face to Search</h3>
-          <button id="backToUpload" class="step-back-btn">← Back</button>
+          <button id="backToUpload" class="step-back-btn">â† Back</button>
         </div>
         <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:20px;">We detected the following faces. Tap one to search for it.</p>
         <div id="faceGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px;"></div>
@@ -1146,7 +1183,7 @@ body{
       <div id="termsStep" style="display:none;padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
           <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);">Before We Search</h3>
-          <button id="backToFaces" class="step-back-btn">← Back</button>
+          <button id="backToFaces" class="step-back-btn">â† Back</button>
         </div>
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
@@ -1158,10 +1195,10 @@ body{
           </div>
           <div style="font-size:.82rem;color:var(--text-secondary);line-height:1.7;max-height:160px;overflow-y:auto;padding-right:8px;">
             <p style="margin-bottom:10px;">By proceeding with this search, you acknowledge and agree to the following:</p>
-            <p style="margin-bottom:8px;">• You confirm that you have a <strong style="color:var(--text);">legitimate reason</strong> for conducting this facial recognition search and that you are not using it for stalking, harassment, or any unlawful purpose.</p>
-            <p style="margin-bottom:8px;">• You understand that search results are generated using <strong style="color:var(--text);">AI-based facial similarity matching</strong> and may include false positives. Results do not confirm identity.</p>
-            <p style="margin-bottom:8px;">• You agree to comply with our <a href="/terms-of-service" target="_blank" style="color:var(--accent);">Terms of Service</a> and <a href="/privacy-policy" target="_blank" style="color:var(--accent);">Privacy Policy</a>, including all applicable laws regarding biometric data (GDPR, BIPA).</p>
-            <p>• Your uploaded image will be <strong style="color:var(--text);">processed temporarily</strong> and not stored permanently on our servers.</p>
+            <p style="margin-bottom:8px;">â€¢ You confirm that you have a <strong style="color:var(--text);">legitimate reason</strong> for conducting this facial recognition search and that you are not using it for stalking, harassment, or any unlawful purpose.</p>
+            <p style="margin-bottom:8px;">â€¢ You understand that search results are generated using <strong style="color:var(--text);">AI-based facial similarity matching</strong> and may include false positives. Results do not confirm identity.</p>
+            <p style="margin-bottom:8px;">â€¢ You agree to comply with our <a href="/terms-of-service" target="_blank" style="color:var(--accent);">Terms of Service</a> and <a href="/privacy-policy" target="_blank" style="color:var(--accent);">Privacy Policy</a>, including all applicable laws regarding biometric data (GDPR, BIPA).</p>
+            <p>â€¢ Your uploaded image will be <strong style="color:var(--text);">processed temporarily</strong> and not stored permanently on our servers.</p>
           </div>
         </div>
         <!-- SEARCH OPTIONS -->
@@ -1226,7 +1263,7 @@ body{
           <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Free accounts see blurred previews. Upgrade to reveal full results with source links and high-resolution images.</p>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
             <a href="/dashboard" class="upgrade-btn" style="background:linear-gradient(135deg,var(--accent),var(--purple));">Upgrade Plan</a>
-            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — €9.99</button>
+            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search â€” â‚¬9.99</button>
           </div>
         </div>
       </div>
@@ -1608,7 +1645,7 @@ try {
               '<svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--green);stroke-width:2;fill:none;margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
               '<h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Payment Confirmed!</h3>' +
               '<p style="color:var(--text-muted);margin-bottom:20px;">Your search has been unlocked. Upload your photo again to see full results.</p>' +
-              '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again →</button>' +
+              '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again â†’</button>' +
               '</div>';
           }
         } catch(e) {}
@@ -1657,7 +1694,7 @@ function getToken() { return localStorage.getItem('protevio_token'); }
         try { const u = JSON.parse(localStorage.getItem('protevio_user') || '{}'); u.plan = 'suspended'; localStorage.setItem('protevio_user', JSON.stringify(u)); } catch(e){}
         window.location.href = '/suspended.html';
       } else if(res.status === 401) {
-        // Refresh token expired — must re-login
+        // Refresh token expired â€” must re-login
         localStorage.removeItem('protevio_token');
         localStorage.removeItem('protevio_refresh');
         localStorage.removeItem('protevio_user');
@@ -1830,12 +1867,12 @@ function showFaceSelection() {
     const isMinor = face.is_minor === true;
     if(isMinor) thumb.classList.add('face-thumb--minor');
 
-    const info = face._totalPhotos > 1 ? ('Photo ' + face._photoIndex + ' · Face ' + (i+1)) : ('Face ' + (i+1));
+    const info = face._totalPhotos > 1 ? ('Photo ' + face._photoIndex + ' Â· Face ' + (i+1)) : ('Face ' + (i+1));
 
     thumb.innerHTML =
       '<img src="' + face.thumbnail + '" alt="Face ' + (i+1) + '">' +
       (isMinor ? '<div class="minor-badge">MINOR</div>' : '') +
-      '<div class="face-thumb__info">' + info + (isMinor ? ' · Under 18' : '') + '</div>';
+      '<div class="face-thumb__info">' + info + (isMinor ? ' Â· Under 18' : '') + '</div>';
 
     if(!isMinor) {
       thumb.addEventListener('click', () => {
@@ -1849,7 +1886,7 @@ function showFaceSelection() {
           selectedFaceIds.push(face.id);
           thumb.classList.add('selected');
         } else {
-          // Max 5 — shake the button
+          // Max 5 â€” shake the button
           searchSelectedBtn.style.animation = 'none';
           searchSelectedBtn.offsetHeight;
           searchSelectedBtn.style.animation = 'shake 0.4s ease';
@@ -1865,7 +1902,7 @@ function showFaceSelection() {
   const allMinors = detectedFaces.every(f => f.is_minor === true);
   if(allMinors) {
     searchSelectedBtn.disabled = true;
-    searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#ef4444;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> <span style="color:#fca5a5">Search unavailable — minors detected</span>';
+    searchSelectedBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#ef4444;stroke-width:2;fill:none;vertical-align:middle;margin-right:6px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> <span style="color:#fca5a5">Search unavailable â€” minors detected</span>';
     const notice = document.createElement('div');
     notice.style.cssText = 'background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);border-radius:12px;padding:14px 16px;margin-top:16px;font-size:.82rem;color:#fca5a5;line-height:1.5;text-align:center';
     notice.innerHTML = 'All detected faces appear to be under 18. Protevio does not allow searches involving minors.';
@@ -1891,10 +1928,10 @@ function showTermsStep() {
   const face = detectedFaces.find(f => f.id === selectedFaceIds[0]);
   if(face) {
     document.querySelector('#termsPreview img').src = face.thumbnail;
-    const countLabel = selectedFaceIds.length > 1 ? selectedFaceIds.length + ' faces selected · ' : '';
+    const countLabel = selectedFaceIds.length > 1 ? selectedFaceIds.length + ' faces selected Â· ' : '';
     document.getElementById('termsDetection').textContent =
       countLabel + 'Face detected' +
-      (face.confidence ? ' · ' + Math.round(face.confidence * 100) + '% confidence' : '');
+      (face.confidence ? ' Â· ' + Math.round(face.confidence * 100) + '% confidence' : '');
   }
 
   // Render Turnstile CAPTCHA if enabled
@@ -1999,13 +2036,13 @@ async function runSearch() {
 
     if(!res.ok) {
       const errData = await res.json();
-      // Minor detected — show warning modal
+      // Minor detected â€” show warning modal
       if(res.status === 451 || errData.error === 'minor_detected') {
         clearInterval(progInterval);
         document.getElementById('minorModalBg').classList.add('open');
         return;
       }
-      // Different faces selected — go back to selection
+      // Different faces selected â€” go back to selection
       if(errData.error === 'different_faces') {
         clearInterval(progInterval);
         statusText.textContent = 'Different people detected';
@@ -2013,14 +2050,14 @@ async function runSearch() {
         setTimeout(showFaceSelection, 2500);
         return;
       }
-      // Face data expired — need to re-upload
+      // Face data expired â€” need to re-upload
       if(res.status === 410) {
         statusText.textContent = 'Session expired';
         statusSub.textContent = 'Please upload your photo again.';
         setTimeout(resetSearch, 3000);
         return;
       }
-      // CAPTCHA failed — go back to terms step to retry
+      // CAPTCHA failed â€” go back to terms step to retry
       if(res.status === 403 && errData.captcha_required) {
         statusText.textContent = 'Verification failed';
         statusSub.textContent = 'Please complete the CAPTCHA and try again.';
@@ -2028,7 +2065,7 @@ async function runSearch() {
         setTimeout(() => showTermsStep(), 2000);
         return;
       }
-      // Account suspended — redirect to suspension page
+      // Account suspended â€” redirect to suspension page
       if(res.status === 403 && (errData.error || '').toLowerCase().includes('suspended')) {
         try { const u = JSON.parse(localStorage.getItem('protevio_user') || '{}'); u.plan = 'suspended'; localStorage.setItem('protevio_user', JSON.stringify(u)); } catch(e){}
         window.location.href = '/suspended.html';
@@ -2088,7 +2125,7 @@ async function runSearch() {
       hideAll();
       searchResults.style.display = 'block';
       
-      // No results — just show no matches, no signup wall
+      // No results â€” just show no matches, no signup wall
       if(matchCount === 0) {
         searchResults.innerHTML = `
           <div style="text-align:center;padding:60px 20px;">
@@ -2139,7 +2176,7 @@ async function runSearch() {
           <button onclick="resetSearch()" style="margin-top:24px;padding:10px 24px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:10px;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;"
                   onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--text)'"
                   onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">
-            ← Try another photo
+            â† Try another photo
           </button>
         </div>
       `;
@@ -2162,7 +2199,7 @@ function handleDeepSearch(btn) {
     // Show upgrade prompt
     btn.classList.remove('on');
     const label = document.getElementById('deepSearchLabel');
-    label.innerHTML = '<span style="color:var(--gold)">⚡ Available on Advanced plan</span> <a href="/pricing" style="color:var(--accent);text-decoration:underline;font-size:.72rem">Upgrade →</a>';
+    label.innerHTML = '<span style="color:var(--gold)">âš¡ Available on Advanced plan</span> <a href="/pricing" style="color:var(--accent);text-decoration:underline;font-size:.72rem">Upgrade â†’</a>';
     return;
   }
   btn.classList.toggle('on');
@@ -2184,7 +2221,7 @@ function showResults(data) {
   if(dlBtn) {
     dlBtn.style.display = (!isFree && matches.length > 0) ? 'flex' : 'none';
   }
-  // Show share button for everyone (even free users — it's marketing)
+  // Show share button for everyone (even free users â€” it's marketing)
   const shareBtn = document.getElementById('shareResultsBtn');
   if(shareBtn) {
     shareBtn.style.display = (matches.length > 0) ? 'flex' : 'none';
@@ -2204,7 +2241,7 @@ function showResults(data) {
   const header = document.createElement('div');
   header.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 4px;margin-bottom:4px;';
   header.innerHTML = '<div style="font-size:.85rem;color:var(--text-muted);">About <strong style="color:var(--text)">' + resultCount + '</strong> results in ' + searchTime + 's</div>' +
-    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">🔒 Free preview — upgrade to see full results</div>' : '');
+    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">ðŸ”’ Free preview â€” upgrade to see full results</div>' : '');
   resultsList.appendChild(header);
 
   matches.forEach((match, i) => {
@@ -2226,10 +2263,10 @@ function showResults(data) {
       '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
       explicitBadge +
       '<div class="result-card__lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap</div>' +
-      '<div class="result-card__source">' + (isFree ? '••••••.com' : domain) + '</div>' +
+      '<div class="result-card__source">' + (isFree ? 'â€¢â€¢â€¢â€¢â€¢â€¢.com' : domain) + '</div>' +
       '<div class="result-card__info">' +
       '<div class="result-card__score">' + similarity + '% match</div>' +
-      '<div class="result-card__domain">' + (isFree ? '••••••.com' : domain) + '</div>' +
+      '<div class="result-card__domain">' + (isFree ? 'â€¢â€¢â€¢â€¢â€¢â€¢.com' : domain) + '</div>' +
       '</div>';
 
     card.addEventListener('click', () => {
@@ -2250,14 +2287,14 @@ function showResults(data) {
       '<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;justify-content:center;">' +
         '<svg viewBox="0 0 24 24" style="width:36px;height:36px;stroke:var(--accent);stroke-width:1.5;fill:none;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>' +
         '<div style="text-align:left">' +
-          '<h4 style="font-size:1.05rem;font-weight:700;margin-bottom:2px;">Unlock access to <u>current search results</u> for 9,99 €</h4>' +
+          '<h4 style="font-size:1.05rem;font-weight:700;margin-bottom:2px;">Unlock access to <u>current search results</u> for 9,99 â‚¬</h4>' +
           '<p style="font-size:.82rem;color:var(--text-muted);">Pay once to see the source of the photos and original websites of the current search.</p>' +
         '</div>' +
       '</div>' +
       '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
-        '<button class="upgrade-btn" id="unlockOnceBtn" onclick="unlockResults()" style="background:linear-gradient(135deg,var(--accent),var(--purple));padding:12px 32px;font-size:.95rem;">Unlock results →</button>' +
+        '<button class="upgrade-btn" id="unlockOnceBtn" onclick="unlockResults()" style="background:linear-gradient(135deg,var(--accent),var(--purple));padding:12px 32px;font-size:.95rem;">Unlock results â†’</button>' +
       '</div>' +
-      '<div style="text-align:center;margin-top:16px;"><a href="/pricing" style="color:var(--text-muted);font-size:.82rem;text-decoration:underline;">Or subscribe for unlimited access →</a></div>';
+      '<div style="text-align:center;margin-top:16px;"><a href="/pricing" style="color:var(--text-muted);font-size:.82rem;text-decoration:underline;">Or subscribe for unlimited access â†’</a></div>';
   } else {
     upgradeOverlay.style.display = 'none';
   }
@@ -2286,8 +2323,8 @@ async function unlockResults() {
     });
     const data = await res.json();
     if(data.url) { window.location.href = data.url; }
-    else { alert(data.error || 'Payment setup failed'); btn.textContent = 'Unlock results →'; btn.disabled = false; }
-  } catch(e) { alert('Connection error'); btn.textContent = 'Unlock results →'; btn.disabled = false; }
+    else { alert(data.error || 'Payment setup failed'); btn.textContent = 'Unlock results â†’'; btn.disabled = false; }
+  } catch(e) { alert('Connection error'); btn.textContent = 'Unlock results â†’'; btn.disabled = false; }
 }
 let currentSearchId = '';
 
@@ -2318,7 +2355,7 @@ function openResultModal(match, locked) {
     unlockOverlay.style.display = 'none';
   }
 
-  document.getElementById('modalDomain').textContent = locked ? '••••••.com' : (match.domain || 'Unknown source');
+  document.getElementById('modalDomain').textContent = locked ? 'â€¢â€¢â€¢â€¢â€¢â€¢.com' : (match.domain || 'Unknown source');
   document.getElementById('modalSimilarity').textContent = domain;
   document.getElementById('modalNsfw').style.display = 'none'; // can enable per-result later
 
@@ -2330,7 +2367,7 @@ function openResultModal(match, locked) {
       a.classList.add('result-modal__action--locked');
       a.onclick = (e) => {
         e.preventDefault();
-        alert('Upgrade your plan or unlock this search for €9.99 to access this feature.');
+        alert('Upgrade your plan or unlock this search for â‚¬9.99 to access this feature.');
       };
     } else {
       a.classList.remove('result-modal__action--locked');
@@ -2424,7 +2461,7 @@ document.getElementById('shareResultsBtn').addEventListener('click', async () =>
 
   const resultCount = currentResults.length || 0;
   const domains = new Set(currentResults.map(r => r.domain).filter(Boolean));
-  const shareText = `I just found ${resultCount} photos of myself on ${domains.size} websites I never knew about 😱\n\nCheck where YOUR face appears online →`;
+  const shareText = `I just found ${resultCount} photos of myself on ${domains.size} websites I never knew about ðŸ˜±\n\nCheck where YOUR face appears online â†’`;
   const shareUrl = 'https://protevio.com';
 
   // Try Web Share API first (mobile-friendly)
@@ -2477,7 +2514,7 @@ document.getElementById('shareResultsBtn').addEventListener('click', async () =>
   // Copy share text to clipboard
   try {
     await navigator.clipboard.writeText(shareText + '\n' + shareUrl);
-    shareBtn.innerHTML = '✅ Copied!';
+    shareBtn.innerHTML = 'âœ… Copied!';
     setTimeout(() => { shareBtn.innerHTML = origHTML; }, 2000);
   } catch(e) {
     shareBtn.innerHTML = origHTML;
@@ -2493,7 +2530,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
 <!-- HOW TO USE MODAL -->
 <div class="result-modal-overlay" id="howToModal" onclick="if(event.target===this)this.classList.remove(&#39;active&#39;)">
   <div class="result-modal" style="max-width:520px;padding:32px;">
-    <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;">✕</button>
+    <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;">âœ•</button>
     <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:20px;color:var(--text);">How to use Protevio</h2>
     <div style="display:flex;flex-direction:column;gap:16px;">
       <div style="display:flex;gap:14px;align-items:flex-start;">
@@ -2515,10 +2552,10 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
     </div>
     <div style="margin-top:20px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;">
       <div style="font-size:.82rem;color:var(--text-muted);line-height:1.5;">
-        <strong style="color:var(--text);">💡 Tips for best results:</strong><br>
-        • Use a clear, front-facing photo with good lighting<br>
-        • Avoid group photos — crop to a single face<br>
-        • Higher resolution images give better matches
+        <strong style="color:var(--text);">ðŸ’¡ Tips for best results:</strong><br>
+        â€¢ Use a clear, front-facing photo with good lighting<br>
+        â€¢ Avoid group photos â€” crop to a single face<br>
+        â€¢ Higher resolution images give better matches
       </div>
     </div>
     <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="width:100%;margin-top:16px;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-weight:600;font-size:.95rem;cursor:pointer;">Got it!</button>
@@ -2527,7 +2564,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
 
 <div class="result-modal-overlay" id="resultModalOverlay" onclick="if(event.target===this)closeResultModal()">
   <div class="result-modal" id="resultModal">
-    <button class="result-modal__close" onclick="closeResultModal()">✕</button>
+    <button class="result-modal__close" onclick="closeResultModal()">âœ•</button>
     <div style="position:relative;overflow:hidden;border-radius:20px 20px 0 0;">
       <div class="result-modal__nsfw" id="modalNsfw" style="display:none">POTENTIALLY EXPLICIT</div>
       <img id="modalImage" class="result-modal__image" src="" alt="Result" onerror="this.src=&#39;data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22&gt;&lt;rect fill=%22%232a3349%22 width=%22400%22 height=%22300%22/&gt;&lt;text x=%22200%22 y=%22155%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2216%22&gt;Image unavailable&lt;/text&gt;&lt;/svg&gt;&#39;">
@@ -2543,7 +2580,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Open website</div>
           <div class="result-modal__action-sub">Go to the website where this image appears</div>
         </div>
-        <span class="result-modal__action-arrow">›</span>
+        <span class="result-modal__action-arrow">â€º</span>
       </button>
       <button class="result-modal__action" id="modalOpenImage" data-requires-paid="true">
         <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
@@ -2553,7 +2590,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Open image</div>
           <div class="result-modal__action-sub">Access the source image (unblurred version)</div>
         </div>
-        <span class="result-modal__action-arrow">›</span>
+        <span class="result-modal__action-arrow">â€º</span>
       </button>
       <button class="result-modal__action" id="modalSearchThis">
         <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
@@ -2563,7 +2600,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Perform search with this image</div>
           <div class="result-modal__action-sub">Start a new search using this result</div>
         </div>
-        <span class="result-modal__action-arrow">›</span>
+        <span class="result-modal__action-arrow">â€º</span>
       </button>
       <button class="result-modal__action" id="modalCopyId">
         <div class="result-modal__action-icon" style="background:rgba(167,139,250,.15)">
@@ -2573,7 +2610,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Copy Result ID</div>
           <div class="result-modal__action-sub">Copy the ID of this result for further actions</div>
         </div>
-        <span class="result-modal__action-arrow">›</span>
+        <span class="result-modal__action-arrow">â€º</span>
       </button>
       <button class="result-modal__action" id="modalExclude">
         <div class="result-modal__action-icon" style="background:rgba(74,222,128,.15)">
@@ -2583,7 +2620,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Exclude from public results</div>
           <div class="result-modal__action-sub">Remove this photo from Protevio's search</div>
         </div>
-        <span class="result-modal__action-arrow">›</span>
+        <span class="result-modal__action-arrow">â€º</span>
       </button>
       <button class="result-modal__action" id="modalShare">
         <div class="result-modal__action-icon" style="background:rgba(248,113,113,.15)">
@@ -2593,10 +2630,10 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Share</div>
           <div class="result-modal__action-sub">Share this result with others</div>
         </div>
-        <span class="result-modal__action-arrow">›</span>
+        <span class="result-modal__action-arrow">â€º</span>
       </button>
     </div>
-    <div class="result-modal__footer">Powered by Protevio AI · Results generated by facial similarity matching</div>
+    <div class="result-modal__footer">Powered by Protevio AI Â· Results generated by facial similarity matching</div>
   </div>
 </div>
 
@@ -2606,7 +2643,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
     <div class="minor-modal__icon">
       <svg viewbox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
-    <div class="minor-modal__title">Search Blocked — Minor Detected</div>
+    <div class="minor-modal__title">Search Blocked â€” Minor Detected</div>
     <div class="minor-modal__text">
       Our AI has detected that the uploaded photo appears to contain a <strong>person under the age of 18</strong>. Protevio does not allow facial recognition searches involving minors.
     </div>
@@ -2628,7 +2665,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       <a href="/csr" style="color:var(--accent);text-decoration:none;margin:0 12px">CSR</a>
       <a href="dmca-templates.html" style="color:var(--accent);text-decoration:none;margin:0 12px">DMCA Templates</a>
     </div>
-    <p>© 2026 Protevio AI. All rights reserved.</p>
+    <p>Â© 2026 Protevio AI. All rights reserved.</p>
   </div>
 </footer>
 </body>
