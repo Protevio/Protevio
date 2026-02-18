@@ -4,10 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Opt-Out Request — Protevio AI | Remove Your Face From Our Database</title>
+<title>Opt-Out Request &mdash; Protevio AI | Remove Your Face From Our Database</title>
 <meta name="description" content="Request removal of your face from Protevio AI's database. Upload your photo and we'll remove all matching results. Free, GDPR-compliant opt-out process."/>
 <meta name="keywords" content="opt out facial recognition, remove face from database, Protevio opt out, facial recognition removal, GDPR right to erasure, remove my photos"/>
-<meta property="og:title" content="Opt-Out Request — Remove Your Face From Protevio AI"/>
+<meta property="og:title" content="Opt-Out Request &mdash; Remove Your Face From Protevio AI"/>
 <meta property="og:description" content="Request removal of your face from our database. Free, GDPR-compliant process completed within 48 hours."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://protevio.com/opt-out.html"/>
@@ -120,6 +120,13 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 .opt-check__text{font-size:.84rem;color:var(--text-secondary);line-height:1.6}
 .opt-check__text a{color:var(--accent);text-decoration:underline}
 
+.id-tip{
+  display:flex;align-items:flex-start;gap:10px;
+  background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.15);
+  border-radius:10px;padding:14px 16px;margin-bottom:14px;
+  font-size:.78rem;color:var(--text-muted);line-height:1.6;
+}
+.id-tip strong{font-weight:700}
 /* SUBMIT */
 .opt-submit{width:100%;padding:15px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--red),#c084fc);color:#fff;font-size:1rem;font-weight:700;font-family:inherit;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
 .opt-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(248,113,113,.25)}
@@ -216,7 +223,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
   <div class="opt-step">
     <div class="opt-step__num">2</div>
     <div class="opt-step__title">Verify your identity</div>
-    <div class="opt-step__text">Confirm your email and that you're requesting removal of your own image</div>
+    <div class="opt-step__text">Upload a redacted government ID showing your face and name for verification</div>
   </div>
   <div class="opt-step">
     <div class="opt-step__num">3</div>
@@ -269,7 +276,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
           <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         </div>
         <div class="upload-zone__text">Click to upload or drag and drop</div>
-        <div class="upload-zone__hint">JPG, PNG · Max 10MB</div>
+        <div class="upload-zone__hint">JPG, PNG &middot; Max 10MB</div>
         <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp"/>
       </div>
 
@@ -289,6 +296,47 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
       <div class="face-detect" id="faceDetect"></div>
     </div>
 
+    <!-- REDACTED ID UPLOAD -->
+    <div class="opt-form__section">
+      <label class="opt-form__label">
+        Upload redacted government ID
+        <span class="opt-form__sublabel">To verify your identity, upload a photo of your government-issued ID (passport, driver's license, national ID) with <strong>only your face and name visible</strong>. Please redact (cover/blur) all other information including ID number, date of birth, address, etc.</span>
+      </label>
+
+      <!-- ID Example tip -->
+      <div class="id-tip">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;flex-shrink:0;stroke:#d97706;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <div>
+          <strong style="color:var(--gold)">What to show:</strong> Your face photo and full name only.<br>
+          <strong style="color:var(--red)">What to redact:</strong> ID number, date of birth, address, barcode, and any other personal details. Use black marker, tape, or image editing.
+        </div>
+      </div>
+
+      <div class="upload-zone" id="idUploadZone">
+        <div class="upload-zone__icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" stroke="var(--text-muted)" stroke-width="1.5" fill="none"/><circle cx="8" cy="12" r="2.5" stroke="var(--text-muted)" stroke-width="1.5" fill="none"/><path d="M13 10h5M13 14h3" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="upload-zone__text">Upload your redacted ID</div>
+        <div class="upload-zone__hint">JPG, PNG &middot; Max 10MB &middot; Face + name visible only</div>
+        <input type="file" id="idInput" accept="image/jpeg,image/png,image/webp"/>
+      </div>
+
+      <!-- ID Preview -->
+      <div class="upload-preview" id="idPreview">
+        <img class="upload-preview__img" id="idPreviewImg" src="" alt="ID Preview" style="border-color:var(--gold);border-radius:8px;width:100px;height:64px;object-fit:cover"/>
+        <div class="upload-preview__info">
+          <div class="upload-preview__name" id="idPreviewName"></div>
+          <div class="upload-preview__size" id="idPreviewSize"></div>
+        </div>
+        <button class="upload-preview__remove" id="idRemoveBtn" title="Remove ID">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- ID validation status -->
+      <div class="face-detect" id="idStatus"></div>
+    </div>
+
     <!-- REASON (OPTIONAL) -->
     <div class="opt-form__section">
       <label class="opt-form__label">
@@ -296,7 +344,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
         <span class="opt-form__sublabel">Help us understand why you're requesting removal</span>
       </label>
       <select class="opt-form__input" id="optReason" style="cursor:pointer;appearance:auto">
-        <option value="">— Select a reason —</option>
+        <option value="">&mdash; Select a reason &mdash;</option>
         <option value="privacy">General privacy concern</option>
         <option value="gdpr">Exercising GDPR Right to Erasure (Art. 17)</option>
         <option value="no_consent">My photos were indexed without my consent</option>
@@ -348,7 +396,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 <!-- FOOTER -->
 <footer class="footer">
   <p class="footer__text">
-    © 2026 Protevio AI. All rights reserved. |
+    &copy; 2026 Protevio AI. All rights reserved. |
     <a href="privacy-policy.html" class="footer__link">Privacy Policy</a> |
     <a href="terms-of-service.html" class="footer__link">Terms of Service</a> |
     <a href="csr.html" class="footer__link">CSR</a>
@@ -357,7 +405,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 </footer>
 
 <script>
-const API = 'https://api.protevio.com';
+const API = 'https://api.protevio.com/api';
 let selectedFile = null;
 let faceValid = false;
 
@@ -374,6 +422,17 @@ const submitBtn = document.getElementById('submitBtn');
 const checkOwn = document.getElementById('checkOwn');
 const checkProcess = document.getElementById('checkProcess');
 const checkTerms = document.getElementById('checkTerms');
+
+// ID upload elements
+const idUploadZone = document.getElementById('idUploadZone');
+const idInput = document.getElementById('idInput');
+const idPreview = document.getElementById('idPreview');
+const idPreviewImg = document.getElementById('idPreviewImg');
+const idPreviewName = document.getElementById('idPreviewName');
+const idPreviewSize = document.getElementById('idPreviewSize');
+const idRemoveBtn = document.getElementById('idRemoveBtn');
+const idStatus = document.getElementById('idStatus');
+let selectedIdFile = null;
 
 // Drag & drop
 uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
@@ -392,6 +451,61 @@ removeBtn.addEventListener('click', e => {
   e.stopPropagation();
   clearFile();
 });
+
+// ID upload handlers
+idUploadZone.addEventListener('dragover', e => { e.preventDefault(); idUploadZone.classList.add('dragover'); });
+idUploadZone.addEventListener('dragleave', () => idUploadZone.classList.remove('dragover'));
+idUploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  idUploadZone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleIdFile(e.dataTransfer.files[0]);
+});
+idInput.addEventListener('change', e => {
+  if (e.target.files.length) handleIdFile(e.target.files[0]);
+});
+idRemoveBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  clearIdFile();
+});
+
+function handleIdFile(file) {
+  if (!file.type.match(/image\/(jpeg|png|webp)/)) {
+    showIdStatus('error', 'Please upload a JPG, PNG, or WebP image.');
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    showIdStatus('error', 'File is too large. Maximum size is 10MB.');
+    return;
+  }
+  selectedIdFile = file;
+  idPreviewImg.src = URL.createObjectURL(file);
+  idPreviewName.textContent = file.name;
+  idPreviewSize.textContent = formatSize(file.size);
+  idUploadZone.style.display = 'none';
+  idPreview.classList.add('active');
+  showIdStatus('success', 'ID photo uploaded. Make sure only your face and name are visible.');
+  updateSubmit();
+}
+
+function clearIdFile() {
+  selectedIdFile = null;
+  idInput.value = '';
+  idPreviewImg.src = '';
+  idPreview.classList.remove('active');
+  idUploadZone.style.display = '';
+  idStatus.className = 'face-detect';
+  idStatus.innerHTML = '';
+  updateSubmit();
+}
+
+function showIdStatus(type, msg) {
+  const icons = {
+    success: '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>',
+    error: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>'
+  };
+  idStatus.className = 'face-detect ' + type;
+  idStatus.innerHTML = (icons[type] || '') + '<span>' + msg + '</span>';
+}
 
 function handleFile(file) {
   if (!file.type.match(/image\/(jpeg|png|webp)/)) {
@@ -438,7 +552,7 @@ async function validateFace(file) {
     const formData = new FormData();
     formData.append('image', file);
 
-    const res = await fetch(API + '/detect-faces', {
+    const res = await fetch(API + '/upload', {
       method: 'POST',
       body: formData
     });
@@ -449,7 +563,7 @@ async function validateFace(file) {
 
     if (data.faces && data.faces.length > 0) {
       faceValid = true;
-      showFaceStatus('success', `Face detected successfully. ${data.faces.length > 1 ? data.faces.length + ' faces found — the primary face will be used.' : 'Ready to submit.'}`);
+      showFaceStatus('success', `Face detected successfully. ${data.faces.length > 1 ? data.faces.length + ' faces found &mdash; the primary face will be used.' : 'Ready to submit.'}`);
     } else {
       faceValid = false;
       showFaceStatus('error', 'No face detected. Please upload a clear, front-facing photo with good lighting.');
@@ -485,7 +599,7 @@ function updateSubmit() {
   const emailOk = document.getElementById('optEmail').value.includes('@');
   const nameOk = document.getElementById('optName').value.trim().length >= 2;
   const allChecked = checkOwn.checked && checkProcess.checked && checkTerms.checked;
-  submitBtn.disabled = !(selectedFile && allChecked && emailOk && nameOk);
+  submitBtn.disabled = !(selectedFile && selectedIdFile && allChecked && emailOk && nameOk);
 }
 
 document.getElementById('optEmail').addEventListener('input', updateSubmit);
@@ -504,11 +618,11 @@ submitBtn.addEventListener('click', async () => {
 
   try {
     const formData = new FormData();
-    formData.append('image', selectedFile);
+    formData.append('face_photo', selectedFile);
+    formData.append('id_photo', selectedIdFile);
     formData.append('email', email);
     formData.append('name', name);
     formData.append('reason', reason);
-    formData.append('type', 'opt-out');
 
     const res = await fetch(API + '/opt-out', {
       method: 'POST',
@@ -531,6 +645,7 @@ submitBtn.addEventListener('click', async () => {
 
     // Reset form
     clearFile();
+    clearIdFile();
     document.getElementById('optEmail').value = '';
     document.getElementById('optName').value = '';
     document.getElementById('optReason').value = '';
