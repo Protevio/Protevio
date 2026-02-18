@@ -964,7 +964,7 @@ body{
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Protevio AI",
-  "description": "Reverse face search engine. Find where your photos appear online across 1M+ indexed faces. Protect your digital identity with facial recognition technology.",
+  "description": "Reverse face search engine. Find where your photos appear online across the web. Protect your digital identity with facial recognition technology.",
   "url": "https://protevio.com",
   "applicationCategory": "SecurityApplication",
   "operatingSystem": "Web",
@@ -1065,8 +1065,8 @@ body{
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div>
-          <div class="trust-item__text">1M+ Faces</div>
-          <div class="trust-item__sub">Indexed</div>
+          <div class="trust-item__text">Real Time</div>
+          <div class="trust-item__sub">Web Scan</div>
         </div>
       </div>
       <div class="trust-item">
@@ -1125,7 +1125,7 @@ body{
           <div id="statusThumb" style="width:36px;height:36px;border-radius:8px;overflow:hidden;display:none;flex-shrink:0;border:2px solid var(--accent);"><img id="statusThumbImg" style="width:100%;height:100%;object-fit:cover;"></div>
           <p style="font-size:1.1rem;font-weight:600;color:var(--text);" id="statusText">Processing...</p>
         </div>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:4px;" id="statusSub">Searching 1M+ faces</p>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:4px;" id="statusSub">Searching the internet</p>
       </div>
 
       <!-- STEP 2: FACE SELECTION (hidden by default) -->
@@ -1329,8 +1329,8 @@ body{
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div>
-          <div class="stats-badge__text">1M+</div>
-          <div class="stats-badge__value">Indexed Faces</div>
+          <div class="stats-badge__text">Real Time</div>
+          <div class="stats-badge__value">Face Scan</div>
         </div>
       </div>
       
@@ -1966,7 +1966,7 @@ async function runSearch() {
   const steps = [
     {pct: 15, text: 'Analyzing face' + multiLabel + '...', sub: 'Extracting facial features'},
     {pct: 35, text: 'Processing...', sub: selectedFaceIds.length > 1 ? 'Averaging embeddings for better accuracy' : 'Encoding biometric signature'},
-    {pct: 55, text: 'Searching database...', sub: 'Comparing against 1M+ indexed faces'},
+    {pct: 55, text: 'Searching database...', sub: 'Comparing against available faces'},
     {pct: 75, text: 'Matching results...', sub: 'Finding similar faces'},
     {pct: 90, text: 'Almost done...', sub: 'Ranking matches by similarity'},
   ];
@@ -2111,7 +2111,7 @@ async function runSearch() {
           </div>
           <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:8px;">Match${matchCount !== 1 ? 'es' : ''} Found</h2>
           <p style="color:var(--text-muted);margin-bottom:32px;font-size:.95rem;line-height:1.6;">
-            We found <strong style="color:var(--accent);">${matchCount} face match${matchCount !== 1 ? 'es' : ''}</strong> across our database of 1M+ indexed faces.<br>
+            We found <strong style="color:var(--accent);">${matchCount} face match${matchCount !== 1 ? 'es' : ''}</strong> across our database of indexed faces.<br>
             Create a free account to see where your face appears online.
           </p>
           <a href="/signup.html?redirect=results" style="display:inline-block;padding:16px 48px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border-radius:14px;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 6px 24px rgba(91,154,255,.4);transition:all .3s;" 
