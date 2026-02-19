@@ -339,16 +339,61 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 
 <!-- TAKEDOWN MODAL -->
+<!-- DMCA TAKEDOWN: CREATE -->
 <div class="modal-bg" id="takedownModal">
-  <div class="modal">
-    <div class="modal__t">New Takedown Request</div>
-    <p style="font-size:.85rem;color:var(--text3);margin-bottom:16px">Submit a request to remove your image from our search results and notify the website owner.</p>
-    <div class="modal__f"><label class="modal__fl">Image URL or Source Page URL</label><input class="modal__fi" id="tdUrl" placeholder="https://example.com/photo.jpg"></div>
-    <div class="modal__f"><label class="modal__fl">Website Domain</label><input class="modal__fi" id="tdDomain" placeholder="e.g. example.com"></div>
-    <div class="modal__f"><label class="modal__fl">Reason for Removal</label><textarea class="modal__fi" id="tdReason" rows="3" placeholder="I want this image removed from search results because...">I want this image removed from search results. This is my photo published without my consent.</textarea></div>
+  <div class="modal" style="max-width:520px">
+    <div class="modal__t" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>New DMCA Takedown</div>
+    <p style="font-size:.82rem;color:var(--text3);margin-bottom:16px;line-height:1.6">We'll generate a legally compliant DMCA takedown notice and send it to the website's hosting provider on your behalf.</p>
+    <div class="modal__f"><label class="modal__fl">Infringing Page URL <span style="color:var(--red)">*</span></label><input class="modal__fi" id="tdUrl" placeholder="https://example.com/page-with-my-photo"></div>
+    <div class="modal__f"><label class="modal__fl">Direct Image URL <span style="color:var(--text3);font-weight:400">(optional)</span></label><input class="modal__fi" id="tdImageUrl" placeholder="https://example.com/images/photo.jpg"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="modal__f"><label class="modal__fl">Your Legal Name <span style="color:var(--red)">*</span></label><input class="modal__fi" id="tdLegalName" placeholder="Full legal name"></div>
+      <div class="modal__f"><label class="modal__fl">Contact Email <span style="color:var(--red)">*</span></label><input class="modal__fi" id="tdContactEmail" placeholder="your@email.com"></div>
+    </div>
+    <div class="modal__f"><label class="modal__fl">Reason for Removal</label><textarea class="modal__fi" id="tdReason" rows="2" style="resize:vertical" placeholder="Unauthorized use of my photograph/likeness">Unauthorized use of my photograph/likeness. This image was published without my consent.</textarea></div>
+    <div style="font-size:.72rem;color:var(--text3);background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);padding:10px 14px;border-radius:8px;line-height:1.6;margin-bottom:16px">
+      <strong style="color:var(--gold)">Important:</strong> By submitting, you confirm that the information is accurate and you are the copyright holder or authorized representative. Filing a false DMCA notice may have legal consequences.
+    </div>
+    <div id="tdCreateMsg" style="font-size:.78rem;display:none;margin-bottom:12px"></div>
     <div class="modal__btns">
       <button class="modal__btn" style="background:var(--bg3);color:var(--text2)" onclick="closeTdModal()">Cancel</button>
-      <button class="modal__btn" style="background:var(--green);color:#fff" onclick="submitTakedown()">Submit Request</button>
+      <button class="modal__btn" style="background:var(--green);color:#fff" id="tdCreateBtn" onclick="submitTakedown()">Generate DMCA Notice</button>
+    </div>
+  </div>
+</div>
+
+<!-- DMCA TAKEDOWN: PREVIEW -->
+<div class="modal-bg" id="dmcaPreviewModal">
+  <div class="modal" style="max-width:640px;max-height:85vh;display:flex;flex-direction:column">
+    <div class="modal__t" style="display:flex;align-items:center;gap:10px">
+      <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      DMCA Notice Preview
+      <span id="dmcaRefBadge" style="margin-left:auto;font-size:.65rem;background:var(--bg3);padding:3px 10px;border-radius:6px;color:var(--text3)"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div style="font-size:.78rem"><span style="color:var(--text3)">To:</span> <strong id="dmcaTo" style="color:var(--accent)"></strong></div>
+      <div style="font-size:.78rem"><span style="color:var(--text3)">Domain:</span> <strong id="dmcaDomain"></strong></div>
+    </div>
+    <div style="flex:1;overflow-y:auto;margin-bottom:14px">
+      <textarea id="dmcaBodyEdit" style="width:100%;min-height:320px;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:16px;border-radius:10px;font-family:'Courier New',monospace;font-size:.78rem;line-height:1.7;resize:vertical;outline:none"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <label style="font-size:.72rem;color:var(--text3);display:block;margin-bottom:4px">Abuse email (editable)</label>
+        <input id="dmcaAbuseEdit" style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:.82rem;outline:none" placeholder="abuse@example.com">
+      </div>
+      <a id="dmcaGoogleLink" href="#" target="_blank" style="display:flex;align-items:flex-end;padding:8px 16px;background:rgba(91,154,255,.1);border:1px solid rgba(91,154,255,.2);border-radius:8px;color:var(--accent);font-size:.78rem;text-decoration:none;white-space:nowrap;font-weight:600;gap:6px">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Google Removal
+      </a>
+    </div>
+    <div id="dmcaSendMsg" style="font-size:.78rem;display:none;margin-bottom:10px"></div>
+    <div class="modal__btns">
+      <button class="modal__btn" style="background:var(--bg3);color:var(--text2)" onclick="closeDmcaPreview()">Close</button>
+      <button class="modal__btn" style="background:var(--bg3);color:var(--accent);border:1px solid var(--accent)" onclick="saveDmcaDraft()">Save Draft</button>
+      <button class="modal__btn" style="background:var(--green);color:#fff" id="dmcaSendBtn" onclick="sendDMCA()">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;margin-right:4px"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send DMCA Notice
+      </button>
     </div>
   </div>
 </div>
@@ -545,6 +590,17 @@ async function loadAlerts() {
 }
 
 // ===== TAKEDOWNS (PROTECT) =====
+const STATUS_COLORS = {
+  draft:'var(--gold)', sent:'var(--accent)', reminded:'var(--purple)',
+  resolved:'var(--green)', failed:'var(--red)', pending:'var(--gold)'
+};
+const STATUS_LABELS = {
+  draft:'Draft', sent:'Sent', reminded:'Reminded',
+  resolved:'Resolved', failed:'Failed', pending:'Pending'
+};
+
+let currentDmcaId = null;
+
 async function loadTakedowns() {
   try {
     const res = await fetch(API+'/takedowns', {headers:{'Authorization':'Bearer '+token}});
@@ -554,26 +610,55 @@ async function loadTakedowns() {
     const dashEl = document.getElementById('dashProtect');
     
     if(!isPro) {
-      dashEl.innerHTML = lockedCard('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>', 'var(--green)', 'var(--green-bg)', 'PROtect Your Photos', 'Request removal of your photos from search results. Submit takedown requests for images found across our indexed database.');
-      document.getElementById('protectContent').innerHTML = '<div style="text-align:center;padding:48px 24px"><div class="fcard__ic" style="background:var(--green-bg);margin:0 auto 16px"><svg viewBox="0 0 24 24" stroke="var(--green)" style="width:28px;height:28px;stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px">PROtect Your Digital Identity</h3><p style="color:var(--text3);font-size:.88rem;line-height:1.6;max-width:420px;margin:0 auto 20px">Found your photos on unauthorized websites? Submit DMCA takedown requests and have your images removed.</p><div class="fcard__b" style="font-size:.8rem;padding:6px 16px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Available with Pro Plan</div></div>';
+      dashEl.innerHTML = lockedCard('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>', 'var(--green)', 'var(--green-bg)', 'PROtect Your Photos', 'Submit automated DMCA takedown notices to remove your photos from unauthorized websites.');
+      document.getElementById('protectContent').innerHTML = '<div style="text-align:center;padding:48px 24px"><div class="fcard__ic" style="background:var(--green-bg);margin:0 auto 16px"><svg viewBox="0 0 24 24" stroke="var(--green)" style="width:28px;height:28px;stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px">Automated DMCA Takedowns</h3><p style="color:var(--text3);font-size:.88rem;line-height:1.6;max-width:420px;margin:0 auto 20px">Generate legally compliant DMCA notices, automatically send them to hosting providers, and track removal status.</p><div class="fcard__b" style="font-size:.8rem;padding:6px 16px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Available with PROtect Plan</div></div>';
       return;
     }
     
     // Dashboard mini
+    const drafts = items.filter(t=>t.status==='draft').length;
+    const sent = items.filter(t=>t.status==='sent'||t.status==='reminded').length;
+    const resolved = items.filter(t=>t.status==='resolved').length;
+    
     if(items.length === 0) {
-      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No takedown requests yet.<br><a href="#" onclick="document.querySelector(\'[data-page=protect]\').click();return false" style="color:var(--accent);font-weight:600">Submit a request →</a></div>';
+      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No takedowns yet.<br><a href="#" onclick="document.querySelector(\'[data-page=protect]\').click();return false" style="color:var(--accent);font-weight:600">Create DMCA takedown \u2192</a></div>';
     } else {
-      const pending = items.filter(t=>t.status==='pending').length;
-      const resolved = items.filter(t=>t.status==='resolved').length;
-      dashEl.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="sbox"><div class="sbox__v" style="color:var(--gold)">${pending}</div><div class="sbox__l">Pending</div></div><div class="sbox"><div class="sbox__v" style="color:var(--green)">${resolved}</div><div class="sbox__l">Resolved</div></div></div>`;
+      dashEl.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><div class="sbox"><div class="sbox__v" style="color:var(--gold)">${drafts}</div><div class="sbox__l">Drafts</div></div><div class="sbox"><div class="sbox__v" style="color:var(--accent)">${sent}</div><div class="sbox__l">Sent</div></div><div class="sbox"><div class="sbox__v" style="color:var(--green)">${resolved}</div><div class="sbox__l">Resolved</div></div></div>`;
     }
     
     // Full page
     const el = document.getElementById('protectContent');
     if(items.length === 0) {
-      el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>No takedown requests yet.<br><br>Click "New Request" to submit a removal request.</div>';
+      el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>No DMCA takedown requests yet.<br><br>Click "New Request" to generate your first DMCA notice.</div>';
     } else {
-      el.innerHTML = items.map(t => `<div class="ti"><div class="ti__top"><div class="ti__url">${t.url || t.face_id || '—'}</div><span class="ti__status ti__status--${t.status}">${t.status}</span></div>${t.domain?'<div style="font-size:.78rem;color:var(--accent)">'+t.domain+'</div>':''}<div class="ti__reason">${t.reason||''}</div><div class="ti__date">Submitted ${timeAgo(t.created_at)}</div></div>`).join('');
+      el.innerHTML = items.map(t => {
+        const statusColor = STATUS_COLORS[t.status] || 'var(--text3)';
+        const statusLabel = STATUS_LABELS[t.status] || t.status;
+        const canSend = t.status === 'draft';
+        const canRemind = t.status === 'sent' && !t.reminder_sent_at;
+        const canResolve = t.status === 'sent' || t.status === 'reminded';
+        
+        let actions = `<button class="ai__btn" style="border-color:var(--accent);color:var(--accent)" onclick="openDmcaPreview(${t.id})">Preview</button>`;
+        if(canSend) actions += `<button class="ai__btn" style="border-color:var(--green);color:var(--green)" onclick="openDmcaPreview(${t.id})">Review & Send</button>`;
+        if(canRemind) actions += `<button class="ai__btn" style="border-color:var(--gold);color:var(--gold)" onclick="remindDMCA(${t.id})">Send Reminder</button>`;
+        if(canResolve) actions += `<button class="ai__btn" style="border-color:var(--green);color:var(--green)" onclick="markResolved(${t.id})">Mark Resolved</button>`;
+        if(t.google_removal_url) actions += `<a class="ai__btn" href="${t.google_removal_url}" target="_blank" style="border-color:var(--purple);color:var(--purple);text-decoration:none">Google Removal</a>`;
+        
+        return `<div class="ti" style="border-left:3px solid ${statusColor}">
+          <div class="ti__top">
+            <div class="ti__url" style="word-break:break-all">${t.url || '\u2014'}</div>
+            <span class="ti__status" style="background:${statusColor}22;color:${statusColor}">${statusLabel}</span>
+          </div>
+          ${t.domain ? '<div style="font-size:.78rem;color:var(--accent)">' + t.domain + '</div>' : ''}
+          ${t.dmca_ref ? '<div style="font-size:.72rem;color:var(--text3);margin-top:2px">Ref: ' + t.dmca_ref + (t.abuse_email ? ' \u2192 ' + t.abuse_email : '') + '</div>' : ''}
+          <div style="font-size:.78rem;color:var(--text3);margin-top:4px">
+            Created ${timeAgo(t.created_at)}
+            ${t.sent_at ? ' \u00b7 Sent ' + timeAgo(t.sent_at) : ''}
+            ${t.reminder_sent_at ? ' \u00b7 Reminded ' + timeAgo(t.reminder_sent_at) : ''}
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">${actions}</div>
+        </div>`;
+      }).join('');
     }
   } catch(e) { console.error('Takedowns error:', e); }
 }
@@ -634,21 +719,127 @@ async function deleteAlert(id) {
 
 // ===== TAKEDOWN ACTIONS =====
 function showNewTakedown() { document.getElementById('takedownModal').classList.add('show'); }
-function closeTdModal() { document.getElementById('takedownModal').classList.remove('show'); }
+function closeTdModal() { 
+  document.getElementById('takedownModal').classList.remove('show');
+  document.getElementById('tdCreateMsg').style.display='none';
+}
 document.getElementById('takedownModal').onclick = e => { if(e.target.id==='takedownModal') closeTdModal(); };
 
 async function submitTakedown() {
   const url = document.getElementById('tdUrl').value.trim();
-  const domain = document.getElementById('tdDomain').value.trim();
+  const imageUrl = document.getElementById('tdImageUrl').value.trim();
+  const legalName = document.getElementById('tdLegalName').value.trim();
+  const contactEmail = document.getElementById('tdContactEmail').value.trim();
   const reason = document.getElementById('tdReason').value.trim();
-  if(!url){alert('Please enter a URL');return;}
+  const msg = document.getElementById('tdCreateMsg');
+  const btn = document.getElementById('tdCreateBtn');
+  
+  if(!url) { showMsg(msg,'Infringing URL is required','var(--red)'); return; }
+  if(!legalName) { showMsg(msg,'Legal name is required','var(--red)'); return; }
+  if(!contactEmail||!contactEmail.includes('@')) { showMsg(msg,'Valid email is required','var(--red)'); return; }
+  
+  btn.disabled=true; btn.textContent='Generating...';
   try {
-    const res = await fetch(API+'/takedowns', {method:'POST',headers:hdr(),body:JSON.stringify({url,domain,reason})});
+    const res = await fetch(API+'/takedowns', {method:'POST',headers:hdr(),
+      body:JSON.stringify({url, image_url:imageUrl, legal_name:legalName, contact_email:contactEmail, reason})});
     const d = await res.json();
-    if(d.error){alert(d.error);return;}
+    btn.disabled=false; btn.textContent='Generate DMCA Notice';
+    if(d.error) { showMsg(msg,d.error,'var(--red)'); return; }
     closeTdModal();
+    // Open preview immediately
+    openDmcaPreview(d.id);
     loadTakedowns();
-  } catch(e){alert('Failed to submit request');}
+  } catch(e) { btn.disabled=false; btn.textContent='Generate DMCA Notice'; showMsg(msg,'Network error','var(--red)'); }
+}
+
+// DMCA Preview
+function closeDmcaPreview() { document.getElementById('dmcaPreviewModal').classList.remove('show'); currentDmcaId=null; }
+document.getElementById('dmcaPreviewModal').onclick = e => { if(e.target.id==='dmcaPreviewModal') closeDmcaPreview(); };
+
+async function openDmcaPreview(id) {
+  currentDmcaId = id;
+  const msg = document.getElementById('dmcaSendMsg');
+  msg.style.display='none';
+  document.getElementById('dmcaPreviewModal').classList.add('show');
+  document.getElementById('dmcaBodyEdit').value = 'Loading...';
+  
+  try {
+    const res = await fetch(API+'/takedowns/'+id+'/preview', {headers:{'Authorization':'Bearer '+token}});
+    const d = await res.json();
+    if(d.error) { document.getElementById('dmcaBodyEdit').value = 'Error: '+d.error; return; }
+    
+    document.getElementById('dmcaRefBadge').textContent = d.dmca_ref || '';
+    document.getElementById('dmcaTo').textContent = d.abuse_email || 'Unknown';
+    document.getElementById('dmcaDomain').textContent = d.domain || '';
+    document.getElementById('dmcaBodyEdit').value = d.dmca_body || '';
+    document.getElementById('dmcaAbuseEdit').value = d.abuse_email || '';
+    document.getElementById('dmcaGoogleLink').href = d.google_removal_url || '#';
+    
+    // Adjust send button based on status
+    const sendBtn = document.getElementById('dmcaSendBtn');
+    if(d.status === 'sent' || d.status === 'reminded' || d.status === 'resolved') {
+      sendBtn.style.display = 'none';
+    } else {
+      sendBtn.style.display = '';
+    }
+  } catch(e) { document.getElementById('dmcaBodyEdit').value = 'Failed to load preview'; }
+}
+
+async function saveDmcaDraft() {
+  if(!currentDmcaId) return;
+  const msg = document.getElementById('dmcaSendMsg');
+  try {
+    await fetch(API+'/takedowns/'+currentDmcaId, {method:'PUT',headers:hdr(),
+      body:JSON.stringify({
+        dmca_body: document.getElementById('dmcaBodyEdit').value,
+        abuse_email: document.getElementById('dmcaAbuseEdit').value
+      })});
+    showMsg(msg,'Draft saved','var(--green)');
+  } catch(e) { showMsg(msg,'Failed to save','var(--red)'); }
+}
+
+async function sendDMCA() {
+  if(!currentDmcaId) return;
+  const msg = document.getElementById('dmcaSendMsg');
+  const btn = document.getElementById('dmcaSendBtn');
+  
+  // Save any edits first
+  await saveDmcaDraft();
+  
+  const abuseEmail = document.getElementById('dmcaAbuseEdit').value.trim();
+  if(!abuseEmail||!abuseEmail.includes('@')) { showMsg(msg,'Valid abuse email required','var(--red)'); return; }
+  
+  if(!confirm('Send DMCA notice to ' + abuseEmail + '? This will send a real email on your behalf.')) return;
+  
+  btn.disabled=true; btn.innerHTML='Sending...';
+  try {
+    const res = await fetch(API+'/takedowns/'+currentDmcaId+'/send', {method:'POST',headers:hdr()});
+    const d = await res.json();
+    btn.disabled=false; btn.innerHTML='<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;margin-right:4px"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send DMCA Notice';
+    if(d.error) { showMsg(msg,d.error,'var(--red)'); return; }
+    showMsg(msg,'DMCA notice sent to ' + (d.sent_to||abuseEmail) + '! A copy was sent to your email.','var(--green)');
+    btn.style.display='none';
+    loadTakedowns();
+  } catch(e) { btn.disabled=false; showMsg(msg,'Failed to send','var(--red)'); }
+}
+
+async function remindDMCA(id) {
+  if(!confirm('Send a follow-up reminder for this takedown?')) return;
+  try {
+    const res = await fetch(API+'/takedowns/'+id+'/remind', {method:'POST',headers:hdr()});
+    const d = await res.json();
+    if(d.error) { alert(d.error); return; }
+    alert(d.message || 'Reminder sent!');
+    loadTakedowns();
+  } catch(e) { alert('Failed to send reminder'); }
+}
+
+async function markResolved(id) {
+  if(!confirm('Mark this takedown as resolved?')) return;
+  try {
+    await fetch(API+'/takedowns/'+id, {method:'PUT',headers:hdr(),body:JSON.stringify({status:'resolved'})});
+    loadTakedowns();
+  } catch(e) { alert('Failed to update'); }
 }
 
 // ===== EXPORT PDF =====
