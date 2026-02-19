@@ -249,6 +249,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
       <svg viewBox="0 0 24 24" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       System
     </a>
+    <a class="sidebar__link" data-page="audit">
+      <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Audit Log
+    </a>
     <div class="sidebar__section">Quick Links</div>
     <a class="sidebar__link" href="/" style="color:var(--text3)">
       <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
@@ -517,10 +521,49 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
       </div>
     </div>
 
+    <div class="page" id="page-audit">
+      <div class="cards">
+        <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(91,154,255,.12)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div><div class="card__value" id="auditTotal">—</div><div class="card__label">Events (7 days)</div></div>
+        <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(248,113,113,.12)"><svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div></div><div class="card__value" id="auditWarnings">—</div><div class="card__label">Warnings</div></div>
+        <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(239,68,68,.12)"><svg viewBox="0 0 24 24" stroke="var(--red)"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div></div><div class="card__value" id="auditCritical">—</div><div class="card__label">Critical</div></div>
+        <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(74,222,128,.12)"><svg viewBox="0 0 24 24" stroke="var(--green)"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></div><div class="card__value" id="auditLogins">—</div><div class="card__label">Logins (7d)</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel__header">
+          <div class="panel__title"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security Audit Log</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="auditFilter" onchange="loadAuditLog()" style="background:var(--bg2);color:var(--text1);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.75rem;font-family:inherit">
+              <option value="">All Events</option>
+              <option value="login_success">Login Success</option>
+              <option value="login_failed">Login Failed</option>
+              <option value="admin_delete_user">User Deleted</option>
+              <option value="admin_suspend">User Suspended</option>
+              <option value="admin_unsuspend">User Unsuspended</option>
+            </select>
+            <select id="auditSeverity" onchange="loadAuditLog()" style="background:var(--bg2);color:var(--text1);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.75rem;font-family:inherit">
+              <option value="">All Severity</option>
+              <option value="info">Info</option>
+              <option value="warn">Warning</option>
+              <option value="critical">Critical</option>
+            </select>
+            <select id="auditDays" onchange="loadAuditLog()" style="background:var(--bg2);color:var(--text1);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.75rem;font-family:inherit">
+              <option value="1">Last 24h</option>
+              <option value="7" selected>Last 7 days</option>
+              <option value="30">Last 30 days</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="tbl">
+            <thead><tr><th>Time</th><th>Event</th><th>User</th><th>IP</th><th>Details</th><th>Severity</th></tr></thead>
+            <tbody id="auditBody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
-
-<!-- USER EDIT MODAL -->
 <div class="modal-overlay" id="userModal">
   <div class="modal">
     <div class="modal__title" id="modalTitle">Edit User</div>
@@ -743,6 +786,7 @@ async function loadAllData() {
   loadPayments();
   loadNewsletter();
   loadDmcaVerifications();
+  loadAuditLog();
 }
 
 async function loadStats() {
@@ -1331,6 +1375,63 @@ function exportNewsletter() {
   const a = document.createElement('a');
   a.href = url; a.download = 'protevio_newsletter_' + new Date().toISOString().split('T')[0] + '.csv';
   a.click(); URL.revokeObjectURL(url);
+}
+
+// ===== AUDIT LOG =====
+async function loadAuditLog() {
+  try {
+    const event = document.getElementById('auditFilter')?.value || '';
+    const severity = document.getElementById('auditSeverity')?.value || '';
+    const days = document.getElementById('auditDays')?.value || '7';
+    
+    let url = API + '/admin/audit-log?days=' + days + '&limit=200';
+    if(event) url += '&event=' + event;
+    if(severity) url += '&severity=' + severity;
+    
+    const res = await fetch(url, {headers:{'Authorization':'Bearer '+token}});
+    if(!res.ok) {
+      document.getElementById('auditBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">Audit log not available yet. Deploy the audit_log system first.</td></tr>';
+      return;
+    }
+    const d = await res.json();
+    
+    // Update stat cards
+    const entries = d.entries || [];
+    const summary = d.summary || [];
+    document.getElementById('auditTotal').textContent = entries.length;
+    
+    let warns = 0, crits = 0, logins = 0;
+    summary.forEach(s => {
+      if(s.severity === 'warn') warns += s.count;
+      if(s.severity === 'critical') crits += s.count;
+      if(s.event === 'login_success') logins += s.count;
+    });
+    document.getElementById('auditWarnings').textContent = warns;
+    document.getElementById('auditCritical').textContent = crits;
+    document.getElementById('auditLogins').textContent = logins;
+    
+    if(entries.length === 0) {
+      document.getElementById('auditBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">No audit events found for this period.</td></tr>';
+      return;
+    }
+    
+    const severityBadge = (s) => {
+      const colors = {info:'var(--accent)',warn:'var(--gold)',critical:'var(--red)'};
+      const bg = {info:'rgba(91,154,255,.1)',warn:'rgba(234,179,8,.1)',critical:'rgba(239,68,68,.1)'};
+      return `<span style="font-size:.7rem;padding:2px 8px;border-radius:8px;background:${bg[s]||bg.info};color:${colors[s]||colors.info};font-weight:600">${(s||'info').toUpperCase()}</span>`;
+    };
+    
+    document.getElementById('auditBody').innerHTML = entries.map(e => `<tr>
+      <td style="font-size:.75rem;white-space:nowrap;color:var(--text3)">${e.time ? new Date(e.time).toLocaleString() : '—'}</td>
+      <td style="font-size:.8rem;font-weight:600;color:var(--text1)">${e.event||'—'}</td>
+      <td style="font-size:.8rem">${e.username||'—'}</td>
+      <td style="font-size:.72rem;color:var(--text3);font-family:monospace">${e.ip||'—'}</td>
+      <td style="font-size:.75rem;color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(e.details||'').replace(/"/g,'&quot;')}">${e.details||'—'}</td>
+      <td>${severityBadge(e.severity)}</td>
+    </tr>`).join('');
+  } catch(e) {
+    document.getElementById('auditBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">Failed to load audit log.</td></tr>';
+  }
 }
 
 
