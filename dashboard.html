@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dashboard â€” Protevio AI</title>
+<title>Dashboard — Protevio AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -232,12 +232,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="dcard">
         <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--accent)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>My Subscription</div><div class="badge" id="planBadge">Free</div></div>
         <div style="font-size:.88rem;color:var(--text2);margin-bottom:14px">Plan: <strong id="planName" style="color:var(--text)">Free</strong></div>
-        <div class="irow"><div class="irow__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="irow__txt"><div class="irow__l" id="userEmail">â€”</div><div class="irow__s" id="userCreated">Created: â€”</div></div></div>
-        <div class="irow"><div class="irow__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div><div class="irow__txt"><div class="irow__l">Orders & Invoices</div><div class="irow__s">Manage your payment history</div></div><button class="irow__act" onclick="openBillingPortal()">Manage â†’</button></div>
+        <div class="irow"><div class="irow__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="irow__txt"><div class="irow__l" id="userEmail">—</div><div class="irow__s" id="userCreated">Created: —</div></div></div>
+        <div class="irow"><div class="irow__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div><div class="irow__txt"><div class="irow__l">Orders & Invoices</div><div class="irow__s">Manage your payment history</div></div><button class="irow__act" onclick="openBillingPortal()">Manage →</button></div>
         <div style="margin-top:16px"><a href="/pricing" class="abtn abtn--o"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Explore Pricing</a></div>
       </div>
       <div class="dcard">
-        <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--green)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search Activity</div><div style="text-align:right"><div style="font-size:.82rem;color:var(--text2)">You have <strong style="color:var(--accent)" id="searchesLeft">â€”</strong> left today</div><div style="font-size:.72rem;color:var(--text3)">Total Searches: <span id="totalSearches">0</span></div></div></div>
+        <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--green)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search Activity</div><div style="text-align:right"><div style="font-size:.82rem;color:var(--text2)">You have <strong style="color:var(--accent)" id="searchesLeft">—</strong> left today</div><div style="font-size:.72rem;color:var(--text3)">Total Searches: <span id="totalSearches">0</span></div></div></div>
         <div class="ubar-w" style="margin-bottom:18px"><div class="ubar-h"><span style="color:var(--text2)">Daily Usage</span><span style="color:var(--text3)" id="usageText">0 / 10</span></div><div class="ubar"><div class="ubar__f" id="usageBar" style="width:0;background:var(--green)"></div></div></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px"><div class="sbox"><div class="sbox__v" id="statToday" style="color:var(--accent)">0</div><div class="sbox__l">Today</div></div><div class="sbox"><div class="sbox__v" id="statTotal" style="color:var(--purple)">0</div><div class="sbox__l">All Time</div></div></div>
         <a href="/" class="abtn abtn--p" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Perform Search</a>
@@ -390,7 +390,7 @@ document.querySelectorAll('.sidebar__link[data-page]').forEach(l => {
 });
 
 function timeAgo(str) {
-  if(!str) return 'â€”';
+  if(!str) return '—';
   const s = Math.floor((Date.now() - new Date(str).getTime()) / 1000);
   if(s < 60) return 'just now';
   if(s < 3600) return Math.floor(s/60) + 'm ago';
@@ -431,7 +431,7 @@ async function loadDashboard() {
     document.getElementById('planBadge').className = 'badge badge--'+userPlan;
     document.getElementById('planName').textContent = pc;
     document.getElementById('userEmail').textContent = u.email||u.username;
-    document.getElementById('userCreated').textContent = 'Created: '+(u.created_at?new Date(u.created_at).toLocaleDateString('en-GB'):'â€”');
+    document.getElementById('userCreated').textContent = 'Created: '+(u.created_at?new Date(u.created_at).toLocaleDateString('en-GB'):'—');
     document.getElementById('searchesLeft').textContent = rem;
     document.getElementById('totalSearches').textContent = total;
     document.getElementById('usageText').textContent = limit===-1?used+' / Unlimited':used+' / '+limit;
@@ -441,7 +441,7 @@ async function loadDashboard() {
     document.getElementById('statTotal').textContent = total;
     document.getElementById('sName').textContent = u.name||u.username;
     loadSettings(u);
-    document.getElementById('sEmail').textContent = u.email||'â€”';
+    document.getElementById('sEmail').textContent = u.email||'—';
     if(u.role==='admin') document.getElementById('adminLink').style.display='block';
     
     // Show/hide pro buttons
@@ -469,7 +469,7 @@ async function loadHistory() {
     if(h.length>0){badge.textContent=h.length;badge.style.display='inline';}
     
     if(h.length===0){
-      el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>No searches yet<br><br><a href="/" style="color:var(--accent);font-weight:600;text-decoration:none">Perform your first search â†’</a></div>';
+      el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>No searches yet<br><br><a href="/" style="color:var(--accent);font-weight:600;text-decoration:none">Perform your first search →</a></div>';
       return;
     }
     
@@ -526,9 +526,9 @@ async function loadAlerts() {
     
     // Dashboard mini view
     if(alerts.length === 0) {
-      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No active alerts.<br><a href="#" onclick="document.querySelector(\'[data-page=alerts]\').click();return false" style="color:var(--accent);font-weight:600">Set up monitoring â†’</a></div>';
+      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No active alerts.<br><a href="#" onclick="document.querySelector(\'[data-page=alerts]\').click();return false" style="color:var(--accent);font-weight:600">Set up monitoring →</a></div>';
     } else {
-      dashEl.innerHTML = alerts.slice(0,2).map(a => `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.82rem"><span class="ai__status ai__status--${a.status}">${a.status}</span><span style="font-weight:600">${a.label}</span><span style="color:var(--text3);margin-left:auto">${a.matches} matches</span></div>`).join('') + (alerts.length > 2 ? `<div style="text-align:center;padding:8px;font-size:.78rem"><a href="#" onclick="document.querySelector('[data-page=alerts]').click();return false" style="color:var(--accent)">View all ${alerts.length} alerts â†’</a></div>` : '');
+      dashEl.innerHTML = alerts.slice(0,2).map(a => `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.82rem"><span class="ai__status ai__status--${a.status}">${a.status}</span><span style="font-weight:600">${a.label}</span><span style="color:var(--text3);margin-left:auto">${a.matches} matches</span></div>`).join('') + (alerts.length > 2 ? `<div style="text-align:center;padding:8px;font-size:.78rem"><a href="#" onclick="document.querySelector('[data-page=alerts]').click();return false" style="color:var(--accent)">View all ${alerts.length} alerts →</a></div>` : '');
     }
     
     // Full alerts page
@@ -538,7 +538,7 @@ async function loadAlerts() {
     } else {
       alertsEl.innerHTML = alerts.map(a => {
         const thumb = a.face_thumbnail ? `<img class="ai__thumb" src="data:image/jpeg;base64,${a.face_thumbnail}">` : '<div class="ai__thumb" style="display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--text3);stroke-width:2;fill:none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
-        return `<div class="ai">${thumb}<div class="ai__info"><div class="ai__label">${a.label}</div><div class="ai__meta">${a.matches} matches found Â· Created ${timeAgo(a.created_at)}${a.last_checked ? ' Â· Last checked '+timeAgo(a.last_checked) : ''}</div></div><span class="ai__status ai__status--${a.status}">${a.status}</span><div class="ai__actions"><button class="ai__btn" style="border-color:var(--gold);color:var(--gold)" onclick="toggleAlert(${a.id})">${a.status==='active'?'Pause':'Resume'}</button><button class="ai__btn" style="border-color:var(--red);color:var(--red)" onclick="deleteAlert(${a.id})">Delete</button></div></div>`;
+        return `<div class="ai">${thumb}<div class="ai__info"><div class="ai__label">${a.label}</div><div class="ai__meta">${a.matches} matches found · Created ${timeAgo(a.created_at)}${a.last_checked ? ' · Last checked '+timeAgo(a.last_checked) : ''}</div></div><span class="ai__status ai__status--${a.status}">${a.status}</span><div class="ai__actions"><button class="ai__btn" style="border-color:var(--gold);color:var(--gold)" onclick="toggleAlert(${a.id})">${a.status==='active'?'Pause':'Resume'}</button><button class="ai__btn" style="border-color:var(--red);color:var(--red)" onclick="deleteAlert(${a.id})">Delete</button></div></div>`;
       }).join('');
     }
   } catch(e) { console.error('Alerts error:', e); }
@@ -561,7 +561,7 @@ async function loadTakedowns() {
     
     // Dashboard mini
     if(items.length === 0) {
-      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No takedown requests yet.<br><a href="#" onclick="document.querySelector(\'[data-page=protect]\').click();return false" style="color:var(--accent);font-weight:600">Submit a request â†’</a></div>';
+      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No takedown requests yet.<br><a href="#" onclick="document.querySelector(\'[data-page=protect]\').click();return false" style="color:var(--accent);font-weight:600">Submit a request →</a></div>';
     } else {
       const pending = items.filter(t=>t.status==='pending').length;
       const resolved = items.filter(t=>t.status==='resolved').length;
@@ -573,7 +573,7 @@ async function loadTakedowns() {
     if(items.length === 0) {
       el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>No takedown requests yet.<br><br>Click "New Request" to submit a removal request.</div>';
     } else {
-      el.innerHTML = items.map(t => `<div class="ti"><div class="ti__top"><div class="ti__url">${t.url || t.face_id || 'â€”'}</div><span class="ti__status ti__status--${t.status}">${t.status}</span></div>${t.domain?'<div style="font-size:.78rem;color:var(--accent)">'+t.domain+'</div>':''}<div class="ti__reason">${t.reason||''}</div><div class="ti__date">Submitted ${timeAgo(t.created_at)}</div></div>`).join('');
+      el.innerHTML = items.map(t => `<div class="ti"><div class="ti__top"><div class="ti__url">${t.url || t.face_id || '—'}</div><span class="ti__status ti__status--${t.status}">${t.status}</span></div>${t.domain?'<div style="font-size:.78rem;color:var(--accent)">'+t.domain+'</div>':''}<div class="ti__reason">${t.reason||''}</div><div class="ti__date">Submitted ${timeAgo(t.created_at)}</div></div>`).join('');
     }
   } catch(e) { console.error('Takedowns error:', e); }
 }
