@@ -286,7 +286,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 
   <!-- ===== SETTINGS ===== -->
-    <div class="page" id="page-settings">
+  <div class="page" id="page-settings">
     <div class="dh"><div class="dh__t">Settings</div><div class="dh__s">Manage your account preferences</div></div>
     <!-- Profile -->
     <div class="dcard">
@@ -299,8 +299,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="dcard" style="margin-top:16px">
       <div style="font-weight:700;font-size:.92rem;margin-bottom:14px">Change Password</div>
       <div style="display:flex;flex-direction:column;gap:10px;max-width:360px">
-        <input class="modal__fi" type="password" id="pwCurrent" placeholder="Current password" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
-        <input class="modal__fi" type="password" id="pwNew" placeholder="New password (min 6 chars)" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
+        <input type="password" id="pwCurrent" placeholder="Current password" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem;outline:none">
+        <input type="password" id="pwNew" placeholder="New password (min 6 chars)" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem;outline:none">
         <button class="abtn" onclick="changePassword()" style="width:fit-content"><svg viewBox="0 0 24 24" style="stroke:currentColor;width:14px;height:14px;fill:none;stroke-width:2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Update Password</button>
         <div id="pwMsg" style="font-size:.78rem;display:none"></div>
       </div>
@@ -309,8 +309,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="dcard" style="margin-top:16px">
       <div style="font-weight:700;font-size:.92rem;margin-bottom:14px">Change Email</div>
       <div style="display:flex;flex-direction:column;gap:10px;max-width:360px">
-        <input class="modal__fi" type="email" id="newEmail" placeholder="New email address" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
-        <input class="modal__fi" type="password" id="emailPw" placeholder="Confirm your password" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
+        <input type="email" id="newEmail" placeholder="New email address" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem;outline:none">
+        <input type="password" id="emailPw" placeholder="Confirm your password" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem;outline:none">
         <button class="abtn" onclick="changeEmail()" style="width:fit-content"><svg viewBox="0 0 24 24" style="stroke:currentColor;width:14px;height:14px;fill:none;stroke-width:2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Update Email</button>
         <div id="emailMsg" style="font-size:.78rem;display:none"></div>
       </div>
@@ -320,12 +320,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div style="font-weight:700;font-size:.92rem;margin-bottom:6px;color:var(--red)">Danger Zone</div>
       <div style="font-size:.82rem;color:var(--text3);margin-bottom:14px">Permanently delete your account and all associated data. This cannot be undone.</div>
       <button class="abtn abtn--o" style="color:var(--red);border-color:var(--red)" onclick="showDeleteModal()"><svg viewBox="0 0 24 24" style="stroke:var(--red);width:14px;height:14px;fill:none;stroke-width:2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Delete Account</button>
-    </div>
-  </div></div>
-      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--green-bg)"><svg viewBox="0 0 24 24" stroke="var(--green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="si__t">Safe Search</div><div class="si__s">Filter explicit results from searches</div></div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
-      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div><div><div class="si__t">Email Notifications</div><div class="si__s">Receive alerts about new matches</div></div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
-      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--gold-bg)"><svg viewBox="0 0 24 24" stroke="var(--gold)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div><div><div class="si__t">Two-Factor Authentication</div><div class="si__s">Add extra security to your account</div></div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="abtn abtn--o" style="color:var(--red);border-color:var(--red)" onclick="alert('Contact support@protevio.com to delete your account.')"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Delete Account</button></div>
     </div>
   </div>
 </div>
@@ -701,7 +695,6 @@ async function toggleSetting(key, btn) {
 }
 
 function loadSettings(u) {
-  // Called from loadDashboard after /auth/me returns
   const safeBtn = document.getElementById('toggleSafe');
   const notifBtn = document.getElementById('toggleNotif');
   if(safeBtn) { if(u.safe_search) safeBtn.classList.add('on'); else safeBtn.classList.remove('on'); }
@@ -769,12 +762,19 @@ async function deleteAccount() {
       localStorage.removeItem('protevio_user');
       alert('Your account has been deleted.');
       window.location.href = '/';
-    } else { showMsg(msg,d.error||'Failed','var(--red)'); document.getElementById('delBtn').disabled=false; document.getElementById('delBtn').textContent='Delete Permanently'; }
-  } catch(e) { showMsg(msg,'Network error','var(--red)'); document.getElementById('delBtn').disabled=false; document.getElementById('delBtn').textContent='Delete Permanently'; }
+    } else {
+      showMsg(msg,d.error||'Failed','var(--red)');
+      document.getElementById('delBtn').disabled=false;
+      document.getElementById('delBtn').textContent='Delete Permanently';
+    }
+  } catch(e) {
+    showMsg(msg,'Network error','var(--red)');
+    document.getElementById('delBtn').disabled=false;
+    document.getElementById('delBtn').textContent='Delete Permanently';
+  }
 }
 
 function showMsg(el,text,color) { el.style.display='block'; el.style.color=color; el.textContent=text; setTimeout(()=>{el.style.display='none'},5000); }
-
 </script>
 
 <!-- DELETE ACCOUNT MODAL -->
