@@ -279,9 +279,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   <!-- ===== PROTECT ===== -->
   <div class="page" id="page-protect">
     <div class="dh" style="display:flex;align-items:center;justify-content:space-between">
-      <div><div class="dh__t">PROtect</div><div class="dh__s">Request removal of your images from search results</div></div>
-      <button class="abtn abtn--p" id="newTakedownBtn" style="display:none" onclick="showNewTakedown()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New Request</button>
+      <div><div class="dh__t">PROtect</div><div class="dh__s">Automated DMCA takedowns to remove your photos</div></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span id="verifyBadge" style="display:none;font-size:.72rem;padding:4px 12px;border-radius:20px;font-weight:700"></span>
+        <button class="abtn abtn--p" id="newTakedownBtn" style="display:none" onclick="showNewTakedown()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New Request</button>
+      </div>
     </div>
+    <!-- Verification required banner -->
+    <div id="verifyBanner" style="display:none"></div>
     <div class="dcard" id="protectContent"><div class="empty">Loading...</div></div>
   </div>
 
@@ -398,6 +403,51 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 </div>
 
+
+<!-- DMCA VERIFICATION MODAL -->
+<div class="modal-bg" id="verifyModal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal__t" style="display:flex;align-items:center;gap:10px">
+      <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Verify Your Identity
+    </div>
+    <p style="font-size:.82rem;color:var(--text3);margin-bottom:16px;line-height:1.6">To send DMCA takedowns, we need to verify your identity once. This protects you and ensures only legitimate requests are processed.</p>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="modal__f"><label class="modal__fl">Legal Name <span style="color:var(--red)">*</span></label><input class="modal__fi" id="verLegalName" placeholder="Full legal name"></div>
+      <div class="modal__f"><label class="modal__fl">Contact Email <span style="color:var(--red)">*</span></label><input class="modal__fi" id="verEmail" placeholder="your@email.com"></div>
+    </div>
+    
+    <div class="modal__f" style="margin-bottom:14px">
+      <label class="modal__fl">Selfie / Photo of You <span style="color:var(--red)">*</span></label>
+      <div style="border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;position:relative;transition:border-color .2s" id="selfieZone" onclick="document.getElementById('selfieInput').click()">
+        <input type="file" id="selfieInput" accept="image/*" style="display:none" onchange="previewUpload(this,'selfiePreview','selfieZone')">
+        <div id="selfiePreview" style="display:none"></div>
+        <div id="selfiePrompt"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:var(--text3);fill:none;stroke-width:1.5;margin-bottom:6px"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><div style="font-size:.82rem;font-weight:600">Upload a clear photo of your face</div><div style="font-size:.72rem;color:var(--text3)">JPG, PNG — used to match your identity</div></div>
+      </div>
+    </div>
+    
+    <div class="modal__f" style="margin-bottom:14px">
+      <label class="modal__fl">Redacted Government ID <span style="color:var(--red)">*</span></label>
+      <div style="border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;position:relative;transition:border-color .2s" id="idZone" onclick="document.getElementById('idInput').click()">
+        <input type="file" id="idInput" accept="image/*" style="display:none" onchange="previewUpload(this,'idPreview','idZone')">
+        <div id="idPreview" style="display:none"></div>
+        <div id="idPrompt"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:var(--text3);fill:none;stroke-width:1.5;margin-bottom:6px"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><div style="font-size:.82rem;font-weight:600">Upload redacted government ID</div><div style="font-size:.72rem;color:var(--text3)">Name visible, other details blurred/covered</div></div>
+      </div>
+    </div>
+    
+    <div style="font-size:.72rem;color:var(--text3);background:rgba(91,154,255,.06);border:1px solid rgba(91,154,255,.12);padding:10px 14px;border-radius:8px;line-height:1.6;margin-bottom:14px">
+      <strong style="color:var(--accent)">Privacy:</strong> Your ID document is deleted immediately after admin approval. We only store your verified name and email — never your ID.
+    </div>
+    
+    <div id="verMsg" style="font-size:.78rem;display:none;margin-bottom:10px"></div>
+    <div class="modal__btns">
+      <button class="modal__btn" style="background:var(--bg3);color:var(--text2)" onclick="closeVerifyModal()">Cancel</button>
+      <button class="modal__btn" style="background:var(--accent);color:#fff" id="verSubmitBtn" onclick="submitVerification()">Submit for Verification</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const API = 'https://api.protevio.com/api';
 const token = localStorage.getItem('protevio_token');
@@ -498,6 +548,7 @@ async function loadDashboard() {
     loadHistory();
     loadAlerts();
     loadTakedowns();
+  if(isPro) checkDmcaVerification();
     loadExports();
   } catch(e){console.error(e);}
 }
@@ -661,6 +712,109 @@ async function loadTakedowns() {
       }).join('');
     }
   } catch(e) { console.error('Takedowns error:', e); }
+}
+
+
+// ===== DMCA VERIFICATION =====
+let dmcaVerified = false;
+
+async function checkDmcaVerification() {
+  try {
+    const res = await fetch(API+'/dmca/verify/status', {headers:{'Authorization':'Bearer '+token}});
+    const d = await res.json();
+    dmcaVerified = d.verified || false;
+    
+    const badge = document.getElementById('verifyBadge');
+    const banner = document.getElementById('verifyBanner');
+    
+    if(dmcaVerified) {
+      badge.style.display='inline-block';
+      badge.textContent='Verified';
+      badge.style.background='rgba(22,163,74,.15)';
+      badge.style.color='var(--green)';
+      banner.style.display='none';
+    } else if(d.pending_verification && d.pending_verification.status === 'pending') {
+      badge.style.display='inline-block';
+      badge.textContent='Pending Review';
+      badge.style.background='rgba(251,191,36,.15)';
+      badge.style.color='var(--gold)';
+      banner.style.display='block';
+      banner.innerHTML = '<div style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:14px"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><div style="font-size:.85rem;font-weight:700;color:var(--gold)">Verification Pending</div><div style="font-size:.78rem;color:var(--text3);margin-top:2px">Your identity is being reviewed. This usually takes less than 24 hours. You can still create draft takedowns.</div></div></div>';
+    } else if(d.pending_verification && d.pending_verification.status === 'rejected') {
+      badge.style.display='inline-block';
+      badge.textContent='Rejected';
+      badge.style.background='rgba(239,68,68,.15)';
+      badge.style.color='var(--red)';
+      banner.style.display='block';
+      banner.innerHTML = '<div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:14px"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--red);fill:none;stroke-width:2;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><div><div style="font-size:.85rem;font-weight:700;color:var(--red)">Verification Rejected</div><div style="font-size:.78rem;color:var(--text3);margin-top:2px">Please <a href="#" onclick="openVerifyModal();return false" style="color:var(--accent)">submit again</a> with clearer documents.</div></div></div>';
+    } else {
+      // Not verified, no pending - show verification banner
+      banner.style.display='block';
+      banner.innerHTML = '<div style="background:rgba(91,154,255,.06);border:1px solid rgba(91,154,255,.12);border-radius:12px;padding:20px;margin-bottom:16px;text-align:center"><svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:var(--accent);fill:none;stroke-width:1.5;margin-bottom:8px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><div style="font-size:.95rem;font-weight:700;margin-bottom:4px">Verify your identity to send DMCA takedowns</div><div style="font-size:.8rem;color:var(--text3);margin-bottom:14px;max-width:400px;margin-left:auto;margin-right:auto">One-time verification with a selfie and redacted ID. After approval, you can send takedowns instantly from your search results.</div><button class="abtn abtn--p" onclick="openVerifyModal()" style="margin:0 auto">Verify Identity</button></div>';
+    }
+    
+    return dmcaVerified;
+  } catch(e) { console.error('Verification check error:', e); return false; }
+}
+
+function openVerifyModal() { document.getElementById('verifyModal').classList.add('show'); }
+function closeVerifyModal() { 
+  document.getElementById('verifyModal').classList.remove('show');
+  document.getElementById('verMsg').style.display='none';
+}
+document.getElementById('verifyModal').onclick = e => { if(e.target.id==='verifyModal') closeVerifyModal(); };
+
+function previewUpload(input, previewId, zoneId) {
+  const file = input.files[0];
+  if(!file) return;
+  const preview = document.getElementById(previewId);
+  const zone = document.getElementById(zoneId);
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    preview.innerHTML = '<img src="'+e.target.result+'" style="max-width:100%;max-height:120px;border-radius:8px;border:2px solid var(--green)">';
+    preview.style.display = 'block';
+    // Hide prompt
+    const prompt = zone.querySelector('[id$=Prompt]');
+    if(prompt) prompt.style.display = 'none';
+    zone.style.borderColor = 'var(--green)';
+    zone.style.borderStyle = 'solid';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function submitVerification() {
+  const legalName = document.getElementById('verLegalName').value.trim();
+  const email = document.getElementById('verEmail').value.trim();
+  const selfie = document.getElementById('selfieInput').files[0];
+  const idDoc = document.getElementById('idInput').files[0];
+  const msg = document.getElementById('verMsg');
+  const btn = document.getElementById('verSubmitBtn');
+  
+  if(!legalName) { showMsg(msg,'Legal name is required','var(--red)'); return; }
+  if(!email||!email.includes('@')) { showMsg(msg,'Valid email is required','var(--red)'); return; }
+  if(!selfie) { showMsg(msg,'Selfie photo is required','var(--red)'); return; }
+  if(!idDoc) { showMsg(msg,'Redacted government ID is required','var(--red)'); return; }
+  
+  btn.disabled=true; btn.textContent='Submitting...';
+  
+  const formData = new FormData();
+  formData.append('legal_name', legalName);
+  formData.append('contact_email', email);
+  formData.append('selfie', selfie);
+  formData.append('id_document', idDoc);
+  
+  try {
+    const res = await fetch(API+'/dmca/verify', {
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token},
+      body: formData
+    });
+    const d = await res.json();
+    btn.disabled=false; btn.textContent='Submit for Verification';
+    if(d.error) { showMsg(msg,d.error,'var(--red)'); return; }
+    showMsg(msg, d.message || 'Verification submitted!', 'var(--green)');
+    setTimeout(() => { closeVerifyModal(); checkDmcaVerification(); }, 2000);
+  } catch(e) { btn.disabled=false; btn.textContent='Submit for Verification'; showMsg(msg,'Network error','var(--red)'); }
 }
 
 // ===== EXPORTS =====

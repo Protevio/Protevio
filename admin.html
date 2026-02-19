@@ -228,6 +228,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
       <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
       Opt-Out<span id="optoutBadge" style="margin-left:auto;font-size:.65rem;background:var(--gold);color:#000;padding:1px 7px;border-radius:10px;font-weight:700;display:none">0</span>
     </a>
+    <a class="sidebar__link" data-page="dmca">
+      <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      DMCA Verify <span id="dmcaPendingBadge" style="margin-left:auto;background:var(--red);color:#fff;font-size:.6rem;padding:2px 7px;border-radius:10px;font-weight:700;display:none">0</span>
+    </a>
     <a class="sidebar__link" data-page="newsletter">
       <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Newsletter<span id="nlBadge" style="margin-left:auto;font-size:.65rem;background:var(--green);color:#000;padding:1px 7px;border-radius:10px;font-weight:700;display:none">0</span>
@@ -483,6 +487,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
     </div>
 
     <!-- ===== NEWSLETTER PAGE ===== -->
+    <div class="page" id="page-dmca">
+      <h2>DMCA Identity Verifications</h2>
+      <p style="color:var(--text3);margin-bottom:20px">Review identity verification requests for DMCA takedown access.</p>
+      <div id="dmcaVerContent"><div style="color:var(--text3)">Loading...</div></div>
+    </div>
+
     <div class="page" id="page-newsletter">
       <div class="cards">
         <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(74,222,128,.12)"><svg viewBox="0 0 24 24" stroke="var(--green)"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div></div><div class="card__value" id="nlActive">0</div><div class="card__label">Active Subscribers</div></div>
@@ -618,6 +628,91 @@ function barChart(container, data, colorFn) {
 // ===== LOAD DATA =====
 let allUsers = [];
 
+
+
+// ===== DMCA VERIFICATIONS =====
+async function loadDmcaVerifications() {
+  try {
+    const res = await fetch(API+'/admin/dmca-verifications', {headers:hdr()});
+    const d = await res.json();
+    const items = d.verifications || [];
+    
+    const pending = items.filter(v=>v.status==='pending');
+    const badge = document.getElementById('dmcaPendingBadge');
+    if(pending.length > 0) { badge.textContent=pending.length; badge.style.display='inline-block'; }
+    else { badge.style.display='none'; }
+    
+    const el = document.getElementById('dmcaVerContent');
+    if(items.length === 0) {
+      el.innerHTML = '<div style="color:var(--text3);text-align:center;padding:40px">No verification requests yet.</div>';
+      return;
+    }
+    
+    el.innerHTML = items.map(v => {
+      const isPending = v.status === 'pending';
+      const statusColors = {pending:'var(--gold)',approved:'var(--green)',rejected:'var(--red)'};
+      const statusColor = statusColors[v.status] || 'var(--text3)';
+      
+      let actions = '';
+      if(isPending) {
+        actions = '<div style="display:flex;gap:8px;margin-top:12px">'
+          + '<button onclick="approveDmca('+v.id+')" style="padding:6px 16px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Approve</button>'
+          + '<button onclick="rejectDmca('+v.id+')" style="padding:6px 16px;background:var(--red);color:#fff;border:none;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Reject</button>'
+          + '</div>';
+      }
+      
+      let images = '';
+      if(v.selfie_data && isPending) {
+        images = '<div style="display:flex;gap:12px;margin-top:12px">'
+          + '<div><div style="font-size:.68rem;color:var(--text3);margin-bottom:4px;font-weight:600">SELFIE</div><img src="'+v.selfie_data+'" style="width:120px;height:120px;object-fit:cover;border-radius:8px;border:1px solid var(--border)"></div>'
+          + '<div><div style="font-size:.68rem;color:var(--text3);margin-bottom:4px;font-weight:600">GOVERNMENT ID (REDACTED)</div><img src="'+v.id_document_data+'" style="width:180px;height:120px;object-fit:cover;border-radius:8px;border:1px solid var(--border)"></div>'
+          + '</div>';
+      } else if(!isPending) {
+        images = '<div style="font-size:.72rem;color:var(--text3);margin-top:8px;font-style:italic">Documents deleted after review.</div>';
+      }
+      
+      return '<div style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid '+statusColor+';border-radius:10px;padding:16px 20px;margin-bottom:12px">'
+        + '<div style="display:flex;justify-content:space-between;align-items:center">'
+        + '<div><strong style="font-size:.9rem">'+v.legal_name+'</strong> <span style="font-size:.78rem;color:var(--text3)">(@'+v.username+')</span></div>'
+        + '<span style="font-size:.7rem;padding:3px 10px;border-radius:10px;font-weight:700;background:'+statusColor+'22;color:'+statusColor+'">'+v.status.toUpperCase()+'</span>'
+        + '</div>'
+        + '<div style="font-size:.78rem;color:var(--text3);margin-top:4px">'+v.contact_email+' &middot; Submitted '+new Date(v.created_at).toLocaleDateString()+'</div>'
+        + (v.reviewed_at ? '<div style="font-size:.72rem;color:var(--text3);margin-top:2px">Reviewed by '+v.reviewed_by+' on '+new Date(v.reviewed_at).toLocaleDateString()+'</div>' : '')
+        + (v.admin_notes ? '<div style="font-size:.78rem;color:var(--gold);margin-top:4px">Note: '+v.admin_notes+'</div>' : '')
+        + images
+        + actions
+        + '</div>';
+    }).join('');
+  } catch(e) { console.error('DMCA verifications error:', e); }
+}
+
+async function approveDmca(id) {
+  const notes = prompt('Admin notes (optional):') || '';
+  try {
+    const res = await fetch(API+'/admin/dmca-verifications/'+id+'/approve', {
+      method:'POST', headers:hdr(), body:JSON.stringify({notes})
+    });
+    const d = await res.json();
+    if(d.error) { alert(d.error); return; }
+    alert(d.message || 'Approved!');
+    loadDmcaVerifications();
+  } catch(e) { alert('Failed'); }
+}
+
+async function rejectDmca(id) {
+  const reason = prompt('Rejection reason:');
+  if(reason === null) return;
+  try {
+    const res = await fetch(API+'/admin/dmca-verifications/'+id+'/reject', {
+      method:'POST', headers:hdr(), body:JSON.stringify({reason: reason || 'Verification could not be completed'})
+    });
+    const d = await res.json();
+    if(d.error) { alert(d.error); return; }
+    alert(d.message || 'Rejected');
+    loadDmcaVerifications();
+  } catch(e) { alert('Failed'); }
+}
+
 async function loadAllData() {
   loadStats();
   loadUsers();
@@ -628,6 +723,7 @@ async function loadAllData() {
   loadMessages();
   loadPayments();
   loadNewsletter();
+  loadDmcaVerifications();
 }
 
 async function loadStats() {
