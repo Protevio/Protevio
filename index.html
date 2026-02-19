@@ -2837,25 +2837,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
 <!-- ===== SOCIAL PROOF ===== -->
 <section id="socialProof" style="padding:80px 24px 60px;max-width:960px;margin:0 auto">
 
-  <!-- STATS BAR -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;margin-bottom:64px;text-align:center">
-    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
-      <div id="statFaces" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent">1.5M+</div>
-      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Faces Indexed</div>
-    </div>
-    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
-      <div id="statSearches" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
-      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Searches Performed</div>
-    </div>
-    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
-      <div id="statUsers" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#34d399,#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
-      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Registered Users</div>
-    </div>
-    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
-      <div id="statTakedowns" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
-      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Takedown Requests</div>
-    </div>
-  </div>
+
 
   <!-- SECTION HEADER -->
   <div style="text-align:center;margin-bottom:48px">
@@ -2949,18 +2931,5 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
   </div>
 </footer>
 
-<script>
-// Load public stats for social proof
-(async function() {
-  try {
-    const res = await fetch('https://api.protevio.com/api/stats/public');
-    const d = await res.json();
-    if(d.faces_indexed) document.getElementById('statFaces').textContent = d.faces_indexed;
-    if(d.searches) document.getElementById('statSearches').textContent = d.searches.toLocaleString();
-    if(d.users) document.getElementById('statUsers').textContent = d.users.toLocaleString();
-    if(d.takedowns) document.getElementById('statTakedowns').textContent = d.takedowns.toLocaleString();
-  } catch(e) {}
-})();
-</script>
 </body>
 </html>
