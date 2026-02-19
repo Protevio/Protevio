@@ -359,7 +359,7 @@ function renderPosts(filter) {
   const grid = document.getElementById('blogGrid');
   const posts = filter === 'all' ? BLOG_POSTS : BLOG_POSTS.filter(p => p.category === filter);
   grid.innerHTML = posts.map(p => `
-    <a href="blog/${p.slug}.html" class="blog-card" data-cat="${p.category}">
+    <a href="${p.slug}.html" class="blog-card" data-cat="${p.category}">
       <div class="blog-card__img" style="background:${p.gradient}">
         <div class="blog-card__img-inner">${p.emoji}</div>
       </div>
