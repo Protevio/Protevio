@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dashboard — Protevio AI</title>
+<title>Dashboard â€” Protevio AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -232,12 +232,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="dcard">
         <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--accent)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>My Subscription</div><div class="badge" id="planBadge">Free</div></div>
         <div style="font-size:.88rem;color:var(--text2);margin-bottom:14px">Plan: <strong id="planName" style="color:var(--text)">Free</strong></div>
-        <div class="irow"><div class="irow__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="irow__txt"><div class="irow__l" id="userEmail">—</div><div class="irow__s" id="userCreated">Created: —</div></div></div>
-        <div class="irow"><div class="irow__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div><div class="irow__txt"><div class="irow__l">Orders & Invoices</div><div class="irow__s">Manage your payment history</div></div><button class="irow__act" onclick="openBillingPortal()">Manage →</button></div>
+        <div class="irow"><div class="irow__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="irow__txt"><div class="irow__l" id="userEmail">â€”</div><div class="irow__s" id="userCreated">Created: â€”</div></div></div>
+        <div class="irow"><div class="irow__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div><div class="irow__txt"><div class="irow__l">Orders & Invoices</div><div class="irow__s">Manage your payment history</div></div><button class="irow__act" onclick="openBillingPortal()">Manage â†’</button></div>
         <div style="margin-top:16px"><a href="/pricing" class="abtn abtn--o"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>Explore Pricing</a></div>
       </div>
       <div class="dcard">
-        <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--green)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search Activity</div><div style="text-align:right"><div style="font-size:.82rem;color:var(--text2)">You have <strong style="color:var(--accent)" id="searchesLeft">—</strong> left today</div><div style="font-size:.72rem;color:var(--text3)">Total Searches: <span id="totalSearches">0</span></div></div></div>
+        <div class="dcard__h"><div class="dcard__t"><svg viewBox="0 0 24 24" stroke="var(--green)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search Activity</div><div style="text-align:right"><div style="font-size:.82rem;color:var(--text2)">You have <strong style="color:var(--accent)" id="searchesLeft">â€”</strong> left today</div><div style="font-size:.72rem;color:var(--text3)">Total Searches: <span id="totalSearches">0</span></div></div></div>
         <div class="ubar-w" style="margin-bottom:18px"><div class="ubar-h"><span style="color:var(--text2)">Daily Usage</span><span style="color:var(--text3)" id="usageText">0 / 10</span></div><div class="ubar"><div class="ubar__f" id="usageBar" style="width:0;background:var(--green)"></div></div></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px"><div class="sbox"><div class="sbox__v" id="statToday" style="color:var(--accent)">0</div><div class="sbox__l">Today</div></div><div class="sbox"><div class="sbox__v" id="statTotal" style="color:var(--purple)">0</div><div class="sbox__l">All Time</div></div></div>
         <a href="/" class="abtn abtn--p" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Perform Search</a>
@@ -286,10 +286,42 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 
   <!-- ===== SETTINGS ===== -->
-  <div class="page" id="page-settings">
+    <div class="page" id="page-settings">
     <div class="dh"><div class="dh__t">Settings</div><div class="dh__s">Manage your account preferences</div></div>
+    <!-- Profile -->
     <div class="dcard">
-      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="si__t" id="sName">—</div><div class="si__s" id="sEmail">—</div></div></div></div>
+      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--accent-bg)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="si__t" id="sName">&mdash;</div><div class="si__s" id="sEmail">&mdash;</div></div></div></div>
+      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--green-bg)"><svg viewBox="0 0 24 24" stroke="var(--green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="si__t">Safe Search</div><div class="si__s">Filter explicit results from searches</div></div></div><button class="toggle" id="toggleSafe" onclick="toggleSetting('safe_search',this)"></button></div>
+      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div><div><div class="si__t">Email Notifications</div><div class="si__s">Receive alerts about new matches</div></div></div><button class="toggle" id="toggleNotif" onclick="toggleSetting('email_notifications',this)"></button></div>
+      <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--gold-bg)"><svg viewBox="0 0 24 24" stroke="var(--gold)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div><div><div class="si__t">Two-Factor Authentication</div><div class="si__s">Coming soon</div></div></div><span style="font-size:.72rem;color:var(--text3);background:var(--bg3);padding:4px 10px;border-radius:6px">Soon</span></div>
+    </div>
+    <!-- Change Password -->
+    <div class="dcard" style="margin-top:16px">
+      <div style="font-weight:700;font-size:.92rem;margin-bottom:14px">Change Password</div>
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:360px">
+        <input class="modal__fi" type="password" id="pwCurrent" placeholder="Current password" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
+        <input class="modal__fi" type="password" id="pwNew" placeholder="New password (min 6 chars)" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
+        <button class="abtn" onclick="changePassword()" style="width:fit-content"><svg viewBox="0 0 24 24" style="stroke:currentColor;width:14px;height:14px;fill:none;stroke-width:2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Update Password</button>
+        <div id="pwMsg" style="font-size:.78rem;display:none"></div>
+      </div>
+    </div>
+    <!-- Change Email -->
+    <div class="dcard" style="margin-top:16px">
+      <div style="font-weight:700;font-size:.92rem;margin-bottom:14px">Change Email</div>
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:360px">
+        <input class="modal__fi" type="email" id="newEmail" placeholder="New email address" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
+        <input class="modal__fi" type="password" id="emailPw" placeholder="Confirm your password" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:.88rem">
+        <button class="abtn" onclick="changeEmail()" style="width:fit-content"><svg viewBox="0 0 24 24" style="stroke:currentColor;width:14px;height:14px;fill:none;stroke-width:2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Update Email</button>
+        <div id="emailMsg" style="font-size:.78rem;display:none"></div>
+      </div>
+    </div>
+    <!-- Danger Zone -->
+    <div class="dcard" style="margin-top:16px;border-color:rgba(248,113,113,.2)">
+      <div style="font-weight:700;font-size:.92rem;margin-bottom:6px;color:var(--red)">Danger Zone</div>
+      <div style="font-size:.82rem;color:var(--text3);margin-bottom:14px">Permanently delete your account and all associated data. This cannot be undone.</div>
+      <button class="abtn abtn--o" style="color:var(--red);border-color:var(--red)" onclick="showDeleteModal()"><svg viewBox="0 0 24 24" style="stroke:var(--red);width:14px;height:14px;fill:none;stroke-width:2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Delete Account</button>
+    </div>
+  </div></div>
       <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--green-bg)"><svg viewBox="0 0 24 24" stroke="var(--green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="si__t">Safe Search</div><div class="si__s">Filter explicit results from searches</div></div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
       <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div><div><div class="si__t">Email Notifications</div><div class="si__s">Receive alerts about new matches</div></div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
       <div class="si"><div class="si__left"><div class="si__ic" style="background:var(--gold-bg)"><svg viewBox="0 0 24 24" stroke="var(--gold)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div><div><div class="si__t">Two-Factor Authentication</div><div class="si__s">Add extra security to your account</div></div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
@@ -364,7 +396,7 @@ document.querySelectorAll('.sidebar__link[data-page]').forEach(l => {
 });
 
 function timeAgo(str) {
-  if(!str) return '—';
+  if(!str) return 'â€”';
   const s = Math.floor((Date.now() - new Date(str).getTime()) / 1000);
   if(s < 60) return 'just now';
   if(s < 3600) return Math.floor(s/60) + 'm ago';
@@ -392,7 +424,7 @@ async function loadDashboard() {
     const limit = limits[userPlan]||10;
     const used = u.searches_today||0;
     const total = u.total_searches||0;
-    const rem = limit===-1?'∞':Math.max(0,limit-used);
+    const rem = limit===-1?'âˆž':Math.max(0,limit-used);
     const pct = limit===-1?3:Math.min(100,Math.round((used/limit)*100));
     const barC = pct>80?'var(--red)':pct>50?'var(--gold)':'var(--green)';
     
@@ -405,7 +437,7 @@ async function loadDashboard() {
     document.getElementById('planBadge').className = 'badge badge--'+userPlan;
     document.getElementById('planName').textContent = pc;
     document.getElementById('userEmail').textContent = u.email||u.username;
-    document.getElementById('userCreated').textContent = 'Created: '+(u.created_at?new Date(u.created_at).toLocaleDateString('en-GB'):'—');
+    document.getElementById('userCreated').textContent = 'Created: '+(u.created_at?new Date(u.created_at).toLocaleDateString('en-GB'):'â€”');
     document.getElementById('searchesLeft').textContent = rem;
     document.getElementById('totalSearches').textContent = total;
     document.getElementById('usageText').textContent = limit===-1?used+' / Unlimited':used+' / '+limit;
@@ -414,7 +446,8 @@ async function loadDashboard() {
     document.getElementById('statToday').textContent = used;
     document.getElementById('statTotal').textContent = total;
     document.getElementById('sName').textContent = u.name||u.username;
-    document.getElementById('sEmail').textContent = u.email||'—';
+    loadSettings(u);
+    document.getElementById('sEmail').textContent = u.email||'â€”';
     if(u.role==='admin') document.getElementById('adminLink').style.display='block';
     
     // Show/hide pro buttons
@@ -442,7 +475,7 @@ async function loadHistory() {
     if(h.length>0){badge.textContent=h.length;badge.style.display='inline';}
     
     if(h.length===0){
-      el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>No searches yet<br><br><a href="/" style="color:var(--accent);font-weight:600;text-decoration:none">Perform your first search →</a></div>';
+      el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>No searches yet<br><br><a href="/" style="color:var(--accent);font-weight:600;text-decoration:none">Perform your first search â†’</a></div>';
       return;
     }
     
@@ -499,9 +532,9 @@ async function loadAlerts() {
     
     // Dashboard mini view
     if(alerts.length === 0) {
-      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No active alerts.<br><a href="#" onclick="document.querySelector(\'[data-page=alerts]\').click();return false" style="color:var(--accent);font-weight:600">Set up monitoring →</a></div>';
+      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No active alerts.<br><a href="#" onclick="document.querySelector(\'[data-page=alerts]\').click();return false" style="color:var(--accent);font-weight:600">Set up monitoring â†’</a></div>';
     } else {
-      dashEl.innerHTML = alerts.slice(0,2).map(a => `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.82rem"><span class="ai__status ai__status--${a.status}">${a.status}</span><span style="font-weight:600">${a.label}</span><span style="color:var(--text3);margin-left:auto">${a.matches} matches</span></div>`).join('') + (alerts.length > 2 ? `<div style="text-align:center;padding:8px;font-size:.78rem"><a href="#" onclick="document.querySelector('[data-page=alerts]').click();return false" style="color:var(--accent)">View all ${alerts.length} alerts →</a></div>` : '');
+      dashEl.innerHTML = alerts.slice(0,2).map(a => `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.82rem"><span class="ai__status ai__status--${a.status}">${a.status}</span><span style="font-weight:600">${a.label}</span><span style="color:var(--text3);margin-left:auto">${a.matches} matches</span></div>`).join('') + (alerts.length > 2 ? `<div style="text-align:center;padding:8px;font-size:.78rem"><a href="#" onclick="document.querySelector('[data-page=alerts]').click();return false" style="color:var(--accent)">View all ${alerts.length} alerts â†’</a></div>` : '');
     }
     
     // Full alerts page
@@ -511,7 +544,7 @@ async function loadAlerts() {
     } else {
       alertsEl.innerHTML = alerts.map(a => {
         const thumb = a.face_thumbnail ? `<img class="ai__thumb" src="data:image/jpeg;base64,${a.face_thumbnail}">` : '<div class="ai__thumb" style="display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--text3);stroke-width:2;fill:none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
-        return `<div class="ai">${thumb}<div class="ai__info"><div class="ai__label">${a.label}</div><div class="ai__meta">${a.matches} matches found · Created ${timeAgo(a.created_at)}${a.last_checked ? ' · Last checked '+timeAgo(a.last_checked) : ''}</div></div><span class="ai__status ai__status--${a.status}">${a.status}</span><div class="ai__actions"><button class="ai__btn" style="border-color:var(--gold);color:var(--gold)" onclick="toggleAlert(${a.id})">${a.status==='active'?'Pause':'Resume'}</button><button class="ai__btn" style="border-color:var(--red);color:var(--red)" onclick="deleteAlert(${a.id})">Delete</button></div></div>`;
+        return `<div class="ai">${thumb}<div class="ai__info"><div class="ai__label">${a.label}</div><div class="ai__meta">${a.matches} matches found Â· Created ${timeAgo(a.created_at)}${a.last_checked ? ' Â· Last checked '+timeAgo(a.last_checked) : ''}</div></div><span class="ai__status ai__status--${a.status}">${a.status}</span><div class="ai__actions"><button class="ai__btn" style="border-color:var(--gold);color:var(--gold)" onclick="toggleAlert(${a.id})">${a.status==='active'?'Pause':'Resume'}</button><button class="ai__btn" style="border-color:var(--red);color:var(--red)" onclick="deleteAlert(${a.id})">Delete</button></div></div>`;
       }).join('');
     }
   } catch(e) { console.error('Alerts error:', e); }
@@ -534,7 +567,7 @@ async function loadTakedowns() {
     
     // Dashboard mini
     if(items.length === 0) {
-      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No takedown requests yet.<br><a href="#" onclick="document.querySelector(\'[data-page=protect]\').click();return false" style="color:var(--accent);font-weight:600">Submit a request →</a></div>';
+      dashEl.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:.85rem">No takedown requests yet.<br><a href="#" onclick="document.querySelector(\'[data-page=protect]\').click();return false" style="color:var(--accent);font-weight:600">Submit a request â†’</a></div>';
     } else {
       const pending = items.filter(t=>t.status==='pending').length;
       const resolved = items.filter(t=>t.status==='resolved').length;
@@ -546,7 +579,7 @@ async function loadTakedowns() {
     if(items.length === 0) {
       el.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>No takedown requests yet.<br><br>Click "New Request" to submit a removal request.</div>';
     } else {
-      el.innerHTML = items.map(t => `<div class="ti"><div class="ti__top"><div class="ti__url">${t.url || t.face_id || '—'}</div><span class="ti__status ti__status--${t.status}">${t.status}</span></div>${t.domain?'<div style="font-size:.78rem;color:var(--accent)">'+t.domain+'</div>':''}<div class="ti__reason">${t.reason||''}</div><div class="ti__date">Submitted ${timeAgo(t.created_at)}</div></div>`).join('');
+      el.innerHTML = items.map(t => `<div class="ti"><div class="ti__top"><div class="ti__url">${t.url || t.face_id || 'â€”'}</div><span class="ti__status ti__status--${t.status}">${t.status}</span></div>${t.domain?'<div style="font-size:.78rem;color:var(--accent)">'+t.domain+'</div>':''}<div class="ti__reason">${t.reason||''}</div><div class="ti__date">Submitted ${timeAgo(t.created_at)}</div></div>`).join('');
     }
   } catch(e) { console.error('Takedowns error:', e); }
 }
@@ -651,6 +684,112 @@ async function openBillingPortal() {
 }
 
 loadDashboard();
+
+
+// ===== SETTINGS =====
+async function toggleSetting(key, btn) {
+  btn.classList.toggle('on');
+  const val = btn.classList.contains('on');
+  try {
+    const res = await fetch(API+'/auth/settings', {
+      method:'PUT', headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body: JSON.stringify({[key]: val})
+    });
+    const d = await res.json();
+    if(!d.success) { btn.classList.toggle('on'); alert(d.error||'Failed'); }
+  } catch(e) { btn.classList.toggle('on'); }
+}
+
+function loadSettings(u) {
+  // Called from loadDashboard after /auth/me returns
+  const safeBtn = document.getElementById('toggleSafe');
+  const notifBtn = document.getElementById('toggleNotif');
+  if(safeBtn) { if(u.safe_search) safeBtn.classList.add('on'); else safeBtn.classList.remove('on'); }
+  if(notifBtn) { if(u.email_notifications) notifBtn.classList.add('on'); else notifBtn.classList.remove('on'); }
+}
+
+async function changePassword() {
+  const cur = document.getElementById('pwCurrent').value;
+  const nw = document.getElementById('pwNew').value;
+  const msg = document.getElementById('pwMsg');
+  if(!cur||!nw) { showMsg(msg,'Both fields required','var(--red)'); return; }
+  if(nw.length<6) { showMsg(msg,'New password must be at least 6 characters','var(--red)'); return; }
+  try {
+    const res = await fetch(API+'/auth/change-password', {
+      method:'POST', headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body: JSON.stringify({current_password:cur, new_password:nw})
+    });
+    const d = await res.json();
+    if(d.success) {
+      showMsg(msg,'Password changed successfully','var(--green)');
+      document.getElementById('pwCurrent').value='';
+      document.getElementById('pwNew').value='';
+    } else { showMsg(msg,d.error||'Failed','var(--red)'); }
+  } catch(e) { showMsg(msg,'Network error','var(--red)'); }
+}
+
+async function changeEmail() {
+  const email = document.getElementById('newEmail').value.trim();
+  const pw = document.getElementById('emailPw').value;
+  const msg = document.getElementById('emailMsg');
+  if(!email||!pw) { showMsg(msg,'Both fields required','var(--red)'); return; }
+  try {
+    const res = await fetch(API+'/auth/change-email', {
+      method:'POST', headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body: JSON.stringify({new_email:email, password:pw})
+    });
+    const d = await res.json();
+    if(d.success) {
+      showMsg(msg,d.message,'var(--green)');
+      document.getElementById('newEmail').value='';
+      document.getElementById('emailPw').value='';
+    } else { showMsg(msg,d.error||'Failed','var(--red)'); }
+  } catch(e) { showMsg(msg,'Network error','var(--red)'); }
+}
+
+function showDeleteModal() { document.getElementById('deleteModal').classList.add('show'); }
+function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('show'); }
+
+async function deleteAccount() {
+  const pw = document.getElementById('delPw').value;
+  const confirm = document.getElementById('delConfirm').value;
+  const msg = document.getElementById('delMsg');
+  if(confirm !== 'DELETE') { showMsg(msg,'Please type DELETE to confirm','var(--red)'); return; }
+  if(!pw) { showMsg(msg,'Password required','var(--red)'); return; }
+  document.getElementById('delBtn').disabled = true;
+  document.getElementById('delBtn').textContent = 'Deleting...';
+  try {
+    const res = await fetch(API+'/auth/delete-account', {
+      method:'DELETE', headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body: JSON.stringify({password:pw, confirm:confirm})
+    });
+    const d = await res.json();
+    if(d.success) {
+      localStorage.removeItem('protevio_token');
+      localStorage.removeItem('protevio_user');
+      alert('Your account has been deleted.');
+      window.location.href = '/';
+    } else { showMsg(msg,d.error||'Failed','var(--red)'); document.getElementById('delBtn').disabled=false; document.getElementById('delBtn').textContent='Delete Permanently'; }
+  } catch(e) { showMsg(msg,'Network error','var(--red)'); document.getElementById('delBtn').disabled=false; document.getElementById('delBtn').textContent='Delete Permanently'; }
+}
+
+function showMsg(el,text,color) { el.style.display='block'; el.style.color=color; el.textContent=text; setTimeout(()=>{el.style.display='none'},5000); }
+
 </script>
+
+<!-- DELETE ACCOUNT MODAL -->
+<div class="modal-bg" id="deleteModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal__t" style="color:var(--red)">Delete Account</div>
+    <p style="font-size:.85rem;color:var(--text3);margin-bottom:16px;line-height:1.6">This will permanently delete your account, search history, alerts, and all associated data. <strong>This cannot be undone.</strong></p>
+    <div class="modal__f"><label class="modal__fl">Password</label><input class="modal__fi" type="password" id="delPw" placeholder="Enter your password"></div>
+    <div class="modal__f"><label class="modal__fl">Type <strong style="color:var(--red)">DELETE</strong> to confirm</label><input class="modal__fi" id="delConfirm" placeholder="Type DELETE"></div>
+    <div class="modal__btns">
+      <button class="modal__btn" style="background:var(--bg3);color:var(--text2)" onclick="closeDeleteModal()">Cancel</button>
+      <button class="modal__btn" style="background:var(--red);color:#fff" id="delBtn" onclick="deleteAccount()">Delete Permanently</button>
+    </div>
+    <div id="delMsg" style="font-size:.78rem;margin-top:10px;display:none"></div>
+  </div>
+</div>
 </body>
 </html>

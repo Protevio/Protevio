@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page Not Found &mdash; Protevio AI</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a1f2e;--bg-elevated:#232a3d;--border:#3a4562;--text:#f8fafc;--text-secondary:#d1d5e0;--text-muted:#9ca3b8;--accent:#5b9aff;--accent-light:#85b4ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+.bg-glow{position:fixed;width:500px;height:500px;border-radius:50%;filter:blur(120px);opacity:.08;pointer-events:none}
+.bg-glow--1{top:-150px;left:-100px;background:var(--accent)}
+.bg-glow--2{bottom:-200px;right:-100px;background:#7c4dff}
+.container{position:relative;z-index:1;text-align:center;max-width:520px}
+.code{font-size:clamp(6rem,15vw,10rem);font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent) 0%,#7c4dff 50%,var(--accent-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;letter-spacing:-.04em}
+.title{font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--text);margin-bottom:12px}
+.desc{font-size:.95rem;color:var(--text-muted);line-height:1.7;margin-bottom:36px}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;font-family:inherit;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .25s;cursor:pointer;border:none}
+.btn--primary{background:linear-gradient(135deg,var(--accent),#7c4dff);color:#fff;box-shadow:0 4px 16px rgba(91,154,255,.3)}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.4)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:var(--text-secondary)}
+.btn--ghost:hover{border-color:var(--accent);color:var(--accent);background:rgba(91,154,255,.06)}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.face{margin-bottom:32px;opacity:.6}
+.face svg{width:80px;height:80px;stroke:var(--accent);stroke-width:1.2;fill:none}
+</style>
+</head>
+<body>
+<div class="bg-glow bg-glow--1"></div>
+<div class="bg-glow bg-glow--2"></div>
+<div class="container">
+  <div class="face">
+    <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" opacity=".3"/><circle cx="30" cy="34" r="3"/><circle cx="50" cy="34" r="3"/><path d="M30 52c2.5-4 7.5-6 10-6s7.5 2 10 6" stroke-linecap="round"/><line x1="15" y1="22" x2="25" y2="28" opacity=".4"/><line x1="65" y1="22" x2="55" y2="28" opacity=".4"/></svg>
+  </div>
+  <div class="code">404</div>
+  <div class="title">This face wasn't found</div>
+  <div class="desc">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</div>
+  <div class="actions">
+    <a href="/" class="btn btn--primary">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Back to Home
+    </a>
+    <a href="/contact.html" class="btn btn--ghost">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Contact Us
+    </a>
+  </div>
+</div>
+</body>
+</html>
