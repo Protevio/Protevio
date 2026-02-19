@@ -636,28 +636,44 @@ document.querySelectorAll('.sidebar__link[data-page]').forEach(link => {
   });
 });
 
+// Admin secret — prompted once per session, sent as X-Admin-Key header
+// This is a second layer of auth on top of JWT. If the server doesn't require it, it's harmless.
+let adminSecret = sessionStorage.getItem('protevio_admin_key') || '';
+if(!adminSecret) {
+  adminSecret = prompt('Enter admin access key:');
+  if(adminSecret) sessionStorage.setItem('protevio_admin_key', adminSecret);
+}
+
+function authHeaders(extra) {
+  const h = {'Authorization': 'Bearer ' + token};
+  if(adminSecret) h['X-Admin-Key'] = adminSecret;
+  if(extra) Object.assign(h, extra);
+  return h;
+}
+
 // API helper
 async function api(path) {
-  const res = await fetch(API + path, { headers: {'Authorization': 'Bearer ' + token} });
+  const res = await fetch(API + path, { headers: authHeaders() });
   if(res.status === 401) { window.location.href = '/login'; return null; }
+  if(res.status === 403) { sessionStorage.removeItem('protevio_admin_key'); alert('Admin access denied. Check your admin key.'); window.location.reload(); return null; }
   return res.json();
 }
 async function apiPost(path, body) {
   const res = await fetch(API + path, {
-    method: 'POST', headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+    method: 'POST', headers: authHeaders({'Content-Type': 'application/json'}),
     body: JSON.stringify(body)
   });
   return res.json();
 }
 async function apiPut(path, body) {
   const res = await fetch(API + path, {
-    method: 'PUT', headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+    method: 'PUT', headers: authHeaders({'Content-Type': 'application/json'}),
     body: JSON.stringify(body)
   });
   return res.json();
 }
 async function apiDel(path) {
-  const res = await fetch(API + path, { method: 'DELETE', headers: {'Authorization': 'Bearer ' + token} });
+  const res = await fetch(API + path, { method: 'DELETE', headers: authHeaders() });
   return res.json();
 }
 
@@ -687,7 +703,7 @@ let allUsers = [];
 
 
 // Auth header helper
-function hdr() { return {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}; }
+function hdr() { return authHeaders({'Content-Type': 'application/json'}); }
 
 // ===== DMCA VERIFICATIONS =====
 async function loadDmcaVerifications() {
@@ -895,7 +911,7 @@ async function editUser(username) {
   document.getElementById('userModal').classList.add('active');
   
   try {
-    const res = await fetch(API + '/admin/user-details/' + encodeURIComponent(username), {headers:{'Authorization':'Bearer '+token}});
+    const res = await fetch(API + '/admin/user-details/' + encodeURIComponent(username), {headers:authHeaders()});
     const d = await res.json();
     if(d.username) {
       document.getElementById('modalAgent').checked = d.takedown_agent || false;
@@ -934,7 +950,7 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
   try {
     await fetch(API + '/admin/user-plan', {
       method: 'POST',
-      headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+      headers: authHeaders({'Content-Type': 'application/json'}),
       body: JSON.stringify({
         username: editingUser.username,
         takedown_agent: agent,
@@ -1265,7 +1281,7 @@ async function loadOptOut(status) {
 async function viewIdPhoto(id) {
   const url = API + '/admin/opt-out-id-photo/' + id;
   try {
-    const res = await fetch(url, {headers:{'Authorization':'Bearer '+token}});
+    const res = await fetch(url, {headers:authHeaders()});
     if(!res.ok) throw new Error('Not found');
     const blob = await res.blob();
     const objUrl = URL.createObjectURL(blob);
@@ -1388,7 +1404,7 @@ async function loadAuditLog() {
     if(event) url += '&event=' + event;
     if(severity) url += '&severity=' + severity;
     
-    const res = await fetch(url, {headers:{'Authorization':'Bearer '+token}});
+    const res = await fetch(url, {headers:authHeaders()});
     if(!res.ok) {
       document.getElementById('auditBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">Audit log not available yet. Deploy the audit_log system first.</td></tr>';
       return;
