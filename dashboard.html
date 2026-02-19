@@ -88,6 +88,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .hi{display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg3);border-radius:12px;margin-bottom:10px;transition:border-color .2s;border:1px solid transparent}
 .hi:hover{border-color:var(--border-h)}
 .hi__thumb{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--bg4);flex-shrink:0}
+.hi__thumb--placeholder{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,rgba(91,154,255,.1),rgba(124,77,255,.1));flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .hi__info{flex:1}
 .hi__top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .hi__results{font-size:.88rem;font-weight:700}
@@ -103,6 +104,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ai{display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg3);border-radius:12px;margin-bottom:10px;border:1px solid transparent}
 .ai:hover{border-color:var(--border-h)}
 .ai__thumb{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--bg4);flex-shrink:0}
+.ai__thumb--placeholder{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,rgba(91,154,255,.1),rgba(124,77,255,.1));flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .ai__info{flex:1}
 .ai__label{font-size:.88rem;font-weight:700;margin-bottom:2px}
 .ai__meta{font-size:.72rem;color:var(--text3)}
@@ -456,6 +458,14 @@ if(!token) window.location.href = '/login';
 let userPlan = 'free';
 let isPro = false;
 
+// Thumbnail helper - renders face image or nice placeholder
+const THUMB_FALLBACK_SVG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none"><rect width="52" height="52" rx="10" fill="#1e2740"/><circle cx="26" cy="20" r="8" stroke="#5b9aff" stroke-width="1.5" opacity=".6"/><path d="M14 44v-2a12 12 0 0124 0v2" stroke="#5b9aff" stroke-width="1.5" opacity=".6"/></svg>');
+function thumbHTML(b64, cls) {
+  cls = cls || 'hi__thumb';
+  if(!b64 || b64.length < 50) return '<img class="'+cls+'" src="'+THUMB_FALLBACK_SVG+'">';
+  return '<img class="'+cls+'" src="data:image/jpeg;base64,'+b64+'" onerror="this.src=THUMB_FALLBACK_SVG">';
+}
+
 const hdr = () => ({'Authorization':'Bearer '+token,'Content-Type':'application/json'});
 
 document.getElementById('logoutBtn').onclick = () => {
@@ -570,7 +580,7 @@ async function loadHistory() {
     }
     
     el.innerHTML = h.map(s => {
-      const thumb = s.face_thumbnail ? `<img class="hi__thumb" src="data:image/jpeg;base64,${s.face_thumbnail}">` : '<div class="hi__thumb" style="display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--text3);stroke-width:2;fill:none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+      const thumb = thumbHTML(s.face_thumbnail, 'hi__thumb');
       
       const tops = (s.top_results||[]).slice(0,4);
       const domains = [...new Set(tops.map(t=>t.domain).filter(Boolean))].slice(0,3);
@@ -633,7 +643,7 @@ async function loadAlerts() {
       alertsEl.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>No alerts set up yet.<br><br>Click "New Alert" to start monitoring a face.</div>';
     } else {
       alertsEl.innerHTML = alerts.map(a => {
-        const thumb = a.face_thumbnail ? `<img class="ai__thumb" src="data:image/jpeg;base64,${a.face_thumbnail}">` : '<div class="ai__thumb" style="display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--text3);stroke-width:2;fill:none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+        const thumb = thumbHTML(a.face_thumbnail, 'ai__thumb');
         return `<div class="ai">${thumb}<div class="ai__info"><div class="ai__label">${a.label}</div><div class="ai__meta">${a.matches} matches found · Created ${timeAgo(a.created_at)}${a.last_checked ? ' · Last checked '+timeAgo(a.last_checked) : ''}</div></div><span class="ai__status ai__status--${a.status}">${a.status}</span><div class="ai__actions"><button class="ai__btn" style="border-color:var(--gold);color:var(--gold)" onclick="toggleAlert(${a.id})">${a.status==='active'?'Pause':'Resume'}</button><button class="ai__btn" style="border-color:var(--red);color:var(--red)" onclick="deleteAlert(${a.id})">Delete</button></div></div>`;
       }).join('');
     }
@@ -875,7 +885,7 @@ async function loadExports() {
     }
     
     el.innerHTML = exports.map(s => {
-      const thumb = s.face_thumbnail ? `<img class="hi__thumb" src="data:image/jpeg;base64,${s.face_thumbnail}">` : '<div class="hi__thumb" style="display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--text3);stroke-width:2;fill:none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+      const thumb = thumbHTML(s.face_thumbnail, 'hi__thumb');
       const domains = [...new Set((s.top_results||[]).map(t=>t.domain).filter(Boolean))].slice(0,3);
       return `<div class="hi">${thumb}<div class="hi__info"><div class="hi__top"><span class="hi__results">${s.results} results</span><span class="hi__time">${timeAgo(s.time)}</span></div>${domains.length?'<div class="hi__domains">'+domains.join(', ')+'</div>':''}</div><div class="hi__right"><button class="abtn abtn--o" style="padding:6px 14px;font-size:.78rem" onclick="exportPDF(${s.id})"><svg viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export PDF</button></div></div>`;
     }).join('');
