@@ -1839,7 +1839,7 @@ try {
               '<svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--green);stroke-width:2;fill:none;margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
               '<h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Payment Confirmed!</h3>' +
               '<p style="color:var(--text-muted);margin-bottom:20px;">Your search has been unlocked. Upload your photo again to see full results.</p>' +
-              '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again â†’</button>' +
+              '<button onclick="resetSearch()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;">Search Again →</button>' +
               '</div>';
           }
         } catch(e) {}
@@ -2420,7 +2420,7 @@ function showResults(data) {
   const header = document.createElement('div');
   header.style.cssText = 'grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 4px;margin-bottom:4px;';
   header.innerHTML = '<div style="font-size:.85rem;color:var(--text-muted);">About <strong style="color:var(--text)">' + resultCount + '</strong> results in ' + searchTime + 's</div>' +
-    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">ðŸ”’ Free preview — upgrade to see full results</div>' : '');
+    (isFree ? '<div style="font-size:.75rem;color:var(--gold);font-weight:600">🔒 Free preview — upgrade to see full results</div>' : '');
   resultsList.appendChild(header);
 
   matches.forEach((match, i) => {
@@ -2442,10 +2442,10 @@ function showResults(data) {
       '<img src="' + imgUrl + '" alt="Match" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a3349%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2212%22>No image</text></svg>\'">' +
       explicitBadge +
       '<div class="result-card__lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Tap</div>' +
-      '<div class="result-card__source">' + (isFree ? 'â€¢â€¢â€¢â€¢â€¢â€¢.com' : domain) + '</div>' +
+      '<div class="result-card__source">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '<div class="result-card__info">' +
       '<div class="result-card__score">' + similarity + '% match</div>' +
-      '<div class="result-card__domain">' + (isFree ? 'â€¢â€¢â€¢â€¢â€¢â€¢.com' : domain) + '</div>' +
+      '<div class="result-card__domain">' + (isFree ? '••••••.com' : domain) + '</div>' +
       '</div>';
 
     card.addEventListener('click', () => {
@@ -2471,9 +2471,9 @@ function showResults(data) {
         '</div>' +
       '</div>' +
       '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
-        '<button class="upgrade-btn" id="unlockOnceBtn" onclick="unlockResults()" style="background:linear-gradient(135deg,var(--accent),var(--purple));padding:12px 32px;font-size:.95rem;">Unlock results â†’</button>' +
+        '<button class="upgrade-btn" id="unlockOnceBtn" onclick="unlockResults()" style="background:linear-gradient(135deg,var(--accent),var(--purple));padding:12px 32px;font-size:.95rem;">Unlock results →</button>' +
       '</div>' +
-      '<div style="text-align:center;margin-top:16px;"><a href="/pricing" style="color:var(--text-muted);font-size:.82rem;text-decoration:underline;">Or subscribe for unlimited access â†’</a></div>';
+      '<div style="text-align:center;margin-top:16px;"><a href="/pricing" style="color:var(--text-muted);font-size:.82rem;text-decoration:underline;">Or subscribe for unlimited access →</a></div>';
   } else {
     upgradeOverlay.style.display = 'none';
   }
@@ -2502,8 +2502,8 @@ async function unlockResults() {
     });
     const data = await res.json();
     if(data.url) { window.location.href = data.url; }
-    else { alert(data.error || 'Payment setup failed'); btn.textContent = 'Unlock results â†’'; btn.disabled = false; }
-  } catch(e) { alert('Connection error'); btn.textContent = 'Unlock results â†’'; btn.disabled = false; }
+    else { alert(data.error || 'Payment setup failed'); btn.textContent = 'Unlock results →'; btn.disabled = false; }
+  } catch(e) { alert('Connection error'); btn.textContent = 'Unlock results →'; btn.disabled = false; }
 }
 let currentSearchId = '';
 
@@ -2534,7 +2534,7 @@ function openResultModal(match, locked) {
     unlockOverlay.style.display = 'none';
   }
 
-  document.getElementById('modalDomain').textContent = locked ? 'â€¢â€¢â€¢â€¢â€¢â€¢.com' : (match.domain || 'Unknown source');
+  document.getElementById('modalDomain').textContent = locked ? '••••••.com' : (match.domain || 'Unknown source');
   document.getElementById('modalSimilarity').textContent = domain;
   document.getElementById('modalNsfw').style.display = 'none'; // can enable per-result later
 
@@ -2640,7 +2640,7 @@ document.getElementById('shareResultsBtn').addEventListener('click', async () =>
 
   const resultCount = currentResults.length || 0;
   const domains = new Set(currentResults.map(r => r.domain).filter(Boolean));
-  const shareText = `I just found ${resultCount} photos of myself on ${domains.size} websites I never knew about ðŸ˜±\n\nCheck where YOUR face appears online â†’`;
+  const shareText = `I just found ${resultCount} photos of myself on ${domains.size} websites I never knew about 😱\n\nCheck where YOUR face appears online →`;
   const shareUrl = 'https://protevio.com';
 
   // Try Web Share API first (mobile-friendly)
@@ -2731,10 +2731,10 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
     </div>
     <div style="margin-top:20px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;">
       <div style="font-size:.82rem;color:var(--text-muted);line-height:1.5;">
-        <strong style="color:var(--text);">ðŸ’¡ Tips for best results:</strong><br>
-        â€¢ Use a clear, front-facing photo with good lighting<br>
-        â€¢ Avoid group photos — crop to a single face<br>
-        â€¢ Higher resolution images give better matches
+        <strong style="color:var(--text);">💡 Tips for best results:</strong><br>
+        • Use a clear, front-facing photo with good lighting<br>
+        • Avoid group photos — crop to a single face<br>
+        • Higher resolution images give better matches
       </div>
     </div>
     <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="width:100%;margin-top:16px;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-weight:600;font-size:.95rem;cursor:pointer;">Got it!</button>
@@ -2759,7 +2759,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Open website</div>
           <div class="result-modal__action-sub">Go to the website where this image appears</div>
         </div>
-        <span class="result-modal__action-arrow">â€º</span>
+        <span class="result-modal__action-arrow">›</span>
       </button>
       <button class="result-modal__action" id="modalOpenImage" data-requires-paid="true">
         <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
@@ -2769,7 +2769,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Open image</div>
           <div class="result-modal__action-sub">Access the source image (unblurred version)</div>
         </div>
-        <span class="result-modal__action-arrow">â€º</span>
+        <span class="result-modal__action-arrow">›</span>
       </button>
       <button class="result-modal__action" id="modalSearchThis">
         <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
@@ -2779,7 +2779,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Perform search with this image</div>
           <div class="result-modal__action-sub">Start a new search using this result</div>
         </div>
-        <span class="result-modal__action-arrow">â€º</span>
+        <span class="result-modal__action-arrow">›</span>
       </button>
       <button class="result-modal__action" id="modalCopyId">
         <div class="result-modal__action-icon" style="background:rgba(167,139,250,.15)">
@@ -2789,7 +2789,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Copy Result ID</div>
           <div class="result-modal__action-sub">Copy the ID of this result for further actions</div>
         </div>
-        <span class="result-modal__action-arrow">â€º</span>
+        <span class="result-modal__action-arrow">›</span>
       </button>
       <button class="result-modal__action" id="modalExclude">
         <div class="result-modal__action-icon" style="background:rgba(74,222,128,.15)">
@@ -2799,7 +2799,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Exclude from public results</div>
           <div class="result-modal__action-sub">Remove this photo from Protevio's search</div>
         </div>
-        <span class="result-modal__action-arrow">â€º</span>
+        <span class="result-modal__action-arrow">›</span>
       </button>
       <button class="result-modal__action" id="modalShare">
         <div class="result-modal__action-icon" style="background:rgba(248,113,113,.15)">
@@ -2809,7 +2809,7 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
           <div class="result-modal__action-title">Share</div>
           <div class="result-modal__action-sub">Share this result with others</div>
         </div>
-        <span class="result-modal__action-arrow">â€º</span>
+        <span class="result-modal__action-arrow">›</span>
       </button>
     </div>
     <div class="result-modal__footer">Powered by Protevio AI · Results generated by facial similarity matching</div>
@@ -2833,6 +2833,107 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
   </div>
 </div>
 
+
+<!-- ===== SOCIAL PROOF ===== -->
+<section id="socialProof" style="padding:80px 24px 60px;max-width:960px;margin:0 auto">
+
+  <!-- STATS BAR -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;margin-bottom:64px;text-align:center">
+    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
+      <div id="statFaces" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent">1.5M+</div>
+      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Faces Indexed</div>
+    </div>
+    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
+      <div id="statSearches" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
+      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Searches Performed</div>
+    </div>
+    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
+      <div id="statUsers" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#34d399,#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
+      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Registered Users</div>
+    </div>
+    <div style="padding:28px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px">
+      <div id="statTakedowns" style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
+      <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Takedown Requests</div>
+    </div>
+  </div>
+
+  <!-- SECTION HEADER -->
+  <div style="text-align:center;margin-bottom:48px">
+    <h2 style="font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:12px">Trusted by Privacy-Conscious Professionals</h2>
+    <p style="font-size:.95rem;color:var(--text-muted);max-width:560px;margin:0 auto;line-height:1.7">People from all backgrounds use Protevio to monitor, protect, and take control of their online presence.</p>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:64px">
+    <div style="padding:28px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column">
+      <div style="display:flex;gap:4px;margin-bottom:16px">
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+      </div>
+      <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;flex:1">&ldquo;Found my photos on 3 websites I never gave permission to. The takedown process was straightforward and effective.&rdquo;</p>
+      <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7c4dff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff">S.M</div>
+        <div><div style="font-size:.82rem;font-weight:600;color:var(--text)">Sarah M.</div><div style="font-size:.72rem;color:var(--text-muted)">Model &amp; Content Creator</div></div>
+      </div>
+    </div>
+    <div style="padding:28px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column">
+      <div style="display:flex;gap:4px;margin-bottom:16px">
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+      </div>
+      <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;flex:1">&ldquo;As a photographer, unauthorized use of my work is a constant problem. Protevio makes it simple to track who&rsquo;s using my images and take action.&rdquo;</p>
+      <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#34d399,#059669);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff">D.K</div>
+        <div><div style="font-size:.82rem;font-weight:600;color:var(--text)">Daniel K.</div><div style="font-size:.72rem;color:var(--text-muted)">Professional Photographer</div></div>
+      </div>
+    </div>
+    <div style="padding:28px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column">
+      <div style="display:flex;gap:4px;margin-bottom:16px">
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+      </div>
+      <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;flex:1">&ldquo;Our security team uses Protevio to monitor executive photos being used in social engineering attacks. Essential tool for corporate protection.&rdquo;</p>
+      <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff">R.A</div>
+        <div><div style="font-size:.82rem;font-weight:600;color:var(--text)">Rachel A.</div><div style="font-size:.72rem;color:var(--text-muted)">Head of Cybersecurity</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USE CASES -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
+      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(91,154,255,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Personal Privacy</div>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Find where your face appears online and take control of your digital identity</div>
+    </div>
+    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
+      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#a78bfa;fill:none;stroke-width:1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Content Creators</div>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Detect stolen photos and unauthorized reposts across the web</div>
+    </div>
+    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
+      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#34d399;fill:none;stroke-width:1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Corporate Security</div>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Monitor executive images used in deepfakes and social engineering</div>
+    </div>
+    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
+      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(251,191,36,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fbbf24;fill:none;stroke-width:1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Catfish Protection</div>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Verify if someone is using stolen photos to create fake profiles</div>
+    </div>
+  </div>
+</section>
+
 <footer style="border-top:1px solid var(--border);padding:32px 24px;margin-top:60px;text-align:center;color:var(--text-muted);font-size:.82rem;line-height:1.8">
   <div style="max-width:600px;margin:0 auto">
     <p style="margin-bottom:12px;color:var(--text-secondary);font-size:.88rem">Protevio AI is a facial recognition search engine that helps you find where your face or images appear online. Track unauthorized use, monitor new matches, and protect your digital identity.</p>
@@ -2847,5 +2948,19 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
     <p>© 2026 Protevio AI. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+// Load public stats for social proof
+(async function() {
+  try {
+    const res = await fetch('https://api.protevio.com/api/stats/public');
+    const d = await res.json();
+    if(d.faces_indexed) document.getElementById('statFaces').textContent = d.faces_indexed;
+    if(d.searches) document.getElementById('statSearches').textContent = d.searches.toLocaleString();
+    if(d.users) document.getElementById('statUsers').textContent = d.users.toLocaleString();
+    if(d.takedowns) document.getElementById('statTakedowns').textContent = d.takedowns.toLocaleString();
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
