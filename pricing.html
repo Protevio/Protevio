@@ -393,7 +393,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <tr><td>Result management</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td></tr>
 <tr><td>Takedown requests</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td></tr>
 <tr><td>Deep Search</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td></tr>
-<tr><td>DMCA Takedowns</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td></tr>
+<tr><td>DMCA Takedowns</td><td class="cn">—</td><td class="cn">—</td><td class="cn">+€50/mo</td><td class="cy">✔</td></tr>
 <tr><td>API access</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td></tr>
 <tr><td>Dedicated support</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td><td class="cy">✔</td></tr>
 </tbody></table></div></div>
@@ -403,7 +403,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What payment methods do you accept?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Visa, Mastercard, Amex, SEPA, iDEAL, Bancontact, and more through our secure payment processor.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Can I switch between plans?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Yes. Upgrade anytime (prorated). Downgrade takes effect at the next billing cycle.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What is a Face Alert?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Face Alerts monitor our database for new appearances of a face. You get notified when new matches are found — great for tracking unauthorized photo use.</div></div>
-<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">How do DMCA takedowns work?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">After a one-time identity verification, you can send automated DMCA notices directly from your search results. We generate legally compliant notices and send them to the website's hosting provider. You can track status and send follow-ups from your dashboard.</div></div>
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">How do DMCA takedowns work?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">DMCA takedowns are available with the Takedown Agent add-on (+€50/mo for PROtect plans) or included with the Advanced plan. After a one-time identity verification, our system generates legally compliant DMCA notices and sends them directly to hosting providers. You can track status, send follow-ups, and file Google removal requests — all from your dashboard.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Is my data safe?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Uploaded photos are processed temporarily and not stored permanently. We use encryption in transit and at rest.</div></div>
 </div></div>
 </div>
@@ -493,10 +493,9 @@ const PLANS = {
       {div:true},
       {n:'Managing current and future results', d:'Take control of where your face appears online. Monitor, track, and manage both existing results and new matches.', c:'green'},
       {n:'Different packages based on your needs', d:'Choose PROtect (100), PROtect Plus (200), or PROtect Pro (400) takedowns per month.', c:'green'},
-      {n:'Automated DMCA Takedowns', d:'Generate legally compliant DMCA takedown notices and send them directly to website hosting providers. Track status and send follow-up reminders.', c:'green'},
-      {n:'Optional: Takedown Agent Support (+€50/mo)', d:'Our dedicated team handles takedown requests on your behalf, contacting websites directly to remove your images.', c:'gray', italic:true},
-    ,
-        {name: 'Automated DMCA notices', desc: 'Generate and send legally compliant DMCA takedown notices to hosting providers automatically. Track delivery and follow up.'}]
+      {div:true},
+      {n:'Takedown Agent (+€50/mo)', d:'Add automated DMCA takedowns: we generate legally compliant notices and send them to hosting providers on your behalf. Includes identity verification, status tracking, follow-up reminders, and Google removal requests.', c:'gray', italic:true},
+    ]
   },
   advanced: {name:'Advanced', headerClass:'pcard--advanced', headerBg:'#1e293b', headerColor:'#fff',
     m:'299,99', a:'239,99', cta:'Buy access', ctaType:'dark',
@@ -506,8 +505,8 @@ const PLANS = {
       {n:'Dedicated support', d:'Get priority access to our support team for any questions or issues.', c:'blue'},
       {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results.', c:'blue'},
       {div:true},
-      {n:'All in PROtect PRO', d:'Includes all PROtect features: result management, takedown requests (400/month), and takedown agent support.', c:'green'},
-      {n:'Automated DMCA Takedowns', d:'One-click DMCA notices sent automatically to hosting providers. Includes reminder system and Google removal links.', c:'green'},
+      {n:'All in PROtect PRO', d:'Includes all PROtect features: result management, takedown requests (400/month), and dedicated support.', c:'green'},
+      {n:'Takedown Agent Included', d:'Automated DMCA takedowns included at no extra cost. One-click notices sent to hosting providers with reminder system and Google removal links.', c:'green'},
       {n:'Deep Search', d:'Extended search across our full database including archived and deep-indexed sources for the most comprehensive results.', c:'green'},
     ]
   }
@@ -636,7 +635,7 @@ const PLAN_DETAILS = {
       { title: 'Content Protection', icon: 'shield', items: [
         {name: 'Result management tools', desc: 'Take full control of your search results. Track, categorize, and manage where your face appears across the web.'},
         {name: 'Takedown requests', desc: 'Send automated takedown requests to websites hosting your photos without consent. Choose from PROtect (100/mo), PROtect Plus (200/mo), or PROtect Pro (400/mo).'},
-        {name: 'Takedown Agent Support (+€50/mo)', desc: 'Our dedicated team personally handles takedown requests on your behalf — contacting websites directly, following up, and ensuring removal. Added as an optional add-on to your subscription.'},
+        {name: 'Takedown Agent (+€50/mo)', desc: 'Add-on: our team generates legally compliant DMCA notices and sends them to hosting providers on your behalf. Includes identity verification, status tracking, follow-up reminders, and Google Search removal requests.'},
       ]},
       { title: 'Advanced Features', icon: 'star', items: [
         {name: 'Dedicated priority support', desc: 'Get faster responses and personalized assistance from our expert support team.'},
@@ -654,9 +653,9 @@ const PLAN_DETAILS = {
         {name: 'Deep Search technology', desc: 'Our most thorough search mode — scans archived content, deep-indexed sources, and hard-to-reach databases for the most comprehensive results possible.'},
       ]},
       { title: 'Everything in PROtect PRO', icon: 'shield', items: [
-        {name: '400 takedown requests/month', desc: 'The highest tier of content removal with 400 automated takedown requests per month, plus full takedown agent support included.'},
+        {name: '400 takedown requests/month', desc: 'The highest tier of content removal with 400 automated takedown requests per month.'},
+        {name: 'Takedown Agent included', desc: 'Automated DMCA takedowns included at no extra cost. We generate and send legally compliant notices, track delivery, send follow-ups, and handle Google removal requests.'},
         {name: 'Full result management', desc: 'Complete toolkit for tracking, categorizing, and managing all search results and takedown statuses.'},
-        {name: 'Takedown Agent Support included', desc: 'Our team handles complex takedown cases personally — contacting sites, following up, and reporting back to you.'},
       ]},
       { title: 'Premium Benefits', icon: 'crown', items: [
         {name: 'API access (coming soon)', desc: 'Programmatic access to Protevio search capabilities for integration into your own tools and workflows.'},

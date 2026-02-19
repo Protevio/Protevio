@@ -139,6 +139,8 @@ a{color:#5b9aff;text-decoration:none}
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px;gap:16px}
 .spinner{width:40px;height:40px;border:3px solid #1e293b;border-top-color:#5b9aff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
@@ -593,7 +595,7 @@ document.getElementById('actTakedown').onclick = async () => {
       
       if(d.needs_verification) {
         btn.textContent = 'Request DMCA Takedown';
-        alert('Please verify your identity first. Go to Dashboard > PROtect.');
+        showDmcaUpsell();
         return;
       }
       if(d.error) {
@@ -616,11 +618,44 @@ document.getElementById('actTakedown').onclick = async () => {
       alert('Failed to send takedown');
     }
   } else {
-    // Not verified — redirect to dashboard
-    alert('Identity verification required before sending DMCA takedowns.\n\nGo to Dashboard > PROtect to verify.');
-    window.open('/dashboard#protect', '_blank');
+    showDmcaUpsell();
   }
 };
+
+function showDmcaUpsell() {
+  // Remove existing if present
+  const existing = document.getElementById('dmcaUpsellModal');
+  if(existing) existing.remove();
+  
+  const overlay = document.createElement('div');
+  overlay.id = 'dmcaUpsellModal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:10000;animation:fadeIn .2s ease';
+  overlay.onclick = e => { if(e.target === overlay) overlay.remove(); };
+  
+  overlay.innerHTML = `
+    <div style="background:#1a1f2e;border:1px solid rgba(91,154,255,.15);border-radius:20px;max-width:420px;width:90%;padding:36px 32px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:slideUp .3s ease">
+      <div style="width:56px;height:56px;margin:0 auto 16px;background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(168,85,247,.15));border-radius:16px;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#ef4444;fill:none;stroke-width:1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:8px;color:#f8fafc">Takedown Agent Required</h3>
+      <p style="font-size:.85rem;color:#94a3b8;line-height:1.65;margin-bottom:20px">
+        Automated DMCA takedowns require the <strong style="color:#a78bfa">Takedown Agent</strong> add-on. Our system generates legally compliant notices, sends them to hosting providers, and tracks everything for you.
+      </p>
+      <div style="background:rgba(91,154,255,.06);border:1px solid rgba(91,154,255,.1);border-radius:12px;padding:14px 18px;margin-bottom:20px;text-align:left">
+        <div style="font-size:.72rem;color:#5b9aff;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">What you get</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#16a34a;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:.8rem;color:#d1d5e0">Automated DMCA notice generation</span></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#16a34a;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:.8rem;color:#d1d5e0">Direct delivery to hosting providers</span></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#16a34a;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:.8rem;color:#d1d5e0">Status tracking & follow-up reminders</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#16a34a;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg><span style="font-size:.8rem;color:#d1d5e0">Google Search removal requests</span></div>
+      </div>
+      <div style="font-size:.78rem;color:#64748b;margin-bottom:16px">Available as add-on for PROtect plans (+€50/mo) or included with Advanced.</div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button onclick="this.closest('#dmcaUpsellModal').remove()" style="padding:10px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#d1d5e0;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit">Maybe Later</button>
+        <button onclick="window.open('/pricing','_blank');this.closest('#dmcaUpsellModal').remove()" style="padding:10px 24px;background:linear-gradient(135deg,#2563eb,#7c3aed);border:none;color:#fff;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(37,99,235,.4)">View Plans</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+}
 
 function showTakedownToast(ref, abuseEmail, domain, googleUrl) {
   const toast = document.createElement('div');
