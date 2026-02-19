@@ -90,14 +90,14 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 .billing-toggle::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:1px;background:rgba(255,255,255,.1)}
 
 /* DESKTOP 3 CARDS */
-.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.pcard{background:#1a1f2e;border-radius:16px;overflow:hidden;border:1px solid #2a3349;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:16px}
+.pcard{background:#1a1f2e;border-radius:16px;overflow:visible;border:1px solid #2a3349;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;position:relative}
 .pcard:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.25)}
-.pcard__header{padding:24px 28px 20px;text-align:center;font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+.pcard__header{padding:24px 28px 20px;text-align:center;font-size:1.35rem;font-weight:800;letter-spacing:-.01em;border-radius:16px 16px 0 0}
 .pcard--open .pcard__header{background:rgba(91,154,255,.15);color:#bfdbfe}
 .pcard--protect .pcard__header{background:var(--accent);color:#fff}
 .pcard--advanced .pcard__header{background:#1e293b;color:#fff}
-.pcard__body{padding:28px;flex:1;display:flex;flex-direction:column}
+.pcard__body{padding:28px;flex:1;display:flex;flex-direction:column;border-radius:0 0 16px 16px;overflow:hidden}
 .pcard__price{margin-bottom:20px}
 .pcard__amount{font-size:2.4rem;font-weight:800;color:#f0f2f7;letter-spacing:-.03em}
 .pcard__amount .cur{font-size:1.2rem;color:#8891a5;margin-left:2px}
