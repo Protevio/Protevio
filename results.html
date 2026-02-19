@@ -562,8 +562,8 @@ async function checkDmcaStatus() {
   try {
     const res = await fetch(API+'/dmca/verify/status', {headers:{'Authorization':'Bearer '+token}});
     const d = await res.json();
-    userDmcaVerified = d.verified || false;
-    // Show takedown button for pro users
+    userDmcaVerified = (d.verified && d.has_agent) || false;
+    // Show takedown button for pro users regardless (upsell modal handles gating)
     document.getElementById('actTakedown').style.display = '';
   } catch(e) {}
 }
@@ -594,6 +594,11 @@ document.getElementById('actTakedown').onclick = async () => {
       const d = await res.json();
       
       if(d.needs_verification) {
+        btn.textContent = 'Request DMCA Takedown';
+        showDmcaUpsell();
+        return;
+      }
+      if(d.needs_agent) {
         btn.textContent = 'Request DMCA Takedown';
         showDmcaUpsell();
         return;

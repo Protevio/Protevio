@@ -723,9 +723,35 @@ async function checkDmcaVerification() {
     const res = await fetch(API+'/dmca/verify/status', {headers:{'Authorization':'Bearer '+token}});
     const d = await res.json();
     dmcaVerified = d.verified || false;
+    const hasAgent = d.has_agent || false;
     
     const badge = document.getElementById('verifyBadge');
     const banner = document.getElementById('verifyBanner');
+    
+    // If no agent add-on, show upsell instead of verification
+    if(!hasAgent) {
+      badge.style.display='inline-block';
+      badge.textContent='Add-on Required';
+      badge.style.background='rgba(168,85,247,.15)';
+      badge.style.color='#a78bfa';
+      banner.style.display='block';
+      banner.innerHTML = '<div style="background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.15);border-radius:12px;padding:24px;margin-bottom:16px;text-align:center">'
+        + '<div style="width:48px;height:48px;margin:0 auto 12px;background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(168,85,247,.15));border-radius:14px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:#a78bfa;fill:none;stroke-width:1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>'
+        + '<div style="font-size:1rem;font-weight:800;margin-bottom:6px">Takedown Agent Required</div>'
+        + '<div style="font-size:.82rem;color:var(--text3);margin-bottom:16px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6">Automated DMCA takedowns require the Takedown Agent add-on. We generate legally compliant notices, send them to hosting providers, and track everything for you.</div>'
+        + '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">'
+        + '<div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text2)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2.5"><path d="M20 6L9 17l-5-5"/></svg>DMCA notice generation</div>'
+        + '<div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text2)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2.5"><path d="M20 6L9 17l-5-5"/></svg>Direct delivery</div>'
+        + '<div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text2)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2.5"><path d="M20 6L9 17l-5-5"/></svg>Status tracking</div>'
+        + '<div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text2)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2.5"><path d="M20 6L9 17l-5-5"/></svg>Google removal</div>'
+        + '</div>'
+        + '<div style="font-size:.78rem;color:var(--text3);margin-bottom:14px">+\u20ac50/mo for PROtect plans \u00b7 Included with Advanced</div>'
+        + '<a href="/pricing" class="abtn abtn--p" style="margin:0 auto;text-decoration:none">View Plans & Add-ons</a>'
+        + '</div>';
+      // Hide new takedown button
+      document.getElementById('newTakedownBtn').style.display='none';
+      return false;
+    }
     
     if(dmcaVerified) {
       badge.style.display='inline-block';
@@ -748,7 +774,7 @@ async function checkDmcaVerification() {
       banner.style.display='block';
       banner.innerHTML = '<div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:14px"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--red);fill:none;stroke-width:2;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><div><div style="font-size:.85rem;font-weight:700;color:var(--red)">Verification Rejected</div><div style="font-size:.78rem;color:var(--text3);margin-top:2px">Please <a href="#" onclick="openVerifyModal();return false" style="color:var(--accent)">submit again</a> with clearer documents.</div></div></div>';
     } else {
-      // Not verified, no pending - show verification banner
+      // Has agent but not verified yet - show verification prompt
       banner.style.display='block';
       banner.innerHTML = '<div style="background:rgba(91,154,255,.06);border:1px solid rgba(91,154,255,.12);border-radius:12px;padding:20px;margin-bottom:16px;text-align:center"><svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:var(--accent);fill:none;stroke-width:1.5;margin-bottom:8px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><div style="font-size:.95rem;font-weight:700;margin-bottom:4px">Verify your identity to send DMCA takedowns</div><div style="font-size:.8rem;color:var(--text3);margin-bottom:14px;max-width:400px;margin-left:auto;margin-right:auto">One-time verification with a selfie and redacted ID. After approval, you can send takedowns instantly from your search results.</div><button class="abtn abtn--p" onclick="openVerifyModal()" style="margin:0 auto">Verify Identity</button></div>';
     }
