@@ -630,6 +630,9 @@ let allUsers = [];
 
 
 
+// Auth header helper
+function hdr() { return {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}; }
+
 // ===== DMCA VERIFICATIONS =====
 async function loadDmcaVerifications() {
   try {
@@ -683,7 +686,10 @@ async function loadDmcaVerifications() {
         + actions
         + '</div>';
     }).join('');
-  } catch(e) { console.error('DMCA verifications error:', e); }
+  } catch(e) { 
+    console.error('DMCA verifications error:', e);
+    document.getElementById('dmcaVerContent').innerHTML = '<div style="color:var(--red);padding:20px">Error loading verifications: '+e.message+'</div>';
+  }
 }
 
 async function approveDmca(id) {
