@@ -430,9 +430,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
     <!-- ===== PAYMENTS PAGE ===== -->
     <div class="page" id="page-payments">
       <div class="cards" id="paymentCards">
-        <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(34,197,94,.12)"><svg viewBox="0 0 24 24" stroke="#22c55e"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div><div class="card__value" id="payMRR">â‚¬0</div><div class="card__label">Monthly Revenue</div></div>
+        <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(34,197,94,.12)"><svg viewBox="0 0 24 24" stroke="#22c55e"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div><div class="card__value" id="payMRR">€0</div><div class="card__label">Monthly Revenue</div></div>
         <div class="card"><div class="card__top"><div class="card__icon" style="background:rgba(91,154,255,.12)"><svg viewBox="0 0 24 24" stroke="var(--accent)"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div></div><div class="card__value" id="payActiveSubs">0</div><div class="card__label">Active Subscriptions</div></div>
-        <div class="card"><div class="card__top"><div class="card__icon" style="background:var(--gold-bg)"><svg viewBox="0 0 24 24" stroke="var(--gold)"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div><div class="card__value" id="payTotal">â‚¬0</div><div class="card__label">Total Revenue</div></div>
+        <div class="card"><div class="card__top"><div class="card__icon" style="background:var(--gold-bg)"><svg viewBox="0 0 24 24" stroke="var(--gold)"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div><div class="card__value" id="payTotal">€0</div><div class="card__label">Total Revenue</div></div>
         <div class="card"><div class="card__top"><div class="card__icon" style="background:var(--purple-bg)"><svg viewBox="0 0 24 24" stroke="var(--purple)"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div></div><div class="card__value" id="payRecent">0</div><div class="card__label">Payments (30d)</div></div>
       </div>
       <div class="panel">
@@ -526,8 +526,21 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
     <div class="modal__title" id="modalTitle">Edit User</div>
     <div class="modal__field"><label class="modal__label">Username</label><input class="modal__input" id="modalUsername" disabled></div>
     <div class="modal__field"><label class="modal__label">Email</label><input class="modal__input" id="modalEmail" disabled></div>
-    <div class="modal__field"><label class="modal__label">Plan</label><select class="modal__input sel" id="modalPlan"><option value="free">Free</option><option value="basic">Basic (â‚¬25/mo)</option><option value="pro">Pro (â‚¬35/mo)</option><option value="unlimited">Unlimited (â‚¬300/mo)</option><option value="suspended">â›” Suspended</option></select></div>
+    <div class="modal__field"><label class="modal__label">Plan</label><select class="modal__input sel" id="modalPlan"><option value="free">Free</option><option value="trial">Trial</option><option value="basic">Open Plus</option><option value="pro">PROtect</option><option value="unlimited">Advanced</option><option value="suspended">Suspended</option></select></div>
     <div class="modal__field"><label class="modal__label">Role</label><select class="modal__input sel" id="modalRole"><option value="user">User</option><option value="admin">Admin</option></select></div>
+    <div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px">
+      <div style="font-size:.72rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">DMCA / Takedown Agent</div>
+      <div class="modal__field" style="display:flex;align-items:center;gap:12px">
+        <label class="modal__label" style="flex:1;margin:0">Takedown Agent</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="modalAgent" style="width:18px;height:18px;accent-color:var(--accent)"><span style="font-size:.78rem;color:var(--text2)">Enabled</span></label>
+      </div>
+      <div class="modal__field"><label class="modal__label">Takedown Limit / month</label><select class="modal__input sel" id="modalLimit"><option value="0">0 (No takedowns)</option><option value="100">100 (PROtect)</option><option value="200">200 (PROtect Plus)</option><option value="400">400 (PROtect Pro)</option><option value="9999">Unlimited (Advanced)</option></select></div>
+      <div class="modal__field" style="display:flex;align-items:center;gap:12px">
+        <label class="modal__label" style="flex:1;margin:0">DMCA Verified</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="modalVerified" style="width:18px;height:18px;accent-color:var(--green)"><span style="font-size:.78rem;color:var(--text2)">Verified</span></label>
+      </div>
+      <div id="modalTakedownStats" style="font-size:.72rem;color:var(--text3);margin-top:4px"></div>
+    </div>
     <div class="modal__btns">
       <button class="modal__btn modal__btn--danger" id="modalDeleteBtn">Delete User</button>
       <button class="modal__btn modal__btn--cancel" onclick="closeModal()">Cancel</button>
@@ -819,7 +832,7 @@ document.getElementById('userSearch').addEventListener('input', (e) => {
 
 // Edit user modal
 let editingUser = null;
-function editUser(username) {
+async function editUser(username) {
   editingUser = allUsers.find(u => u.username === username);
   if(!editingUser) return;
   document.getElementById('modalTitle').textContent = 'Edit User: ' + username;
@@ -828,7 +841,33 @@ function editUser(username) {
   document.getElementById('modalPlan').value = editingUser.plan || 'free';
   document.getElementById('modalRole').value = editingUser.role || 'user';
   document.getElementById('modalDeleteBtn').style.display = username === 'admin' ? 'none' : 'block';
+  
+  // Fetch detailed info
+  document.getElementById('modalAgent').checked = false;
+  document.getElementById('modalLimit').value = '0';
+  document.getElementById('modalVerified').checked = false;
+  document.getElementById('modalTakedownStats').textContent = 'Loading details...';
+  
   document.getElementById('userModal').classList.add('active');
+  
+  try {
+    const res = await fetch(API + '/admin/user-details/' + encodeURIComponent(username), {headers:{'Authorization':'Bearer '+token}});
+    const d = await res.json();
+    if(d.username) {
+      document.getElementById('modalAgent').checked = d.takedown_agent || false;
+      document.getElementById('modalLimit').value = String(d.takedown_limit || 0);
+      document.getElementById('modalVerified').checked = d.dmca_verified || false;
+      
+      let stats = [];
+      if(d.takedown_agent) stats.push('Agent: ON');
+      if(d.dmca_verified) stats.push('Verified: ' + (d.dmca_verified_at || 'yes'));
+      stats.push('Takedowns this month: ' + (d.takedowns_used || 0) + '/' + (d.takedown_limit || 0));
+      if(d.stripe_subscription_id) stats.push('Stripe: ' + d.stripe_subscription_id);
+      document.getElementById('modalTakedownStats').textContent = stats.join(' | ');
+    }
+  } catch(e) {
+    document.getElementById('modalTakedownStats').textContent = 'Could not load details';
+  }
 }
 function closeModal() { document.getElementById('userModal').classList.remove('active'); editingUser = null; }
 document.getElementById('userModal').addEventListener('click', (e) => { if(e.target === document.getElementById('userModal')) closeModal(); });
@@ -837,10 +876,30 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
   if(!editingUser) return;
   const plan = document.getElementById('modalPlan').value;
   const role = document.getElementById('modalRole').value;
+  const agent = document.getElementById('modalAgent').checked;
+  const limit = parseInt(document.getElementById('modalLimit').value) || 0;
+  const verified = document.getElementById('modalVerified').checked;
+  
+  // Save plan + role via existing endpoints
   await apiPut('/admin/users/' + editingUser.username + '/plan', { plan });
   if(role !== editingUser.role) {
     await apiPut('/admin/users/' + editingUser.username + '/role', { role });
   }
+  
+  // Save agent/limit/verified via new endpoint
+  try {
+    await fetch(API + '/admin/user-plan', {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        username: editingUser.username,
+        takedown_agent: agent,
+        takedown_limit: limit,
+        dmca_verified: verified
+      })
+    });
+  } catch(e) { console.error('Failed to save agent settings:', e); }
+  
   closeModal();
   loadUsers();
 });
@@ -1025,9 +1084,9 @@ async function loadPayments() {
     if (!d) return;
 
     // Summary cards
-    document.getElementById('payMRR').textContent = 'â‚¬' + (d.mrr || 0).toFixed(2);
+    document.getElementById('payMRR').textContent = '€' + (d.mrr || 0).toFixed(2);
     document.getElementById('payActiveSubs').textContent = d.active_subscriptions || 0;
-    document.getElementById('payTotal').textContent = 'â‚¬' + (d.total_revenue || 0).toFixed(2);
+    document.getElementById('payTotal').textContent = '€' + (d.total_revenue || 0).toFixed(2);
     document.getElementById('payRecent').textContent = d.recent_count || 0;
     document.getElementById('payCount').textContent = (d.payments || []).length + ' payments';
 
@@ -1044,7 +1103,7 @@ async function loadPayments() {
           <td style="font-weight:600">${p.username || p.customer_name || '—'}</td>
           <td style="color:var(--text2)">${p.email || '—'}</td>
           <td>${planBadge}</td>
-          <td style="font-weight:600;color:var(--green)">â‚¬${(p.amount || 0).toFixed(2)}</td>
+          <td style="font-weight:600;color:var(--green)">€${(p.amount || 0).toFixed(2)}</td>
           <td><span style="color:${statusColor};font-weight:600;font-size:.8rem">${(p.status || '').toUpperCase()}</span></td>
           <td style="color:var(--text3);font-size:.78rem">${date}</td>
           <td style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">${p.subscription_id ? p.subscription_id.slice(-8) : '—'}</td>

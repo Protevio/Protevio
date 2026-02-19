@@ -758,7 +758,20 @@ async function checkDmcaVerification() {
       badge.textContent='Verified';
       badge.style.background='rgba(22,163,74,.15)';
       badge.style.color='var(--green)';
-      banner.style.display='none';
+      // Show usage stats
+      const tdLimit = d.takedown_limit || 0;
+      const tdUsed = d.takedowns_used || 0;
+      const limitLabel = tdLimit >= 9999 ? 'Unlimited' : tdLimit;
+      const pct = tdLimit >= 9999 ? 0 : (tdLimit > 0 ? Math.round(tdUsed/tdLimit*100) : 0);
+      const barColor = pct > 80 ? 'var(--red)' : pct > 50 ? 'var(--gold)' : 'var(--green)';
+      banner.style.display='block';
+      banner.innerHTML = '<div style="background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.1);border-radius:12px;padding:14px 20px;margin-bottom:16px">'
+        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'
+        + '<span style="font-size:.82rem;font-weight:700;color:var(--text2)">Takedowns this month</span>'
+        + '<span style="font-size:.82rem;font-weight:700;color:var(--text)">' + tdUsed + ' / ' + limitLabel + '</span>'
+        + '</div>'
+        + (tdLimit < 9999 ? '<div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+barColor+';border-radius:3px;transition:width .3s"></div></div>' : '')
+        + '</div>';
     } else if(d.pending_verification && d.pending_verification.status === 'pending') {
       badge.style.display='inline-block';
       badge.textContent='Pending Review';
