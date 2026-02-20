@@ -4,20 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="theme-color" content="#1a1f2e"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pricing — Protevio AI | Face Search Plans from Free to Unlimited</title>
-<meta name="description" content="Choose your Protevio plan. Free tier with 10 searches/day, Open Plus at €24.99/mo, PROtect with takedowns at €34.99/mo, or Advanced unlimited at €299.99/mo."/>
+<title>Pricing â€” Protevio AI | Face Search Plans from Free to Unlimited</title>
+<meta name="description" content="Choose your Protevio plan. Free tier with 10 searches/day, Open Plus at â‚¬24.99/mo, PROtect with takedowns at â‚¬34.99/mo, or Advanced unlimited at â‚¬299.99/mo."/>
 <meta name="keywords" content="Protevio pricing, face search pricing, reverse face search cost, PimEyes alternative pricing, facial recognition plans, photo monitoring subscription"/>
-<meta property="og:title" content="Protevio AI Pricing — Plans Starting Free"/>
-<meta property="og:description" content="Choose your Protevio plan. Free tier with 10 searches/day, Open Plus at €24.99/mo, PROtect with takedowns at €34.99/mo, or Advanced unlimited at €299.99/mo."/>
+<meta property="og:title" content="Protevio AI Pricing â€” Plans Starting Free"/>
+<meta property="og:description" content="Choose your Protevio plan. Free tier with 10 searches/day, Open Plus at â‚¬24.99/mo, PROtect with takedowns at â‚¬34.99/mo, or Advanced unlimited at â‚¬299.99/mo."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://protevio.com/pricing.html"/>
 <meta property="og:site_name" content="Protevio AI"/>
-<meta property="og:image" content="https://protevio.com/og-image.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Protevio AI Pricing — Plans Starting Free"/>
-<meta name="twitter:description" content="Choose your Protevio plan. Free tier with 10 searches/day, Open Plus at €24.99/mo, PROtect with takedowns at €34.99/mo, or Advanced unlimited at €299.99/mo."/>
+<meta name="twitter:title" content="Protevio AI Pricing â€” Plans Starting Free"/>
+<meta name="twitter:description" content="Choose your Protevio plan. Free tier with 10 searches/day, Open Plus at â‚¬24.99/mo, PROtect with takedowns at â‚¬34.99/mo, or Advanced unlimited at â‚¬299.99/mo."/>
 <link rel="canonical" href="https://protevio.com/pricing.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,22 +24,59 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 *{-webkit-tap-highlight-color:transparent}
 :root{
-  /* Added --text to match index.html */
+  --bg:#1a1f2e;
+  --bg-elevated:#232a3d;
+  --bg-card:#2a3349;
+  --border:#3a4562;
+  --border-light:#4a5678;
   --text:#f8fafc;
-  --bg:#0c0f1a;
-  --accent:#2563eb;
-  --accent-light:#5b9aff;
-  --green:#16a34a;
+  --text-secondary:#d1d5e0;
+  --text-muted:#9ca3b8;
+  --accent:#5b9aff;
+  --accent-light:#85b4ff;
+  --accent-glow:rgba(91,154,255,.15);
+  --gold:#ffb020;
+  --green:#4ade80;
   --purple:#a78bfa;
-  --text3:#8891a5;
+  --glass:rgba(42,51,73,.6);
   --glass-border:rgba(255,255,255,.08);
+  --text3:#9ca3b8;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;background:var(--bg);color:#fff;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 0%,rgba(91,154,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 100%,rgba(167,139,250,.06) 0%,transparent 50%)}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.bg-gradient{
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(91,154,255,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(74,222,128,.05) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+  animation:gradientShift 15s ease-in-out infinite;
+}
+@keyframes gradientShift{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.8;transform:scale(1.05)}
+}
+.dot-pattern{
+  position:fixed;inset:0;
+  background-image:radial-gradient(rgba(91,154,255,.15) 1px, transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;z-index:0;opacity:.5;
+}
 
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;padding:14px 40px;z-index:100;background:rgba(12,15,26,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-border)}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(26,31,46,.9);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--glass-border);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
 
 /* Updated Logo Styles to Match Index */
 .nav__logo{
@@ -60,25 +94,47 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
   color:var(--text);
 }
 
-.nav__links{display:flex;gap:24px;margin:0 auto}
-.nav__link{color:var(--text3);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;position:relative}
-.nav__link:hover{color:#fff}.nav__link--active{color:var(--accent-light)}
-.nav__link--active::after{content:'';position:absolute;bottom:-6px;left:0;right:0;height:2px;background:var(--accent-light);border-radius:1px}
-.nav__right{display:flex;align-items:center;gap:14px}
-.nav__lang{display:flex;align-items:center;gap:6px;background:none;border:1px solid rgba(255,255,255,.15);color:var(--text3);padding:7px 14px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
-.nav__lang svg{width:16px;height:16px}.nav__lang:hover{border-color:var(--accent-light);color:var(--accent-light)}
-.nav__login{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent-light),var(--purple));color:#fff;padding:9px 22px;border-radius:12px;text-decoration:none;font-size:.88rem;font-weight:600;transition:all .2s;box-shadow:0 4px 16px rgba(91,154,255,.25)}
-.nav__login svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;fill:none}
-.nav__login:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(91,154,255,.35)}
+.nav__links{display:flex;align-items:center;gap:32px}
+.nav__link{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .25s;position:relative}
+.nav__link:hover{color:var(--text)}
+.nav__link--active{color:var(--text)}
+.nav__link--active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px}
+.nav__right{display:flex;align-items:center;gap:12px}
+.nav__lang{
+  display:flex;align-items:center;gap:6px;
+  padding:9px 14px;border:1px solid var(--border);border-radius:10px;
+  font-size:.85rem;font-weight:500;color:var(--text-secondary);
+  background:var(--glass);backdrop-filter:blur(10px);
+  cursor:pointer;transition:all .25s;font-family:inherit;
+}
+.nav__lang svg{width:16px;height:16px;opacity:.7}
+.nav__lang:hover{border-color:var(--border-light);background:var(--bg-card);transform:translateY(-1px)}
+.nav__login{
+  padding:9px 20px;font-size:.85rem;font-weight:600;color:white;
+  background:linear-gradient(135deg,var(--accent) 0%,#7c6aff 100%);
+  border:none;border-radius:10px;text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  transition:all .25s;box-shadow:0 4px 16px rgba(91,154,255,.35);
+  position:relative;overflow:hidden;
+}
+.nav__login::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#7c6aff 0%,var(--accent) 100%);
+  opacity:0;transition:opacity .25s;
+}
+.nav__login:hover::before{opacity:1}
+.nav__login span{position:relative;z-index:1}
+.nav__login svg{width:16px;height:16px;stroke:white;stroke-width:2.5;fill:none;position:relative;z-index:1}
+.nav__login:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,154,255,.45)}
 .nav__hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:10px;z-index:110;background:none;border:none;margin-left:auto}
 .nav__hamburger span{display:block;width:22px;height:2.5px;background:#fff;border-radius:2px;transition:all .3s}
 .nav__mobile-menu{position:fixed;top:0;right:-100%;width:280px;max-width:80vw;height:100vh;background:var(--bg);border-left:1px solid var(--glass-border);padding:80px 32px 32px;z-index:99;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:none}
 .nav__mobile-menu.active{right:0}
-.nav__mobile-menu .mobile-link{display:block;padding:16px 0;font-size:1.1rem;font-weight:600;color:var(--text3);text-decoration:none;border-bottom:1px solid var(--glass-border);transition:color .2s}
-.nav__mobile-menu .mobile-link:hover,.nav__mobile-menu .mobile-link--active{color:var(--accent-light)}
+.nav__mobile-menu .mobile-link{display:block;padding:16px 0;font-size:1.1rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--glass-border);transition:color .2s}
+.nav__mobile-menu .mobile-link:hover,.nav__mobile-menu .mobile-link--active{color:var(--accent)}
 .nav__mobile-menu .mobile-login{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:24px;padding:16px;background:linear-gradient(135deg,var(--accent-light),var(--purple));color:#fff;border-radius:12px;text-decoration:none;font-size:1rem;font-weight:600}
 
-.container{max-width:1140px;margin:0 auto;padding:110px 24px 60px;position:relative;z-index:1}
+.container{max-width:1140px;margin:0 auto;padding:80px 24px 60px;position:relative;z-index:1}
 .hero{text-align:center;margin-bottom:40px}
 .hero__title{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:12px}
 .hero__title span{background:linear-gradient(135deg,var(--accent-light),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -93,14 +149,14 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 .billing-toggle::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:1px;background:rgba(255,255,255,.1)}
 
 /* DESKTOP 3 CARDS */
-.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:16px}
-.pcard{background:#1a1f2e;border-radius:16px;overflow:visible;border:1px solid #2a3349;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;position:relative}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pcard{background:#1a1f2e;border-radius:16px;overflow:hidden;border:1px solid #2a3349;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
 .pcard:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.25)}
-.pcard__header{padding:24px 28px 20px;text-align:center;font-size:1.35rem;font-weight:800;letter-spacing:-.01em;border-radius:16px 16px 0 0}
+.pcard__header{padding:24px 28px 20px;text-align:center;font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
 .pcard--open .pcard__header{background:rgba(91,154,255,.15);color:#bfdbfe}
 .pcard--protect .pcard__header{background:var(--accent);color:#fff}
 .pcard--advanced .pcard__header{background:#1e293b;color:#fff}
-.pcard__body{padding:28px;flex:1;display:flex;flex-direction:column;border-radius:0 0 16px 16px;overflow:hidden}
+.pcard__body{padding:28px;flex:1;display:flex;flex-direction:column}
 .pcard__price{margin-bottom:20px}
 .pcard__amount{font-size:2.4rem;font-weight:800;color:#f0f2f7;letter-spacing:-.03em}
 .pcard__amount .cur{font-size:1.2rem;color:#8891a5;margin-left:2px}
@@ -246,9 +302,6 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 .ctbl tr:hover td{background:rgba(42,51,73,.3)}
 .cy{color:var(--green);font-weight:700;font-size:1rem}.cn{color:#3a4562}.cv{font-weight:700;color:#f0f2f7}
 
-
-.pcard__badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-size:.68rem;font-weight:800;padding:5px 18px;border-radius:20px;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase;z-index:5;box-shadow:0 4px 16px rgba(37,99,235,.5)}
-.pcard{position:relative}
 /* FAQ */
 .faq{margin-top:60px}.faq__title{font-size:1.5rem;font-weight:800;text-align:center;margin-bottom:28px}
 .faq-wrap{background:#1a1f2e;border-radius:14px;border:1px solid #2a3349;overflow:hidden}
@@ -272,7 +325,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 @media(max-width:768px){
   .nav{padding:12px 20px}.nav__hamburger{display:flex}.nav__mobile-menu{display:block}
   .nav__links{display:none !important}.nav__lang{display:none !important}.nav__login{display:none !important}
-  .container{padding:90px 12px 40px}.hero__title{font-size:1.7rem}
+  .container{padding:60px 12px 40px}.hero__title{font-size:1.7rem}
   .free-tier{flex-direction:column;text-align:center;padding:20px}.free-tier__feats{justify-content:center}
 }
 @media(max-width:420px){.hero__title{font-size:1.4rem}.mpc__tab{font-size:.78rem;padding:9px 4px}.mpc__amount{font-size:2.1rem}}
@@ -316,10 +369,10 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
   ]
 }
 </script>
-<meta name="twitter:image" content="https://protevio.com/og-image.png"/>
 </head>
 <body>
 <div class="bg-gradient"></div>
+<div class="dot-pattern"></div>
 
 <nav class="nav">
   <a href="/" class="nav__logo">
@@ -344,7 +397,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 </nav>
 <div class="nav__mobile-menu" id="mobileMenu">
   <a href="/" class="mobile-link">Home</a><a href="about.html" class="mobile-link">About</a><a href="pricing.html" class="mobile-link mobile-link--active">Pricing</a><a href="faq.html" class="mobile-link">FAQ</a><a href="blog.html" class="mobile-link">Blog</a><a href="contact.html" class="mobile-link">Contact</a><a href="opt-out.html" class="mobile-link">Opt-Out</a>
-  <a href="login.html" class="mobile-login" id="mobileAuth">Log In →</a>
+  <a href="login.html" class="mobile-login" id="mobileAuth">Log In â†’</a>
 </div>
 
 <div class="container">
@@ -359,11 +412,11 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
     <div class="mpc__name" id="mpName">Open Plus</div>
     <div class="mpc__tabs"><button class="mpc__tab active" data-plan="open">Open Plus</button><button class="mpc__tab" data-plan="protect">PROtect</button><button class="mpc__tab" data-plan="advanced">Advanced</button></div>
     <div class="mpc__billing"><button class="mpc__bbtn active" data-billing="monthly">Monthly</button><button class="mpc__bbtn" data-billing="annual">Annually <span class="save">-20%</span></button></div>
-    <div class="mpc__price"><div class="mpc__amount"><span id="mpPrice">24,99</span> <span class="cur">€</span> <span class="per">/ month</span></div><div class="mpc__anote" id="mpAnote" style="display:none"></div></div>
+    <div class="mpc__price"><div class="mpc__amount"><span id="mpPrice">24,99</span> <span class="cur">â‚¬</span> <span class="per">/ month</span></div><div class="mpc__anote" id="mpAnote" style="display:none"></div></div>
     <div class="mpc__subs" id="mpSubs">
-      <div class="mpc__sub active" data-sub="base" data-m="34,99" data-a="27,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect</div><div class="mpc__sub-desc">100 takedowns / month</div></div><div class="mpc__sub-price">34,99 €</div></div>
-      <div class="mpc__sub" data-sub="plus" data-m="69,99" data-a="55,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Plus</div><div class="mpc__sub-desc">200 takedowns / month</div></div><div class="mpc__sub-price">69,99 €</div></div>
-      <div class="mpc__sub" data-sub="pro" data-m="149,99" data-a="119,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Pro</div><div class="mpc__sub-desc">400 takedowns / month</div></div><div class="mpc__sub-price">149,99 €</div></div>
+      <div class="mpc__sub active" data-sub="base" data-m="34,99" data-a="27,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect</div><div class="mpc__sub-desc">100 takedowns / month</div></div><div class="mpc__sub-price">34,99 â‚¬</div></div>
+      <div class="mpc__sub" data-sub="plus" data-m="69,99" data-a="55,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Plus</div><div class="mpc__sub-desc">200 takedowns / month</div></div><div class="mpc__sub-price">69,99 â‚¬</div></div>
+      <div class="mpc__sub" data-sub="pro" data-m="149,99" data-a="119,99"><div class="mpc__sub-radio"></div><div class="mpc__sub-info"><div class="mpc__sub-name">PROtect Pro</div><div class="mpc__sub-desc">400 takedowns / month</div></div><div class="mpc__sub-price">149,99 â‚¬</div></div>
       <div class="mpc__addon" id="mpAddon"><div class="mpc__addon-chk"></div><div class="mpc__addon-text">Takedown Agent Support</div><div class="mpc__addon-info" title="Our team handles takedown requests on your behalf.">i</div></div>
     </div>
     <div class="mpc__cta"><button class="mpc__btn" onclick="mPlan==='protect'?openProtectOptions():startCheckout(mPlan)">Buy access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
@@ -377,37 +430,29 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
   <div class="trial-banner__title" id="trialTitle">Try <span>Full Access</span> free for 3 days</div>
   <div class="trial-banner__desc" id="trialDesc">See unblurred results, source URLs, and full website details. Experience the full power of Protevio before you commit.</div>
   <button class="trial-banner__btn" id="trialBtn" onclick="startTrial()"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span id="trialBtnText">Start Free Trial</span></button>
-  <div class="trial-banner__note" id="trialNote">Credit card required · Cancel anytime · Automatically charges €24.99/mo after 3 days</div>
+  <div class="trial-banner__note" id="trialNote">Credit card required Â· Cancel anytime Â· Automatically charges â‚¬24.99/mo after 3 days</div>
 </div>
 
-
-<div style="text-align:center;margin:28px auto 0;max-width:460px;padding:20px 28px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15);border-radius:14px;display:flex;align-items:center;gap:14px;justify-content:center">
-  <svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#16a34a;fill:none;stroke-width:1.5;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke-width="2.5"/></svg>
-  <div style="text-align:left"><div style="font-size:.85rem;font-weight:700;color:#fff">30-Day Money-Back Guarantee</div><div style="font-size:.75rem;color:#8891a5;margin-top:2px">Not satisfied? Full refund, no questions asked.</div></div>
-</div>
-
-<div class="free-tier"><div><div class="free-tier__title">Start with Free</div><div class="free-tier__desc">Try Protevio AI with limited features — no credit card required.</div><div class="free-tier__feats"><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>10 searches/day</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Basic results</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No credit card</span></div></div><a href="signup.html" class="free-tier__btn">Get started free →</a></div>
+<div class="free-tier"><div><div class="free-tier__title">Start with Free</div><div class="free-tier__desc">Try Protevio AI with limited features â€” no credit card required.</div><div class="free-tier__feats"><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>10 searches/day</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Basic results</span><span class="free-tier__f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No credit card</span></div></div><a href="signup.html" class="free-tier__btn">Get started free â†’</a></div>
 
 <div class="compare"><h2 class="compare__title">Compare all features</h2><div class="compare-wrap"><table class="ctbl"><thead><tr><th>Feature</th><th>Free</th><th>Open Plus</th><th>PROtect</th><th>Advanced</th></tr></thead><tbody>
 <tr><td>Daily searches</td><td class="cv">10</td><td class="cv">50</td><td class="cv">75</td><td class="cv">Unlimited</td></tr>
-<tr><td>Face Alerts</td><td class="cn">—</td><td class="cv">5</td><td class="cv">20</td><td class="cv">500</td></tr>
-<tr><td>PDF reports</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td><td class="cy">✔</td></tr>
-<tr><td>Multi-photo upload</td><td class="cy">✔</td><td class="cy">✔</td><td class="cy">✔</td><td class="cy">✔</td></tr>
-<tr><td>Search history</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td><td class="cy">✔</td></tr>
-<tr><td>Result management</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td></tr>
-<tr><td>Takedown requests</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td></tr>
-<tr><td>Deep Search</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td></tr>
-<tr><td>DMCA Takedowns</td><td class="cn">—</td><td class="cn">—</td><td class="cn">+€50/mo</td><td class="cy">✔</td></tr>
-<tr><td>API access</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✔</td></tr>
-<tr><td>Dedicated support</td><td class="cn">—</td><td class="cy">✔</td><td class="cy">✔</td><td class="cy">✔</td></tr>
+<tr><td>Face Alerts</td><td class="cn">â€”</td><td class="cv">5</td><td class="cv">20</td><td class="cv">500</td></tr>
+<tr><td>PDF reports</td><td class="cn">â€”</td><td class="cy">âœ“</td><td class="cy">âœ“</td><td class="cy">âœ“</td></tr>
+<tr><td>Multi-photo upload</td><td class="cy">âœ“</td><td class="cy">âœ“</td><td class="cy">âœ“</td><td class="cy">âœ“</td></tr>
+<tr><td>Search history</td><td class="cn">â€”</td><td class="cy">âœ“</td><td class="cy">âœ“</td><td class="cy">âœ“</td></tr>
+<tr><td>Result management</td><td class="cn">â€”</td><td class="cn">â€”</td><td class="cy">âœ“</td><td class="cy">âœ“</td></tr>
+<tr><td>Takedown requests</td><td class="cn">â€”</td><td class="cn">â€”</td><td class="cy">âœ“</td><td class="cy">âœ“</td></tr>
+<tr><td>Deep Search</td><td class="cn">â€”</td><td class="cn">â€”</td><td class="cn">â€”</td><td class="cy">âœ“</td></tr>
+<tr><td>API access</td><td class="cn">â€”</td><td class="cn">â€”</td><td class="cn">â€”</td><td class="cy">âœ“</td></tr>
+<tr><td>Dedicated support</td><td class="cn">â€”</td><td class="cy">âœ“</td><td class="cy">âœ“</td><td class="cy">âœ“</td></tr>
 </tbody></table></div></div>
 
 <div class="faq"><h2 class="faq__title">Frequently asked questions</h2><div class="faq-wrap">
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Can I cancel my subscription at any time?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Yes, cancel anytime from your dashboard. Your access continues until the end of the billing period.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What payment methods do you accept?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Visa, Mastercard, Amex, SEPA, iDEAL, Bancontact, and more through our secure payment processor.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Can I switch between plans?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Yes. Upgrade anytime (prorated). Downgrade takes effect at the next billing cycle.</div></div>
-<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What is a Face Alert?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Face Alerts monitor our database for new appearances of a face. You get notified when new matches are found — great for tracking unauthorized photo use.</div></div>
-<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">How do DMCA takedowns work?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">DMCA takedowns are available with the Takedown Agent add-on (+€50/mo for PROtect plans) or included with the Advanced plan. After a one-time identity verification, our system generates legally compliant DMCA notices and sends them directly to hosting providers. You can track status, send follow-ups, and file Google removal requests — all from your dashboard.</div></div>
+<div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">What is a Face Alert?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Face Alerts monitor our database for new appearances of a face. You get notified when new matches are found â€” great for tracking unauthorized photo use.</div></div>
 <div class="faq-item"><div class="faq-item__q" onclick="this.parentElement.classList.toggle('open')">Is my data safe?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="faq-item__a">Uploaded photos are processed temporarily and not stored permanently. We use encryption in transit and at rest.</div></div>
 </div></div>
 </div>
@@ -415,7 +460,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="plan-modal-overlay" id="protectModal" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="plan-modal" style="max-width:500px">
     <div class="plan-modal__header">
-      <button class="plan-modal__close" onclick="document.getElementById('protectModal').classList.remove('active')">✕</button>
+      <button class="plan-modal__close" onclick="document.getElementById('protectModal').classList.remove('active')">âœ•</button>
       <div class="plan-modal__name">Choose your PROtect plan</div>
       <div class="plan-modal__tagline">Select the package that fits your needs</div>
     </div>
@@ -426,7 +471,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
           <div class="protect-option__name">PROtect</div>
           <div class="protect-option__desc">100 takedowns / month</div>
         </div>
-        <div class="protect-option__price"><span id="poPrice1">34,99</span> €<small>/mo</small></div>
+        <div class="protect-option__price"><span id="poPrice1">34,99</span> â‚¬<small>/mo</small></div>
       </div>
       <div class="protect-option" data-key="protect_plus" onclick="selectProtect(this)">
         <div class="protect-option__radio"></div>
@@ -434,7 +479,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
           <div class="protect-option__name">PROtect Plus</div>
           <div class="protect-option__desc">200 takedowns / month</div>
         </div>
-        <div class="protect-option__price"><span id="poPrice2">69,99</span> €<small>/mo</small></div>
+        <div class="protect-option__price"><span id="poPrice2">69,99</span> â‚¬<small>/mo</small></div>
       </div>
       <div class="protect-option" data-key="protect_pro" onclick="selectProtect(this)">
         <div class="protect-option__radio"></div>
@@ -442,19 +487,19 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
           <div class="protect-option__name">PROtect Pro <span style="background:#2563eb;color:#fff;font-size:.6rem;padding:2px 6px;border-radius:4px;font-weight:700;margin-left:6px">POPULAR</span></div>
           <div class="protect-option__desc">400 takedowns / month</div>
         </div>
-        <div class="protect-option__price"><span id="poPrice3">149,99</span> €<small>/mo</small></div>
+        <div class="protect-option__price"><span id="poPrice3">149,99</span> â‚¬<small>/mo</small></div>
       </div>
       <div class="protect-option" data-key="protect_agent" onclick="selectProtect(this)" style="border-style:dashed">
         <div class="protect-option__radio"></div>
         <div class="protect-option__info">
-          <div class="protect-option__name">➕ Takedown Agent Support</div>
+          <div class="protect-option__name">âž• Takedown Agent Support</div>
           <div class="protect-option__desc">Our team handles removals for you</div>
         </div>
-        <div class="protect-option__price" style="color:#f59e0b">+50 €<small>/mo</small></div>
+        <div class="protect-option__price" style="color:#f59e0b">+50 â‚¬<small>/mo</small></div>
       </div>
     </div>
     <div class="plan-modal__cta">
-      <button class="plan-modal__btn" id="protectCta" style="background:#2563eb" onclick="checkoutProtect()">Continue with PROtect — 34,99 €/mo</button>
+      <button class="plan-modal__btn" id="protectCta" style="background:#2563eb" onclick="checkoutProtect()">Continue with PROtect â€” 34,99 â‚¬/mo</button>
     </div>
   </div>
 </div>
@@ -462,7 +507,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
 <div class="plan-modal-overlay" id="planModal" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="plan-modal">
     <div class="plan-modal__header">
-      <button class="plan-modal__close" onclick="document.getElementById('planModal').classList.remove('active')">✕</button>
+      <button class="plan-modal__close" onclick="document.getElementById('planModal').classList.remove('active')">âœ•</button>
       <div class="plan-modal__name" id="pmName"></div>
       <div class="plan-modal__tagline" id="pmTagline"></div>
     </div>
@@ -473,7 +518,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;backgrou
   </div>
 </div>
 
-<div class="footer"><p class="footer__text">© 2026 Protevio AI. All rights reserved.</p><div class="footer__links"><a href="privacy-policy.html" class="footer__link">Privacy Policy</a><a href="terms-of-service.html" class="footer__link">Terms of Service</a><a href="about.html" class="footer__link">About</a><a href="contact.html" class="footer__link">Contact</a><a href="csr.html" class="footer__link">CSR</a>
+<div class="footer"><p class="footer__text">Â© 2026 Protevio AI. All rights reserved.</p><div class="footer__links"><a href="privacy-policy.html" class="footer__link">Privacy Policy</a><a href="terms-of-service.html" class="footer__link">Terms of Service</a><a href="about.html" class="footer__link">About</a><a href="contact.html" class="footer__link">Contact</a><a href="csr.html" class="footer__link">CSR</a>
       <a href="dmca-templates.html" style="color:var(--accent);text-decoration:none;margin:0 12px">DMCA Templates</a></div></div>
 
 <script>
@@ -484,7 +529,7 @@ const PLANS = {
       {n:'Up to 50 searches daily', d:'With the Open Plus plan, you can perform up to 50 face searches per day. Subscribers get full access to all sources of their results: website addresses and direct links to source images.', c:'blue'},
       {n:'Up to 5 Protevio Alerts', d:'A Protevio Alert is the notification you get when we find a new photo of you. With Open Plus you can set up to 5 Alerts.', c:'blue'},
       {n:'Dedicated support', d:'Get priority access to our support team for any questions or issues with your account.', c:'blue'},
-      {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results — perfect for documentation, evidence collection, or sharing with legal teams.', c:'blue'},
+      {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results â€” perfect for documentation, evidence collection, or sharing with legal teams.', c:'blue'},
     ]
   },
   protect: {name:'PROtect', headerClass:'pcard--protect', headerBg:'#2563eb', headerColor:'#fff',
@@ -497,20 +542,18 @@ const PLANS = {
       {div:true},
       {n:'Managing current and future results', d:'Take control of where your face appears online. Monitor, track, and manage both existing results and new matches.', c:'green'},
       {n:'Different packages based on your needs', d:'Choose PROtect (100), PROtect Plus (200), or PROtect Pro (400) takedowns per month.', c:'green'},
-      {div:true},
-      {n:'Takedown Agent (+€50/mo)', d:'Add automated DMCA takedowns: we generate legally compliant notices and send them to hosting providers on your behalf. Includes identity verification, status tracking, follow-up reminders, and Google removal requests.', c:'gray', italic:true},
+      {n:'Optional: Takedown Agent Support (+â‚¬50/mo)', d:'Our dedicated team handles takedown requests on your behalf, contacting websites directly to remove your images.', c:'gray', italic:true},
     ]
   },
   advanced: {name:'Advanced', headerClass:'pcard--advanced', headerBg:'#1e293b', headerColor:'#fff',
     m:'299,99', a:'239,99', cta:'Buy access', ctaType:'dark',
     features:[
-      {n:'Unlimited searches daily', d:'No limits. Search as much as you need with our full database. Unlimited daily searches across all indexed sources.', c:'blue'},
+      {n:'Unlimited searches daily', d:'No limits. Search as much as you need with our full database of over 1.1 million indexed faces and growing.', c:'blue'},
       {n:'Up to 500 Protevio Alerts', d:'Set up to 500 face alerts for comprehensive monitoring. Ideal for agencies, legal teams, and professionals.', c:'blue'},
       {n:'Dedicated support', d:'Get priority access to our support team for any questions or issues.', c:'blue'},
       {n:'Generating PDF reports from the results', d:'Generate professional PDF intelligence reports from your search results.', c:'blue'},
       {div:true},
-      {n:'All in PROtect PRO', d:'Includes all PROtect features: result management, takedown requests (400/month), and dedicated support.', c:'green'},
-      {n:'Takedown Agent Included', d:'Automated DMCA takedowns included at no extra cost. One-click notices sent to hosting providers with reminder system and Google removal links.', c:'green'},
+      {n:'All in PROtect PRO', d:'Includes all PROtect features: result management, takedown requests (400/month), and takedown agent support.', c:'green'},
       {n:'Deep Search', d:'Extended search across our full database including archived and deep-indexed sources for the most comprehensive results.', c:'green'},
     ]
   }
@@ -527,10 +570,9 @@ function buildDesktop(){
     const price = p[b()];
     const annual = billing !== 'monthly';
     const annualAmt = (parseFloat(p.a.replace(',','.'))*12).toFixed(2).replace('.',',');
-    const badge = key==='protect' ? '<div class="pcard__badge">Most Popular</div>' : '';
-    html += `<div class="pcard ${p.headerClass}" ${key==='protect'?'style="border:2px solid #2563eb;transform:scale(1.03)"':''}>${badge}<div class="pcard__header">${p.name}</div><div class="pcard__body">`;
-    html += `<div class="pcard__price"><div class="pcard__amount"><span class="dpr" data-key="${key}">${price}</span> <span class="cur">€</span> <span class="per">/ month</span></div>`;
-    html += annual ? `<div class="pcard__annual-note">Billed as ${annualAmt} € / year</div>` : '';
+    html += `<div class="pcard ${p.headerClass}"><div class="pcard__header">${p.name}</div><div class="pcard__body">`;
+    html += `<div class="pcard__price"><div class="pcard__amount"><span class="dpr" data-key="${key}">${price}</span> <span class="cur">â‚¬</span> <span class="per">/ month</span></div>`;
+    html += annual ? `<div class="pcard__annual-note">Billed as ${annualAmt} â‚¬ / year</div>` : '';
     html += `</div>`;
     const ctaAction = key==='protect' ? 'openProtectOptions()' : "startCheckout('" + key + "')";
     html += `<div class="pcard__cta"><button class="pcard__btn" onclick="${ctaAction}">${p.cta} <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
@@ -594,9 +636,9 @@ function updateMobile(){
   if(mPlan==='protect'){const as=mpSubs.querySelector('.mpc__sub.active');if(as)price=as.dataset[b()];}
   document.getElementById('mpPrice').textContent = price;
   const an = document.getElementById('mpAnote');
-  if(billing!=='monthly'){const mo=parseFloat(price.replace(',','.'));an.textContent=`Billed as ${(mo*12).toFixed(2).replace('.',',')} € / year`;an.style.display='block';}else{an.style.display='none';}
+  if(billing!=='monthly'){const mo=parseFloat(price.replace(',','.'));an.textContent=`Billed as ${(mo*12).toFixed(2).replace('.',',')} â‚¬ / year`;an.style.display='block';}else{an.style.display='none';}
   mpSubs.classList.toggle('show', mPlan==='protect');
-  mpSubs.querySelectorAll('.mpc__sub').forEach(sp=>{sp.querySelector('.mpc__sub-price').textContent=sp.dataset[b()]+' €';});
+  mpSubs.querySelectorAll('.mpc__sub').forEach(sp=>{sp.querySelector('.mpc__sub-price').textContent=sp.dataset[b()]+' â‚¬';});
   document.querySelector('.mpc__btn').innerHTML = (mPlan==='protect'?'See options':'Buy access')+' <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
   let html = '<div class="mpc__ftitle">What\'s included</div>';
   p.features.forEach(f=>{
@@ -613,7 +655,7 @@ const PLAN_DETAILS = {
     color: '#2563eb',
     sections: [
       { title: 'Search & Discovery', icon: 'search', items: [
-        {name: '50 searches per day', desc: 'Run up to 50 face searches daily across our entire indexed database. Each search scans every indexed source instantly.'},
+        {name: '50 searches per day', desc: 'Run up to 50 face searches daily across our entire database of indexed faces. Each search scans every indexed source instantly.'},
         {name: 'Full source access', desc: 'See the exact website addresses and direct links to source images found. Know exactly where your photos appear online.'},
         {name: 'Safe Search filter', desc: 'Toggle Safe Search to filter potentially explicit results from your searches.'},
       ]},
@@ -622,7 +664,7 @@ const PLAN_DETAILS = {
         {name: 'Email notifications', desc: 'Get notified via email as soon as new matches are detected for your monitored faces.'},
       ]},
       { title: 'Reporting & Support', icon: 'file', items: [
-        {name: 'PDF intelligence reports', desc: 'Generate professional PDF reports containing all matched faces, source URLs, similarity scores, and timestamps — ideal for documentation or evidence.'},
+        {name: 'PDF intelligence reports', desc: 'Generate professional PDF reports containing all matched faces, source URLs, similarity scores, and timestamps â€” ideal for documentation or evidence.'},
         {name: 'Dedicated support', desc: 'Priority access to our support team via email. Typical response time under 24 hours.'},
       ]},
     ]
@@ -639,11 +681,11 @@ const PLAN_DETAILS = {
       { title: 'Content Protection', icon: 'shield', items: [
         {name: 'Result management tools', desc: 'Take full control of your search results. Track, categorize, and manage where your face appears across the web.'},
         {name: 'Takedown requests', desc: 'Send automated takedown requests to websites hosting your photos without consent. Choose from PROtect (100/mo), PROtect Plus (200/mo), or PROtect Pro (400/mo).'},
-        {name: 'Takedown Agent (+€50/mo)', desc: 'Add-on: our team generates legally compliant DMCA notices and sends them to hosting providers on your behalf. Includes identity verification, status tracking, follow-up reminders, and Google Search removal requests.'},
+        {name: 'Takedown Agent Support (+â‚¬50/mo)', desc: 'Our dedicated team personally handles takedown requests on your behalf â€” contacting websites directly, following up, and ensuring removal. Added as an optional add-on to your subscription.'},
       ]},
       { title: 'Advanced Features', icon: 'star', items: [
         {name: 'Dedicated priority support', desc: 'Get faster responses and personalized assistance from our expert support team.'},
-        {name: 'Detailed takedown tracking', desc: 'Monitor the status of every takedown request — see which have been sent, acknowledged, or completed.'},
+        {name: 'Detailed takedown tracking', desc: 'Monitor the status of every takedown request â€” see which have been sent, acknowledged, or completed.'},
       ]},
     ]
   },
@@ -652,14 +694,14 @@ const PLAN_DETAILS = {
     color: '#1e293b',
     sections: [
       { title: 'Unlimited Power', icon: 'zap', items: [
-        {name: 'Unlimited daily searches', desc: 'No daily limits whatsoever. Search as many faces as you need across our full database with unlimited access.'},
+        {name: 'Unlimited daily searches', desc: 'No daily limits whatsoever. Search as many faces as you need across our full database of over 1.1 million indexed faces and growing.'},
         {name: 'Up to 500 Protevio Alerts', desc: 'Enterprise-grade monitoring with up to 500 simultaneous face alerts. Ideal for agencies managing multiple clients or cases.'},
-        {name: 'Deep Search technology', desc: 'Our most thorough search mode — scans archived content, deep-indexed sources, and hard-to-reach databases for the most comprehensive results possible.'},
+        {name: 'Deep Search technology', desc: 'Our most thorough search mode â€” scans archived content, deep-indexed sources, and hard-to-reach databases for the most comprehensive results possible.'},
       ]},
       { title: 'Everything in PROtect PRO', icon: 'shield', items: [
-        {name: '400 takedown requests/month', desc: 'The highest tier of content removal with 400 automated takedown requests per month.'},
-        {name: 'Takedown Agent included', desc: 'Automated DMCA takedowns included at no extra cost. We generate and send legally compliant notices, track delivery, send follow-ups, and handle Google removal requests.'},
+        {name: '400 takedown requests/month', desc: 'The highest tier of content removal with 400 automated takedown requests per month, plus full takedown agent support included.'},
         {name: 'Full result management', desc: 'Complete toolkit for tracking, categorizing, and managing all search results and takedown statuses.'},
+        {name: 'Takedown Agent Support included', desc: 'Our team handles complex takedown cases personally â€” contacting sites, following up, and reporting back to you.'},
       ]},
       { title: 'Premium Benefits', icon: 'crown', items: [
         {name: 'API access (coming soon)', desc: 'Programmatic access to Protevio search capabilities for integration into your own tools and workflows.'},
@@ -711,7 +753,7 @@ function openPlanModal(planKey) {
 
   const cta = document.getElementById('pmCta');
   cta.style.background = detail.color;
-  cta.textContent = `Get ${plan.name} — ${plan[b()]} € / month`;
+  cta.textContent = `Get ${plan.name} â€” ${plan[b()]} â‚¬ / month`;
   cta.onclick = () => { document.getElementById('planModal').classList.remove('active'); if(planKey==='protect'){openProtectOptions();}else{startCheckout(planKey);} };
 
   document.getElementById('planModal').classList.add('active');
@@ -785,7 +827,7 @@ function updateProtectCta() {
   const total = agentAddon ? (baseNum + 50).toFixed(2).replace('.',',') : base;
   const name = selectedProtect === 'protect' ? 'PROtect' : selectedProtect === 'protect_plus' ? 'PROtect Plus' : 'PROtect Pro';
   const extra = agentAddon ? ' + Agent' : '';
-  document.getElementById('protectCta').textContent = `Continue with ${name}${extra} — ${total} €/mo`;
+  document.getElementById('protectCta').textContent = `Continue with ${name}${extra} â€” ${total} â‚¬/mo`;
 }
 
 function checkoutProtect() {
@@ -840,7 +882,7 @@ async function startCheckout(planKey) {
 (async function checkTrial(){
   const token = localStorage.getItem('protevio_token');
   if (!token) {
-    // Not logged in — show banner, redirect to signup
+    // Not logged in â€” show banner, redirect to signup
     document.getElementById('trialBanner').style.display = 'block';
     document.getElementById('trialBtnText').textContent = 'Sign up to start trial';
     window._trialNoAuth = true;
@@ -868,9 +910,9 @@ async function startCheckout(planKey) {
       document.getElementById('trialDesc').textContent = 'Upgrade to a paid plan to continue seeing unblurred results and source URLs.';
       document.getElementById('trialBtnText').textContent = 'Choose a plan above';
       document.getElementById('trialBtn').onclick = () => { window.scrollTo({top: 0, behavior: 'smooth'}); };
-      document.getElementById('trialNote').textContent = 'Plans start at €24.99/month';
+      document.getElementById('trialNote').textContent = 'Plans start at â‚¬24.99/month';
     }
-    // else: trial_available — default "Start Free Trial" state
+    // else: trial_available â€” default "Start Free Trial" state
     // Check for trial=success in URL
     const params = new URLSearchParams(location.search);
     if (params.get('trial') === 'success') {
@@ -879,9 +921,9 @@ async function startCheckout(planKey) {
       document.getElementById('trialBadgeText').textContent = 'Trial Active';
       document.getElementById('trialTitle').innerHTML = '<span>3 days</span> of full access activated!';
       document.getElementById('trialDesc').textContent = 'Your free trial is now active. Search and see unblurred results with source URLs!';
-      document.getElementById('trialBtnText').textContent = 'Start searching →';
+      document.getElementById('trialBtnText').textContent = 'Start searching â†’';
       document.getElementById('trialBtn').onclick = () => { window.location.href = '/'; };
-      document.getElementById('trialNote').textContent = 'Your trial expires in 3 days · Cancel anytime from your dashboard';
+      document.getElementById('trialNote').textContent = 'Your trial expires in 3 days Â· Cancel anytime from your dashboard';
     }
   } catch(e) {}
 })();
