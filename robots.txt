@@ -4,25 +4,20 @@ Allow: /
 # Block admin and internal pages
 Disallow: /admin.html
 Disallow: /admin-minors.html
-Disallow: /suspended.html
-Disallow: /reset-password.html
-Disallow: /forgot-password.html
-Disallow: /results.html
 Disallow: /dashboard.html
+Disallow: /results.html
 Disallow: /check-email.html
 Disallow: /verify-email.html
+Disallow: /suspended.html
 Disallow: /thankyou.html
 Disallow: /test.html
-
-# Block duplicate/legacy files
-Disallow: /login__1_.html
-Disallow: /forgot-password__1_.html
+Disallow: /reset-password.html
+Disallow: /forgot-password.html
 Disallow: /reset-password__1_.html
+Disallow: /forgot-password__1_.html
+Disallow: /login__1_.html
 Disallow: /privacy-policy__1_.html
 Disallow: /terms-of-service__1_.html
-
-# Block API
-Disallow: /api/
 
 # Sitemap
 Sitemap: https://protevio.com/sitemap.xml
