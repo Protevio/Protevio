@@ -1,1 +1,26 @@
-/* /index.html 200
+# Blog articles: redirect old root-level URLs to /blog/ subfolder
+# Cloudflare Pages _redirects format: /from /to statusCode
+
+/catfish-photo-check.html /blog/catfish-photo-check.html 301
+/deepfake-monitoring.html /blog/deepfake-monitoring.html 301
+/executive-image-protection.html /blog/executive-image-protection.html 301
+/face-recognition-search.html /blog/face-recognition-search.html 301
+/face-search-for-photographers.html /blog/face-search-for-photographers.html 301
+/find-my-face-online.html /blog/find-my-face-online.html 301
+/gdpr-face-data-rights.html /blog/gdpr-face-data-rights.html 301
+/gdpr-right-to-be-forgotten.html /blog/gdpr-right-to-be-forgotten.html 301
+/how-catfishers-steal-photos.html /blog/how-catfishers-steal-photos.html 301
+/how-to-find-where-your-photos-appear-online.html /blog/how-to-find-where-your-photos-appear-online.html 301
+/how-to-remove-your-photos-from-the-internet.html /blog/how-to-remove-your-photos-from-the-internet.html 301
+/is-someone-using-my-photo-on-dating-sites.html /blog/is-someone-using-my-photo-on-dating-sites.html 301
+/model-portfolio-tracking.html /blog/model-portfolio-tracking.html 301
+/online-identity-protection.html /blog/online-identity-protection.html 301
+/online-sextortion-what-to-do.html /blog/online-sextortion-what-to-do.html 301
+/protect-photos-online.html /blog/protect-photos-online.html 301
+/remove-photos-from-internet.html /blog/remove-photos-from-internet.html 301
+/reverse-face-search.html /blog/reverse-face-search.html 301
+/reverse-image-search-vs-face-recognition.html /blog/reverse-image-search-vs-face-recognition.html 301
+/social-media-photo-leak.html /blog/social-media-photo-leak.html 301
+/someone-using-my-photos-without-permission.html /blog/someone-using-my-photos-without-permission.html 301
+/stolen-photos-search.html /blog/stolen-photos-search.html 301
+/what-is-reverse-face-search.html /blog/what-is-reverse-face-search.html 301
