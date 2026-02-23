@@ -134,20 +134,16 @@
             .hero h1 { font-size: 2.2rem; }
             .hero p { font-size: 1rem; }
             
-            /* Forțăm totul pe o singură coloană perfectă */
             .features-wrapper, .services-grid, .reviews-grid { 
                 grid-template-columns: 1fr; 
                 gap: 20px; 
             }
             
-            /* Ajustăm spațierea interioară a cardurilor */
             .feature-box, .service-card, .review-card { padding: 25px 20px; }
             
-            /* Butoanele pe toată lățimea ecranului */
             .cta-container { flex-direction: column; width: 100%; } 
             .btn { width: 100%; text-align: center; justify-content: center; } 
             
-            /* Ajustări fereastră pop-up */
             .modal-content { padding: 30px 20px; width: 95%; }
             .location-wrapper { flex-direction: column; }
             .btn-gps { padding: 12px; width: 100%; }
@@ -349,7 +345,7 @@
             if (event.target == modal) { inchideModal(); }
         }
 
-        // Funcția GPS completă
+        // --- Funcția GPS NOUĂ și iertătoare ---
         function obtineLocatiaGPS() {
             const inputLocatie = document.getElementById('locatie');
             const statusLocatie = document.getElementById('status-locatie');
@@ -360,33 +356,41 @@
                 return;
             }
 
-            statusLocatie.textContent = "Te localizăm... (aprobă cererea pe ecran)";
+            statusLocatie.textContent = "Te localizăm... (aprobă cererea dacă apare)";
             statusLocatie.style.color = "#ccc";
+
+            // Opțiuni mai relaxate ca să nu eșueze din cauza semnalului slab
+            const optiuniGPS = {
+                enableHighAccuracy: false, // Daca e true, pe PC/unele telefoane da fail direct daca n-are hardware precis
+                timeout: 15000, 
+                maximumAge: 10000 
+            };
 
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     const lat = position.coords.latitude;
                     const lng = position.coords.longitude;
                     
-                    // Link de Google Maps corectat și perfect funcțional
-                    inputLocatie.value = `https://maps.google.com/?q=${lat},${lng}`;
+                    // Link oficial și universal valid de la Google Maps
+                    inputLocatie.value = `https://www.google.com/maps?q=${lat},${lng}`;
                     
                     statusLocatie.textContent = "✓ Locație salvată cu succes!";
                     statusLocatie.style.color = "#25D366";
                 },
                 function(error) {
+                    // Verificăm care e problema exactă
                     if (error.code === error.PERMISSION_DENIED) {
-                        statusLocatie.textContent = "⚠️ Ai refuzat accesul la locație.";
+                        statusLocatie.textContent = "⚠️ Permisiune refuzată din setările OS (Windows/Mac/Telefon) sau browser.";
                     } else if (error.code === error.POSITION_UNAVAILABLE) {
-                        statusLocatie.textContent = "⚠️ Nu putem detecta semnalul GPS.";
+                        statusLocatie.textContent = "⚠️ Nu putem detecta semnalul GPS. Încearcă să fii în aer liber.";
                     } else if (error.code === error.TIMEOUT) {
                         statusLocatie.textContent = "⚠️ Căutarea a durat prea mult.";
                     } else {
-                        statusLocatie.textContent = "⚠️ Eroare necunoscută. Scrie manual.";
+                        statusLocatie.textContent = "⚠️ Eroare necunoscută. Scrie manual adresa.";
                     }
                     statusLocatie.style.color = "#ff5e00";
                 },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                optiuniGPS
             );
         }
 
