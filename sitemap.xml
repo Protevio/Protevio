@@ -175,20 +175,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://protevio.com/privacy-policy.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
   <url>
-    <loc>https://protevio.com/terms-of-service.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
   <url>
-    <loc>https://protevio.com/csr.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
   <url>
     <loc>https://protevio.com/blog/is-someone-using-my-photo-on-dating-sites.html</loc>
     <changefreq>monthly</changefreq>
