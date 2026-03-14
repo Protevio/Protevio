@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- ===== CORE PAGES ===== -->
   <url>
     <loc>https://protevio.com/</loc>
     <changefreq>weekly</changefreq>
@@ -42,8 +40,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-
-  <!-- ===== AUTH PAGES ===== -->
   <url>
     <loc>https://protevio.com/login.html</loc>
     <changefreq>monthly</changefreq>
@@ -54,8 +50,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-
-  <!-- ===== SEO LANDING PAGES (14 unique pages) ===== -->
+  <url>
+    <loc>https://protevio.com/privacy-policy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://protevio.com/terms-of-service.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://protevio.com/csr.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
   <url>
     <loc>https://protevio.com/blog/reverse-face-search.html</loc>
     <changefreq>monthly</changefreq>
@@ -112,11 +121,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://protevio.com/blog/model-portfolio-tracking.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://protevio.com/blog/gdpr-face-data-rights.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -126,24 +130,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- ===== LEGAL ===== -->
   <url>
-    <loc>https://protevio.com/privacy-policy.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://protevio.com/blog/model-portfolio-tracking.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://protevio.com/terms-of-service.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://protevio.com/csr.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
   <url>
     <loc>https://protevio.com/blog/gdpr-right-to-be-forgotten.html</loc>
     <changefreq>monthly</changefreq>
@@ -174,9 +165,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-  <url>
-  <url>
   <url>
     <loc>https://protevio.com/blog/is-someone-using-my-photo-on-dating-sites.html</loc>
     <changefreq>monthly</changefreq>
