@@ -4,23 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Minor Protection — Protevio Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#0c0f1a;color:#e2e8f0;min-height:100vh}
+body{font-family:'Outfit',system-ui,sans-serif;background:#0c0f1a;color:#18181b;min-height:100vh}
 a{color:#5b9aff;text-decoration:none}
 
 /* Header */
-.header{background:#141825;border-bottom:1px solid #1e2538;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.header{background:#fefefe;border-bottom:1px solid #1e2538;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
 .header__title{font-size:1.1rem;font-weight:800;color:#f1f5f9;display:flex;align-items:center;gap:10px}
 .header__title svg{width:22px;height:22px;stroke:#ef4444;stroke-width:2;fill:none}
-.header__back{font-size:.82rem;color:#6b7280;padding:7px 16px;border:1px solid #2a3349;border-radius:8px;background:none;cursor:pointer;font-family:inherit;transition:all .15s}
+.header__back{font-size:.82rem;color:#6b7280;padding:7px 16px;border:1px solid #e4e4e7;border-radius:8px;background:none;cursor:pointer;font-family:inherit;transition:all .15s}
 .header__back:hover{border-color:#5b9aff;color:#5b9aff}
 
 /* Tabs */
-.tabs{display:flex;gap:0;padding:0 32px;background:#141825;border-bottom:1px solid #1e2538}
+.tabs{display:flex;gap:0;padding:0 32px;background:#fefefe;border-bottom:1px solid #1e2538}
 .tab{padding:14px 24px;font-size:.85rem;font-weight:700;color:#6b7280;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;position:relative;font-family:inherit;background:none;border-top:none;border-left:none;border-right:none}
-.tab:hover{color:#e2e8f0}
+.tab:hover{color:#18181b}
 .tab.active{color:#5b9aff;border-bottom-color:#5b9aff}
 .tab .badge{background:#dc2626;color:#fff;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:10px;margin-left:8px;min-width:18px;text-align:center}
 .tab .badge--warn{background:#f59e0b}
@@ -29,7 +29,7 @@ a{color:#5b9aff;text-decoration:none}
 
 /* Stats bar */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:24px 32px 0}
-.stat{background:#141825;border:1px solid #1e2538;border-radius:12px;padding:16px}
+.stat{background:#fefefe;border:1px solid #1e2538;border-radius:12px;padding:16px}
 .stat__label{font-size:.72rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px}
 .stat__val{font-size:1.6rem;font-weight:800;color:#f1f5f9}
 .stat--danger .stat__val{color:#ef4444}
@@ -37,26 +37,26 @@ a{color:#5b9aff;text-decoration:none}
 
 /* Controls */
 .controls{padding:20px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.controls select,.controls input{background:#141825;border:1px solid #2a3349;color:#e2e8f0;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:.85rem}
+.controls select,.controls input{background:#fefefe;border:1px solid #e4e4e7;color:#18181b;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:.85rem}
 .controls select:focus,.controls input:focus{outline:none;border-color:#5b9aff}
 .btn{padding:8px 18px;border-radius:8px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;border:none;transition:all .15s}
 .btn--primary{background:#2563eb;color:#fff}.btn--primary:hover{background:#1d4ed8}
 .btn--danger{background:#dc2626;color:#fff}.btn--danger:hover{background:#b91c1c}
 .btn--success{background:#16a34a;color:#fff}.btn--success:hover{background:#15803d}
-.btn--outline{background:none;border:1px solid #2a3349;color:#9ca3af}.btn--outline:hover{border-color:#5b9aff;color:#5b9aff}
+.btn--outline{background:none;border:1px solid #e4e4e7;color:#a1a1aa}.btn--outline:hover{border-color:#5b9aff;color:#5b9aff}
 .btn:disabled{opacity:.4;cursor:not-allowed}
-.selected-count{font-size:.85rem;color:#9ca3af;margin-left:auto}
+.selected-count{font-size:.85rem;color:#a1a1aa;margin-left:auto}
 
 /* Grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:12px 32px 32px}
-.face-card{background:#141825;border:1px solid #1e2538;border-radius:12px;overflow:hidden;position:relative;transition:all .15s;cursor:pointer}
+.face-card{background:#fefefe;border:1px solid #1e2538;border-radius:12px;overflow:hidden;position:relative;transition:all .15s;cursor:pointer}
 .face-card:hover{border-color:#3a4a60}
 .face-card.selected{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.3)}
 .face-card__check{position:absolute;top:8px;left:8px;width:22px;height:22px;border-radius:6px;border:2px solid #3a4a60;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:2;transition:all .15s}
 .face-card.selected .face-card__check{border-color:#2563eb;background:#2563eb}
 .face-card.selected .face-card__check::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
 .face-card__age{position:absolute;top:8px;right:8px;background:rgba(220,38,38,.85);color:#fff;font-size:.66rem;font-weight:800;padding:3px 8px;border-radius:5px;z-index:2}
-.face-card__img{width:100%;aspect-ratio:1;object-fit:cover;background:#1a1f2e;display:block}
+.face-card__img{width:100%;aspect-ratio:1;object-fit:cover;background:#f2eeea;display:block}
 .face-card__info{padding:10px 12px}
 .face-card__domain{font-size:.75rem;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .face-card__meta{font-size:.7rem;color:#4b5563;margin-top:3px}
@@ -65,8 +65,8 @@ a{color:#5b9aff;text-decoration:none}
 .vtable{width:100%;border-collapse:collapse;margin:0 0 32px}
 .vtable th{text-align:left;font-size:.72rem;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;font-weight:700;padding:12px 16px;border-bottom:1px solid #1e2538;background:#0f1220;position:sticky;top:0}
 .vtable td{padding:12px 16px;border-bottom:1px solid #1a1f30;font-size:.85rem;vertical-align:middle}
-.vtable tr:hover td{background:#141825}
-.vtable__thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#1a1f2e;border:1px solid #2a3349}
+.vtable tr:hover td{background:#fefefe}
+.vtable__thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#f2eeea;border:1px solid #e4e4e7}
 .vtable__user{font-weight:700;color:#f1f5f9}
 .vtable__email{font-size:.75rem;color:#6b7280}
 .vtable__time{font-size:.78rem;color:#6b7280}
@@ -76,7 +76,7 @@ a{color:#5b9aff;text-decoration:none}
 .vtable__age-badge--warn{background:rgba(245,158,11,.15);color:#fcd34d}
 
 /* Flagged users */
-.user-card{background:#141825;border:1px solid #1e2538;border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all .15s}
+.user-card{background:#fefefe;border:1px solid #1e2538;border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all .15s}
 .user-card:hover{border-color:#3a4a60}
 .user-card__info{flex:1;min-width:0}
 .user-card__name{font-weight:800;color:#f1f5f9;font-size:.95rem}
@@ -91,7 +91,7 @@ a{color:#5b9aff;text-decoration:none}
 
 /* Pagination */
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px 32px 40px}
-.page-btn{padding:7px 14px;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid #2a3349;background:none;color:#9ca3af;font-family:inherit}
+.page-btn{padding:7px 14px;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid #e4e4e7;background:none;color:#a1a1aa;font-family:inherit}
 .page-btn:hover{border-color:#5b9aff;color:#5b9aff}
 .page-btn.active{background:#2563eb;border-color:#2563eb;color:#fff}
 .page-btn:disabled{opacity:.3;cursor:not-allowed}
@@ -101,21 +101,21 @@ a{color:#5b9aff;text-decoration:none}
 .spinner{width:32px;height:32px;border:3px solid #1e293b;border-top-color:#5b9aff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{text-align:center;padding:60px 32px;color:#4b5563}
-.empty svg{width:48px;height:48px;stroke:#2a3349;margin-bottom:12px}
+.empty svg{width:48px;height:48px;stroke:#e4e4e7;margin-bottom:12px}
 .empty__text{font-size:.9rem;color:#6b7280}
 
 /* Confirm modal */
 .confirm-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:1000;justify-content:center;align-items:center}
 .confirm-bg.open{display:flex}
-.confirm{background:#141825;border:1px solid #2a3349;border-radius:16px;max-width:460px;width:90%;padding:28px}
+.confirm{background:#fefefe;border:1px solid #e4e4e7;border-radius:16px;max-width:460px;width:90%;padding:28px}
 .confirm__title{font-size:1.1rem;font-weight:800;color:#fca5a5;margin-bottom:8px}
-.confirm__text{font-size:.88rem;color:#9ca3af;line-height:1.6;margin-bottom:20px}
+.confirm__text{font-size:.88rem;color:#a1a1aa;line-height:1.6;margin-bottom:20px}
 .confirm__text strong{color:#ef4444}
 .confirm__actions{display:flex;gap:10px;justify-content:flex-end}
 
 /* Bulk delete section */
 .bulk-section{padding:0 32px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.bulk-section__label{font-size:.85rem;color:#9ca3af}
+.bulk-section__label{font-size:.85rem;color:#a1a1aa}
 
 @media(max-width:600px){
   .stats{padding:16px 16px 0;grid-template-columns:repeat(2,1fr)}
@@ -162,7 +162,7 @@ a{color:#5b9aff;text-decoration:none}
   </div>
 
   <div class="controls" id="controls" style="display:none">
-    <label style="font-size:.82rem;color:#9ca3af">Max age:</label>
+    <label style="font-size:.82rem;color:#a1a1aa">Max age:</label>
     <select id="ageFilter" onchange="loadFaces()">
       <option value="13">Under 13</option>
       <option value="16">Under 16</option>
@@ -183,7 +183,7 @@ a{color:#5b9aff;text-decoration:none}
   <!-- Bulk delete -->
   <div class="bulk-section" id="bulkSection" style="display:none">
     <span class="bulk-section__label">Bulk action:</span>
-    <select id="bulkAge" style="background:#141825;border:1px solid #2a3349;color:#e2e8f0;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:.85rem">
+    <select id="bulkAge" style="background:#fefefe;border:1px solid #e4e4e7;color:#18181b;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:.85rem">
       <option value="10">Delete all under 10</option>
       <option value="13">Delete all under 13</option>
       <option value="16">Delete all under 16</option>
@@ -305,7 +305,7 @@ async function loadFaces(page) {
   document.getElementById('selectedCount').textContent = `${data.total.toLocaleString()} faces total · Page ${data.page} of ${data.total_pages}`;
 
   if(!allFaces.length) {
-    grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:#2a3349;fill:none;margin-bottom:12px"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg><br><span style="color:#6b7280">No faces found matching this filter.</span></div>';
+    grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:#e4e4e7;fill:none;margin-bottom:12px"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg><br><span style="color:#6b7280">No faces found matching this filter.</span></div>';
     document.getElementById('pagination').style.display = 'none';
     return;
   }
@@ -473,7 +473,7 @@ async function loadFlaggedUsers() {
   if(data.count > 0) { badge.textContent = data.count; badge.style.display = 'inline'; }
 
   if(!data.flagged_users.length) {
-    list.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24" style="stroke:#2a3349;fill:none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="11" x2="19" y2="11.01"/></svg><div class="empty__text">No flagged users.</div></div>';
+    list.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24" style="stroke:#e4e4e7;fill:none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="11" x2="19" y2="11.01"/></svg><div class="empty__text">No flagged users.</div></div>';
     return;
   }
 

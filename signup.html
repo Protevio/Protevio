@@ -2,280 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="theme-color" content="#1a1f2e"/>
+<meta name="theme-color" content="#fefefe"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sign Up — Protevio AI | Create Your Free Account</title>
-<meta name="description" content="Create a free Protevio AI account. Start searching for your face online with 10 free searches per day. No credit card required."/>
-<meta name="keywords" content="Protevio sign up, create face search account, free face search, Protevio register"/>
-<meta property="og:title" content="Sign Up for Protevio AI — Free"/>
-<meta property="og:description" content="Create a free Protevio AI account. Start searching for your face online with 10 free searches per day. No credit card required."/>
+<title>Sign Up — Protevio AI</title>
+<meta name="description" content="Create a free Protevio AI account to search faces, monitor matches, and protect your digital identity."/>
+<meta property="og:title" content="Create a Protevio AI Account"/>
+<meta property="og:description" content="Create a free Protevio AI account to search faces, monitor matches, and protect your digital identity."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://protevio.com/signup.html"/>
 <meta property="og:site_name" content="Protevio AI"/>
 <meta property="og:image" content="https://protevio.com/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Sign Up for Protevio AI — Free"/>
-<meta name="twitter:description" content="Create a free Protevio AI account. Start searching for your face online with 10 free searches per day. No credit card required."/>
 <link rel="canonical" href="https://protevio.com/signup.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="protevio.css">
+<link rel="stylesheet" href="auth.css">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-*{-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#1a1f2e;
-  --bg-card:#2a3349;
-  --border:#3a4562;
-  --border-light:#4a5678;
-  --text:#f8fafc;
-  --text-secondary:#d1d5e0;
-  --text-muted:#9ca3b8;
-  --accent:#5b9aff;
-  --accent-light:#85b4ff;
-  --green:#4ade80;
-  --gold:#ffb020;
-  --purple:#a78bfa;
-  --glass:rgba(42,51,73,.6);
-  --glass-border:rgba(255,255,255,.08);
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.password-strength { display: flex; gap: 6px; margin-top: 8px; }
+.strength-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; transition: background .3s; }
+.strength-bar.weak { background: var(--red); }
+.strength-bar.medium { background: var(--amber); }
+.strength-bar.strong { background: var(--emerald); }
+.checkbox-wrapper {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 20px; font-size: .82rem; color: var(--ink-muted);
 }
-html{font-size:16px;scroll-behavior:smooth}
-body{
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
-  background:var(--bg);color:var(--text);min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-  display:flex;align-items:center;justify-content:center;padding:24px;
-}
-
-.bg-gradient{
-  position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(91,154,255,.12) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,.08) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(74,222,128,.05) 0%, transparent 50%);
-  pointer-events:none;z-index:0;animation:gradientShift 15s ease-in-out infinite;
-}
-@keyframes gradientShift{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
-
-.dot-pattern{
-  position:fixed;inset:0;
-  background-image:radial-gradient(rgba(91,154,255,.15) 1px, transparent 1px);
-  background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5;
-}
-
-.back-link{min-height:44px;
-  position:fixed;top:24px;left:24px;display:flex;align-items:center;gap:8px;
-  color:var(--text-muted);text-decoration:none;font-size:.9rem;font-weight:500;
-  transition:all .2s;z-index:10;
-}
-.back-link:hover{color:var(--accent);transform:translateX(-4px)}
-.back-link svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
-
-.container{width:100%;max-width:480px;position:relative;z-index:1}
-
-.card{
-  background:var(--glass);backdrop-filter:blur(20px);
-  border:1px solid var(--glass-border);border-radius:24px;
-  padding:48px 40px;box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-
-.header{text-align:center;margin-bottom:36px}
-.logo{
-  width:56px;height:56px;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 20px;
-}
-.logo svg{width:100%;height:100%}
-.title{font-size:1.9rem;font-weight:800;margin-bottom:8px}
-.subtitle{font-size:.95rem;color:var(--text-muted)}
-
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-group{margin-bottom:20px}
-.form-label{display:block;font-size:.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px}
-.form-input{
-  width:100%;padding:14px 16px;
-  background:rgba(26,31,46,.6);border:1px solid var(--border);border-radius:12px;
-  font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;color:var(--text);
-  transition:all .3s;
-}
-.form-input:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 4px rgba(91,154,255,.1);background:rgba(26,31,46,.8);
-}
-.form-input::placeholder{color:var(--text-muted)}
-
-.password-strength{margin-top:8px;display:flex;gap:4px;height:4px}
-.strength-bar{flex:1;background:var(--border);border-radius:2px;transition:background .3s}
-.strength-bar.weak{background:var(--accent)}
-.strength-bar.medium{background:var(--gold)}
-.strength-bar.strong{background:var(--green)}
-
-.checkbox-wrapper{display:flex;gap:12px;align-items:flex-start;margin-bottom:24px}
-.checkbox-wrapper input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
-.checkbox-wrapper label{font-size:.88rem;color:var(--text-muted);line-height:1.5;cursor:pointer}
-.checkbox-wrapper a{color:var(--accent);text-decoration:none;transition:color .2s}
-.checkbox-wrapper a:hover{color:var(--accent-light)}
-
-.btn{
-  width:100%;padding:16px;font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:1rem;font-weight:600;border-radius:12px;cursor:pointer;
-  transition:all .3s;border:none;display:flex;align-items:center;justify-content:center;
-  gap:10px;position:relative;overflow:hidden;
-}
-.btn-primary{
-  background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;
-  box-shadow:0 6px 24px rgba(91,154,255,.35);margin-bottom:24px;
-}
-.btn-primary::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--purple),var(--accent));opacity:0;transition:opacity .3s;
-}
-.btn-primary:hover::before{opacity:1}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(91,154,255,.5)}
-.btn span{position:relative;z-index:1}
-
-.divider{display:flex;align-items:center;gap:16px;margin:28px 0}
-.divider-line{flex:1;height:1px;background:var(--border)}
-.divider-text{font-size:.8rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em}
-
-.btn-google{background:var(--bg-card);border:1px solid var(--border);color:var(--text)}
-.btn-google:hover{
-  background:rgba(35,42,61,1);border-color:var(--border-light);
-  transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3);
-}
-.google-icon{width:20px;height:20px;flex-shrink:0}
-
-.login-prompt{text-align:center;margin-top:32px;font-size:.9rem;color:var(--text-muted)}
-.login-prompt a{color:var(--accent);text-decoration:none;font-weight:600;transition:color .2s}
-.login-prompt a:hover{color:var(--accent-light)}
-
-@media(max-width:560px){
-  .card{padding:36px 28px}
-  .title{font-size:1.5rem}
-  .back-link{min-height:44px;top:16px;left:16px}
-  .form-row{grid-template-columns:1fr}
-}
-
-@media(max-width:380px){
-  .card,.login-card{padding:28px 20px}
-  .title,.login-title{font-size:1.35rem}
-}
+.checkbox-wrapper input { width: 16px; height: 16px; accent-color: var(--blue); cursor: pointer; margin-top: 2px; }
+.checkbox-wrapper a { color: var(--blue); }
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-<meta name="twitter:image" content="https://protevio.com/og-image.png"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Sign Up – Protevio AI",
-  "description": "Create a free Protevio AI account. Search for your face online, set up monitoring alerts, and protect your digital identity.",
-  "url": "https://protevio.com/signup.html",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Protevio AI",
-    "url": "https://protevio.com"
-  }
-}
-</script>
 </head>
 <body>
 
-<div class="bg-gradient"></div>
-<div class="dot-pattern"></div>
+<div class="p-glow"></div>
 
-<a href="/" class="back-link">
+<a href="/" class="auth-back">
   <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
   Back to Home
 </a>
 
-<div class="container">
-  <div class="card">
-    
-    <div class="header">
-      <div class="logo">
-        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
-          <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
-          <circle cx="18" cy="18" r="2" fill="#050608"/>
-          <defs>
-            <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
-              <stop offset="0%" stop-color="#00e5ff"/>
-              <stop offset="100%" stop-color="#7c4dff"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <h1 class="title">Create Account</h1>
-      <p class="subtitle">Join Protevio and start searching</p>
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">Protevio<span>.</span></div>
+      <h1 class="auth-title">Create account</h1>
+      <p class="auth-sub">Join Protevio and start searching</p>
     </div>
 
     <form id="signupForm">
-      
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label" for="firstName">First Name</label>
+          <label class="form-label" for="firstName">First name</label>
           <input type="text" id="firstName" class="form-input" placeholder="John" required>
         </div>
         <div class="form-group">
-          <label class="form-label" for="lastName">Last Name</label>
+          <label class="form-label" for="lastName">Last name</label>
           <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
         </div>
       </div>
-
       <div class="form-group">
         <label class="form-label" for="email">Email</label>
         <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
       </div>
-
       <div class="form-group">
         <label class="form-label" for="password">Password</label>
         <input type="password" id="password" class="form-input" placeholder="Create a strong password" required>
         <div class="password-strength" id="strengthBar">
-          <div class="strength-bar"></div>
-          <div class="strength-bar"></div>
-          <div class="strength-bar"></div>
-          <div class="strength-bar"></div>
+          <div class="strength-bar"></div><div class="strength-bar"></div><div class="strength-bar"></div><div class="strength-bar"></div>
         </div>
       </div>
-
       <div class="form-group">
-        <label class="form-label" for="confirmPassword">Confirm Password</label>
+        <label class="form-label" for="confirmPassword">Confirm password</label>
         <input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter your password" required>
       </div>
-
       <div class="checkbox-wrapper">
         <input type="checkbox" id="terms" required>
-        <label for="terms">I agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></label>
+        <label for="terms">I agree to the <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a></label>
       </div>
-
-      <button type="submit" class="btn btn-primary">
-        <span>Create Account</span>
-      </button>
-
+      <button type="submit" class="auth-btn auth-btn--primary"><span>Create Account</span></button>
     </form>
 
     <div class="divider">
-      <div class="divider-line"></div>
-      <span class="divider-text">Or</span>
-      <div class="divider-line"></div>
+      <div class="divider-line"></div><span class="divider-text">Or</span><div class="divider-line"></div>
     </div>
 
-    <button class="btn btn-google" id="googleBtn">
-      <svg class="google-icon" viewBox="0 0 24 24">
-        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-      </svg>
+    <button class="auth-btn auth-btn--google" id="googleBtn">
+      <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
       <span>Sign up with Google</span>
     </button>
 
-    <div class="login-prompt">
-      Already have an account? <a href="login.html">Log in</a>
-    </div>
-
+    <div class="auth-prompt">Already have an account? <a href="login.html">Log in</a></div>
   </div>
 </div>
 
@@ -283,7 +103,6 @@ body{
 const API = 'https://api.protevio.com/api';
 const _redir = new URLSearchParams(window.location.search).get('redirect');
 
-// Password strength indicator
 document.getElementById('password').addEventListener('input', function(e) {
   const password = e.target.value;
   const bars = document.querySelectorAll('.strength-bar');
@@ -297,24 +116,16 @@ document.getElementById('password').addEventListener('input', function(e) {
   for (let i = 0; i < strength; i++) { bars[i].classList.add(cls); }
 });
 
-// Form submission
 document.getElementById('signupForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
-
-  if (password !== confirmPassword) {
-    showError('Passwords do not match!'); return;
-  }
-  if (!document.getElementById('terms').checked) {
-    showError('Please accept the Terms of Service'); return;
-  }
+  if (password !== confirmPassword) { showError('Passwords do not match!'); return; }
+  if (!document.getElementById('terms').checked) { showError('Please accept the Terms of Service'); return; }
 
   const btn = this.querySelector('button[type="submit"]');
   const btnText = btn.querySelector('span');
-  btnText.textContent = 'Creating account...';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
+  btnText.textContent = 'Creating account...'; btn.disabled = true;
 
   const firstName = document.getElementById('firstName').value;
   const lastName = document.getElementById('lastName').value;
@@ -322,122 +133,66 @@ document.getElementById('signupForm').addEventListener('submit', async function(
 
   try {
     const res = await fetch(API + '/auth/register', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        username: email,
-        email: email,
-        password: password,
-        name: firstName + ' ' + lastName
-      })
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ username: email, email, password, name: firstName + ' ' + lastName })
     });
     const data = await res.json();
     if (res.ok) {
       if (data.requires_verification) {
-        // Email verification required — redirect to check-email page
         localStorage.setItem('protevio_verify_email', email);
-        const redirParam = _redir ? '&redirect=' + _redir : '';
-        window.location.href = '/check-email?email=' + encodeURIComponent(email) + redirParam;
+        window.location.href = '/check-email?email=' + encodeURIComponent(email) + (_redir ? '&redirect=' + _redir : '');
       } else if (data.token) {
         localStorage.setItem('protevio_token', data.token);
         if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
         localStorage.setItem('protevio_user', JSON.stringify(data.user || {username: email}));
         window.location.href = _redir === 'results' ? '/results.html' : '/login';
-      } else {
-        window.location.href = _redir === 'results' ? '/login.html?redirect=results' : '/login';
-      }
+      } else { window.location.href = _redir === 'results' ? '/login.html?redirect=results' : '/login'; }
     } else if (res.status === 403 && data.requires_verification) {
-      // Account exists but not verified
       localStorage.setItem('protevio_verify_email', email);
-      const redirParam = _redir ? '&redirect=' + _redir : '';
-      window.location.href = '/check-email?email=' + encodeURIComponent(email) + redirParam;
-    } else {
-      showError(data.error || 'Registration failed. Try a different email.');
-    }
-  } catch(err) {
-    showError('Connection error. Please try again.');
-  } finally {
-    btnText.textContent = 'Create Account';
-    btn.disabled = false;
-    btn.style.opacity = '1';
-  }
+      window.location.href = '/check-email?email=' + encodeURIComponent(email) + (_redir ? '&redirect=' + _redir : '');
+    } else { showError(data.error || 'Registration failed.'); }
+  } catch(err) { showError('Connection error.'); }
+  finally { btnText.textContent = 'Create Account'; btn.disabled = false; }
 });
 
 function showError(msg) {
-  let el = document.querySelector('.signup-error');
-  if (!el) {
-    el = document.createElement('div');
-    el.className = 'signup-error';
-    el.style.cssText = 'background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171;padding:12px 16px;border-radius:12px;font-size:.9rem;margin-bottom:16px;text-align:center;';
-    document.getElementById('signupForm').prepend(el);
-  }
-  el.textContent = msg;
-  setTimeout(() => el.remove(), 5000);
+  let el = document.querySelector('.auth-error');
+  if (!el) { el = document.createElement('div'); el.className = 'auth-error'; document.getElementById('signupForm').prepend(el); }
+  el.textContent = msg; setTimeout(() => el.remove(), 5000);
 }
 
 const GOOGLE_CLIENT_ID = '902178578189-e5gmfnandrvgkqs5aeotq3vn612vc3jf.apps.googleusercontent.com';
-
 const gsiScript = document.createElement('script');
-gsiScript.src = 'https://accounts.google.com/gsi/client';
-gsiScript.async = true;
-gsiScript.defer = true;
+gsiScript.src = 'https://accounts.google.com/gsi/client'; gsiScript.async = true; gsiScript.defer = true;
 document.head.appendChild(gsiScript);
-
-gsiScript.onload = () => {
-  google.accounts.id.initialize({
-    client_id: GOOGLE_CLIENT_ID,
-    callback: handleGoogleResponse
-  });
-};
+gsiScript.onload = () => { google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleResponse }); };
 
 document.getElementById('googleBtn').addEventListener('click', function() {
-  if (!window.google?.accounts) {
-    showError('Google Sign-In is loading, please try again.');
-    return;
-  }
+  if (!window.google?.accounts) { showError('Google Sign-In loading...'); return; }
   google.accounts.id.prompt((n) => {
     if (n.isNotDisplayed()) {
-      const div = document.createElement('div');
-      div.style.cssText = 'position:fixed;top:-9999px';
-      document.body.appendChild(div);
+      const div = document.createElement('div'); div.style.cssText = 'position:fixed;top:-9999px'; document.body.appendChild(div);
       google.accounts.id.renderButton(div, {type:'standard', theme:'filled_black', size:'large'});
-      setTimeout(() => {
-        const inner = div.querySelector('div[role=button]') || div.querySelector('iframe');
-        if (inner) inner.click();
-        else showError('Please allow popups for Google Sign-In');
-      }, 300);
+      setTimeout(() => { const inner = div.querySelector('div[role=button]') || div.querySelector('iframe'); if (inner) inner.click(); else showError('Please allow popups'); }, 300);
     }
   });
 });
 
 async function handleGoogleResponse(response) {
   const btn = document.getElementById('googleBtn');
-  btn.querySelector('span').textContent = 'Creating account...';
-  btn.disabled = true;
-  
+  btn.querySelector('span').textContent = 'Creating account...'; btn.disabled = true;
   try {
-    const res = await fetch(API + '/auth/google', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ credential: response.credential })
-    });
+    const res = await fetch(API + '/auth/google', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ credential: response.credential }) });
     const data = await res.json();
     if (res.ok && data.token) {
       localStorage.setItem('protevio_token', data.token);
-        if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
+      if(data.refresh_token) localStorage.setItem('protevio_refresh', data.refresh_token);
       localStorage.setItem('protevio_user', JSON.stringify(data.user || {}));
       window.location.href = _redir === 'results' ? '/results.html' : '/dashboard';
-    } else {
-      showError(data.error || 'Google sign-up failed');
-    }
-  } catch(err) {
-    showError('Connection error. Please try again.');
-  } finally {
-    btn.querySelector('span').textContent = 'Continue with Google';
-    btn.disabled = false;
-  }
+    } else { showError(data.error || 'Google sign-up failed'); }
+  } catch(err) { showError('Connection error.'); }
+  finally { btn.querySelector('span').textContent = 'Sign up with Google'; btn.disabled = false; }
 }
 </script>
-
 </body>
 </html>

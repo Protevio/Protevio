@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script type='text/javascript' nonce='hU/mp/WHA/aLCr55FMU6kA==' src='https://contribution.usercontent.google.com/iVICXKTdZ4bxWfD9xHmNjE0ThjcDRCRgNDUV0RNRp5l92qQXYiVOQxoBmxK-UpV4x5ika8OgU_sKfz5oqZJ9B24gBNy-Q2QhLzH-odt2_AHRNbHKuNTYO2Aa1xPZMAZW_Hnb_vSAGlpj0yHR4DHEyLlNEtDCWsHYb1AFe0pbkc2XyWQDsC85o3HkZ89UA31E1edkjZqmzvGxZ2En97ltwH2S4rke08V-c7DC4UwPAtVXn1aooT5vdEFzClnYNbat3Z-pG-w3668ALVkSO4SvSuTNWuzuwvs_5iZgxrXjcpYfo5FUlE9WWXtQlhLX5rzzwDwMgExSHGNLuLEmUquY8-fFJeUxo0WvQjX45AvZj1bce0seauMF4EA-HDWkeIPONDaGWVw6aLhtGijk5i_pumE6HXv3oLoX0oO5h6uRzTWBg2tGZ5ccrTecHHE2NMBfJwvkNA5d1Sbl6k7c9duHEdhk6Rz24ETqmeL2nygT-smsXEcUE3rIp16GTosSBkQ3WfEjnSd6IDMVLtPB-Of2SxqlYXrfBMF-7NVpPomV4I0CnsFs-QFtE3Js0CX958x3wDCP8YdFT0PChZKj1I4VEojFICvI4z7dS8HhfsKceBdBh6OPGcEaTmUJ0iRLiNj8qiPE4VxEBTxxPXDscai5_04yoHnnFrRuwEQ-_eglkD9weL5om-QlFkLfKm4m7NAuVzJXYMmN9km9xxXr'></script>
+<head>
 <meta charset="UTF-8"/>
-<meta name="theme-color" content="#1a1f2e"/>
+<meta name="theme-color" content="#fefefe"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Protevio AI &mdash; Reverse Face Search Engine | Find Where Your Photos Appear Online</title>
-<meta name="description" content="Find where your face appears online. Monitor new matches, request DMCA takedowns, and protect your digital identity with AI-powered reverse face search."/>
+<meta name="description" content="Search your face across 2.6 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <meta name="keywords" content="reverse face search, facial recognition search, find my photos online, face search engine, PimEyes alternative, photo protection, digital identity"/>
 <meta property="og:title" content="Protevio AI &mdash; Find Where Your Face Appears Online"/>
-<meta property="og:description" content="Find where your face appears online. Monitor new matches, request DMCA takedowns, and protect your digital identity with AI-powered reverse face search."/>
+<meta property="og:description" content="Search your face across 2.6 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://protevio.com/"/>
 <meta property="og:site_name" content="Protevio AI"/>
@@ -17,988 +17,436 @@
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Protevio AI &mdash; Find Where Your Face Appears Online"/>
-<meta name="twitter:description" content="Find where your face appears online. Monitor new matches, request DMCA takedowns, and protect your digital identity with AI-powered reverse face search."/>
+<meta name="twitter:description" content="Search your face across 2.6 million+ indexed photos. Find where your images appear online, monitor new matches, request takedowns, and protect your digital identity."/>
 <link rel="canonical" href="https://protevio.com/"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async="" defer=""></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<link rel="stylesheet" href="protevio.css">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-*{-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#1a1f2e;
-  --bg-elevated:#232a3d;
-  --bg-card:#2a3349;
-  --bg-upload:#1e2538;
-  --border:#3a4562;
-  --border-light:#4a5678;
-  --border-dashed:#5b9aff;
-  --text:#f8fafc;
-  --text-secondary:#d1d5e0;
-  --text-muted:#9ca3b8;
-  --accent:#5b9aff;
-  --accent-light:#85b4ff;
-  --accent-glow:rgba(91,154,255,.15);
-  --gold:#ffb020;
-  --green:#4ade80;
-  --purple:#a78bfa;
-  --glass:rgba(42,51,73,.6);
-  --glass-border:rgba(255,255,255,.08);
-}
-html{font-size:16px;scroll-behavior:smooth}
-body{
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+/* ===== PAGE-SPECIFIC: Homepage ===== */
+
+/* Hero */
+.hero {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
+  padding: 80px 40px 48px; text-align: center;
 }
 
-/* Animated gradient background */
-.bg-gradient{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(91,154,255,.12) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,.08) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(74,222,128,.05) 0%, transparent 50%);
-  pointer-events:none;
-  z-index:0;
-  animation:gradientShift 15s ease-in-out infinite;
-}
-@keyframes gradientShift{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.8;transform:scale(1.05)}
+/* Upload zone overrides for homepage context */
+#uploadZone { position: relative; z-index: 1; }
+#uploadBox { cursor: pointer; }
+#uploadBox.dragover .p-upload__dropzone {
+  border-color: var(--blue);
+  background: var(--blue-soft);
 }
 
-/* Dot pattern */
-.dot-pattern{
-  position:fixed;
-  inset:0;
-  background-image:radial-gradient(rgba(91,154,255,.15) 1px, transparent 1px);
-  background-size:32px 32px;
-  pointer-events:none;
-  z-index:0;
-  opacity:.5;
+/* Search status (inline progress) */
+#searchStatus { text-align: center; padding: 48px 24px; }
+#searchResults { padding: 24px; }
+
+/* Inline result cards */
+.result-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+}
+.result-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.result-card img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+  transition: transform .2s;
+}
+.result-card:hover img { transform: scale(1.02); }
+.result-card--locked img {
+  filter: blur(12px) saturate(.4);
+  transform: scale(1.08);
+}
+.result-card--locked.tease img {
+  filter: blur(6px) saturate(.6) !important;
+  transition: filter .25s;
+}
+.result-card__info {
+  padding: 10px 12px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.result-card__domain { font-size: .78rem; color: var(--ink-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.result-card__score { font-size: .78rem; font-weight: 700; color: var(--blue); padding: 3px 8px; background: var(--blue-soft); border-radius: var(--r-sm); }
+.result-card__source { font-size: .72rem; color: var(--ink-muted); }
+.result-card__lock {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(255,255,255,.85); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: var(--r-sm);
+  font-size: .7rem; font-weight: 600; color: var(--ink-soft);
+  display: none;
+}
+.result-card--locked .result-card__lock { display: flex; align-items: center; gap: 4px; }
+.result-card__explicit {
+  position: absolute; top: 8px; left: 8px;
+  background: rgba(124,58,237,.85); color: #fff;
+  padding: 3px 10px; border-radius: var(--r-sm);
+  font-size: .65rem; font-weight: 700; z-index: 2;
+}
+.result-card__explicit span { background: rgba(255,255,255,.2); padding: 1px 4px; border-radius: 3px; font-weight: 800; }
+#resultsList {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+#upgradeOverlay {
+  max-width: 600px; margin: 24px auto 0;
+  padding: 28px; text-align: center;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+}
+.upgrade-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; background: var(--blue); color: #fff;
+  border: none; border-radius: var(--r-md);
+  font-family: var(--sans); font-size: .9rem; font-weight: 700;
+  cursor: pointer; transition: all .15s;
+}
+.upgrade-btn:hover { background: var(--blue-dark); box-shadow: 0 6px 24px rgba(37,99,235,.25); }
+
+/* Action buttons row */
+#actionButtons {
+  display: flex; gap: 10px; justify-content: center; margin-top: 16px;
+}
+.action-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: none; border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-family: var(--sans); font-size: .82rem; font-weight: 500;
+  color: var(--ink-muted); cursor: pointer; transition: all .15s;
+}
+.action-btn:hover { border-color: var(--ink); color: var(--ink); }
+.action-btn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+/* Security badges */
+.security-row { display: flex; gap: 20px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.security-badge {
+  display: flex; align-items: center; gap: 5px;
+  font-size: .7rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .03em;
+}
+.security-badge svg { width: 13px; height: 13px; stroke: var(--emerald); stroke-width: 2; fill: none; }
+
+/* ===== SFM (Search Flow Modal) ===== */
+.sfm-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(24,24,27,.5); backdrop-filter: blur(8px);
+  z-index: 2000; justify-content: center; align-items: center; padding: 20px;
+}
+.sfm-overlay.active { display: flex; }
+.sfm-modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  width: 460px; max-width: 95vw; max-height: 92vh;
+  overflow-y: auto; position: relative;
+  box-shadow: var(--shadow-xl);
+  animation: p-modal-in .25s ease;
+}
+.sfm-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: var(--r-md); color: var(--ink-muted);
+  font-size: 1.1rem; cursor: pointer; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.sfm-close:hover { border-color: var(--ink); color: var(--ink); }
+.sfm-view { padding: 36px 28px; }
+.sfm-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.sfm-back {
+  background: none; border: 1px solid var(--border); border-radius: var(--r-md);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--ink-muted); transition: all .15s;
+}
+.sfm-back:hover { border-color: var(--ink); color: var(--ink); }
+.sfm-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; flex: 1; }
+.sfm-edit-link {
+  font-size: .78rem; color: var(--blue); cursor: pointer;
+  background: none; border: none; font-family: var(--sans);
+}
+.sfm-edit-link:hover { text-decoration: underline; }
+
+/* Progress ring */
+.sfm-progress-ring {
+  width: 100px; height: 100px; margin: 0 auto 24px; position: relative;
+}
+.sfm-progress-pct {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-size: 1.4rem; font-weight: 700; color: var(--ink);
+}
+.sfm-processing-info { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 6px; }
+.sfm-processing-thumb {
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  overflow: hidden; border: 2px solid var(--blue);
+  display: none; flex-shrink: 0;
+}
+.sfm-processing-thumb.show { display: block; }
+.sfm-processing-label { font-size: 1rem; font-weight: 600; color: var(--ink); }
+.sfm-processing-sub { font-size: .85rem; color: var(--ink-muted); text-align: center; }
+
+/* Face grid */
+.sfm-face-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px; margin-bottom: 16px;
+}
+.face-thumb {
+  position: relative; border-radius: var(--r-md); overflow: hidden;
+  cursor: pointer; border: 2px solid var(--border); transition: all .15s;
+}
+.face-thumb img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.face-thumb.selected { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-soft); }
+.face-thumb.selected::after {
+  content: attr(data-sel-num);
+  position: absolute; top: 4px; right: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  font-size: .65rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.face-thumb--minor { border-color: var(--amber); opacity: .7; cursor: not-allowed; }
+.face-thumb__info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 4px 6px; background: rgba(0,0,0,.55);
+  font-size: .62rem; color: #fff; font-weight: 500;
+}
+.minor-badge {
+  position: absolute; top: 4px; left: 4px;
+  background: var(--amber); color: #fff;
+  font-size: .55rem; font-weight: 700; padding: 2px 6px;
+  border-radius: 4px; text-transform: uppercase;
+}
+.sfm-hint { font-size: .82rem; color: var(--ink-muted); text-align: center; margin-bottom: 20px; }
+
+/* SFM buttons */
+.sfm-btn {
+  width: 100%; padding: 14px; border: none; border-radius: var(--r-md);
+  font-family: var(--sans); font-size: .92rem; font-weight: 700;
+  cursor: pointer; transition: all .15s; text-align: center;
+}
+.sfm-btn--inactive { background: var(--bg-soft); color: var(--ink-muted); cursor: not-allowed; }
+.sfm-btn--active { background: var(--ink); color: var(--bg); }
+.sfm-btn--active:hover { background: var(--blue); }
+.sfm-btn--search { background: var(--ink); color: var(--bg); }
+.sfm-btn--search:hover { background: var(--blue); }
+.sfm-btn--search:disabled { opacity: .5; cursor: not-allowed; }
+.sfm-btn--searching { background: var(--blue); color: #fff; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+
+/* Selected faces row */
+.sfm-selected-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.sfm-sel-face {
+  width: 56px; height: 56px; border-radius: var(--r-md);
+  overflow: hidden; position: relative; border: 2px solid var(--blue);
+}
+.sfm-sel-face img { width: 100%; height: 100%; object-fit: cover; }
+.sfm-sel-face__remove {
+  position: absolute; top: -2px; right: -2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--red); color: #fff; border: none;
+  font-size: .65rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.sfm-sel-face__badge { display: none; }
+
+/* Thin progress bar */
+.sfm-thin-bar {
+  height: 3px; background: var(--border-soft); border-radius: 2px;
+  overflow: hidden; margin-bottom: 16px;
+}
+.sfm-thin-bar__fill { height: 100%; background: var(--blue); width: 0; transition: width .3s; }
+
+/* Tip box */
+.sfm-tip {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; background: var(--amber-soft);
+  border: 1px solid rgba(217,119,6,.12);
+  border-radius: var(--r-md); margin-bottom: 16px;
+  font-size: .78rem; color: var(--amber-text); line-height: 1.5;
 }
 
-/* NAV */
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 40px;
-  background:rgba(26,31,46,.9);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--glass-border);
-  position:sticky;
-  top:0;
-  z-index:100;
+/* Options row */
+.sfm-option-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid var(--border-soft); margin-bottom: 12px;
 }
-.nav__logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-}
-.nav__logo-mark{width:36px;height:36px}
-.nav__logo-mark svg{width:100%;height:100%}
-.nav__logo-text{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.55rem;letter-spacing:.22em;color:var(--text);
-}
-.nav__links{
-  display:flex;
-  align-items:center;
-  gap:32px;
-}
-.nav__link{
-  font-size:.88rem;
-  font-weight:500;
-  color:var(--text-muted);
-  text-decoration:none;
-  transition:color .25s;
-  position:relative;
-}
-.nav__link:hover{color:var(--text)}
-.nav__link--active{color:var(--text)}
-.nav__link--active::after{
-  content:'';
-  position:absolute;
-  bottom:-4px;
-  left:0;
-  right:0;
-  height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--purple));
-  border-radius:2px;
-}
-.nav__right{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.nav__lang{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:9px 14px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:.85rem;
-  font-weight:500;
-  color:var(--text-secondary);
-  background:var(--glass);
-  backdrop-filter:blur(10px);
-  cursor:pointer;
-  transition:all .25s;
-}
-.nav__lang:hover{
-  border-color:var(--border-light);
-  background:var(--bg-card);
-  transform:translateY(-1px);
-}
-.nav__lang svg{width:16px;height:16px;opacity:.7}
-.nav__login{
-  padding:9px 20px;
-  font-size:.85rem;
-  font-weight:600;
-  color:white;
-  background:linear-gradient(135deg,var(--accent) 0%,#7c6aff 100%);
-  border:none;
-  border-radius:10px;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  transition:all .25s;
-  box-shadow:0 4px 16px rgba(91,154,255,.35);
-  position:relative;
-  overflow:hidden;
-}
-.nav__login::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 50%);
-}
-.nav__login:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 24px rgba(91,154,255,.45);
-}
-.nav__login svg{width:12px;height:12px;stroke:currentColor;stroke-width:2.5;fill:none;position:relative;z-index:1}
-.nav__login span{position:relative;z-index:1}
-
-/* HERO */
-.hero{
-  display:grid;
-  grid-template-columns:1.1fr 1fr;
-  gap:50px;
-  max-width:1320px;
-  margin:0 auto;
-  padding:36px 48px 30px;
-  align-items:center;
-  position:relative;
-  z-index:1;
-  min-height:calc(100vh - 65px);
-}
-.hero__content{
-  animation:fadeUp .6s ease-out;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(24px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.hero__badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 14px 6px 8px;
-  background:var(--glass);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--glass-border);
-  border-radius:100px;
-  font-size:.75rem;
-  font-weight:600;
-  color:var(--accent-light);
-  margin-bottom:16px;
-  text-transform:uppercase;
-  letter-spacing:.04em;
-}
-.hero__badge-dot{
-  width:8px;
-  height:8px;
-  background:var(--green);
-  border-radius:50%;
-  animation:pulse 2s ease-in-out infinite;
-  box-shadow:0 0 8px var(--green);
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.6;transform:scale(.9)}
-}
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  20%{transform:translateX(-6px)}
-  40%{transform:translateX(6px)}
-  60%{transform:translateX(-4px)}
-  80%{transform:translateX(4px)}
-}
-.hero__title{
-  font-size:2.85rem;
-  font-weight:800;
-  line-height:1.1;
-  letter-spacing:-.03em;
-  margin-bottom:14px;
-}
-.hero__title span{
-  background:linear-gradient(135deg,var(--gold) 0%,#ff9500 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero__desc{
-  font-size:.95rem;
-  line-height:1.65;
-  color:var(--text-secondary);
-  max-width:480px;
-  margin-bottom:24px;
+.sfm-option-left { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--ink-soft); }
+.sfm-select {
+  padding: 6px 12px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--r-sm); font-size: .82rem; color: var(--ink); font-family: var(--sans);
 }
 
-/* TRUST INDICATORS */
-.trust-row{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  margin-bottom:24px;
-  flex-wrap:wrap;
+/* Toggles */
+.sfm-toggles { display: flex; gap: 24px; margin-bottom: 16px; padding: 10px 0; }
+.sfm-toggle-item { display: flex; align-items: center; gap: 10px; font-size: .85rem; color: var(--ink-soft); }
+.search-toggle {
+  width: 40px; height: 22px; background: var(--border); border-radius: 11px;
+  position: relative; cursor: pointer; border: none; transition: background .2s;
 }
-.trust-item{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 14px 8px 8px;
-  background:var(--glass);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--glass-border);
-  border-radius:12px;
-  transition:all .25s;
+.search-toggle::after {
+  content: ''; width: 18px; height: 18px; background: #fff;
+  border-radius: 50%; position: absolute; top: 2px; left: 2px;
+  transition: transform .2s; box-shadow: var(--shadow-sm);
 }
-.trust-item:hover{
-  transform:translateY(-2px);
-  border-color:var(--border-light);
-  box-shadow:0 8px 24px rgba(0,0,0,.2);
+.search-toggle.on { background: var(--blue); }
+.search-toggle.on::after { transform: translateX(18px); }
+
+/* Terms */
+.sfm-terms {
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  padding: 12px 0; font-size: .82rem; color: var(--ink-soft); margin-bottom: 12px;
 }
-.trust-item__icon{
-  width:36px;
-  height:36px;
-  background:var(--bg-card);
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.sfm-terms input { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+.sfm-terms a { color: var(--blue); }
+
+/* Captcha */
+.sfm-captcha { display: flex; justify-content: center; margin-bottom: 16px; min-height: 65px; }
+
+/* Remaining searches */
+.sfm-remaining { font-size: .78rem; color: var(--ink-muted); text-align: center; margin-top: 12px; }
+
+/* ===== Result Detail Modal ===== */
+.result-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(24,24,27,.5); backdrop-filter: blur(4px);
+  z-index: 1000; justify-content: center; align-items: center; padding: 20px;
 }
-.trust-item__icon svg{
-  width:18px;
-  height:18px;
-  stroke-width:2;
-  fill:none;
+.result-modal-overlay.active { display: flex; }
+.result-modal {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--r-xl); width: 100%; max-width: 420px;
+  max-height: 90vh; overflow-y: auto; position: relative;
+  box-shadow: var(--shadow-xl); animation: p-modal-in .25s ease;
 }
-.trust-item__icon--blue svg{stroke:var(--accent)}
-.trust-item__icon--green svg{stroke:var(--green)}
-.trust-item__icon--gold svg{stroke:var(--gold)}
-.trust-item__text{
-  font-size:.9rem;
-  font-weight:700;
-  color:var(--text);
+.result-modal__close {
+  position: absolute; top: 12px; right: 12px;
+  width: 32px; height: 32px; background: var(--bg);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  color: var(--ink-muted); font-size: .85rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; z-index: 3;
 }
-.trust-item__sub{
-  font-size:.7rem;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  letter-spacing:.03em;
+.result-modal__close:hover { border-color: var(--ink); color: var(--ink); }
+.result-modal__image {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+}
+.result-modal__image--locked {
+  filter: blur(14px) saturate(.4); transform: scale(1.1);
+}
+.result-modal__nsfw {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--violet); color: #fff;
+  font-size: .72rem; font-weight: 700; padding: 4px 12px;
+  border-radius: var(--r-sm); letter-spacing: .03em;
+}
+.result-modal__domain {
+  position: absolute; bottom: 0; left: 0;
+  padding: 8px 14px; background: rgba(255,255,255,.9);
+  color: var(--ink); font-size: .8rem; font-weight: 600;
+  border-radius: 0 var(--r-md) 0 0;
+}
+.result-modal__actions { padding: 8px 0; }
+.result-modal__action {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 20px; cursor: pointer; transition: background .1s;
+  border: none; background: none; width: 100%; text-align: left;
+  color: var(--ink); font-family: var(--sans);
+}
+.result-modal__action:hover { background: var(--bg-soft); }
+.result-modal__action--locked { opacity: .4; cursor: not-allowed; }
+.result-modal__action--locked:hover { background: none; }
+.result-modal__action-icon {
+  width: 38px; height: 38px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.result-modal__action-icon svg { width: 18px; height: 18px; stroke-width: 1.8; fill: none; }
+.result-modal__action-text { flex: 1; }
+.result-modal__action-title { font-size: .86rem; font-weight: 600; }
+.result-modal__action-sub { font-size: .72rem; color: var(--ink-muted); margin-top: 2px; }
+.result-modal__action-arrow { color: var(--ink-muted); font-size: 1.1rem; }
+.result-modal__footer {
+  padding: 12px 20px; font-size: .72rem; color: var(--ink-muted);
+  border-top: 1px solid var(--border-soft);
 }
 
-/* UPLOAD ZONE */
-.upload-zone{
-  background:var(--glass);
-  backdrop-filter:blur(16px);
-  border:1px solid var(--glass-border);
-  border-radius:20px;
-  padding:24px;
-  animation:fadeUp .6s ease-out .1s both;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-  position:relative;
-  overflow:hidden;
+/* Minor modal */
+#minorModalBg {
+  display: none; position: fixed; inset: 0;
+  background: rgba(24,24,27,.5); backdrop-filter: blur(4px);
+  z-index: 3000; justify-content: center; align-items: center; padding: 20px;
 }
-.upload-zone::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
-}
-.upload-box{
-  border:2px dashed var(--border-dashed);
-  border-radius:14px;
-  background:var(--bg-upload);
-  padding:32px 28px;
-  text-align:center;
-  cursor:pointer;
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-  position:relative;
-  overflow:hidden;
-}
-.upload-box::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at center,var(--accent-glow) 0%,transparent 70%);
-  opacity:0;
-  transition:opacity .3s;
-}
-.upload-box::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(91,154,255,.05) 0%,transparent 50%);
-  opacity:0;
-  transition:opacity .3s;
-}
-.upload-box:hover{
-  border-color:var(--accent-light);
-  background:rgba(91,154,255,.08);
-  transform:translateY(-3px);
-  box-shadow:0 12px 32px rgba(91,154,255,.15);
-}
-.upload-box:hover::before{opacity:1}
-.upload-box:hover::after{opacity:1}
-.upload-box:hover .upload-icon svg{
-  transform:scale(1.08);
-}
-.upload-icon{
-  width:52px;
-  height:52px;
-  margin:0 auto 14px;
-  position:relative;
-  z-index:1;
-}
-.upload-icon svg{
-  width:100%;
-  height:100%;
-  stroke:var(--accent);
-  stroke-width:1.5;
-  fill:none;
-  transition:transform .3s;
-}
-.upload-text{
-  font-size:1rem;
-  font-weight:600;
-  color:var(--accent-light);
-  margin-bottom:4px;
-  position:relative;
-  z-index:1;
-}
-.upload-subtext{
-  font-size:.95rem;
-  font-weight:600;
-  color:var(--accent);
-  margin-bottom:6px;
-  position:relative;
-  z-index:1;
-}
-.upload-hint{
-  font-size:.8rem;
-  color:var(--text-muted);
-  position:relative;
-  z-index:1;
-  margin-bottom:8px;
-}
-.upload-shortcut{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-size:.75rem;
-  color:var(--text-muted);
-  position:relative;
-  z-index:1;
-}
-.upload-shortcut kbd{
-  padding:3px 7px;
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:5px;
-  font-family:inherit;
-  font-size:.7rem;
-  font-weight:600;
-  color:var(--text-secondary);
-}
+#minorModalBg.open { display: flex; }
 
-/* ACTION BUTTONS */
-.action-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:14px;
+/* ===== Mobile ===== */
+.nav__hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
 }
-.action-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:12px 16px;
-  background:var(--bg-elevated);
-  border:1px solid var(--border);
-  border-radius:12px;
-  font-family:inherit;
-  font-size:.85rem;
-  font-weight:500;
-  color:var(--text-secondary);
-  cursor:pointer;
-  transition:all .25s;
-  position:relative;
-  overflow:hidden;
-}
-.action-btn::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 50%);
-  opacity:0;
-  transition:opacity .25s;
-}
-.action-btn:hover{
-  border-color:var(--border-light);
-  color:var(--text);
-  background:var(--bg-card);
-  transform:translateY(-2px);
-  box-shadow:0 6px 20px rgba(0,0,0,.15);
-}
-.action-btn:hover::before{opacity:1}
-.action-btn svg{
-  width:18px;
-  height:18px;
-  stroke:currentColor;
-  stroke-width:1.5;
-  fill:none;
-  transition:transform .25s;
-}
-.action-btn:hover svg{transform:scale(1.1)}
+.nav__hamburger span { width: 22px; height: 2px; background: var(--ink-muted); border-radius: 2px; transition: all .3s; }
+.nav__hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.nav__hamburger.active span:nth-child(2) { opacity: 0; }
+.nav__hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-/* SECURITY BADGES */
-.security-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:16px;
-  margin-top:16px;
-  padding-top:14px;
-  border-top:1px solid var(--border);
+.nav__mobile-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(24,24,27,.4); z-index: 99;
 }
-.security-badge{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size:.72rem;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  letter-spacing:.03em;
-}
-.security-badge svg{
-  width:14px;
-  height:14px;
-  stroke:var(--green);
-  stroke-width:2;
-  fill:none;
-}
+.nav__mobile-overlay.active { display: block; }
 
-/* ILLUSTRATION */
-.hero__illustration{
-  position:relative;
-  animation:fadeUp .6s ease-out .15s both;
+.nav__mobile-menu {
+  position: fixed; top: 0; right: -280px; width: 280px; height: 100vh;
+  background: var(--bg); border-left: 1px solid var(--border);
+  z-index: 101; transition: right .3s ease;
+  padding: 24px; display: flex; flex-direction: column; gap: 8px;
 }
-.illustration-container{
-  position:relative;
-  width:100%;
-  aspect-ratio:1.1;
-  max-width:480px;
-  margin:0 auto;
+.nav__mobile-menu.active { right: 0; }
+.nav__mobile-menu a {
+  display: block; padding: 12px 16px; font-size: .92rem; font-weight: 500;
+  color: var(--ink-soft); text-decoration: none; border-radius: var(--r-md);
 }
+.nav__mobile-menu a:hover { background: var(--bg-soft); color: var(--ink); }
 
-/* Phone with scanning effect */
-.phone{
-  position:absolute;
-  top:8%;
-  left:5%;
-  width:clamp(110px, 28%, 135px);
-  background:var(--glass);
-  backdrop-filter:blur(16px);
-  border:1px solid var(--glass-border);
-  border-radius:20px;
-  padding:12px;
-  box-shadow:0 24px 60px rgba(0,0,0,.45);
-  z-index:20;
-  animation:float 5s ease-in-out infinite;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
-.phone__notch{
-  width:40%;
-  height:5px;
-  background:var(--bg);
-  border-radius:4px;
-  margin:0 auto 10px;
-}
-.phone__face-main{
-  width:100%;
-  aspect-ratio:1;
-  background:linear-gradient(135deg,var(--accent) 0%,var(--purple) 100%);
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:10px;
-  position:relative;
-  overflow:hidden;
-}
-/* Scanning line effect */
-.phone__face-main::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:3px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);
-  animation:scan 2s ease-in-out infinite;
-}
-@keyframes scan{
-  0%{top:0;opacity:0}
-  10%{opacity:1}
-  90%{opacity:1}
-  100%{top:100%;opacity:0}
-}
-.phone__face-main::after{
-  content:'';
-  position:absolute;
-  inset:8px;
-  border:2px solid rgba(255,255,255,.2);
-  border-radius:8px;
-}
-.phone__face-icon{
-  width:48px;
-  height:48px;
-  background:rgba(255,255,255,.2);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-.phone__face-icon::after{
-  content:'';
-  position:absolute;
-  inset:-4px;
-  border:2px solid rgba(255,255,255,.3);
-  border-radius:50%;
-  animation:pingRing 2s ease-out infinite;
-}
-@keyframes pingRing{
-  0%{transform:scale(1);opacity:.5}
-  100%{transform:scale(1.4);opacity:0}
-}
-.phone__face-icon svg{
-  width:26px;
-  height:26px;
-}
-.phone__match-label{
-  font-size:.65rem;
-  font-weight:600;
-  color:var(--green);
-  text-align:center;
-  margin-bottom:6px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-}
-.phone__match-label svg{
-  width:10px;
-  height:10px;
-  stroke:currentColor;
-  stroke-width:2.5;
-  fill:none;
-}
-.phone__faces-row{
-  display:flex;
-  gap:6px;
-}
-.phone__face-thumb{
-  flex:1;
-  aspect-ratio:1;
-  background:var(--bg);
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
-}
-.phone__face-thumb::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(91,154,255,.2) 0%,transparent 50%);
-}
-.phone__face-thumb svg{
-  width:18px;
-  height:18px;
-  stroke:var(--text-muted);
-  stroke-width:1.5;
-  fill:none;
-}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes blurTease { 0%,100%{filter:blur(12px) saturate(.5)} 50%{filter:blur(6px) saturate(.7)} }
 
-/* Floating elements */
-.float-element{
-  position:absolute;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  box-shadow:0 8px 28px rgba(0,0,0,.35);
-  transition:transform .3s;
+@media (max-width: 768px) {
+  .hero { padding: 40px 20px 32px; }
+  .nav__hamburger { display: flex; }
+  #resultsList { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  #actionButtons { flex-direction: column; align-items: stretch; }
+  .sfm-modal { width: 95%; }
 }
-.float-element:hover{transform:scale(1.1) !important}
-.float-element--sun{
-  top:2%;
-  right:20%;
-  width:48px;
-  height:48px;
-  background:linear-gradient(135deg,var(--gold) 0%,#ff9500 100%);
-  box-shadow:0 0 36px rgba(255,176,32,.45);
-  animation:float 4s ease-in-out infinite;
-  animation-delay:-.5s;
-}
-.float-element--shield{
-  top:35%;
-  right:5%;
-  width:44px;
-  height:44px;
-  background:var(--glass);
-  backdrop-filter:blur(10px);
-  border:2px solid var(--green);
-  animation:float 5s ease-in-out infinite;
-  animation-delay:-1s;
-}
-.float-element--shield svg{
-  width:20px;
-  height:20px;
-  stroke:var(--green);
-  stroke-width:2;
-  fill:none;
-}
-.float-element--search{
-  bottom:28%;
-  left:2%;
-  width:42px;
-  height:42px;
-  background:var(--glass);
-  backdrop-filter:blur(10px);
-  border:2px solid var(--purple);
-  animation:float 4.5s ease-in-out infinite;
-  animation-delay:-1.5s;
-}
-.float-element--search svg{
-  width:18px;
-  height:18px;
-  stroke:var(--purple);
-  stroke-width:2;
-  fill:none;
-}
-
-/* Stats badges - Glassmorphism */
-.stats-badge{
-  position:absolute;
-  background:var(--glass);
-  backdrop-filter:blur(16px);
-  border:1px solid var(--glass-border);
-  border-radius:14px;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:.8rem;
-  font-weight:600;
-  box-shadow:0 12px 36px rgba(0,0,0,.35);
-  z-index:25;
-  transition:transform .3s,box-shadow .3s;
-}
-.stats-badge:hover{
-  transform:translateY(-4px) !important;
-  box-shadow:0 16px 48px rgba(0,0,0,.4);
-}
-.stats-badge--faces{
-  bottom:18%;
-  left:-4%;
-  animation:float 5s ease-in-out infinite;
-  animation-delay:-2s;
-}
-.stats-badge--speed{
-  top:12%;
-  right:-4%;
-  animation:float 4.5s ease-in-out infinite;
-  animation-delay:-3s;
-}
-.stats-badge__icon{
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.stats-badge__icon--blue{background:rgba(91,154,255,.2)}
-.stats-badge__icon--green{background:rgba(74,222,128,.2)}
-.stats-badge__icon svg{
-  width:18px;
-  height:18px;
-  stroke:currentColor;
-  stroke-width:2;
-  fill:none;
-}
-.stats-badge__icon--blue svg{color:var(--accent-light)}
-.stats-badge__icon--green svg{color:var(--green)}
-.stats-badge__text{color:var(--text);font-weight:700;font-size:.95rem}
-.stats-badge__value{color:var(--text-muted);font-weight:500;font-size:.72rem;text-transform:uppercase;letter-spacing:.02em}
-
-/* Character - Looking at phone */
-.character{
-  position:absolute;
-  bottom:3%;
-  right:2%;
-  width:clamp(140px, 48%, 250px);
-  z-index:10;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.3));
-}
-
-/* Clouds */
-.cloud{
-  position:absolute;
-  background:var(--bg-card);
-  border-radius:20px;
-  opacity:.35;
-}
-.cloud--1{
-  top:22%;
-  right:2%;
-  width:65px;
-  height:24px;
-}
-.cloud--2{
-  top:48%;
-  right:28%;
-  width:45px;
-  height:18px;
-}
-
-/* Connection arcs */
-.arc{
-  position:absolute;
-  border:1px dashed var(--border-light);
-  border-radius:50%;
-  opacity:.25;
-}
-.arc--1{
-  top:5%;
-  left:15%;
-  width:180px;
-  height:180px;
-}
-.arc--2{
-  top:18%;
-  left:28%;
-  width:120px;
-  height:120px;
-}
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-  .hero{
-    grid-template-columns:1fr;
-    gap:40px;
-    padding:28px 32px;
-    min-height:auto;
-  }
-  .hero__content{text-align:center}
-  .hero__desc{margin-left:auto;margin-right:auto}
-  .trust-row{justify-content:center}
-  .illustration-container{max-width:400px}
-}
-@media(max-width:768px){
-  .nav{padding:12px 20px}
-  
-  .hero{padding:20px 16px}
-  .hero__title{font-size:1.9rem}
-  .hero__badge{font-size:.68rem}
-  .action-buttons{grid-template-columns:1fr}
-  .trust-row{gap:12px}
-  .trust-item{padding:6px 10px 6px 6px}
-  .trust-item__icon{width:30px;height:30px}
-  .trust-item__text{font-size:.8rem}
-  .security-row{flex-wrap:wrap;gap:10px}
-  
-  .upload-zone{padding:0}
-  .upload-box{padding:28px 16px;min-height:auto}
-  .upload-text{font-size:.9rem}
-  .upload-subtext{font-size:.78rem}
-  .upload-shortcut{display:none}
-  
-  .result-card__info{padding:6px 8px}
-  .result-card__domain{font-size:.65rem}
-  
-  .result-modal{max-width:calc(100vw - 24px);margin:12px}
-  .result-modal__actions{padding:4px 0}
-  .result-modal__action{padding:12px 16px;gap:10px}
-  .result-modal__action-icon{width:34px;height:34px}
-  .result-modal__action-title{font-size:.82rem}
-  .result-modal__action-sub{font-size:.7rem}
-
-  .illustration-container{max-width:340px}
-  .phone{left:3%;top:5%;padding:8px;border-radius:16px}
-  .phone__face-main{border-radius:8px}
-  .phone__face-icon{width:36px;height:36px}
-  .phone__face-icon svg{width:20px;height:20px}
-  .phone__match-label{font-size:.58rem}
-  .phone__face-thumb{border-radius:6px}
-  .stats-badge{padding:8px 12px;border-radius:10px;gap:8px;font-size:.72rem}
-  .stats-badge__icon{width:28px;height:28px;border-radius:7px}
-  .stats-badge__icon svg{width:14px;height:14px}
-  .stats-badge__text{font-size:.78rem}
-  .stats-badge__value{font-size:.62rem}
-  .stats-badge--faces{bottom:14%;left:0}
-  .stats-badge--speed{top:8%;right:0}
-  .float-element--sun{width:36px;height:36px;top:0;right:18%}
-  .float-element--shield{width:32px;height:32px;top:32%;right:2%}
-  .float-element--shield svg{width:14px;height:14px}
-  .float-element--search{width:32px;height:32px;bottom:30%;left:0}
-  .float-element--search svg{width:14px;height:14px}
-}
-@media(max-width:480px){
-  .hero__title{font-size:1.5rem}
-  .hero__desc{font-size:.85rem}
-  .hero{padding:16px 12px}
-  .step-next-btn{font-size:.85rem;padding:12px 16px}
-  .illustration-container{max-width:300px}
-  .character{right:0;width:clamp(120px, 45%, 180px)}
-  .phone{left:2%;width:clamp(95px, 28%, 110px);padding:6px;border-radius:12px}
-  .phone__notch{height:3px;margin-bottom:6px}
-  .phone__face-icon{width:28px;height:28px}
-  .phone__face-icon svg{width:16px;height:16px}
-  .phone__match-label{font-size:.52rem;margin-bottom:4px}
-  .phone__faces-row{gap:3px}
-  .phone__face-thumb svg{width:14px;height:14px}
-  .stats-badge{padding:6px 10px;border-radius:8px;gap:6px}
-  .stats-badge__icon{width:24px;height:24px;border-radius:6px}
-  .stats-badge__icon svg{width:12px;height:12px}
-  .stats-badge__text{font-size:.7rem}
-  .stats-badge__value{font-size:.56rem}
-  .float-element--sun{width:28px;height:28px}
-  .float-element--shield,.float-element--search{width:26px;height:26px}
-  .float-element--shield svg,.float-element--search svg{width:12px;height:12px}
-}
-
-/* â”€â”€ Hamburger Menu â”€â”€ */
-.nav__hamburger{
-  display:none;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
-  padding:10px;
-  z-index:110;
-  background:none;
-  border:none;
-  margin-left:auto;
-}
-.nav__hamburger span{
-  display:block;width:22px;height:2.5px;
-  background:var(--text);border-radius:2px;
-  transition:all .3s ease;
-}
-.nav__hamburger.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-.nav__hamburger.active span:nth-child(2){opacity:0}
-.nav__hamburger.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-
-.nav__mobile-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:98;
-}
-.nav__mobile-overlay.active{display:block}
-
-.nav__mobile-menu{
-  position:fixed;top:0;right:-100%;
-  width:280px;max-width:80vw;height:100vh;height:100dvh;
-  background:var(--bg);
-  border-left:1px solid var(--glass-border);
-  padding:80px 32px 32px;
-  z-index:99;
-  transition:right .35s cubic-bezier(.4,0,.2,1);
-  overflow-y:auto;
-  display:none;
-}
-.nav__mobile-menu.active{right:0}
-
-.nav__mobile-menu .mobile-link{
-  display:block;padding:16px 0;
-  font-size:1.1rem;font-weight:600;
-  color:var(--text-muted);text-decoration:none;
-  border-bottom:1px solid var(--glass-border);
-  transition:color .2s;
-}
-.nav__mobile-menu .mobile-link:hover,
-.nav__mobile-menu .mobile-link--active{color:var(--accent)}
-
-.nav__mobile-menu .mobile-login{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:24px;padding:16px;
-  background:linear-gradient(135deg,var(--accent),var(--purple));
-  color:#fff;border-radius:12px;text-decoration:none;
-  font-size:1rem;font-weight:600;
-  box-shadow:0 4px 16px rgba(91,154,255,.35);
-}
-
-@media(max-width:768px){
-  .nav__hamburger{display:flex}
-  .nav__mobile-menu{display:block}
-  .nav__links{display:none !important}
-  .nav__lang{display:none !important}
-  .nav__login{display:none !important}
-}
-
-/* ===== MINOR WARNING MODAL ===== */
-.minor-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:9999;justify-content:center;align-items:center;padding:20px}
-.minor-modal-bg.open{display:flex}
-.minor-modal{background:#1a1f2e;border:2px solid #dc2626;border-radius:20px;max-width:460px;width:100%;box-shadow:0 30px 80px rgba(220,38,38,.3),0 0 0 1px rgba(220,38,38,.2);position:relative;overflow:hidden}
-.minor-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#dc2626,#ef4444,#dc2626)}
-.minor-modal__icon{width:64px;height:64px;margin:32px auto 16px;background:rgba(220,38,38,.15);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.minor-modal__icon svg{width:32px;height:32px;stroke:#ef4444;stroke-width:2;fill:none}
-.minor-modal__title{font-size:1.3rem;font-weight:800;color:#fca5a5;text-align:center;margin-bottom:8px;padding:0 24px}
-.minor-modal__text{font-size:.88rem;color:#9ca3af;text-align:center;line-height:1.6;padding:0 28px;margin-bottom:20px}
-.minor-modal__text strong{color:#f87171}
-.minor-modal__warning{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);border-radius:12px;padding:16px 20px;margin:0 24px 24px;font-size:.82rem;color:#fca5a5;line-height:1.6}
-.minor-modal__warning b{color:#fff}
-.minor-modal__btn{display:block;width:calc(100% - 48px);margin:0 24px 24px;padding:14px;border-radius:12px;background:#dc2626;color:#fff;border:none;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s}
-.minor-modal__btn:hover{background:#b91c1c}
-.minor-badge{position:absolute;top:4px;right:4px;background:#dc2626;color:#fff;font-size:.56rem;font-weight:800;padding:2px 6px;border-radius:4px;z-index:2;letter-spacing:.03em;text-transform:uppercase}
-.face-thumb--minor{opacity:.5;pointer-events:none;position:relative}
-.face-thumb--minor img{filter:grayscale(.6)}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
 
+<style>
+/* Compatibility aliases for preserved modal inline styles */
+:root {
+  --accent: var(--blue);
+  --purple: var(--violet);
+  --text: var(--ink);
+  --text-muted: var(--ink-muted);
+  --text-secondary: var(--ink-soft);
+  --bg-card: var(--bg-soft);
+  --bg-elevated: var(--bg);
+  --green: var(--emerald);
+  --gold: var(--amber);
+  --glass-border: var(--border-soft);
+}
+</style>
 <script type="application/ld+json">
 [{
   "@context": "https://schema.org",
@@ -1028,698 +476,460 @@ body{
   "sameAs": []
 }]
 </script>
-<meta name="twitter:image" content="https://protevio.com/og-image.png"/>
 </head>
 <body>
-
-<div class="bg-gradient"></div>
-<div class="dot-pattern"></div>
+<div class="p-glow"></div>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="/" class="nav__logo">
-    <div class="nav__logo-mark">
-      <svg viewbox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
-        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
-        <circle cx="18" cy="18" r="2" fill="#050608"/>
-        <defs>
-          <lineargradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
-            <stop offset="0%" stop-color="#00e5ff"/>
-            <stop offset="100%" stop-color="#7c4dff"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-    <span class="nav__logo-text">PROTEVIO</span>
-  </a>
-  <div class="nav__links">
-    <a href="/" class="nav__link nav__link--active">Home</a>
-    <a href="about.html" class="nav__link">About</a>
-    <a href="pricing.html" class="nav__link">Pricing</a>
-    <a href="faq.html" class="nav__link">FAQ</a>
-    <a href="blog.html" class="nav__link">Blog</a>
-    <a href="contact.html" class="nav__link">Contact</a><a href="opt-out.html" class="nav__link">Opt-Out</a>
+<nav class="p-nav">
+  <a href="/" class="p-nav__logo">Protevio<span>.</span></a>
+  <div class="p-nav__center">
+    <a href="/" class="p-nav__link p-nav__link--active">Home</a>
+    <a href="about.html" class="p-nav__link">About</a>
+    <a href="pricing.html" class="p-nav__link">Pricing</a>
+    <a href="faq.html" class="p-nav__link">FAQ</a>
+    <a href="blog.html" class="p-nav__link">Blog</a>
+    <a href="contact.html" class="p-nav__link">Contact</a>
+    <a href="opt-out.html" class="p-nav__link">Opt-Out</a>
   </div>
-  <div class="nav__right">
-    <button class="nav__lang">
-      <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      EN
-    </button>
-    <a href="login.html" class="nav__login" id="navAuth">
-      <span>Log In</span>
-      <svg viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  <div class="p-nav__right">
+    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth">
+      <span>Sign In</span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
     </a>
   </div>
   <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav__mobile-overlay"></div>
 <div class="nav__mobile-menu">
-    <a href="/" class="mobile-link mobile-link--active">Home</a>
-    <a href="about.html" class="mobile-link">About</a>
-    <a href="pricing.html" class="mobile-link">Pricing</a>
-  <a href="faq.html" class="mobile-link">FAQ</a>
-    <a href="contact.html" class="mobile-link">Contact</a><a href="opt-out.html" class="mobile-link">Opt-Out</a>
-    <a href="login.html" class="mobile-login" id="mobileAuth">Log In</a>
+  <a href="/">Home</a>
+  <a href="about.html">About</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="opt-out.html">Opt-Out</a>
+  <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
 </div>
-
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero__content">
-    <div class="hero__badge">
-      <span class="hero__badge-dot"></span>
-      Trusted by Professionals Worldwide
-    </div>
-    <h1 class="hero__title">
-      Face Search and Reverse<br>
-      <span>Image Search Engine</span>
-    </h1>
-    <p class="hero__desc">
-      Find where your face or images appear online. Track unauthorized use, monitor new matches, and protect your identity with our industry-leading facial recognition technology.
-    </p>
-    
-    <!-- TRUST INDICATORS -->
-    <div class="trust-row">
-      <div class="trust-item">
-        <div class="trust-item__icon trust-item__icon--blue">
-          <svg viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div>
-          <div class="trust-item__text">Real Time</div>
-          <div class="trust-item__sub">Web Scan</div>
-        </div>
+  <div class="p-pill p-pill--green" style="margin-bottom:28px">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    2.6 million faces indexed &middot; Updated daily
+  </div>
+  <h1 class="p-heading p-heading--xl" style="max-width:780px;margin:0 auto 24px;">
+    Know where your <em>face</em> appears online
+  </h1>
+  <p style="font-size:1.12rem;color:var(--ink-muted);line-height:1.7;max-width:560px;margin:0 auto 40px;">
+    Upload a photo. Our AI analyzes facial geometry and searches millions of indexed images to show you every website where your face is published.
+  </p>
+
+  <!-- UPLOAD ZONE -->
+  <div id="uploadZone">
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none" max="5">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+
+    <div class="p-upload" id="uploadBox">
+      <div class="p-upload__dropzone">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <div class="p-upload__title">Drop your photo here</div>
+        <div class="p-upload__sub">JPG, PNG or WebP &middot; Up to 10 MB &middot; Up to 5 photos</div>
       </div>
-      <div class="trust-item">
-        <div class="trust-item__icon trust-item__icon--green">
-          <svg viewbox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <div>
-          <div class="trust-item__text">&lt;1 Second</div>
-          <div class="trust-item__sub">Search Time</div>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-item__icon trust-item__icon--gold">
-          <svg viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div>
-          <div class="trust-item__text">99.7%</div>
-          <div class="trust-item__sub">Accuracy</div>
-        </div>
+      <button class="p-btn p-btn--primary p-btn--lg p-upload__btn" onclick="document.getElementById('fileInput').click()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Search for my face
+      </button>
+      <div style="text-align:center;margin-top:12px;font-size:.78rem;color:var(--ink-muted);">
+        <kbd style="padding:2px 6px;background:var(--bg-soft);border:1px solid var(--border);border-radius:4px;font-family:var(--mono);font-size:.7rem;">Ctrl</kbd>
+        +
+        <kbd style="padding:2px 6px;background:var(--bg-soft);border:1px solid var(--border);border-radius:4px;font-family:var(--mono);font-size:.7rem;">V</kbd>
+        to paste from clipboard
       </div>
     </div>
-    
-    <!-- UPLOAD ZONE -->
-    <div class="upload-zone" id="uploadZone">
-      <input type="file" id="fileInput" accept="image/*" multiple="" style="display:none" max="5">
-      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
-      <div class="upload-box" id="uploadBox">
-        <div class="upload-icon">
-          <svg viewbox="0 0 52 52">
-            <rect x="6" y="10" width="36" height="28" rx="3" stroke-width="2"/>
-            <circle cx="17" cy="22" r="4"/>
-            <path d="M6 32l10-8 6 5 10-8 10 7"/>
-            <circle cx="44" cy="10" r="7" fill="#5b9aff" stroke="none"/>
-            <path d="M44 7v6M41 10h6" stroke="white" stroke-width="2"/>
-          </svg>
-        </div>
-        <p class="upload-text">Click to Upload Photos or</p>
-        <p class="upload-subtext">Drop / Paste It Here</p>
-        <p class="upload-hint">You can select up to 5 files at once</p>
-        <div class="upload-shortcut">
-          <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste from clipboard
-        </div>
-      </div>
 
-      <!-- SEARCH STATUS (inline fallback - hidden by default) -->
-      <div id="searchStatus" style="display:none;text-align:center;padding:48px 24px;">
-        <div style="position:relative;width:120px;height:120px;margin:0 auto 24px;">
-          <svg width="120" height="120" style="transform:rotate(-90deg)">
-            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--border)" stroke-width="6"/>
-            <circle id="progressCircle" cx="60" cy="60" r="52" fill="none" stroke="url(#progGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset .3s ease"/>
-            <defs><linearGradient id="progGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs>
-          </svg>
-          <div id="progressPercent" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.5rem;font-weight:700;color:var(--text);">0%</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:8px;">
-          <div id="statusThumb" style="width:36px;height:36px;border-radius:8px;overflow:hidden;display:none;flex-shrink:0;border:2px solid var(--accent);"><img id="statusThumbImg" style="width:100%;height:100%;object-fit:cover;"></div>
-          <p style="font-size:1.1rem;font-weight:600;color:var(--text);" id="statusText">Processing...</p>
-        </div>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:4px;" id="statusSub">Searching the internet</p>
+    <!-- SEARCH STATUS (inline fallback) -->
+    <div id="searchStatus" style="display:none;text-align:center;padding:48px 24px;">
+      <div style="position:relative;width:120px;height:120px;margin:0 auto 24px;">
+        <svg width="120" height="120" style="transform:rotate(-90deg)">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--border)" stroke-width="5"/>
+          <circle id="progressCircle" cx="60" cy="60" r="52" fill="none" stroke="var(--blue)" stroke-width="5" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset .3s ease"/>
+        </svg>
+        <div id="progressPercent" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.5rem;font-weight:700;color:var(--ink);">0%</div>
       </div>
+      <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:8px;">
+        <div id="statusThumb" style="width:36px;height:36px;border-radius:8px;overflow:hidden;display:none;flex-shrink:0;border:2px solid var(--blue);"><img id="statusThumbImg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <p style="font-size:1.1rem;font-weight:600;color:var(--ink);" id="statusText">Processing...</p>
+      </div>
+      <p style="font-size:.85rem;color:var(--ink-muted);margin-top:4px;" id="statusSub">Searching the internet</p>
+    </div>
 
-
-<!-- STEP 4: SEARCH RESULTS (hidden by default) -->
-      <div id="searchResults" style="display:none;padding:24px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-          <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);">Search Results</h3>
-          <div style="display:flex;gap:8px;">
-            <button id="downloadReportBtn" style="display:none;padding:8px 16px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s;" title="Download PDF Evidence Report">
-              <svg viewbox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              PDF Report
-            </button>
-            <button id="shareResultsBtn" style="display:none;padding:8px 16px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;align-items:center;gap:6px;transition:opacity .2s;" title="Share Results">
-              <svg viewbox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;display:inline;vertical-align:middle;margin-right:4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              Share
-            </button>
-            <button id="newSearchBtn" class="step-back-btn">New Search</button>
-          </div>
-        </div>
-        <div id="resultsList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;"></div>
-        <p id="noResults" style="display:none;text-align:center;color:var(--text-muted);padding:24px;font-size:.95rem;">No matching faces found. Try a different photo.</p>
-        <!-- UPGRADE OVERLAY for free tier -->
-        <div id="upgradeOverlay" style="display:none;margin-top:24px;background:linear-gradient(135deg,rgba(91,154,255,.1),rgba(167,139,250,.1));border:1px solid rgba(91,154,255,.3);border-radius:16px;padding:28px;text-align:center;">
-          <svg viewbox="0 0 24 24" style="width:40px;height:40px;stroke:var(--accent);stroke-width:1.5;fill:none;margin-bottom:12px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Unlock Full Results</h4>
-          <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Free accounts see blurred previews. Upgrade to reveal full results with source links and high-resolution images.</p>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-            <a href="/dashboard" class="upgrade-btn" style="background:linear-gradient(135deg,var(--accent),var(--purple));">Upgrade Plan</a>
-            <button class="upgrade-btn" id="unlockOnceBtn" style="background:linear-gradient(135deg,var(--gold),#f59e0b);">Unlock This Search — â‚¬9.99</button>
-          </div>
+    <!-- INLINE SEARCH RESULTS -->
+    <div id="searchResults" style="display:none;padding:24px 0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <h3 class="p-heading p-heading--sm">Search Results</h3>
+        <div style="display:flex;gap:8px;">
+          <button id="downloadReportBtn" class="p-btn p-btn--outline p-btn--sm" style="display:none;">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            PDF Report
+          </button>
+          <button id="shareResultsBtn" class="p-btn p-btn--outline p-btn--sm" style="display:none;">
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <button id="newSearchBtn" class="p-btn p-btn--ghost p-btn--sm">&larr; New search</button>
         </div>
       </div>
-      
-      <div class="action-buttons" id="actionButtons">
-        <button class="action-btn" onclick="document.getElementById(&#39;cameraInput&#39;).click()">
-          <svg viewbox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>
-          </svg>
-          Use camera for photos
-        </button>
-        <button class="action-btn" onclick="document.getElementById(&#39;howToModal&#39;).classList.add(&#39;active&#39;)">
-          <svg viewbox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 16v-4M12 8h.01"/>
-          </svg>
-          How to use Protevio?
-        </button>
+      <div id="resultsList"></div>
+      <div id="noResults" style="display:none;text-align:center;padding:60px 20px;">
+        <svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--ink-muted);stroke-width:1.5;fill:none;margin:0 auto 16px;display:block;opacity:.5;"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <h3 style="font-size:1.15rem;margin-bottom:6px;color:var(--ink);">No matches found</h3>
+        <p style="color:var(--ink-muted);font-size:.88rem;margin-bottom:20px;">We didn't find any matching faces. Try a clearer photo.</p>
+        <button onclick="resetSearch()" class="p-btn p-btn--blue">Try another search</button>
       </div>
-      
-      <!-- SECURITY BADGES -->
-      <div class="security-row">
-        <div class="security-badge">
-          <svg viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-          GDPR Compliant
-        </div>
-        <div class="security-badge">
-          <svg viewbox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          256-bit Encryption
-        </div>
-        <div class="security-badge">
-          <svg viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Privacy Protected
-        </div>
-      </div>
+      <div id="upgradeOverlay" style="display:none;"></div>
     </div>
   </div>
-  
-  <!-- ILLUSTRATION -->
-  <div class="hero__illustration">
-    <div class="illustration-container">
-      <!-- Connection arcs -->
-      <div class="arc arc--1"></div>
-      <div class="arc arc--2"></div>
-      
-      <!-- Floating sun -->
-      <div class="float-element float-element--sun"></div>
-      
-      <!-- Shield -->
-      <div class="float-element float-element--shield">
-        <svg viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      
-      <!-- Search icon -->
-      <div class="float-element float-element--search">
-        <svg viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      </div>
-      
-      <!-- Clouds -->
-      <div class="cloud cloud--1"></div>
-      <div class="cloud cloud--2"></div>
-      
-      <!-- Phone with scanning effect -->
-      <div class="phone">
-        <div class="phone__notch"></div>
-        <div class="phone__face-main">
-          <div class="phone__face-icon">
-            <svg viewbox="0 0 24 24" fill="none">
-              <circle cx="12" cy="9.5" r="3.2" stroke="white" stroke-width="1.8"/>
-              <path d="M6.8 19.5c0-2.9 2.3-5.2 5.2-5.2s5.2 2.3 5.2 5.2" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M4.5 8.5V5.5Q4.5 4 6 4h3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".65"/>
-              <path d="M19.5 8.5V5.5Q19.5 4 18 4h-3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".65"/>
-              <path d="M4.5 16v3Q4.5 20.5 6 20.5h3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".65"/>
-              <path d="M19.5 16v3Q19.5 20.5 18 20.5h-3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".65"/>
-            </svg>
-          </div>
-        </div>
-        <div class="phone__match-label">
-          <svg viewbox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-          3 Matches Found
-        </div>
-        <div class="phone__faces-row">
-          <div class="phone__face-thumb">
-            <svg viewbox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6 18c0-3 3-5 6-5s6 2 6 5"/></svg>
-          </div>
-          <div class="phone__face-thumb">
-            <svg viewbox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6 18c0-3 3-5 6-5s6 2 6 5"/></svg>
-          </div>
-          <div class="phone__face-thumb">
-            <svg viewbox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6 18c0-3 3-5 6-5s6 2 6 5"/></svg>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Stats badges -->
-      <div class="stats-badge stats-badge--faces">
-        <div class="stats-badge__icon stats-badge__icon--blue">
-          <svg viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div>
-          <div class="stats-badge__text">Real Time</div>
-          <div class="stats-badge__value">Face Scan</div>
-        </div>
-      </div>
-      
-      <div class="stats-badge stats-badge--speed">
-        <div class="stats-badge__icon stats-badge__icon--green">
-          <svg viewbox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <div>
-          <div class="stats-badge__text">&lt;1 sec</div>
-          <div class="stats-badge__value">Search Speed</div>
-        </div>
-      </div>
-      
-      <!-- Character - Looking at phone -->
-      <svg class="character" viewbox="0 0 200 280" fill="none">
-        <!-- Shadow -->
-        <ellipse cx="100" cy="268" rx="38" ry="7" fill="rgba(0,0,0,.2)"/>
-        
-        <!-- Legs -->
-        <path d="M82 218 L78 256" stroke="#9ca3b8" stroke-width="11" stroke-linecap="round"/>
-        <path d="M118 218 L122 256" stroke="#9ca3b8" stroke-width="11" stroke-linecap="round"/>
-        
-        <!-- Shoes -->
-        <ellipse cx="76" cy="258" rx="12" ry="6" fill="#2a3349"/>
-        <ellipse cx="124" cy="258" rx="12" ry="6" fill="#2a3349"/>
-        
-        <!-- Torso - Professional shirt -->
-        <path d="M62 128 Q60 175 70 218 L130 218 Q140 175 138 128 Z" fill="#5b9aff"/>
-        <!-- Shirt highlight -->
-        <path d="M62 128 Q60 175 70 218 L85 218 Q78 175 80 128 Z" fill="rgba(255,255,255,.1)"/>
-        
-        <!-- Collar -->
-        <path d="M85 128 L100 145 L115 128" stroke="#4a8af0" stroke-width="3" fill="none"/>
-        
-        <!-- Arms -->
-        <path d="M62 138 Q32 148 28 178 Q24 198 42 202" stroke="#f0c8b8" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <path d="M138 138 Q165 130 172 102 Q178 82 168 72" stroke="#f0c8b8" stroke-width="12" stroke-linecap="round" fill="none"/>
-        
-        <!-- Hand with phone -->
-        <rect x="158" y="55" width="28" height="48" rx="5" fill="#232a3d" stroke="#5b9aff" stroke-width="2"/>
-        <rect x="162" y="61" width="20" height="36" rx="2" fill="#1a1f2e"/>
-        <circle cx="172" cy="79" r="6" fill="#5b9aff" opacity=".4"/>
-        <path d="M169 79 L175 79" stroke="#5b9aff" stroke-width="1" opacity=".6"/>
-        
-        <!-- Head - tilted slightly toward phone -->
-        <ellipse cx="100" cy="82" rx="40" ry="45" fill="#f0c8b8" transform="rotate(-3 100 82)"/>
-        
-        <!-- Hair - Professional cut -->
-        <path d="M60 68 Q62 28 100 22 Q138 28 140 68 Q138 48 125 43 Q100 36 75 43 Q62 48 60 68" fill="#3a4562"/>
-        
-        <!-- Ears -->
-        <ellipse cx="60" cy="82" rx="7" ry="10" fill="#f0c8b8"/>
-        <ellipse cx="140" cy="80" rx="7" ry="10" fill="#f0c8b8"/>
-        
-        <!-- Glasses - Professional frames -->
-        <rect x="70" y="70" width="24" height="18" rx="3" fill="rgba(255,255,255,.1)" stroke="#2a3349" stroke-width="2.5"/>
-        <rect x="106" y="69" width="24" height="18" rx="3" fill="rgba(255,255,255,.1)" stroke="#2a3349" stroke-width="2.5"/>
-        <path d="M94 78 L106 77" stroke="#2a3349" stroke-width="2.5"/>
-        <path d="M70 77 L60 76" stroke="#2a3349" stroke-width="2.5"/>
-        <path d="M130 76 L140 74" stroke="#2a3349" stroke-width="2.5"/>
-        
-        <!-- Eyes - looking toward phone (right) -->
-        <circle cx="84" cy="78" r="3" fill="#2a3349"/>
-        <circle cx="120" cy="77" r="3" fill="#2a3349"/>
-        <circle cx="85" cy="77" r="1" fill="white"/>
-        <circle cx="121" cy="76" r="1" fill="white"/>
-        
-        <!-- Eyebrows - focused expression -->
-        <path d="M72 66 Q82 63 92 66" stroke="#3a4562" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M108 65 Q118 62 128 65" stroke="#3a4562" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        
-        <!-- Nose -->
-        <path d="M100 84 L98 94 L102 94" stroke="#e0b0a0" stroke-width="2" stroke-linecap="round" fill="none"/>
-        
-        <!-- Slight smile - satisfied/professional -->
-        <path d="M92 104 Q100 109 108 104" stroke="#2a3349" stroke-width="2" stroke-linecap="round" fill="none"/>
-      </svg>
+
+  <!-- ACTION BUTTONS -->
+  <div class="action-buttons" id="actionButtons">
+    <button class="action-btn" onclick="document.getElementById('cameraInput').click()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+      Use camera
+    </button>
+    <button class="action-btn" onclick="document.getElementById('howToModal').classList.add('active')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      How to use Protevio?
+    </button>
+  </div>
+
+  <!-- SECURITY BADGES -->
+  <div class="security-row">
+    <div class="security-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      GDPR Compliant
+    </div>
+    <div class="security-badge">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      256-bit Encryption
+    </div>
+    <div class="security-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Privacy Protected
+    </div>
+  </div>
+
+  <!-- TRUST ROW -->
+  <div class="p-trust-row" style="margin-top:40px;">
+    <div class="p-trust-item">
+      <div class="p-icon-box p-icon-box--blue"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <div class="p-trust-text"><strong>&lt;1 second</strong><span>Search time</span></div>
+    </div>
+    <div class="p-trust-item">
+      <div class="p-icon-box p-icon-box--green"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <div class="p-trust-text"><strong>99.7% accuracy</strong><span>Match precision</span></div>
+    </div>
+    <div class="p-trust-item">
+      <div class="p-icon-box p-icon-box--violet"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="p-trust-text"><strong>2.6M+ faces</strong><span>Indexed</span></div>
     </div>
   </div>
 </section>
 
-    <!-- ===== SEARCH FLOW MODAL (PimEyes-style) ===== -->
-    <div class="sfm-overlay" id="sfmOverlay">
-      <div class="sfm-modal" id="sfmModal">
-        <button class="sfm-close" id="sfmClose">&times;</button>
+<!-- ===== SEARCH FLOW MODAL ===== -->
+<div class="sfm-overlay" id="sfmOverlay">
+  <div class="sfm-modal" id="sfmModal">
+    <button class="sfm-close" id="sfmClose">&times;</button>
 
-        <!-- VIEW 1: Processing -->
-        <div class="sfm-view" id="sfmProcessing">
-          <div class="sfm-progress-ring">
-            <svg width="100" height="100" viewBox="0 0 100 100" style="transform:rotate(-90deg)">
-              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="5"/>
-              <circle class="sfm-progress-arc" id="sfmArc" cx="50" cy="50" r="42" fill="none" stroke="url(#sfmGrad)" stroke-width="5" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
-              <defs><linearGradient id="sfmGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--purple)"/></linearGradient></defs>
-            </svg>
-            <div class="sfm-progress-pct" id="sfmPct">0%</div>
-          </div>
-          <div class="sfm-processing-info">
-            <div class="sfm-processing-thumb" id="sfmProcThumb"></div>
-            <span class="sfm-processing-label" id="sfmProcLabel">Processing...</span>
-          </div>
-          <p class="sfm-processing-sub" id="sfmProcSub">Detecting faces in your photo</p>
-        </div>
-
-        <!-- VIEW 2: Choose your face -->
-        <div class="sfm-view" id="sfmChoose" style="display:none">
-          <div class="sfm-header">
-            <button class="sfm-back" id="sfmBackToUpload"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <h3 class="sfm-title">Choose your face</h3>
-          </div>
-          <div class="sfm-face-grid" id="sfmFaceGrid"></div>
-          <p class="sfm-hint" id="sfmFaceHint">Select photo(s) of your face to proceed with the search</p>
-          <button class="sfm-btn sfm-btn--inactive" id="sfmProceedBtn" disabled>Proceed to the Face Search</button>
-        </div>
-
-        <!-- VIEW 3: Face search (merged terms + options) -->
-        <div class="sfm-view" id="sfmSearch" style="display:none">
-          <div class="sfm-header">
-            <button class="sfm-back" id="sfmBackToChoose"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <h3 class="sfm-title">Face search</h3>
-            <button class="sfm-edit-link" id="sfmEditPhotos">edit photo(s)</button>
-          </div>
-
-          <!-- Selected faces row -->
-          <div class="sfm-selected-row" id="sfmSelectedRow"></div>
-
-          <!-- Progress bar (thin) -->
-          <div class="sfm-thin-bar"><div class="sfm-thin-bar__fill" id="sfmSearchBar"></div></div>
-
-          <!-- Quality tip -->
-          <div class="sfm-tip" id="sfmTip">
-            <svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="none" stroke="#d97706" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="#d97706" stroke-width="2" stroke-linecap="round"/></svg>
-            <span>Try to upload a better quality image or add more photos to get better search results.</span>
-          </div>
-
-          <!-- Search time filter -->
-          <div class="sfm-option-row">
-            <div class="sfm-option-left">
-              <svg viewBox="0 0 24 24" width="16" height="16" style="flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>Choose Search Time:</span>
-            </div>
-            <select class="sfm-select" id="sfmTimeFilter">
-              <option value="any">Any Time</option>
-              <option value="24h">Last 24 Hours</option>
-              <option value="week">Last Week</option>
-              <option value="month">Last Month</option>
-              <option value="year">Last Year</option>
-            </select>
-          </div>
-
-          <!-- Toggles row -->
-          <div class="sfm-toggles">
-            <div class="sfm-toggle-item">
-              <button class="search-toggle on" id="sfmSafeToggle" onclick="this.classList.toggle('on')"></button>
-              <span>Safe Search</span>
-            </div>
-            <div class="sfm-toggle-item">
-              <button class="search-toggle" id="sfmDeepToggle" onclick="handleDeepSearch(this)"></button>
-              <span>Deep Search</span>
-            </div>
-          </div>
-
-          <!-- Terms checkbox -->
-          <label class="sfm-terms" id="sfmTermsLabel">
-            <input type="checkbox" id="sfmTermsCheck">
-            <span>I agree to the <a href="/terms-of-service" target="_blank">Terms of Service</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a></span>
-          </label>
-
-          <!-- Cloudflare Turnstile CAPTCHA -->
-          <div class="sfm-captcha" id="sfmCaptchaBox" style="display:none">
-            <div id="sfmTurnstileWidget"></div>
-          </div>
-
-          <!-- Start Search button -->
-          <button class="sfm-btn sfm-btn--search" id="sfmStartBtn" disabled>Start Search</button>
-
-          <!-- Remaining searches -->
-          <p class="sfm-remaining" id="sfmRemaining"></p>
-        </div>
-
+    <!-- VIEW 1: Processing -->
+    <div class="sfm-view" id="sfmProcessing">
+      <div class="sfm-progress-ring">
+        <svg width="100" height="100" viewBox="0 0 100 100" style="transform:rotate(-90deg)">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="var(--border)" stroke-width="4"/>
+          <circle class="sfm-progress-arc" id="sfmArc" cx="50" cy="50" r="42" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+        </svg>
+        <div class="sfm-progress-pct" id="sfmPct">0%</div>
       </div>
+      <div class="sfm-processing-info">
+        <div class="sfm-processing-thumb" id="sfmProcThumb"></div>
+        <span class="sfm-processing-label" id="sfmProcLabel">Processing...</span>
+      </div>
+      <p class="sfm-processing-sub" id="sfmProcSub">Detecting faces in your photo</p>
     </div>
 
-      
+    <!-- VIEW 2: Choose your face -->
+    <div class="sfm-view" id="sfmChoose" style="display:none">
+      <div class="sfm-header">
+        <button class="sfm-back" id="sfmBackToUpload"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <h3 class="sfm-title">Choose your face</h3>
+      </div>
+      <div class="sfm-face-grid" id="sfmFaceGrid"></div>
+      <p class="sfm-hint" id="sfmFaceHint">Select photo(s) of your face to proceed with the search</p>
+      <button class="sfm-btn sfm-btn--inactive" id="sfmProceedBtn" disabled>Proceed to the Face Search</button>
+    </div>
+
+    <!-- VIEW 3: Face search -->
+    <div class="sfm-view" id="sfmSearch" style="display:none">
+      <div class="sfm-header">
+        <button class="sfm-back" id="sfmBackToChoose"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <h3 class="sfm-title">Face search</h3>
+        <button class="sfm-edit-link" id="sfmEditPhotos">edit photo(s)</button>
+      </div>
+      <div class="sfm-selected-row" id="sfmSelectedRow"></div>
+      <div class="sfm-thin-bar"><div class="sfm-thin-bar__fill" id="sfmSearchBar"></div></div>
+      <div class="sfm-tip" id="sfmTip">
+        <svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="none" stroke="var(--amber)" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="var(--amber)" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>Try to upload a better quality image or add more photos to get better results.</span>
+      </div>
+      <div class="sfm-option-row">
+        <div class="sfm-option-left">
+          <svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="var(--blue)" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Choose Search Time:</span>
+        </div>
+        <select class="sfm-select" id="sfmTimeFilter">
+          <option value="any">Any Time</option>
+          <option value="24h">Last 24 Hours</option>
+          <option value="week">Last Week</option>
+          <option value="month">Last Month</option>
+          <option value="year">Last Year</option>
+        </select>
+      </div>
+      <div class="sfm-toggles">
+        <div class="sfm-toggle-item">
+          <button class="search-toggle on" id="sfmSafeToggle" onclick="this.classList.toggle('on')"></button>
+          <span>Safe Search</span>
+        </div>
+        <div class="sfm-toggle-item">
+          <button class="search-toggle" id="sfmDeepToggle" onclick="handleDeepSearch(this)"></button>
+          <span>Deep Search</span>
+        </div>
+      </div>
+      <label class="sfm-terms" id="sfmTermsLabel">
+        <input type="checkbox" id="sfmTermsCheck">
+        <span>I agree to the <a href="/terms-of-service.html" target="_blank">Terms of Service</a> and <a href="/privacy-policy.html" target="_blank">Privacy Policy</a></span>
+      </label>
+      <div class="sfm-captcha" id="sfmCaptchaBox" style="display:none">
+        <div id="sfmTurnstileWidget"></div>
+      </div>
+      <button class="sfm-btn sfm-btn--search" id="sfmStartBtn" disabled>Start Search</button>
+      <p class="sfm-remaining" id="sfmRemaining"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Minor modal -->
+<div id="minorModalBg" onclick="if(event.target===this)this.classList.remove('open')">
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-xl);padding:36px;max-width:420px;text-align:center;box-shadow:var(--shadow-xl);">
+    <div style="width:56px;height:56px;border-radius:50%;background:var(--amber-soft);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--amber);stroke-width:2;fill:none;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:8px;">Minor detected</h3>
+    <p style="font-size:.88rem;color:var(--ink-muted);line-height:1.6;margin-bottom:20px;">This face appears to belong to a minor. Protevio does not allow searches involving minors.</p>
+    <button onclick="document.getElementById('minorModalBg').classList.remove('open');resetSearch();" class="p-btn p-btn--primary" style="width:100%;">Understood</button>
+  </div>
+</div>
+
+
+<!-- RESULT DETAIL MODAL -->
+<!-- HOW TO USE MODAL -->
+<div class="result-modal-overlay" id="howToModal" onclick="if(event.target===this)this.classList.remove(&#39;active&#39;)">
+  <div class="result-modal" style="max-width:520px;padding:32px;">
+    <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;">âœ•</button>
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:20px;color:var(--text);">How to use Protevio</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(91,154,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--accent);">1</div>
+        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Upload a photo</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">Click the upload area, drag & drop, paste from clipboard, or use your camera. You can upload up to 5 photos at once.</div></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--purple);">2</div>
+        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Select a face</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">Our AI detects all faces in your photo. Tap on the face you want to search for.</div></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--green);">3</div>
+        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Review results</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">We scan our continuously growing database and show you matching results ranked by similarity, including the source website.</div></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(250,204,21,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--gold);">4</div>
+        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Take action</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">Export PDF reports, set up monitoring alerts, or request takedowns for images published without consent.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:20px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;">
+      <div style="font-size:.82rem;color:var(--text-muted);line-height:1.5;">
+        <strong style="color:var(--text);">💡 Tips for best results:</strong><br>
+        • Use a clear, front-facing photo with good lighting<br>
+        • Avoid group photos — crop to a single face<br>
+        • Higher resolution images give better matches
+      </div>
+    </div>
+    <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="width:100%;margin-top:16px;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-weight:600;font-size:.95rem;cursor:pointer;">Got it!</button>
+  </div>
+</div>
+
+<div class="result-modal-overlay" id="resultModalOverlay" onclick="if(event.target===this)closeResultModal()">
+  <div class="result-modal" id="resultModal">
+    <button class="result-modal__close" onclick="closeResultModal()">âœ•</button>
+    <div style="position:relative;overflow:hidden;border-radius:20px 20px 0 0;">
+      <div class="result-modal__nsfw" id="modalNsfw" style="display:none">POTENTIALLY EXPLICIT</div>
+      <img id="modalImage" class="result-modal__image" src="" alt="Result" onerror="this.src=&#39;data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22&gt;&lt;rect fill=%22%232a3349%22 width=%22400%22 height=%22300%22/&gt;&lt;text x=%22200%22 y=%22155%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2216%22&gt;Image unavailable&lt;/text&gt;&lt;/svg&gt;&#39;">
+      <div class="result-modal__domain" id="modalDomain">domain.com</div>
+    </div>
+    <div style="padding:12px 20px 4px;font-size:.82rem;font-weight:600;color:var(--accent);display:none;" id="modalSimilarity"></div>
+    <div class="result-modal__actions">
+      <button class="result-modal__action" id="modalOpenWebsite" data-requires-paid="true">
+        <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
+          <svg viewbox="0 0 24 24" stroke="var(--accent)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
+        </div>
+        <div class="result-modal__action-text">
+          <div class="result-modal__action-title">Open website</div>
+          <div class="result-modal__action-sub">Go to the website where this image appears</div>
+        </div>
+        <span class="result-modal__action-arrow">›</span>
+      </button>
+      <button class="result-modal__action" id="modalOpenImage" data-requires-paid="true">
+        <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
+          <svg viewbox="0 0 24 24" stroke="var(--accent)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="result-modal__action-text">
+          <div class="result-modal__action-title">Open image</div>
+          <div class="result-modal__action-sub">Access the source image (unblurred version)</div>
+        </div>
+        <span class="result-modal__action-arrow">›</span>
+      </button>
+      <button class="result-modal__action" id="modalSearchThis">
+        <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
+          <svg viewbox="0 0 24 24" stroke="var(--accent)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <div class="result-modal__action-text">
+          <div class="result-modal__action-title">Perform search with this image</div>
+          <div class="result-modal__action-sub">Start a new search using this result</div>
+        </div>
+        <span class="result-modal__action-arrow">›</span>
+      </button>
+      <button class="result-modal__action" id="modalCopyId">
+        <div class="result-modal__action-icon" style="background:rgba(167,139,250,.15)">
+          <svg viewbox="0 0 24 24" stroke="var(--purple)"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        </div>
+        <div class="result-modal__action-text">
+          <div class="result-modal__action-title">Copy Result ID</div>
+          <div class="result-modal__action-sub">Copy the ID of this result for further actions</div>
+        </div>
+        <span class="result-modal__action-arrow">›</span>
+      </button>
+      <button class="result-modal__action" id="modalExclude">
+        <div class="result-modal__action-icon" style="background:rgba(74,222,128,.15)">
+          <svg viewbox="0 0 24 24" stroke="var(--green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="result-modal__action-text">
+          <div class="result-modal__action-title">Exclude from public results</div>
+          <div class="result-modal__action-sub">Remove this photo from Protevio's search</div>
+        </div>
+        <span class="result-modal__action-arrow">›</span>
+      </button>
+      <button class="result-modal__action" id="modalShare">
+        <div class="result-modal__action-icon" style="background:rgba(248,113,113,.15)">
+          <svg viewbox="0 0 24 24" stroke="var(--red)"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+        </div>
+        <div class="result-modal__action-text">
+          <div class="result-modal__action-title">Share</div>
+          <div class="result-modal__action-sub">Share this result with others</div>
+        </div>
+        <span class="result-modal__action-arrow">›</span>
+      </button>
+    </div>
+    <div class="result-modal__footer">Powered by Protevio AI · Results generated by facial similarity matching</div>
+  </div>
+</div>
 
 
 
-<style>
-/* ===== SEARCH FLOW MODAL (SFM) ===== */
-.sfm-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.65);backdrop-filter:blur(12px);
-  z-index:2000;justify-content:center;align-items:center;padding:20px;
-}
-.sfm-overlay.active{display:flex}
-.sfm-modal{
-  background:var(--bg-elevated,#1e2538);
-  border:1px solid var(--glass-border);
-  border-radius:20px;
-  width:100%;max-width:520px;max-height:90vh;
-  overflow-y:auto;position:relative;
-  animation:sfmIn .25s ease;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(255,255,255,.1) transparent;
-}
-@keyframes sfmIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
-.sfm-close{
-  position:absolute;top:12px;right:12px;width:32px;height:32px;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
-  border-radius:50%;color:var(--text-muted);font-size:20px;cursor:pointer;
-  z-index:3;display:flex;align-items:center;justify-content:center;transition:all .2s;
-}
-.sfm-close:hover{background:rgba(255,255,255,.12);color:var(--text)}
-.sfm-view{padding:28px 24px}
+<!-- HOW IT WORKS -->
+<div class="p-divider"><hr></div>
+<section class="p-section">
+  <div class="p-section__header">
+    <h2 class="p-heading p-heading--lg">How it works</h2>
+    <p>Three steps from photo to answers. No technical knowledge needed.</p>
+  </div>
+  <div class="p-grid-3">
+    <div class="p-card p-card--elevated" style="padding:32px 24px;">
+      <div style="font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--border);margin-bottom:16px;">01</div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">Upload any photo</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">Selfie, headshot, or group photo. Our AI detects and isolates every face automatically.</p>
+    </div>
+    <div class="p-card p-card--elevated" style="padding:32px 24px;">
+      <div style="font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--border);margin-bottom:16px;">02</div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">AI analyzes geometry</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">512 facial landmarks are encoded into a biometric vector that captures unique features.</p>
+    </div>
+    <div class="p-card p-card--elevated" style="padding:32px 24px;">
+      <div style="font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--border);margin-bottom:16px;">03</div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">Review results</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">See every website where that face appears. Download evidence reports or send takedowns.</p>
+    </div>
+  </div>
+</section>
 
-/* Processing view */
-.sfm-progress-ring{position:relative;width:100px;height:100px;margin:0 auto 20px}
-.sfm-progress-arc{transition:stroke-dashoffset .3s ease}
-.sfm-progress-pct{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:1.4rem;font-weight:700;color:var(--text);
-}
-.sfm-processing-info{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
-.sfm-processing-thumb{
-  width:32px;height:32px;border-radius:8px;overflow:hidden;flex-shrink:0;
-  border:2px solid var(--accent);display:none;
-}
-.sfm-processing-thumb.show{display:block}
-.sfm-processing-thumb img{width:100%;height:100%;object-fit:cover}
-.sfm-processing-label{font-size:1rem;font-weight:600;color:var(--text)}
-.sfm-processing-sub{font-size:.82rem;color:var(--text-muted);text-align:center}
+<!-- FEATURES -->
+<div class="p-divider"><hr></div>
+<section class="p-section">
+  <div class="p-section__header">
+    <h2 class="p-heading p-heading--lg">Everything you need</h2>
+    <p>Search, monitor, and protect your facial identity online.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px;">
+    <div class="p-card" style="grid-column:span 2;padding:32px;">
+      <div class="p-icon-box p-icon-box--blue" style="margin-bottom:16px;"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">Facial recognition search</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">Our AI matches facial geometry — not pixels. InsightFace's buffalo_l model encodes bone structure, eye spacing, and unique features into a 512-dimensional vector that survives crops, edits, and angle changes.</p>
+    </div>
+    <div class="p-card" style="padding:32px;">
+      <div class="p-icon-box p-icon-box--green" style="margin-bottom:16px;"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">Face alerts</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">Automated monitoring checks every 4 hours. Get notified when your face appears somewhere new.</p>
+    </div>
+    <div class="p-card" style="padding:32px;">
+      <div class="p-icon-box p-icon-box--violet" style="margin-bottom:16px;"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">DMCA takedowns</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">Generate legally compliant takedown letters with timestamped evidence. Send directly from the platform.</p>
+    </div>
+    <div class="p-card" style="grid-column:span 2;padding:32px;">
+      <div class="p-icon-box p-icon-box--blue" style="margin-bottom:16px;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:8px;">Multi-photo search</h3>
+      <p style="font-size:.85rem;color:var(--ink-muted);line-height:1.7;">Upload up to 5 photos of the same face. We average the embeddings to create a noise-reduced representation that finds more matches — improving accuracy by 15-20%.</p>
+    </div>
+  </div>
+</section>
 
-/* Header with back + title */
-.sfm-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-right:28px}
-.sfm-back{
-  width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
-  background:none;color:var(--text-muted);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;
-}
-.sfm-back:hover{border-color:var(--accent);color:var(--accent)}
-.sfm-title{font-size:1.1rem;font-weight:700;color:var(--text);flex:1}
-.sfm-edit-link{
-  background:rgba(91,154,255,.1);border:1px solid rgba(91,154,255,.2);
-  color:var(--accent);font-size:.75rem;font-weight:600;padding:4px 12px;
-  border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .2s;
-}
-.sfm-edit-link:hover{background:rgba(91,154,255,.2)}
+<!-- SOCIAL PROOF -->
+<section style="padding:48px 24px;max-width:700px;margin:0 auto;text-align:center;">
+  <p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--ink-soft);line-height:1.65;max-width:560px;margin:0 auto 12px;">
+    "Protevio found 47 websites using my headshot without permission. The DMCA tool helped me get 38 of them removed within two weeks."
+  </p>
+  <cite style="font-size:.82rem;color:var(--ink-muted);font-style:normal;">&mdash; Professional photographer, Berlin</cite>
+</section>
 
-/* Face grid */
-.sfm-face-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
-  gap:10px;margin-bottom:16px;
-}
-.sfm-hint{font-size:.82rem;color:var(--text-muted);text-align:center;margin-bottom:16px}
+<!-- CTA -->
+<div style="max-width:1100px;margin:24px auto 48px;padding:0 40px;">
+  <div class="p-banner p-banner--dark" style="border-radius:var(--r-xl);padding:48px;text-align:center;flex-direction:column;">
+    <h2 class="p-heading p-heading--md" style="color:var(--bg);margin-bottom:8px;">Start protecting your identity</h2>
+    <p style="font-size:.95rem;color:var(--ink-muted);margin-bottom:24px;">Free plan includes 10 searches per day. No credit card required.</p>
+    <a href="#uploadZone" class="p-btn p-btn--lg" style="background:var(--bg);color:var(--ink);border:none;">Search for free &rarr;</a>
+  </div>
+</div>
 
-/* Buttons */
-.sfm-btn{
-  display:block;width:100%;padding:14px;border-radius:12px;
-  font-family:inherit;font-size:.95rem;font-weight:700;
-  cursor:pointer;border:none;transition:all .25s;text-align:center;
-}
-.sfm-btn:disabled{opacity:.4;cursor:not-allowed}
-.sfm-btn--inactive{background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border)}
-.sfm-btn--active{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;box-shadow:0 4px 16px rgba(91,154,255,.3)}
-.sfm-btn--active:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.4)}
-.sfm-btn--search{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;box-shadow:0 4px 16px rgba(91,154,255,.3)}
-.sfm-btn--search:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.4)}
-.sfm-btn--searching{background:var(--bg-card);color:var(--text-muted);cursor:wait;opacity:.7}
+<!-- FOOTER -->
+<footer class="p-footer">
+  <p>&copy; 2026 Protevio AI. All rights reserved.</p>
+  <div class="p-footer__links">
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="terms-of-service.html">Terms</a>
+    <a href="opt-out.html">Opt-Out</a>
+    <a href="contact.html">Contact</a>
+    <a href="csr.html">CSR</a>
+  </div>
+</footer>
 
-/* Selected faces row */
-.sfm-selected-row{
-  display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:4px;
-  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent;
-}
-.sfm-sel-face{
-  position:relative;flex-shrink:0;width:120px;height:120px;border-radius:12px;overflow:hidden;
-  border:2px solid var(--accent);
-}
-.sfm-sel-face img{width:100%;height:100%;object-fit:cover}
-.sfm-sel-face__remove{
-  position:absolute;top:4px;right:4px;width:22px;height:22px;
-  background:rgba(0,0,0,.7);border:none;border-radius:50%;color:#fff;
-  font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;
-}
-.sfm-sel-face__remove:hover{background:rgba(220,38,38,.8)}
-.sfm-sel-face__badge{
-  position:absolute;bottom:4px;left:4px;width:20px;height:20px;
-  background:rgba(234,179,8,.9);border-radius:5px;
-  display:flex;align-items:center;justify-content:center;
-}
-.sfm-sel-face__badge svg{width:12px;height:12px;stroke:#fff;stroke-width:2.5;fill:none}
 
-/* Thin progress bar */
-.sfm-thin-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:16px;overflow:hidden}
-.sfm-thin-bar__fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px;transition:width .3s ease}
-
-/* Tip banner */
-.sfm-tip{
-  display:flex;align-items:flex-start;gap:10px;
-  background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);
-  border-radius:10px;padding:12px 14px;margin-bottom:16px;
-  font-size:.8rem;color:#d97706;line-height:1.5;
-}
-
-/* Option row */
-.sfm-option-row{
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:10px;padding:12px 14px;margin-bottom:10px;
-}
-.sfm-option-left{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--text)}
-.sfm-select{
-  background:var(--bg);border:1px solid var(--border);color:var(--accent);
-  padding:6px 12px;border-radius:8px;font-family:inherit;font-size:.82rem;
-  font-weight:700;cursor:pointer;outline:none;
-}
-.sfm-select:focus{border-color:var(--accent)}
-
-/* Toggles row */
-.sfm-toggles{
-  display:flex;gap:8px;margin-bottom:14px;
-}
-.sfm-toggle-item{
-  flex:1;display:flex;align-items:center;gap:10px;
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:10px;padding:12px 14px;
-}
-.sfm-toggle-item span{font-size:.82rem;font-weight:600;color:var(--text)}
-
-/* Terms */
-.sfm-terms{
-  display:flex;align-items:center;gap:10px;cursor:pointer;
-  padding:12px 14px;background:var(--bg-card);border:1px solid var(--border);
-  border-radius:10px;margin-bottom:14px;transition:border-color .2s;
-}
-.sfm-terms:has(input:checked){border-color:var(--accent);background:rgba(91,154,255,.06)}
-.sfm-terms input{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
-.sfm-terms span{font-size:.82rem;color:var(--text-secondary);line-height:1.4}
-.sfm-terms a{color:var(--accent)}
-
-/* Captcha */
-.sfm-captcha{display:flex;align-items:center;justify-content:center;margin-bottom:14px;min-height:65px}
-
-/* Remaining searches */
-.sfm-remaining{
-  text-align:center;font-size:.78rem;color:var(--text-muted);margin-top:12px;
-}
-.sfm-remaining strong{color:var(--accent);font-weight:700}
-
-/* Responsive */
-@media(max-width:600px){
-  .sfm-modal{max-width:100%;border-radius:16px;margin:8px}
-  .sfm-view{padding:20px 16px}
-  .sfm-face-grid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:8px}
-  .sfm-sel-face{width:95px;height:95px}
-  .sfm-toggles{flex-direction:column;gap:6px}
-}
-
-.upload-box.dragover{border-color:var(--accent)!important;background:var(--accent-glow)!important}
-.step-back-btn{background:none;border:1px solid var(--border);color:var(--text-muted);padding:8px 18px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
-.step-back-btn:hover{border-color:var(--border-light);color:var(--text)}
-.step-next-btn{background:linear-gradient(135deg,var(--accent),#7c6bf0);color:#fff;border:none;padding:14px 24px;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .25s}
-.step-next-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(91,154,255,.3)}
-.step-next-btn:disabled{opacity:.4;cursor:not-allowed}
-.face-thumb{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;border:3px solid transparent;transition:all .2s;aspect-ratio:1}
-.face-thumb img{width:100%;height:100%;object-fit:cover}
-.face-thumb:hover{border-color:var(--border-light);transform:scale(1.03)}
-.face-thumb.selected{border-color:var(--accent);box-shadow:0 0 20px rgba(91,154,255,.3)}
-.face-thumb.selected::after{content:attr(data-sel-num);position:absolute;top:6px;right:6px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.face-thumb__info{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.7rem;color:#fff}
-/* RESULT CARDS */
-.result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s;position:relative;cursor:pointer}
-.result-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.result-card img{width:100%;aspect-ratio:1;object-fit:cover}
-.result-card__info{padding:8px 10px}
-.result-card__score{font-size:.75rem;font-weight:600;color:var(--accent)}
-.result-card__domain{font-size:.7rem;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* BLURRED CARDS for free tier */
-.result-card--locked img{filter:blur(8px) saturate(0.7);transform:scale(1.05);transition:filter .6s ease}
-.result-card--locked.tease img{filter:blur(2px) saturate(0.9);transition:filter .15s ease}
-.result-card--locked .result-card__info{filter:blur(4px)}
-.result-card--locked .result-card__lock{display:flex!important;transition:opacity .15s}
-.result-card--locked.tease .result-card__lock{opacity:0}
-.result-card__lock{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);padding:8px 16px;border-radius:10px;align-items:center;gap:8px;color:#fff;font-size:.78rem;font-weight:600;z-index:2;white-space:nowrap}
-.result-card__lock svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.result-card__nsfw{position:absolute;top:6px;left:6px;background:rgba(167,139,250,.8);color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:6px;z-index:2;letter-spacing:.04em}
-.result-card__explicit{position:absolute;top:0;left:0;right:0;background:linear-gradient(180deg,rgba(239,68,68,.85) 0%,transparent 100%);color:#fff;font-size:.6rem;font-weight:700;padding:6px 8px;z-index:2;letter-spacing:.04em;display:flex;align-items:center;gap:4px}
-.result-card__explicit span{background:rgba(255,255,255,.25);padding:1px 5px;border-radius:3px;font-weight:800;line-height:1.2}
-.search-toggle{width:44px;height:24px;border-radius:12px;border:none;background:var(--border);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
-.search-toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
-.search-toggle.on{background:var(--accent)}
-.search-toggle.on::after{transform:translateX(20px)}
-.search-toggle.locked{opacity:.5;cursor:not-allowed}
-.result-card__source{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);padding:6px 8px;font-size:.7rem;color:#fff;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* UPGRADE */
-.upgrade-btn{display:inline-flex;align-items:center;color:#fff;border:none;padding:12px 24px;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
-.upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
-/* RESULT MODAL */
-.result-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:1000;justify-content:center;align-items:center;padding:20px}
-.result-modal-overlay.active{display:flex}
-.result-modal{background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .25s ease}
-@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes blurTease{0%,100%{filter:blur(12px) saturate(0.5)}50%{filter:blur(6px) saturate(0.7)}}
-.result-modal__close{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(0,0,0,.5);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.result-modal__close:hover{background:rgba(0,0,0,.8)}
-.result-modal__image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px 20px 0 0}
-.result-modal__image--locked{filter:blur(12px) saturate(0.5);transform:scale(1.1);animation:blurTease 3s ease-in-out infinite}
-.result-modal__nsfw{position:absolute;top:16px;left:16px;background:rgba(167,139,250,.85);color:#fff;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:8px;letter-spacing:.04em}
-.result-modal__domain{position:absolute;bottom:0;left:0;padding:8px 14px;background:rgba(255,255,255,.95);color:#1a1f2e;font-size:.8rem;font-weight:600;border-radius:0 10px 0 0}
-.result-modal__actions{padding:8px 0}
-.result-modal__action{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;text-align:left;color:var(--text)}
-.result-modal__action:hover{background:rgba(255,255,255,.05)}
-.result-modal__action-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.result-modal__action-icon svg{width:20px;height:20px;stroke-width:2;fill:none}
-.result-modal__action-text{flex:1}
-.result-modal__action-title{font-size:.9rem;font-weight:600}
-.result-modal__action-sub{font-size:.75rem;color:var(--text-muted);margin-top:2px}
-.result-modal__action-arrow{color:var(--text-muted);font-size:1.1rem}
-.result-modal__action--locked{opacity:.5;cursor:not-allowed}
-.result-modal__footer{padding:12px 20px;font-size:.72rem;color:var(--text-muted);border-top:1px solid var(--border)}
-</style>
 <script>
 (function(){
   var h=document.querySelector('.nav__hamburger'),
@@ -2708,232 +1918,6 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
   alert('Payment integration coming soon.\n\nFor now, contact admin to upgrade your account.');
 });
 </script>
-
-<!-- RESULT DETAIL MODAL -->
-<!-- HOW TO USE MODAL -->
-<div class="result-modal-overlay" id="howToModal" onclick="if(event.target===this)this.classList.remove(&#39;active&#39;)">
-  <div class="result-modal" style="max-width:520px;padding:32px;">
-    <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;">âœ•</button>
-    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:20px;color:var(--text);">How to use Protevio</h2>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:10px;background:rgba(91,154,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--accent);">1</div>
-        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Upload a photo</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">Click the upload area, drag & drop, paste from clipboard, or use your camera. You can upload up to 5 photos at once.</div></div>
-      </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:10px;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--purple);">2</div>
-        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Select a face</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">Our AI detects all faces in your photo. Tap on the face you want to search for.</div></div>
-      </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--green);">3</div>
-        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Review results</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">We scan our continuously growing database and show you matching results ranked by similarity, including the source website.</div></div>
-      </div>
-      <div style="display:flex;gap:14px;align-items:flex-start;">
-        <div style="width:36px;height:36px;border-radius:10px;background:rgba(250,204,21,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;color:var(--gold);">4</div>
-        <div><div style="font-weight:600;color:var(--text);margin-bottom:2px;">Take action</div><div style="font-size:.85rem;color:var(--text-muted);line-height:1.5;">Export PDF reports, set up monitoring alerts, or request takedowns for images published without consent.</div></div>
-      </div>
-    </div>
-    <div style="margin-top:20px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;">
-      <div style="font-size:.82rem;color:var(--text-muted);line-height:1.5;">
-        <strong style="color:var(--text);">💡 Tips for best results:</strong><br>
-        • Use a clear, front-facing photo with good lighting<br>
-        • Avoid group photos — crop to a single face<br>
-        • Higher resolution images give better matches
-      </div>
-    </div>
-    <button onclick="document.getElementById(&#39;howToModal&#39;).classList.remove(&#39;active&#39;)" style="width:100%;margin-top:16px;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;font-weight:600;font-size:.95rem;cursor:pointer;">Got it!</button>
-  </div>
-</div>
-
-<div class="result-modal-overlay" id="resultModalOverlay" onclick="if(event.target===this)closeResultModal()">
-  <div class="result-modal" id="resultModal">
-    <button class="result-modal__close" onclick="closeResultModal()">âœ•</button>
-    <div style="position:relative;overflow:hidden;border-radius:20px 20px 0 0;">
-      <div class="result-modal__nsfw" id="modalNsfw" style="display:none">POTENTIALLY EXPLICIT</div>
-      <img id="modalImage" class="result-modal__image" src="" alt="Result" onerror="this.src=&#39;data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22&gt;&lt;rect fill=%22%232a3349%22 width=%22400%22 height=%22300%22/&gt;&lt;text x=%22200%22 y=%22155%22 text-anchor=%22middle%22 fill=%22%239ca3b8%22 font-size=%2216%22&gt;Image unavailable&lt;/text&gt;&lt;/svg&gt;&#39;">
-      <div class="result-modal__domain" id="modalDomain">domain.com</div>
-    </div>
-    <div style="padding:12px 20px 4px;font-size:.82rem;font-weight:600;color:var(--accent);display:none;" id="modalSimilarity"></div>
-    <div class="result-modal__actions">
-      <button class="result-modal__action" id="modalOpenWebsite" data-requires-paid="true">
-        <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
-          <svg viewbox="0 0 24 24" stroke="var(--accent)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
-        </div>
-        <div class="result-modal__action-text">
-          <div class="result-modal__action-title">Open website</div>
-          <div class="result-modal__action-sub">Go to the website where this image appears</div>
-        </div>
-        <span class="result-modal__action-arrow">›</span>
-      </button>
-      <button class="result-modal__action" id="modalOpenImage" data-requires-paid="true">
-        <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
-          <svg viewbox="0 0 24 24" stroke="var(--accent)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        </div>
-        <div class="result-modal__action-text">
-          <div class="result-modal__action-title">Open image</div>
-          <div class="result-modal__action-sub">Access the source image (unblurred version)</div>
-        </div>
-        <span class="result-modal__action-arrow">›</span>
-      </button>
-      <button class="result-modal__action" id="modalSearchThis">
-        <div class="result-modal__action-icon" style="background:rgba(91,154,255,.15)">
-          <svg viewbox="0 0 24 24" stroke="var(--accent)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </div>
-        <div class="result-modal__action-text">
-          <div class="result-modal__action-title">Perform search with this image</div>
-          <div class="result-modal__action-sub">Start a new search using this result</div>
-        </div>
-        <span class="result-modal__action-arrow">›</span>
-      </button>
-      <button class="result-modal__action" id="modalCopyId">
-        <div class="result-modal__action-icon" style="background:rgba(167,139,250,.15)">
-          <svg viewbox="0 0 24 24" stroke="var(--purple)"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        </div>
-        <div class="result-modal__action-text">
-          <div class="result-modal__action-title">Copy Result ID</div>
-          <div class="result-modal__action-sub">Copy the ID of this result for further actions</div>
-        </div>
-        <span class="result-modal__action-arrow">›</span>
-      </button>
-      <button class="result-modal__action" id="modalExclude">
-        <div class="result-modal__action-icon" style="background:rgba(74,222,128,.15)">
-          <svg viewbox="0 0 24 24" stroke="var(--green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-        </div>
-        <div class="result-modal__action-text">
-          <div class="result-modal__action-title">Exclude from public results</div>
-          <div class="result-modal__action-sub">Remove this photo from Protevio's search</div>
-        </div>
-        <span class="result-modal__action-arrow">›</span>
-      </button>
-      <button class="result-modal__action" id="modalShare">
-        <div class="result-modal__action-icon" style="background:rgba(248,113,113,.15)">
-          <svg viewbox="0 0 24 24" stroke="var(--red)"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
-        </div>
-        <div class="result-modal__action-text">
-          <div class="result-modal__action-title">Share</div>
-          <div class="result-modal__action-sub">Share this result with others</div>
-        </div>
-        <span class="result-modal__action-arrow">›</span>
-      </button>
-    </div>
-    <div class="result-modal__footer">Powered by Protevio AI · Results generated by facial similarity matching</div>
-  </div>
-</div>
-
-<!-- MINOR WARNING MODAL -->
-<div class="minor-modal-bg" id="minorModalBg" onclick="if(event.target===this){this.classList.remove(&#39;open&#39;);resetSearch()}">
-  <div class="minor-modal">
-    <div class="minor-modal__icon">
-      <svg viewbox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    </div>
-    <div class="minor-modal__title">Search Blocked — Minor Detected</div>
-    <div class="minor-modal__text">
-      Our AI has detected that the uploaded photo appears to contain a <strong>person under the age of 18</strong>. Protevio does not allow facial recognition searches involving minors.
-    </div>
-    <div class="minor-modal__warning">
-      <b>This attempt has been logged.</b> Repeated attempts to search for minors will result in account suspension. Protevio takes child safety extremely seriously and cooperates with law enforcement authorities when necessary.
-    </div>
-    <button class="minor-modal__btn" onclick="document.getElementById(&#39;minorModalBg&#39;).classList.remove(&#39;open&#39;);resetSearch()">I Understand</button>
-  </div>
-</div>
-
-
-<!-- ===== SOCIAL PROOF ===== -->
-<section id="socialProof" style="padding:80px 24px 60px;max-width:960px;margin:0 auto">
-
-
-
-  <!-- SECTION HEADER -->
-  <div style="text-align:center;margin-bottom:48px">
-    <h2 style="font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:12px">Trusted by Privacy-Conscious Professionals</h2>
-    <p style="font-size:.95rem;color:var(--text-muted);max-width:560px;margin:0 auto;line-height:1.7">People from all backgrounds use Protevio to monitor, protect, and take control of their online presence.</p>
-  </div>
-
-  <!-- TESTIMONIALS -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:64px">
-    <div style="padding:28px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column">
-      <div style="display:flex;gap:4px;margin-bottom:16px">
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-      </div>
-      <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;flex:1">&ldquo;Found my photos on 3 websites I never gave permission to. The takedown process was straightforward and effective.&rdquo;</p>
-      <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
-        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7c4dff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff">S.M</div>
-        <div><div style="font-size:.82rem;font-weight:600;color:var(--text)">Sarah M.</div><div style="font-size:.72rem;color:var(--text-muted)">Model &amp; Content Creator</div></div>
-      </div>
-    </div>
-    <div style="padding:28px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column">
-      <div style="display:flex;gap:4px;margin-bottom:16px">
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-      </div>
-      <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;flex:1">&ldquo;As a photographer, unauthorized use of my work is a constant problem. Protevio makes it simple to track who&rsquo;s using my images and take action.&rdquo;</p>
-      <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
-        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#34d399,#059669);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff">D.K</div>
-        <div><div style="font-size:.82rem;font-weight:600;color:var(--text)">Daniel K.</div><div style="font-size:.72rem;color:var(--text-muted)">Professional Photographer</div></div>
-      </div>
-    </div>
-    <div style="padding:28px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column">
-      <div style="display:flex;gap:4px;margin-bottom:16px">
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-        <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#fbbf24"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-      </div>
-      <p style="font-size:.9rem;color:var(--text-secondary);line-height:1.7;flex:1">&ldquo;Our security team uses Protevio to monitor executive photos being used in social engineering attacks. Essential tool for corporate protection.&rdquo;</p>
-      <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
-        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff">R.A</div>
-        <div><div style="font-size:.82rem;font-weight:600;color:var(--text)">Rachel A.</div><div style="font-size:.72rem;color:var(--text-muted)">Head of Cybersecurity</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- USE CASES -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
-    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
-      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(91,154,255,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Personal Privacy</div>
-      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Find where your face appears online and take control of your digital identity</div>
-    </div>
-    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
-      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#a78bfa;fill:none;stroke-width:1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Content Creators</div>
-      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Detect stolen photos and unauthorized reposts across the web</div>
-    </div>
-    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
-      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#34d399;fill:none;stroke-width:1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Corporate Security</div>
-      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Monitor executive images used in deepfakes and social engineering</div>
-    </div>
-    <div style="padding:24px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;text-align:center">
-      <div style="width:44px;height:44px;margin:0 auto 14px;border-radius:12px;background:rgba(251,191,36,.12);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fbbf24;fill:none;stroke-width:1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-      <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:4px">Catfish Protection</div>
-      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.6">Verify if someone is using stolen photos to create fake profiles</div>
-    </div>
-  </div>
-</section>
-
-<footer style="border-top:1px solid var(--border);padding:32px 24px;margin-top:60px;text-align:center;color:var(--text-muted);font-size:.82rem;line-height:1.8">
-  <div style="max-width:600px;margin:0 auto">
-    <p style="margin-bottom:12px;color:var(--text-secondary);font-size:.88rem">Protevio AI is a facial recognition search engine that helps you find where your face or images appear online. Track unauthorized use, monitor new matches, and protect your digital identity.</p>
-    <div style="margin-bottom:10px">
-      <a href="/privacy-policy" style="color:var(--accent);text-decoration:none;margin:0 12px">Privacy Policy</a>
-      <a href="/terms-of-service" style="color:var(--accent);text-decoration:none;margin:0 12px">Terms of Service</a>
-      <a href="/about" style="color:var(--accent);text-decoration:none;margin:0 12px">About</a>
-      <a href="/contact" style="color:var(--accent);text-decoration:none;margin:0 12px">Contact</a>
-      <a href="/csr" style="color:var(--accent);text-decoration:none;margin:0 12px">CSR</a>
-      <a href="dmca-templates.html" style="color:var(--accent);text-decoration:none;margin:0 12px">DMCA Templates</a>
-    </div>
-    <p>© 2026 Protevio AI. All rights reserved.</p>
-  </div>
-</footer>
 
 </body>
 </html>

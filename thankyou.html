@@ -13,7 +13,7 @@
    ════════════════════════════════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --ink:#050608;
+  --ink:#f8f7f5;
   --white:#f0eff2;
   --muted:#5a5d64;
   --accent:#00e5ff;
@@ -44,7 +44,7 @@ body{
 }
 .vignette{
   position:fixed;inset:0;z-index:2;pointer-events:none;
-  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 40%,rgba(5,6,8,.75) 100%);
+  background:radial-gradient(ellipse 70% 65% at 50% 50%,transparent 40%,rgba(248,247,245,.75) 100%);
 }
 
 /* ════════════════════════════════════════
@@ -59,8 +59,8 @@ body{
 .nav__logo-mark{width:36px;height:36px}
 .nav__logo-mark svg{width:100%;height:100%}
 .nav__logo-text{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.55rem;letter-spacing:.22em;color:var(--white);
+  font-family:'Literata',Georgia,serif;
+  font-size:1.35rem;letter-spacing:-.02em;color:var(--white);
 }
 .nav__back{
   display:flex;align-items:center;gap:8px;
@@ -130,7 +130,7 @@ body{
   opacity:0;animation:fadeUp .7s .5s cubic-bezier(.22,1,.36,1) forwards;
 }
 .hero__title{
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'Literata',Georgia,serif;
   font-size:clamp(3rem,10vw,7.5rem);
   line-height:.92;color:var(--white);
   margin-bottom:24px;
@@ -177,7 +177,7 @@ body{
   margin-bottom:16px;display:block;
 }
 .vision__heading h2{
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'Literata',Georgia,serif;
   font-size:clamp(1.8rem,5vw,2.8rem);
   color:var(--white);letter-spacing:.04em;
 }
@@ -207,7 +207,7 @@ body{
   background:rgba(0,229,255,.06);
   border:1px solid rgba(0,229,255,.18);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'Literata',Georgia,serif;
   font-size:1.1rem;letter-spacing:.08em;
   color:var(--accent);
   position:relative;z-index:1;
@@ -314,7 +314,7 @@ body{
       <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#g1)" stroke-width="1.4" fill="none"/>
         <circle cx="18" cy="18" r="5.5" fill="url(#g1)" opacity=".9"/>
-        <circle cx="18" cy="18" r="2" fill="#050608"/>
+        <circle cx="18" cy="18" r="2" fill="#fefefe"/>
         <defs>
           <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36">
             <stop offset="0%" stop-color="#00e5ff"/>
@@ -443,13 +443,13 @@ body{
   <div class="footer-cta__rule"></div>
   <p>Questions or want to talk about what's coming? Reach out — we'd love to hear from you.</p>
   <div class="footer-cta__emails">
-    <a href="mailto:info@protevio.com" class="footer-cta__email">
+    <a href="/cdn-cgi/l/email-protection#a2cbccc4cde2d2d0cdd6c7d4cbcd8cc1cdcf" class="footer-cta__email">
       <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6.5L2 7"/></svg>
-      info@protevio.com
+      <span class="__cf_email__" data-cfemail="7b12151d143b0b09140f1e0d121455181416">[email&#160;protected]</span>
     </a>
-    <a href="mailto:help@protevio.com" class="footer-cta__email">
+    <a href="/cdn-cgi/l/email-protection#19717c756959696b766d7c6f7076377a7674" class="footer-cta__email">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      help@protevio.com
+      <span class="__cf_email__" data-cfemail="422a272e320232302d3627342b2d6c212d2f">[email&#160;protected]</span>
     </a>
   </div>
 </div>
@@ -457,7 +457,7 @@ body{
 <!-- ════════════════════════════════════════
      SCRIPTS
      ════════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Particle Field ── */
 (function(){
   const canvas=document.getElementById('canvas');
@@ -500,21 +500,4 @@ body{
         const d=Math.sqrt(dx*dx+dy*dy);
         if(d<maxDist){
           ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(0,229,255,${(.12)*(1-d/maxDist)})`;
-          ctx.lineWidth=.6;ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function loop(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p=>{p.update();p.draw()});
-    drawLines();requestAnimationFrame(loop);
-  }
-  loop();
-})();
-</script>
-</body>
-</html>
+        
