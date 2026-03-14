@@ -17,7 +17,7 @@
   --white:#f0eff2;
   --muted:#5a5d64;
   --accent:#00e5ff;
-  --accent2:#7c4dff;
+  --accent2:#2563eb;
   --glow:rgba(0,229,255,.18);
 }
 html{font-size:16px;scroll-behavior:smooth}
@@ -56,12 +56,8 @@ body{
   display:flex;align-items:center;justify-content:space-between;
 }
 .nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav__logo-mark{width:36px;height:36px}
-.nav__logo-mark svg{width:100%;height:100%}
-.nav__logo-text{
-  font-family:'Literata',Georgia,serif;
-  font-size:1.35rem;letter-spacing:-.02em;color:var(--white);
-}
+
+.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);font-weight:600}
 .nav__back{
   display:flex;align-items:center;gap:8px;
   text-decoration:none;color:var(--muted);
@@ -309,22 +305,7 @@ body{
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="/" class="nav__logo">
-    <div class="nav__logo-mark">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#g1)" stroke-width="1.4" fill="none"/>
-        <circle cx="18" cy="18" r="5.5" fill="url(#g1)" opacity=".9"/>
-        <circle cx="18" cy="18" r="2" fill="#fefefe"/>
-        <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36">
-            <stop offset="0%" stop-color="#00e5ff"/>
-            <stop offset="100%" stop-color="#7c4dff"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-    <span class="nav__logo-text">PROTEVIO</span>
-  </a>
+  <a href="/" class="nav__logo"><span class="nav__logo-text">Protevio<span style="color:var(--accent)">.</span></span></a>
   <a href="/" class="nav__back">
     <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
     Back
@@ -340,7 +321,7 @@ body{
       <defs>
         <linearGradient id="checkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#00e5ff"/>
-          <stop offset="100%" stop-color="#7c4dff"/>
+          <stop offset="100%" stop-color="#2563eb"/>
         </linearGradient>
       </defs>
       <!-- Circle -->

@@ -39,7 +39,7 @@
   --accent-glow:rgba(37,99,235,.08);
   --gold:#d97706;
   --green:#059669;
-  --purple:#7c3aed;
+  --purple:#334155;
   --glass:rgba(255,255,255,.85);
   --glass-border:#f0f0f0;
 }
@@ -57,7 +57,7 @@ body{
   position:fixed;inset:0;
   background:
     radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,235,.04) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(124,58,237,.03) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(37,99,235,.03) 0%, transparent 60%),
     ;
   pointer-events:none;z-index:0;
   animation:gradientShift 15s ease-in-out infinite;
@@ -93,12 +93,8 @@ body{
   gap:12px;
   text-decoration:none;
 }
-.nav__logo-mark{width:36px;height:36px}
-.nav__logo-mark svg{width:100%;height:100%}
-.nav__logo-text{
-  font-family:'Literata',Georgia,serif;
-  font-size:1.35rem;letter-spacing:-.02em;color:var(--text);
-}
+
+.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);font-weight:600}
 .nav__links{
   display:flex;
   align-items:center;
@@ -467,22 +463,7 @@ body{
 <div class="dot-pattern"></div>
 
 <nav class="nav">
-  <a href="/" class="nav__logo">
-    <div class="nav__logo-mark">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
-        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
-        <circle cx="18" cy="18" r="2" fill="#fefefe"/>
-        <defs>
-          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
-            <stop offset="0%" stop-color="#00e5ff"/>
-            <stop offset="100%" stop-color="#7c4dff"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-    <span class="nav__logo-text">PROTEVIO</span>
-  </a>
+  <a href="/" class="nav__logo"><span class="nav__logo-text">Protevio<span style="color:var(--accent)">.</span></span></a>
   <div class="nav__links">
     <a href="/" class="nav__link">Home</a>
     <a href="about.html" class="nav__link">About</a>
@@ -561,8 +542,8 @@ body{
         <p class="contact-card__text">
           Questions about Protevio AI? Drop us a line.
         </p>
-        <a href="/cdn-cgi/l/email-protection#8ae3e4ece5cafaf8e5feeffce3e5a4e9e5e7" class="contact-card__link">
-          <span class="__cf_email__" data-cfemail="5831363e3718282a372c3d2e3137763b3735">[email&#160;protected]</span>
+        <a href="/cdn-cgi/l/email-protection#9bf2f5fdf4dbebe9f4effeedf2f4b5f8f4f6" class="contact-card__link">
+          <span class="__cf_email__" data-cfemail="177e797178576765786372617e783974787a">[email&#160;protected]</span>
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>
@@ -575,8 +556,8 @@ body{
         <p class="contact-card__text">
           Need help with integration or API questions?
         </p>
-        <a href="/cdn-cgi/l/email-protection#721a171e023202001d0617041b1d5c111d1f" class="contact-card__link">
-          <span class="__cf_email__" data-cfemail="4028252c300030322f342536292f6e232f2d">[email&#160;protected]</span>
+        <a href="/cdn-cgi/l/email-protection#7119141d013101031e051407181e5f121e1c" class="contact-card__link">
+          <span class="__cf_email__" data-cfemail="f49c919884b484869b8091829d9bda979b99">[email&#160;protected]</span>
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>
@@ -589,8 +570,8 @@ body{
         <p class="contact-card__text">
           Interested in enterprise plans or partnerships?
         </p>
-        <a href="/cdn-cgi/l/email-protection#7003111c15033000021f041506191f5e131f1d" class="contact-card__link">
-          <span class="__cf_email__" data-cfemail="295a48454c5a69595b465d4c5f4046074a4644">[email&#160;protected]</span>
+        <a href="/cdn-cgi/l/email-protection#5724363b3224172725382332213e387934383a" class="contact-card__link">
+          <span class="__cf_email__" data-cfemail="5d2e3c31382e1d2d2f3229382b3432733e3230">[email&#160;protected]</span>
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>

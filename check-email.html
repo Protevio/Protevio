@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0c0f1a;--accent:#2563eb;--accent-light:#3b82f6;--purple:#7c3aed;--text3:#8891a5;--glass-border:#f0f0f0;--green:#059669}
-body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
+:root{--bg:#faf8f5;--accent:#2563eb;--accent-light:#3b82f6;--purple:#334155;--text3:#8891a5;--glass-border:#f0f0f0;--green:#059669}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#2c2418;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
 .bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 0%,rgba(91,154,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 100%,rgba(167,139,250,.06) 0%,transparent 50%)}
 
 .card{position:relative;z-index:1;max-width:480px;width:calc(100% - 32px);text-align:center;padding:48px 36px;background:rgba(26,31,46,.8);border:1px solid var(--glass-border);border-radius:24px;backdrop-filter:blur(20px)}
@@ -18,10 +18,10 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;m
 /* Logo */
 .logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px;text-decoration:none}
 .logo svg{width:36px;height:36px}
-.logo span{font-size:1.2rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo span{font-size:1.2rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#2563eb);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 /* Icon */
-.email-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,rgba(91,154,255,.15),rgba(167,139,250,.15));display:flex;align-items:center;justify-content:center;animation:pulse 2s ease-in-out infinite}
+.email-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,rgba(91,154,255,.15),rgba(37,99,235,.15));display:flex;align-items:center;justify-content:center;animation:pulse 2s ease-in-out infinite}
 .email-icon svg{width:40px;height:40px;color:var(--accent)}
 @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(91,154,255,.2)}50%{transform:scale(1.05);box-shadow:0 0 20px 10px rgba(91,154,255,.1)}}
 
@@ -68,7 +68,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;m
 
 <div class="card">
   <a href="/" class="logo">
-    <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#fefefe"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg>
+    <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#fefefe"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs></svg>
     <span>PROTEVIO</span>
   </a>
 
@@ -84,7 +84,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;m
   <p class="email-display" id="emailDisplay">your email address</p>
 
   <div class="steps">
-    <div class="step"><div class="step__num">1</div><div class="step__text">Open the email from <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6a8a9b4a3b6aabf86b6b4a9b2a3b0afa9e8a5a9ab">[email&#160;protected]</a></strong></div></div>
+    <div class="step"><div class="step__num">1</div><div class="step__text">Open the email from <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4826273a2d38243108383a273c2d3e2127662b2725">[email&#160;protected]</a></strong></div></div>
     <div class="step"><div class="step__num">2</div><div class="step__text">Click the <strong>"Verify Email Address"</strong> button</div></div>
     <div class="step"><div class="step__num">3</div><div class="step__text">You'll be redirected to <strong>log in</strong> to your new account</div></div>
   </div>
@@ -101,7 +101,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;m
   </a>
 
   <div class="spam-note">
-    💡 Check your spam or junk folder if you don't see the email within a few minutes. Add <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95fbfae7f0e5f9ecd5e5e7fae1f0e3fcfabbf6faf8">[email&#160;protected]</a> to your contacts to ensure delivery.
+    💡 Check your spam or junk folder if you don't see the email within a few minutes. Add <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1afaeb3a4b1adb881b1b3aeb5a4b7a8aeefa2aeac">[email&#160;protected]</a> to your contacts to ensure delivery.
   </div>
 </div>
 

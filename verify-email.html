@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0c0f1a;--accent:#2563eb;--purple:#7c3aed;--text3:#8891a5;--glass-border:#f0f0f0;--green:#059669;--red:#f87171}
-body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
+:root{--bg:#faf8f5;--accent:#2563eb;--purple:#334155;--text3:#8891a5;--glass-border:#f0f0f0;--green:#059669;--red:#f87171}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#2c2418;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
 .bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 0%,rgba(91,154,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 100%,rgba(167,139,250,.06) 0%,transparent 50%)}
 
 .card{position:relative;z-index:1;max-width:480px;width:calc(100% - 32px);text-align:center;padding:48px 36px;background:rgba(26,31,46,.8);border:1px solid var(--glass-border);border-radius:24px;backdrop-filter:blur(20px)}
 
 .logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px;text-decoration:none}
 .logo svg{width:36px;height:36px}
-.logo span{font-size:1.2rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo span{font-size:1.2rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,#00e5ff,#2563eb);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 /* States */
 .state{display:none}
@@ -71,7 +71,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:#fff;m
 
 <div class="card">
   <a href="/" class="logo">
-    <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#fefefe"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg>
+    <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hg)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hg)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#fefefe"/><defs><linearGradient id="hg" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs></svg>
     <span>PROTEVIO</span>
   </a>
 
@@ -138,7 +138,7 @@ function showState(id) {
 
 function launchConfetti() {
   const container = document.getElementById('confetti');
-  const colors = ['#5b9aff', '#a78bfa', '#4ade80', '#ffb020', '#f87171', '#00e5ff'];
+  const colors = ['#5b9aff', '#334155', '#4ade80', '#ffb020', '#f87171', '#00e5ff'];
   for (let i = 0; i < 50; i++) {
     const el = document.createElement('div');
     el.className = 'confetti';

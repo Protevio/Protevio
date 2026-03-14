@@ -18,7 +18,7 @@
   --green:#059669;--green-bg:rgba(5,150,105,.08);
   --red:#dc2626;--red-bg:rgba(220,38,38,.06);
   --gold:#d97706;--gold-bg:rgba(217,119,6,.08);
-  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.08);
+  --purple:#334155;--purple-bg:rgba(51,65,85,.08);
   --cyan:#0891b2;--cyan-bg:rgba(8,145,178,.08);
   --serif:'Literata',Georgia,serif;
   --sans:'Outfit',system-ui,sans-serif;
@@ -744,10 +744,10 @@ async function checkDmcaVerification() {
       badge.style.display='inline-block';
       badge.textContent='Add-on Required';
       badge.style.background='rgba(168,85,247,.15)';
-      badge.style.color='#a78bfa';
+      badge.style.color='#334155';
       banner.style.display='block';
       banner.innerHTML = '<div style="background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.15);border-radius:12px;padding:24px;margin-bottom:16px;text-align:center">'
-        + '<div style="width:48px;height:48px;margin:0 auto 12px;background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(168,85,247,.15));border-radius:14px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:#a78bfa;fill:none;stroke-width:1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>'
+        + '<div style="width:48px;height:48px;margin:0 auto 12px;background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(168,85,247,.15));border-radius:14px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:#334155;fill:none;stroke-width:1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>'
         + '<div style="font-size:1rem;font-weight:800;margin-bottom:6px">Takedown Agent Required</div>'
         + '<div style="font-size:.82rem;color:var(--text3);margin-bottom:16px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6">Automated DMCA takedowns require the Takedown Agent add-on. We generate legally compliant notices, send them to hosting providers, and track everything for you.</div>'
         + '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">'

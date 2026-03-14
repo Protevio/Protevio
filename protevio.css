@@ -2,7 +2,7 @@
    PROTEVIO AI — Premium Minimal Design System
    ============================================================================
    Typography: Literata (serif headings) + Outfit (body/UI)
-   Colors: Warm whites, blue/emerald/violet semantic accents
+   Colors: Warm whites, blue/emerald/slate semantic accents
    Philosophy: Trust through restraint. Every element earns its place.
    ============================================================================ */
 
@@ -39,9 +39,9 @@
   --amber-soft: #fef3c7;
   --amber-text: #92400e;
 
-  --violet: #7c3aed;
-  --violet-soft: #ede9fe;
-  --violet-text: #5b21b6;
+  --violet: #334155;
+  --violet-soft: #f1f5f9;
+  --violet-text: #1e293b;
 
   --red: #dc2626;
   --red-soft: #fee2e2;
@@ -308,7 +308,7 @@ img { display: block; max-width: 100%; }
 .p-heading--sm { font-size: 1.15rem; }
 .p-heading em {
   font-style: italic;
-  background: linear-gradient(135deg, var(--blue), var(--violet));
+  background: var(--blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -334,7 +334,7 @@ img { display: block; max-width: 100%; }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--violet), var(--emerald));
+  background: linear-gradient(90deg, var(--blue), var(--emerald));
 }
 .p-upload__dropzone {
   border: 2px dashed var(--border);
@@ -711,4 +711,31 @@ img { display: block; max-width: 100%; }
   .p-heading--xl { font-size: 2rem; }
   .p-upload { padding: 24px; margin: 0 16px; }
   .p-upload__dropzone { padding: 24px; }
+}
+
+
+/* ─── Mobile improvements ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .p-heading--xl { font-size: 2rem; }
+  .p-heading--lg { font-size: 1.6rem; }
+  .p-trust-row { gap: 16px; flex-direction: column; align-items: center; }
+  .p-trust-item { min-width: 200px; }
+  .p-section { padding: 40px 20px; }
+  .p-grid-3 { grid-template-columns: 1fr; gap: 14px; }
+  .p-grid-2 { grid-template-columns: 1fr; gap: 14px; }
+  .p-upload { margin: 0 8px; padding: 24px 20px; }
+  .p-upload__dropzone { padding: 24px 16px; }
+  .p-footer { padding: 24px 20px; }
+  .p-nav { padding: 12px 16px; }
+  .p-nav__center { display: none; }
+  .p-btn--lg { padding: 12px 24px; font-size: .88rem; }
+  .hero { padding: 48px 16px 32px; }
+}
+
+@media (max-width: 480px) {
+  .p-heading--xl { font-size: 1.7rem; }
+  .p-heading--lg { font-size: 1.4rem; }
+  .p-heading--md { font-size: 1.2rem; }
+  .p-upload { margin: 0; border-radius: 12px; }
+  .p-section { padding: 32px 16px; }
 }

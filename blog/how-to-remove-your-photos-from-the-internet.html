@@ -29,7 +29,7 @@
   --bg:#f8f7f5;--bg-elevated:#fefefe;--bg-card:#fefefe;--border:#e4e4e7;--border-light:#d4d4d8;
   --text:#18181b;--text-secondary:#3f3f46;--text-muted:#a1a1aa;
   --accent:#2563eb;--accent-light:#3b82f6;--accent-glow:rgba(37,99,235,.08);
-  --gold:#d97706;--green:#059669;--purple:#7c3aed;
+  --gold:#d97706;--green:#059669;--purple:#334155;
   --glass:rgba(255,255,255,.85);--glass-border:#f0f0f0;
 }
 html{font-size:16px;scroll-behavior:smooth}
@@ -40,8 +40,8 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 /* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(254,254,254,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:100}
 .nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav__logo-mark{width:36px;height:36px}.nav__logo-mark svg{width:100%;height:100%}
-.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text)}
+
+.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);font-weight:600}
 .nav__links{display:flex;align-items:center;gap:32px}
 .nav__link{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .25s;position:relative}
 .nav__link:hover{color:var(--text)}
@@ -138,12 +138,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 <div class="dot-pattern"></div>
 
 <nav class="nav">
-  <a href="/" class="nav__logo">
-    <div class="nav__logo-mark">
-      <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/><circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/><circle cx="18" cy="18" r="2" fill="#fefefe"/><defs><linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs></svg>
-    </div>
-    <span class="nav__logo-text">PROTEVIO</span>
-  </a>
+  <a href="/" class="nav__logo"><span class="nav__logo-text">Protevio<span style="color:var(--accent)">.</span></span></a>
   <div class="nav__links">
     <a href="/" class="nav__link">Home</a>
     <a href="../about.html" class="nav__link">About</a>
