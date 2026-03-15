@@ -34,56 +34,60 @@
   padding: 44px 40px 24px; text-align: center;
 }
 
-/* Phone mockup — decorative float */
-.phone {
+/* Phone + person decoration */
+.hero-deco {
   position: absolute;
-  right: -60px; bottom: 40px;
-  width: 140px; height: 270px;
-  background: #18181b;
-  border-radius: 24px;
-  padding: 8px;
-  box-shadow: 0 16px 48px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+  right: -30px; top: 50%;
+  transform: translateY(-40%);
+  display: flex; flex-direction: column; align-items: center; gap: 0;
   z-index: 2;
-  opacity: .92;
+}
+.phone {
+  width: 110px; height: 210px;
+  background: #18181b;
+  border-radius: 20px;
+  padding: 6px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.08);
+  position: relative;
 }
 .phone__notch {
-  width: 52px; height: 16px;
+  width: 40px; height: 12px;
   background: #18181b;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 8px 8px;
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
   z-index: 5;
 }
 .phone__screen {
   width: 100%; height: 100%;
   background: var(--bg-soft);
-  border-radius: 17px;
+  border-radius: 15px;
   overflow: hidden;
   position: relative;
   display: flex; flex-direction: column; align-items: center;
   justify-content: center;
 }
 .phone__face {
-  width: 56px; height: 68px;
+  width: 44px; height: 54px;
   position: relative; z-index: 1;
 }
 .phone__face svg { width: 100%; height: 100%; }
 .phone__scan {
   position: absolute;
-  left: 8px; right: 8px;
+  left: 6px; right: 6px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--blue), var(--blue), transparent);
-  box-shadow: 0 0 8px var(--blue), 0 0 16px rgba(37,99,235,.2);
+  box-shadow: 0 0 6px var(--blue), 0 0 12px rgba(37,99,235,.15);
   z-index: 3;
   animation: scanLine 2.6s ease-in-out infinite;
   border-radius: 2px;
 }
 @keyframes scanLine {
-  0%, 100% { top: 36px; opacity: .2; }
-  50% { top: calc(100% - 50px); opacity: 1; }
+  0%, 100% { top: 28px; opacity: .2; }
+  50% { top: calc(100% - 40px); opacity: 1; }
 }
 .phone__corners {
   position: absolute;
-  width: 66px; height: 78px;
+  width: 54px; height: 64px;
   top: 50%; left: 50%;
   transform: translate(-50%, -52%);
   z-index: 2;
@@ -91,76 +95,85 @@
 .phone__corners::before, .phone__corners::after,
 .phone__corner-bl, .phone__corner-br {
   position: absolute;
-  width: 12px; height: 12px;
+  width: 10px; height: 10px;
   border-color: var(--blue);
   border-style: solid;
   border-width: 0;
   content: '';
 }
-.phone__corners::before { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; border-radius: 3px 0 0 0; }
-.phone__corners::after { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; border-radius: 0 3px 0 0; }
-.phone__corner-bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; border-radius: 0 0 0 3px; }
-.phone__corner-br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; border-radius: 0 0 3px 0; }
+.phone__corners::before { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; border-radius: 2px 0 0 0; }
+.phone__corners::after { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; border-radius: 0 2px 0 0; }
+.phone__corner-bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; border-radius: 0 0 0 2px; }
+.phone__corner-br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; border-radius: 0 0 2px 0; }
 .phone__badge {
   position: absolute;
-  bottom: 16px; left: 50%; transform: translateX(-50%);
+  bottom: 12px; left: 50%; transform: translateX(-50%);
   background: var(--blue);
   color: #fff;
-  font-size: .52rem; font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 12px;
+  font-size: .44rem; font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
   white-space: nowrap;
   z-index: 4;
   animation: badgePulse 2.6s ease-in-out infinite;
-  box-shadow: 0 2px 8px rgba(37,99,235,.25);
-  letter-spacing: .02em;
+  box-shadow: 0 2px 6px rgba(37,99,235,.2);
 }
 @keyframes badgePulse {
-  0%, 40% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  0%, 40% { opacity: 0; transform: translateX(-50%) translateY(3px); }
   55%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-3px); }
+  100% { opacity: 0; }
 }
-.phone__dots {
-  position: absolute;
-  bottom: 34px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 3px;
-  z-index: 4;
-  animation: badgePulse 2.6s ease-in-out infinite;
-  animation-delay: .1s;
-}
-.phone__dot {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: var(--bg-warm);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.phone__dot svg { width: 10px; height: 10px; stroke: var(--ink-muted); stroke-width: 1.5; fill: none; }
 .phone__status {
-  position: absolute; top: 22px; left: 0; right: 0;
+  position: absolute; top: 18px; left: 0; right: 0;
   text-align: center;
-  font-size: .45rem;
+  font-size: .38rem;
   font-weight: 700;
   color: var(--ink-muted);
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   text-transform: uppercase;
   z-index: 4;
 }
 
+/* Person with speech bubble */
+.hero-person {
+  display: flex; align-items: flex-start; gap: 6px;
+  margin-top: 12px;
+}
+.hero-person__avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--bg-warm);
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-person__avatar svg { width: 18px; height: 18px; stroke: var(--ink-muted); stroke-width: 1.5; fill: none; }
+.hero-person__bubble {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px 10px 10px 2px;
+  padding: 7px 10px;
+  font-size: .56rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 120px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  position: relative;
+}
+.hero-person__bubble strong { color: var(--blue); font-weight: 700; }
+
 @media (max-width: 1060px) {
-  .phone { right: -20px; width: 120px; height: 230px; border-radius: 20px; padding: 6px; }
-  .phone__notch { width: 42px; height: 12px; border-radius: 0 0 8px 8px; }
-  .phone__screen { border-radius: 15px; }
-  .phone__face { width: 44px; height: 54px; }
-  .phone__corners { width: 54px; height: 64px; }
-  .phone__badge { font-size: .48rem; padding: 2px 8px; bottom: 12px; }
-  .phone__dots { bottom: 28px; gap: 2px; }
-  .phone__dot { width: 14px; height: 14px; }
-  .phone__status { top: 16px; font-size: .4rem; }
+  .hero-deco { right: -10px; }
+  .phone { width: 95px; height: 180px; border-radius: 16px; padding: 5px; }
+  .phone__screen { border-radius: 12px; }
+  .phone__face { width: 36px; height: 44px; }
+  .phone__corners { width: 44px; height: 52px; }
+  .phone__notch { width: 32px; height: 10px; }
+  .hero-person__bubble { font-size: .5rem; max-width: 100px; }
+  .hero-person__avatar { width: 30px; height: 30px; }
 }
 @media (max-width: 860px) {
-  .phone { display: none; }
+  .hero-deco { display: none; }
   .hero { padding: 28px 20px 20px; }
 }
 @media (max-width: 480px) {
@@ -652,31 +665,34 @@
 
 <!-- HERO -->
 <section class="hero">
-  <!-- Phone scanner decoration -->
-  <div class="phone">
-    <div class="phone__notch"></div>
-    <div class="phone__screen">
-      <div class="phone__status">Scanning...</div>
-      <div class="phone__scan"></div>
-      <div class="phone__corners">
-        <span class="phone__corner-bl"></span>
-        <span class="phone__corner-br"></span>
+  <!-- Phone + person decoration -->
+  <div class="hero-deco">
+    <div class="phone">
+      <div class="phone__notch"></div>
+      <div class="phone__screen">
+        <div class="phone__status">Scanning...</div>
+        <div class="phone__scan"></div>
+        <div class="phone__corners">
+          <span class="phone__corner-bl"></span>
+          <span class="phone__corner-br"></span>
+        </div>
+        <div class="phone__face">
+          <svg viewBox="0 0 100 120" fill="none">
+            <ellipse cx="50" cy="52" rx="34" ry="42" fill="#e4e4e7" stroke="#d4d4d8" stroke-width="1"/>
+            <circle cx="36" cy="44" r="4" fill="#c4c4c8"/>
+            <circle cx="64" cy="44" r="4" fill="#c4c4c8"/>
+            <ellipse cx="50" cy="60" rx="3" ry="2" fill="#d4d4d8"/>
+            <path d="M40 72 Q50 80 60 72" stroke="#d4d4d8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="phone__badge">23 matches found</div>
       </div>
-      <div class="phone__face">
-        <svg viewBox="0 0 100 120" fill="none">
-          <ellipse cx="50" cy="52" rx="34" ry="42" fill="#e4e4e7" stroke="#d4d4d8" stroke-width="1"/>
-          <circle cx="36" cy="44" r="4" fill="#c4c4c8"/>
-          <circle cx="64" cy="44" r="4" fill="#c4c4c8"/>
-          <ellipse cx="50" cy="60" rx="3" ry="2" fill="#d4d4d8"/>
-          <path d="M40 72 Q50 80 60 72" stroke="#d4d4d8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        </svg>
+    </div>
+    <div class="hero-person">
+      <div class="hero-person__avatar">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
-      <div class="phone__dots">
-        <div class="phone__dot"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <div class="phone__dot"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <div class="phone__dot"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-      </div>
-      <div class="phone__badge">23 matches found</div>
+      <div class="hero-person__bubble">Found <strong>47 sites</strong> using my photo without permission!</div>
     </div>
   </div>
 
