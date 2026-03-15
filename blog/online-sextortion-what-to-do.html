@@ -37,27 +37,7 @@ html{font-size:16px;scroll-behavior:smooth}
 body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .bg-gradient{position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 20%,rgba(91,154,255,.12) 0%,transparent 50%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(167,139,250,.08) 0%,transparent 50%);pointer-events:none;z-index:0}
 .dot-pattern{position:fixed;inset:0;background-image:radial-gradient(rgba(91,154,255,.15) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(254,254,254,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:100}
-.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 
-.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);font-weight:600}
-.nav__links{display:flex;align-items:center;gap:32px}
-.nav__link{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .25s;position:relative}
-.nav__link:hover{color:var(--text)}
-.nav__link--active{color:var(--text)}
-.nav__link--active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px}
-.nav__right{display:flex;align-items:center;gap:12px}
-.nav__lang{display:flex;align-items:center;gap:6px;padding:9px 14px;border:1px solid var(--border);border-radius:10px;font-size:.85rem;font-weight:500;color:var(--text-secondary);background:var(--glass);backdrop-filter:blur(10px);cursor:pointer;transition:all .25s}
-.nav__lang:hover{border-color:var(--border-light);background:var(--bg-card)}
-.nav__lang svg{width:16px;height:16px;opacity:.7}
-.nav__login{padding:9px 20px;font-size:.85rem;font-weight:600;color:white;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:10px;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .25s;border:none;cursor:pointer}
-.nav__login:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(91,154,255,.3)}
-.nav__login svg{width:16px;height:16px;stroke:white;stroke-width:2;fill:none}
-.nav__hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
-.nav__hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
-.mobile-menu{display:none;position:fixed;top:65px;left:0;right:0;bottom:0;background:rgba(26,31,46,.98);backdrop-filter:blur(20px);z-index:99;flex-direction:column;padding:24px}
-.mobile-menu.active{display:flex}
-.mobile-menu a{padding:14px 0;font-size:1.1rem;font-weight:600;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border)}
 .article{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:60px 24px 80px}
 .article__breadcrumb{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted);margin-bottom:32px}
 .article__breadcrumb a{color:var(--accent);text-decoration:none}
@@ -100,8 +80,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 .footer__link{color:var(--text-muted);text-decoration:none;transition:color .2s}
 .footer__link:hover{color:var(--accent)}
 @media(max-width:768px){
-  .nav{padding:12px 16px}.nav__links,.nav__right{display:none}.nav__hamburger{display:flex}
-  .article{padding:32px 16px 60px}
+    .article{padding:32px 16px 60px}
   .post-nav{flex-direction:column}.post-nav__link{max-width:100%}
 }
 </style>
@@ -153,8 +132,6 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
   <a href="opt-out.html">Opt-Out</a>
   <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
 </div>
-<div class="mobile-menu" id="mobileMenu"><a href="/">Home</a><a href="../about.html">About</a><a href="../pricing.html">Pricing</a><a href="../blog.html">Blog</a><a href="../faq.html">FAQ</a><a href="../contact.html">Contact</a><a href="../login.html" id="mobileAuth">Log In</a></div>
-
 <article class="article">
   <div class="article__breadcrumb">
     <a href="../blog.html">Blog</a>

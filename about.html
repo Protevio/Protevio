@@ -75,106 +75,10 @@ body{
 }
 
 /* NAV - Exact from homepage */
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 40px;
-  background:rgba(254,254,254,.88);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--glass-border);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.nav__logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-}
 
-.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);font-weight:600}
-.nav__links{
-  display:flex;
-  align-items:center;
-  gap:32px;
-}
-.nav__link{
-  font-size:.88rem;
-  font-weight:500;
-  color:var(--text-muted);
-  text-decoration:none;
-  transition:color .25s;
-  position:relative;
-}
-.nav__link:hover{color:var(--text)}
-.nav__link--active{color:var(--text)}
-.nav__link--active::after{
-  content:'';
-  position:absolute;
-  bottom:-4px;
-  left:0;
-  right:0;
-  height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--purple));
-  border-radius:2px;
-}
-.nav__right{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.nav__lang{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:9px 14px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:.85rem;
-  font-weight:500;
-  color:var(--text-secondary);
-  background:var(--glass);
-  backdrop-filter:blur(10px);
-  cursor:pointer;
-  transition:all .25s;
-}
-.nav__lang:hover{
-  border-color:var(--border-light);
-  background:var(--bg-card);
-  transform:translateY(-1px);
-}
-.nav__lang svg{width:16px;height:16px;opacity:.7}
-.nav__login{
-  padding:9px 20px;
-  font-size:.85rem;
-  font-weight:600;
-  color:white;
-  background:var(--accent);
-  border:none;
-  border-radius:10px;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  transition:all .25s;
-  box-shadow:0 4px 16px rgba(37,99,235,.2);
-  position:relative;
-  overflow:hidden;
-}
-.nav__login::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:#1d4ed8;
-  opacity:0;
-  transition:opacity .25s;
-}
-.nav__login:hover::before{opacity:1}
-.nav__login:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,154,255,.45)}
-.nav__login span{position:relative;z-index:1}
-.nav__login svg{width:16px;height:16px;stroke:white;stroke-width:2.5;fill:none;position:relative;z-index:1}
+
+
+
 
 
 .container{
@@ -329,9 +233,7 @@ body{
 .footer__link:hover{color:var(--accent-light)}
 
 @media(max-width:768px){
-  .nav{padding:12px 20px}
-  .nav__links{gap:16px}
-  .nav__link{font-size:.8rem}
+
   .container{padding:40px 16px}
   .hero{margin-bottom:40px}
   .hero__title{font-size:2rem}
@@ -366,41 +268,9 @@ body{
 }
 
 /* ── Hamburger Menu ── */
-.nav__hamburger{
-  display:none;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
-  padding:10px;
-  z-index:110;
-  background:none;
-  border:none;
-  margin-left:auto;
-}
-.nav__hamburger span{
-  display:block;width:22px;height:2.5px;
-  background:var(--text);border-radius:2px;
-  transition:all .3s ease;
-}
-.nav__hamburger.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-.nav__hamburger.active span:nth-child(2){opacity:0}
-.nav__hamburger.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-
-
-
-
-
-
-
-
-
 
 @media(max-width:768px){
-  .nav__hamburger{display:flex}
-  
-  
-  
-  
+
 }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">

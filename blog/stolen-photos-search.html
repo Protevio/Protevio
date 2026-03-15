@@ -66,20 +66,9 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 .bg-gradient{position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 20%,rgba(91,154,255,.12) 0%,transparent 50%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(167,139,250,.08) 0%,transparent 50%),radial-gradient(ellipse 40% 30% at 50% 50%,rgba(74,222,128,.05) 0%,transparent 50%);pointer-events:none;z-index:0;animation:gradientShift 15s ease-in-out infinite}
 @keyframes gradientShift{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
 .dot-pattern{position:fixed;inset:0;background-image:radial-gradient(rgba(91,154,255,.15) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(254,254,254,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:100}
-.nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 
-.nav__logo-text{font-family:'Literata',Georgia,serif;font-size:1.35rem;letter-spacing:-.02em;color:var(--text);font-weight:600}
-.nav__links{display:flex;align-items:center;gap:32px}
-.nav__link{font-size:.88rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .25s}
-.nav__link:hover{color:var(--text)}
-.nav__right{display:flex;align-items:center;gap:12px}
-.nav__login{padding:9px 20px;font-size:.85rem;font-weight:600;color:white;background:var(--accent);border:none;border-radius:10px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:all .25s;box-shadow:0 4px 16px rgba(37,99,235,.2);position:relative;overflow:hidden}
-.nav__login:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(91,154,255,.45)}
-.nav__login svg{width:12px;height:12px;stroke:currentColor;stroke-width:2.5;fill:none;position:relative;z-index:1}
-.nav__login span{position:relative;z-index:1}
-.nav__hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.nav__hamburger span{width:22px;height:2px;background:var(--text-muted);border-radius:2px;transition:all .3s}
+
+
 .lp-hero{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:80px 40px 60px;text-align:center}
 .lp-hero__badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-glow);border:1px solid rgba(91,154,255,.2);padding:8px 18px;border-radius:20px;font-size:.78rem;font-weight:700;color:var(--accent-light);margin-bottom:28px;letter-spacing:.03em}
 .lp-hero__badge svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
@@ -124,9 +113,7 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 .lp-banner h2{font-size:1.6rem;font-weight:800;margin-bottom:12px}
 .lp-banner p{color:var(--text-muted);margin-bottom:28px;font-size:1rem}
 @media(max-width:768px){
-  .nav{padding:12px 20px}
-  .nav__links{display:none}
-  .nav__hamburger{display:flex}
+
   .lp-hero{padding:48px 20px 40px}
   .lp-section{padding:0 20px 40px}
   .lp-trust{gap:20px}
