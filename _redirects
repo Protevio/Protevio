@@ -1,10 +1,10 @@
 # ═══════════════════════════════════════════════════════════════
 # PROTEVIO — Cloudflare Pages Redirect Rules
-# Updated: 2026-03-14 based on Google Search Console data
+# Updated: 2026-03-15
 #
-# NOTE: www → non-www redirect is handled by Cloudflare 
-# Redirect Rules (dashboard), NOT here. CF Pages _redirects
-# only handles path-level redirects.
+# NOTE: www → non-www is handled by Cloudflare Redirect Rules
+# NOTE: CF Pages auto-serves .html files without extension
+#       so do NOT add extensionless→.html redirects here
 # ═══════════════════════════════════════════════════════════════
 
 # ===== Blog: root-level duplicates → canonical /blog/ paths =====
@@ -22,8 +22,3 @@
 /reset-password__1_.html /reset-password.html 301
 /privacy-policy__1_.html /privacy-policy.html 301
 /terms-of-service__1_.html /terms-of-service.html 301
-
-# ===== Legal/CSR pages: extensionless → .html canonical =====
-/privacy-policy /privacy-policy.html 301
-/terms-of-service /terms-of-service.html 301
-/csr /csr.html 301
