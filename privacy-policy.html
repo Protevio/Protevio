@@ -47,9 +47,9 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 
 .dot-pattern{position:fixed;inset:0;background:none;background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5}
 
-nav{background:rgba(254,254,254,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);padding:16px 40px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'Literata',Georgia,serif;font-size:1.3rem;font-weight:400;letter-spacing:.18em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+
+
+
 .nav-link{color:var(--text-secondary);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
 .nav-link:hover{color:var(--accent)}
 
@@ -104,7 +104,7 @@ footer p{font-size:.85rem;color:var(--text-muted);margin:8px 0}
 footer a{color:var(--accent);margin:0 12px}
 
 @media(max-width:768px){
-  nav{padding:12px 20px}
+  
   .container{padding:60px 20px}
   .content{padding:32px 24px}
   .title{font-size:2rem}
@@ -133,28 +133,42 @@ footer a{color:var(--accent);margin:0 12px}
   }
 }
 </script>
+<link rel="stylesheet" href="/protevio.css">
 </head>
 <body>
 
 <div class="bg-gradient"></div>
 <div class="dot-pattern"></div>
 
-<nav>
-  <a href="/" class="logo">
-    <div class="logo-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
-        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
-        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
-        <circle cx="18" cy="18" r="2" fill="#fefefe"/>
-        <defs>
-          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
-            <stop offset="0%" stop-color="#00e5ff"/>
-            <stop offset="100%" stop-color="#2563eb"/>
-          </linearGradient>
-        </defs>
-      </svg></div>
-    PROTEVIO
-  </a>
-  <a href="/" class="nav-link">Back to Home</a>
+<nav class="p-nav">
+  <a href="/" class="p-nav__logo">Protevio<span>.</span></a>
+  <div class="p-nav__center">
+    <a href="/" class="p-nav__link">Home</a>
+    <a href="about.html" class="p-nav__link">About</a>
+    <a href="pricing.html" class="p-nav__link">Pricing</a>
+    <a href="faq.html" class="p-nav__link">FAQ</a>
+    <a href="blog.html" class="p-nav__link">Blog</a>
+    <a href="contact.html" class="p-nav__link">Contact</a>
+    <a href="opt-out.html" class="p-nav__link">Opt-Out</a>
+  </div>
+  <div class="p-nav__right">
+    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth">
+      <span>Sign In</span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </a>
+  </div>
+  <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav__mobile-overlay"></div>
+  <div class="nav__mobile-menu" style="display:none">
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="opt-out.html">Opt-Out</a>
+    <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
+  </div>
 </nav>
 
 <div class="container">
@@ -197,7 +211,7 @@ footer a{color:var(--accent);margin:0 12px}
     <p>By using our services, you consent to the data practices described in this policy. Please read this document carefully alongside our <a href="terms-of-service.html">Terms of Service</a>.</p>
 
     <div class="highlight">
-      <strong>ðŸ”’ Our Core Privacy Commitments:</strong>
+      <strong>&#128274; Our Core Privacy Commitments:</strong>
       <ul style="margin-top:12px">
         <li>We never sell your personal data or photos</li>
         <li>Biometric data is processed securely and deleted within 30 days</li>
@@ -206,7 +220,7 @@ footer a{color:var(--accent);margin:0 12px}
       </ul>
     </div>
 
-    <h2 id="biometric">2. Biometric Data Processing ⚠ ï¸ CRITICAL</h2>
+    <h2 id="biometric">2. Biometric Data Processing ⚠  CRITICAL</h2>
     
     <div class="warning">
       <strong>Special Notice: Biometric Information</strong><br>
@@ -333,7 +347,7 @@ footer a{color:var(--accent);margin:0 12px}
     <h2 id="ai-technology">5. AI Technology & Limitations</h2>
 
     <div class="info-box">
-      <h4>⚠ ï¸ Important: AI-Generated Results</h4>
+      <h4>⚠  Important: AI-Generated Results</h4>
       <p>Protevio uses neural networks for facial recognition. While highly accurate, the technology has limitations you should understand.</p>
     </div>
 
@@ -357,7 +371,7 @@ footer a{color:var(--accent);margin:0 12px}
 
     <h3>5.3 What Our AI Is NOT Suitable For</h3>
     <div class="warning">
-      <strong>ðŸš« Prohibited Uses:</strong>
+      <strong>&#128683; Prohibited Uses:</strong>
       <ul style="margin-top:12px">
         <li>Law enforcement or criminal investigations</li>
         <li>Legal proceedings or identity verification</li>
@@ -719,7 +733,7 @@ footer a{color:var(--accent);margin:0 12px}
     <h2 id="children">14. Children's Privacy</h2>
 
     <div class="warning">
-      <strong>⚠ ï¸ Age Restriction: 18+</strong>
+      <strong>⚠  Age Restriction: 18+</strong>
       <p>Protevio services are not intended for children under 18 years of age.</p>
     </div>
 
@@ -811,7 +825,7 @@ footer a{color:var(--accent);margin:0 12px}
     <h2 id="user-control">16. User Control Dashboard</h2>
 
     <div class="success">
-      <strong>ðŸŽ›ï¸ Manage Your Privacy</strong>
+      <strong>&#9888; Manage Your Privacy</strong>
       <p>Access your User Control Dashboard to manage all privacy settings in one place.</p>
     </div>
 
@@ -900,7 +914,7 @@ footer a{color:var(--accent);margin:0 12px}
     [Country]</p>
 
     <div class="highlight">
-      <strong>ðŸ“§ Quick Contact:</strong>
+      <strong>&#128231; Quick Contact:</strong>
       <p>For urgent privacy matters, email <a href="/cdn-cgi/l/email-protection#8ed5ebe3efe7e2aefefce1faebedfaebead3">[email protected]</a> with "URGENT" in the subject line.</p>
     </div>
 
@@ -925,4 +939,4 @@ footer a{color:var(--accent);margin:0 12px}
     <p>Continued use of services after changes constitutes acceptance. If you don't agree, please stop using our services and delete your account.</p>
 
     <div class="warning">
-      <strong>⚠ ï¸ Legal Notice:</strong> This Privacy Policy was last updated on February 6, 2026. By using Protevio services, you acknowledge you have read
+      <strong>⚠  Legal Notice:</strong> This Privacy Policy was last updated on February 6, 2026. By using Protevio services, you acknowledge you have read

@@ -47,9 +47,9 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 
 .dot-pattern{position:fixed;inset:0;background:none;background-size:32px 32px;pointer-events:none;z-index:0;opacity:.5}
 
-nav{background:rgba(254,254,254,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);padding:16px 40px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'Literata',Georgia,serif;font-size:1.3rem;font-weight:400;letter-spacing:.18em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+
+
+
 .nav-link{color:var(--text-secondary);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
 .nav-link:hover{color:var(--accent)}
 
@@ -110,7 +110,7 @@ footer p{font-size:.85rem;color:var(--text-muted);margin:8px 0}
 footer a{color:var(--accent);margin:0 12px}
 
 @media(max-width:768px){
-  nav{padding:12px 20px}
+  
   .container{padding:60px 20px}
   .content{padding:32px 24px}
   .title{font-size:2rem}
@@ -140,28 +140,42 @@ footer a{color:var(--accent);margin:0 12px}
   }
 }
 </script>
+<link rel="stylesheet" href="/protevio.css">
 </head>
 <body>
 
 <div class="bg-gradient"></div>
 <div class="dot-pattern"></div>
 
-<nav>
-  <a href="/" class="logo">
-    <div class="logo-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
-        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" stroke="url(#hexGrad)" stroke-width="1.4" fill="none"/>
-        <circle cx="18" cy="18" r="5.5" fill="url(#hexGrad)" opacity=".9"/>
-        <circle cx="18" cy="18" r="2" fill="#fefefe"/>
-        <defs>
-          <linearGradient id="hexGrad" x1="0" y1="0" x2="36" y2="36">
-            <stop offset="0%" stop-color="#00e5ff"/>
-            <stop offset="100%" stop-color="#2563eb"/>
-          </linearGradient>
-        </defs>
-      </svg></div>
-    PROTEVIO
-  </a>
-  <a href="/" class="nav-link">Back to Home</a>
+<nav class="p-nav">
+  <a href="/" class="p-nav__logo">Protevio<span>.</span></a>
+  <div class="p-nav__center">
+    <a href="/" class="p-nav__link">Home</a>
+    <a href="about.html" class="p-nav__link">About</a>
+    <a href="pricing.html" class="p-nav__link">Pricing</a>
+    <a href="faq.html" class="p-nav__link">FAQ</a>
+    <a href="blog.html" class="p-nav__link">Blog</a>
+    <a href="contact.html" class="p-nav__link">Contact</a>
+    <a href="opt-out.html" class="p-nav__link">Opt-Out</a>
+  </div>
+  <div class="p-nav__right">
+    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth">
+      <span>Sign In</span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </a>
+  </div>
+  <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav__mobile-overlay"></div>
+  <div class="nav__mobile-menu" style="display:none">
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="opt-out.html">Opt-Out</a>
+    <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
+  </div>
 </nav>
 
 <div class="container">
@@ -206,7 +220,7 @@ footer a{color:var(--accent);margin:0 12px}
     <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "You") and Protevio AI ("Protevio", "We", "Us") governing your access to and use of our facial recognition search platform and related services (collectively, "Services").</p>
 
     <div class="warning">
-      <strong>⚠ ï¸ IMPORTANT: Please read carefully</strong>
+      <strong>⚠  IMPORTANT: Please read carefully</strong>
       <p>By accessing or using our Services, you agree to be bound by these Terms and our <a href="privacy-policy.html">Privacy Policy</a>. If you do not agree, do not use our Services.</p>
     </div>
 
@@ -229,7 +243,7 @@ footer a{color:var(--accent);margin:0 12px}
 
     <h3>2.1 Free Tier (No Account Required)</h3>
     <div class="info-box">
-      <h4>ðŸ†“ Free Access</h4>
+      <h4>&#127379; Free Access</h4>
       <ul style="margin-top:12px">
         <li><strong>10 searches per day</strong></li>
         <li>No account required</li>
@@ -314,7 +328,7 @@ footer a{color:var(--accent);margin:0 12px}
 
     <h3>3.2 Account Security - Your Responsibilities</h3>
     <div class="warning">
-      <strong>ðŸ”’ You are responsible for:</strong>
+      <strong>&#128274; You are responsible for:</strong>
       <ul style="margin-top:12px">
         <li>Maintaining confidentiality of your password</li>
         <li>All activities under your account</li>
@@ -372,10 +386,10 @@ footer a{color:var(--accent);margin:0 12px}
       <li>Do not upload explicit or pornographic content</li>
     </ul>
 
-    <h2 id="prohibited">5. Prohibited Activities ⚠ ï¸</h2>
+    <h2 id="prohibited">5. Prohibited Activities ⚠ </h2>
 
     <div class="warning">
-      <strong>ðŸš« STRICTLY PROHIBITED</strong>
+      <strong>&#128683; STRICTLY PROHIBITED</strong>
       <p>The following activities will result in immediate account termination:</p>
     </div>
 
@@ -455,7 +469,7 @@ footer a{color:var(--accent);margin:0 12px}
     <h2 id="fair-use">6. Fair Use Policy (Enterprise Unlimited) ⚠¡</h2>
 
     <div class="highlight">
-      <strong>ðŸ“Š Enterprise "Unlimited" Plan Fair Use Limits</strong>
+      <strong>&#128202; Enterprise "Unlimited" Plan Fair Use Limits</strong>
       <p>To ensure service quality for all users, Enterprise Unlimited is subject to reasonable use limits.</p>
     </div>
 
@@ -495,10 +509,10 @@ footer a{color:var(--accent);margin:0 12px}
 
     <p><strong>Need higher limits?</strong> Contact <a href="/cdn-cgi/l/email-protection#510a343c30383d7121233e2534322534350c">[email protected]</a> for custom Enterprise plans.</p>
 
-    <h2 id="search-disclaimer">7. Search Results Disclaimer ⚠ ï¸ CRITICAL</h2>
+    <h2 id="search-disclaimer">7. Search Results Disclaimer ⚠  CRITICAL</h2>
 
     <div class="warning">
-      <strong>ðŸ¤– AI-Generated Results - Read Carefully</strong>
+      <strong>&#9888; AI-Generated Results - Read Carefully</strong>
       <p>Search results are generated by artificial intelligence and may contain errors, false positives, or incomplete information.</p>
     </div>
 
@@ -607,7 +621,7 @@ footer a{color:var(--accent);margin:0 12px}
     <h2 id="refunds">9. Refund Policy</h2>
 
     <div class="success">
-      <strong>ðŸ’° 7-Day Money-Back Guarantee</strong>
+      <strong>&#9888; 7-Day Money-Back Guarantee</strong>
       <p>Not satisfied? Get a full refund within 7 days of purchase if eligibility criteria met.</p>
     </div>
 
@@ -843,7 +857,7 @@ footer a{color:var(--accent);margin:0 12px}
     <h2 id="liability">13. Limitation of Liability</h2>
 
     <div class="warning">
-      <strong>⚠ ï¸ IMPORTANT LEGAL DISCLAIMER</strong>
+      <strong>⚠  IMPORTANT LEGAL DISCLAIMER</strong>
       <p>To the maximum extent permitted by law, Protevio and its affiliates shall not be liable for any damages arising from your use of Services.</p>
     </div>
 
