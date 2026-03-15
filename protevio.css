@@ -740,7 +740,7 @@ img { display: block; max-width: 100%; }
   transition: transform .3s ease;
   box-shadow: -8px 0 32px rgba(0,0,0,.06);
 }
-.nav__mobile-menu.active { display: flex; transform: translateX(0); }
+.nav__mobile-menu.active { display: flex !important; transform: translateX(0); }
 .nav__mobile-menu a {
   display: block; padding: 14px 16px; font-size: .95rem; font-weight: 500;
   color: var(--ink-soft); text-decoration: none; border-radius: var(--r-md);
