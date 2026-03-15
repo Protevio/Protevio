@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"How can models track where their photos appear?","acceptedAnswer":{"@type":"Answer","text":"Upload a face photo from your portfolio. Results show every indexed website where that face appears, with direct URLs and similarity scores. Set up alerts for ongoing monitoring of new publications."}},{"@type":"Question","name":"Does this work for photos taken by others?","acceptedAnswer":{"@type":"Answer","text":"Yes. Protevio matches your face regardless of who took the photo. Whether it is your own selfie, an agency headshot, or a campaign photo — if your face is in it, we can find where it appears."}},{"@type":"Question","name":"Can I verify agency placements?","acceptedAnswer":{"@type":"Answer","text":"After a campaign, search for the subject’s face to verify images appear only on agreed platforms. Unexpected results may indicate unauthorized distribution or sublicensing violations."}},{"@type":"Question","name":"How does this help with contract enforcement?","acceptedAnswer":{"@type":"Answer","text":"Results provide timestamped evidence of where images appear. Compare against licensing agreements to identify breaches. PDF evidence reports and DMCA templates support formal enforcement."}},{"@type":"Question","name":"Is this useful for agencies?","acceptedAnswer":{"@type":"Answer","text":"Yes. Agencies can monitor placements for their entire roster, verify client usage stays within contracts, and quickly identify unauthorized redistribution of campaign assets."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

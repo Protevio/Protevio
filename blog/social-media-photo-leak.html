@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"How do I check if my social media photos have leaked?","acceptedAnswer":{"@type":"Answer","text":"Upload a selfie or profile photo to Protevio. Compare results against platforms where you actually posted — any additional websites represent potential leaks, scraping, or unauthorized redistribution."}},{"@type":"Question","name":"Can private account photos be scraped?","acceptedAnswer":{"@type":"Answer","text":"While harder to scrape directly, private photos leak through screenshots, third-party apps, tagged photos on public accounts, data breaches, and friends who share. Profile pictures are often publicly accessible regardless of settings."}},{"@type":"Question","name":"What should I do if I find my photos on unauthorized sites?","acceptedAnswer":{"@type":"Answer","text":"Document the finding with Protevio’s evidence reports, then send removal requests. EU residents have strong GDPR rights. For others, DMCA takedowns are effective. Many aggregation sites also have their own removal processes."}},{"@type":"Question","name":"How can I prevent future photo leaks?","acceptedAnswer":{"@type":"Answer","text":"Use strict privacy settings, be selective about follow requests, avoid posting high-resolution face photos publicly, and set up Protevio monitoring alerts to catch leaks early. Complete prevention is impossible, but early detection minimizes damage."}},{"@type":"Question","name":"Does Protevio scrape social media?","acceptedAnswer":{"@type":"Answer","text":"Protevio crawls publicly accessible websites to build its face index. We respect robots.txt directives, do not bypass authentication, and offer complete opt-out for anyone who wants their face removed."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

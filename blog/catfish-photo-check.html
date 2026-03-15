@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"How do I check if someone is catfishing me?","acceptedAnswer":{"@type":"Answer","text":"Upload their photo to Protevio. If the face appears on multiple unrelated websites or under different names, it is very likely a catfish. If results show one consistent identity, the person is more likely real."}},{"@type":"Question","name":"What should I do if I discover a catfish?","acceptedAnswer":{"@type":"Answer","text":"Stop all communication immediately. Do not send money or personal information. Report the fake profile to the platform. If you already sent money, contact your bank and file a police report."}},{"@type":"Question","name":"Is it legal to search for someone else’s face?","acceptedAnswer":{"@type":"Answer","text":"Protevio’s terms allow searching to verify identity and protect yourself from fraud. Verifying someone is who they claim to be is a legitimate protective measure, especially in online dating."}},{"@type":"Question","name":"How accurate is this for exposing catfish?","acceptedAnswer":{"@type":"Answer","text":"Protevio achieves 99.7% facial recognition accuracy. If a catfish is using photos that exist elsewhere on the indexed web, we find the match. The more widely the stolen photos appear, the more likely we catch them."}},{"@type":"Question","name":"Can catfishers avoid detection?","acceptedAnswer":{"@type":"Answer","text":"Catfishers try to evade reverse image search by cropping, filtering, and mirroring photos. These techniques fool pixel-based tools but not facial recognition. Protevio matches the face geometry itself, which cannot be hidden without making the person unrecognizable."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

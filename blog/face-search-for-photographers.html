@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"How can photographers use Protevio for copyright protection?","acceptedAnswer":{"@type":"Answer","text":"Upload faces from your portrait portfolio to find where those images appear online. Compare results against your licensing records. Use built-in tools to generate DMCA takedown letters or retroactive license invoices backed by timestamped evidence."}},{"@type":"Question","name":"Does Protevio work for edited or cropped portraits?","acceptedAnswer":{"@type":"Answer","text":"Yes. Unlike pixel-based search, Protevio matches facial features. It finds your portraits even when cropped, resized, filtered, color-graded, or screenshotted from another platform."}},{"@type":"Question","name":"Can I send invoices for unlicensed use?","acceptedAnswer":{"@type":"Answer","text":"Protevio generates timestamped evidence reports documenting each unauthorized use. You can use these to support retroactive licensing invoices. Many photographers find that a professional invoice backed by evidence results in payment without legal action."}},{"@type":"Question","name":"How does this compare to TinEye or Google Images?","acceptedAnswer":{"@type":"Answer","text":"Those tools match pixel patterns and fail with cropped, edited, or reformatted photos. Protevio matches the actual face using 512-dimensional embeddings, finding unlicensed use that pixel-based tools completely miss."}},{"@type":"Question","name":"Can I monitor my entire client portfolio?","acceptedAnswer":{"@type":"Answer","text":"You can search for any face and set up alerts for ongoing monitoring. Paid plans provide higher search limits suitable for professional workflows monitoring multiple subjects across many shoots."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

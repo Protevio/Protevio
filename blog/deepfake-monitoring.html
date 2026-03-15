@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"Does Protevio detect whether an image is a deepfake?","acceptedAnswer":{"@type":"Answer","text":"No. Protevio is a face monitoring tool, not a forensic analyzer. We find all images matching your face across the indexed web — whether authentic or AI-generated. You review results to identify unauthorized or manipulated content. This approach catches all unauthorized face use, not just deepfakes."}},{"@type":"Question","name":"How does monitoring help against deepfakes?","acceptedAnswer":{"@type":"Answer","text":"The biggest challenge with deepfakes is not knowing they exist. Protevio gives you visibility by finding every indexed image matching your face. Regular searches and automated alerts ensure you discover unauthorized content early, when removal is practical."}},{"@type":"Question","name":"What should I do if I find unauthorized content?","acceptedAnswer":{"@type":"Answer","text":"Document it using Protevio’s evidence report feature. Report it to the hosting platform, file a DMCA takedown, and consider reporting to law enforcement. In many jurisdictions, non-consensual deepfakes are now illegal."}},{"@type":"Question","name":"How often should I check for unauthorized face use?","acceptedAnswer":{"@type":"Answer","text":"Run a search at least monthly and set up face alerts for continuous automated monitoring. High-risk individuals (public figures, executives) should monitor more frequently."}},{"@type":"Question","name":"Are deepfakes illegal?","acceptedAnswer":{"@type":"Answer","text":"Laws are evolving rapidly. The EU AI Act, UK Online Safety Act, and several US state laws address non-consensual deepfake creation and distribution. Protevio’s timestamped evidence reports support legal proceedings in any jurisdiction."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

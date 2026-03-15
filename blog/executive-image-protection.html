@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"How does executive image protection work?","acceptedAnswer":{"@type":"Answer","text":"Upload each executive’s headshot. Our facial recognition reveals everywhere that face appears online. Set up alerts for continuous monitoring and use built-in tools to request removal of unauthorized content."}},{"@type":"Question","name":"Can I monitor multiple executives?","acceptedAnswer":{"@type":"Answer","text":"Yes. Paid plans support multiple searches and face alerts. Set up individual monitoring for each leadership team member and manage all alerts from one account."}},{"@type":"Question","name":"What types of fraud use executive photos?","acceptedAnswer":{"@type":"Answer","text":"Common misuses include fake cryptocurrency endorsements, impersonation on LinkedIn and social media, fraudulent business websites listing fake team members, and social engineering attacks using executive photos for credibility."}},{"@type":"Question","name":"Is this suitable for small businesses?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Small business owners and founders are actually easier targets because they often lack dedicated security teams. Image fraud targets businesses of all sizes."}},{"@type":"Question","name":"How quickly can unauthorized content be removed?","acceptedAnswer":{"@type":"Answer","text":"With DMCA tools, most hosting providers process takedowns within 24–72 hours. Social media platforms typically respond within 1–2 weeks. Having legal counsel can accelerate the process further."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

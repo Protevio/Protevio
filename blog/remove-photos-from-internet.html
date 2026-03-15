@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"Does Protevio remove my photos for me?","acceptedAnswer":{"@type":"Answer","text":"No. Protevio finds where your photos appear and generates the legal documents (DMCA letters, evidence reports) you need to request removal yourself. We are a search and documentation tool, not a takedown service."}},{"@type":"Question","name":"How do I use the DMCA letters Protevio generates?","acceptedAnswer":{"@type":"Answer","text":"Send them to the website owner or their hosting provider via email. Most hosting companies have abuse@ email addresses specifically for this. Letters come pre-filled with URLs, timestamps, and legal language."}},{"@type":"Question","name":"What if a website ignores my takedown request?","acceptedAnswer":{"@type":"Answer","text":"Send the DMCA notice to their hosting provider instead. If the hosting provider is also unresponsive, consult an intellectual property attorney. Protevio’s evidence reports support legal escalation."}},{"@type":"Question","name":"How long does removal typically take?","acceptedAnswer":{"@type":"Answer","text":"Hosting providers typically process DMCA requests within 24–72 hours. Social media platforms respond within 1–2 weeks. Uncooperative websites may require escalation."}},{"@type":"Question","name":"Can I remove my face from Protevio’s own database?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use our opt-out page to submit your face and all matching embeddings will be permanently removed from our index."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>

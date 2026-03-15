@@ -28,24 +28,25 @@
     "mainEntity": [{"@type":"Question","name":"Is my face biometric data under GDPR?","acceptedAnswer":{"@type":"Answer","text":"Yes. Under Article 9, facial images used for identification are classified as biometric data — a special category requiring explicit consent or a valid legal basis for processing."}},{"@type":"Question","name":"Can I force websites to delete photos of my face?","acceptedAnswer":{"@type":"Answer","text":"Under Article 17, you can request deletion from any EU data controller when there is no overriding legitimate reason for continued processing. Protevio helps identify which websites to contact and provides template letters."}},{"@type":"Question","name":"Does GDPR apply to websites outside the EU?","acceptedAnswer":{"@type":"Answer","text":"GDPR applies to any organization processing data of EU residents, regardless of location. Non-EU websites with your facial data must comply with your data rights requests."}},{"@type":"Question","name":"How do I opt out of Protevio’s database?","acceptedAnswer":{"@type":"Answer","text":"Visit our opt-out page, upload your photo, and our system matches your face against our index and permanently deletes all matching embeddings. Typically completes within 24 hours."}},{"@type":"Question","name":"What if a website ignores my GDPR request?","acceptedAnswer":{"@type":"Answer","text":"If a controller fails to respond within 30 days or refuses without valid grounds, file a complaint with your national data protection authority. Protevio’s evidence reports document the violation for your complaint."}}]
   }]
 
-// Nav hamburger
+
+// Nav + Auth (shared)
 (function(){
   var h=document.querySelector('.nav__hamburger'),
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
     h.onclick=toggle;
     if(o)o.onclick=toggle;
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
   }
-  // Auth state
-  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
-  if(t&&u.username){
-    var name=u.first_name||u.username;
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'null');
+  if(t&&u){
+    var name=(u.first_name||u.name||u.username||'Account').split(' ')[0];
     var navAuth=document.getElementById('navAuth');
     var mobileAuth=document.getElementById('mobileAuth');
-    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
-    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name;}
   }
 })();
 </script>
