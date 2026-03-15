@@ -1,41 +1,25 @@
 /**
  * Protevio Cookie Consent
- * 
- * Simple accept/decline banner. Only loads analytics and marketing
- * scripts when the user accepts. Stores preference in a cookie
- * that lasts 365 days.
- * 
- * SETUP: Replace the placeholder IDs below with your real ones:
- *   - GA_ID: Your Google Analytics 4 Measurement ID (e.g. "G-XXXXXXXXXX")
- *   - META_PIXEL_ID: Your Meta/Facebook Pixel ID (e.g. "1234567890")
+ * Self-contained popup with built-in styles.
+ * Loads GA4 + Meta Pixel only when user accepts.
  */
-
 (function() {
-  // ══════════════════════════════════════════════════════════
-  // CONFIG — Fill in your tracking IDs here
-  // ══════════════════════════════════════════════════════════
-  var GA_ID = '';           // e.g. 'G-XXXXXXXXXX'
-  var META_PIXEL_ID = '';   // e.g. '1234567890'
-  // ══════════════════════════════════════════════════════════
-
+  var GA_ID = 'G-W2LVCL8XJP';
+  var META_PIXEL_ID = '';
   var COOKIE_NAME = 'protevio_consent';
   var COOKIE_DAYS = 365;
 
-  // --- Cookie helpers ---
-  function setCookie(name, value, days) {
-    var d = new Date();
-    d.setTime(d.getTime() + days * 86400000);
-    document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
+  function setCookie(n, v, d) {
+    var e = new Date();
+    e.setTime(e.getTime() + d * 864e5);
+    document.cookie = n + '=' + v + ';expires=' + e.toUTCString() + ';path=/;SameSite=Lax;Secure';
+  }
+  function getCookie(n) {
+    var m = document.cookie.match(new RegExp('(^| )' + n + '=([^;]+)'));
+    return m ? m[2] : null;
   }
 
-  function getCookie(name) {
-    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    return match ? match[2] : null;
-  }
-
-  // --- Load tracking scripts ---
   function loadAnalytics() {
-    // Google Analytics 4
     if (GA_ID) {
       var s = document.createElement('script');
       s.async = true;
@@ -44,105 +28,109 @@
       window.dataLayer = window.dataLayer || [];
       function gtag() { window.dataLayer.push(arguments); }
       gtag('js', new Date());
-      gtag('config', GA_ID, {
-        anonymize_ip: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
+      gtag('config', GA_ID, { anonymize_ip: true });
       window.gtag = gtag;
     }
-
-    // Meta / Facebook Pixel
     if (META_PIXEL_ID) {
-      !function(f,b,e,v,n,t,s) {
-        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)
-      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', META_PIXEL_ID);
       fbq('track', 'PageView');
     }
   }
 
-  // --- Store user preferences cookie ---
-  function savePreferences() {
-    // Language preference (default: en)
-    var lang = document.documentElement.lang || 'en';
-    setCookie('protevio_lang', lang, COOKIE_DAYS);
+  function injectStyles() {
+    if (document.getElementById('cc-styles')) return;
+    var style = document.createElement('style');
+    style.id = 'cc-styles';
+    style.textContent =
+      '.cc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:99998;opacity:0;transition:opacity .3s ease}' +
+      '.cc-overlay.cc-show{opacity:1}' +
+      '.cc-popup{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(30px);z-index:99999;' +
+        'background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.04);' +
+        'padding:32px;max-width:440px;width:calc(100% - 32px);opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}' +
+      '.cc-popup.cc-show{opacity:1;transform:translateX(-50%) translateY(0)}' +
+      '.cc-popup__icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#f0f4ff,#e8eeff);display:flex;align-items:center;justify-content:center;margin-bottom:16px}' +
+      '.cc-popup__icon svg{width:24px;height:24px;stroke:#2563eb;stroke-width:2;fill:none}' +
+      '.cc-popup__title{font-size:1.1rem;font-weight:700;color:#18181b;margin-bottom:8px}' +
+      '.cc-popup__text{font-size:.85rem;color:#71717a;line-height:1.65;margin-bottom:24px}' +
+      '.cc-popup__text a{color:#2563eb;text-decoration:underline}' +
+      '.cc-popup__actions{display:flex;gap:10px}' +
+      '.cc-popup__btn{flex:1;padding:12px 16px;border-radius:10px;font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit}' +
+      '.cc-popup__btn--accept{background:#18181b;color:#fff}' +
+      '.cc-popup__btn--accept:hover{background:#2563eb}' +
+      '.cc-popup__btn--decline{background:#f4f4f5;color:#52525b}' +
+      '.cc-popup__btn--decline:hover{background:#e4e4e7;color:#18181b}' +
+      '@media(max-width:480px){.cc-popup{bottom:16px;padding:24px;max-width:calc(100% - 24px)}.cc-popup__actions{flex-direction:column-reverse}}';
+    document.head.appendChild(style);
   }
 
-  // --- Banner ---
-  function showBanner() {
-    var banner = document.createElement('div');
-    banner.className = 'cc-banner';
-    banner.id = 'cookieBanner';
-    banner.innerHTML =
-      '<div class="cc-banner__text">' +
-        'We use cookies to improve your experience, analyze traffic, and for marketing. ' +
-        'By clicking "Accept", you consent to our use of cookies. ' +
+  function showPopup() {
+    injectStyles();
+    var overlay = document.createElement('div');
+    overlay.className = 'cc-overlay';
+    overlay.id = 'ccOverlay';
+    document.body.appendChild(overlay);
+
+    var popup = document.createElement('div');
+    popup.className = 'cc-popup';
+    popup.id = 'ccPopup';
+    popup.innerHTML =
+      '<div class="cc-popup__icon">' +
+        '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>' +
+      '</div>' +
+      '<div class="cc-popup__title">Your privacy matters</div>' +
+      '<div class="cc-popup__text">' +
+        'We use cookies to analyze traffic and improve your experience. ' +
+        'You can accept all cookies or decline non-essential ones. ' +
         '<a href="/privacy-policy.html">Privacy Policy</a>' +
       '</div>' +
-      '<div class="cc-banner__actions">' +
-        '<button class="cc-banner__btn cc-banner__btn--decline" id="ccDecline">Decline</button>' +
-        '<button class="cc-banner__btn cc-banner__btn--accept" id="ccAccept">Accept</button>' +
+      '<div class="cc-popup__actions">' +
+        '<button class="cc-popup__btn cc-popup__btn--decline" id="ccDecline">Decline</button>' +
+        '<button class="cc-popup__btn cc-popup__btn--accept" id="ccAccept">Accept all</button>' +
       '</div>';
-    document.body.appendChild(banner);
+    document.body.appendChild(popup);
 
-    document.getElementById('ccAccept').addEventListener('click', function() {
-      setCookie(COOKIE_NAME, 'accepted', COOKIE_DAYS);
-      loadAnalytics();
-      savePreferences();
-      banner.remove();
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        overlay.classList.add('cc-show');
+        popup.classList.add('cc-show');
+      });
     });
 
-    document.getElementById('ccDecline').addEventListener('click', function() {
-      setCookie(COOKIE_NAME, 'declined', COOKIE_DAYS);
-      savePreferences();
-      banner.remove();
-    });
+    function close(accepted) {
+      popup.classList.remove('cc-show');
+      overlay.classList.remove('cc-show');
+      setTimeout(function() { popup.remove(); overlay.remove(); }, 350);
+      setCookie(COOKIE_NAME, accepted ? 'accepted' : 'declined', COOKIE_DAYS);
+      if (accepted) loadAnalytics();
+    }
+
+    document.getElementById('ccAccept').addEventListener('click', function() { close(true); });
+    document.getElementById('ccDecline').addEventListener('click', function() { close(false); });
+    overlay.addEventListener('click', function() { close(false); });
   }
 
-  // --- "Manage cookies" link handler ---
   function bindManageLinks() {
     document.querySelectorAll('[data-cc-manage]').forEach(function(el) {
       el.addEventListener('click', function(e) {
         e.preventDefault();
-        // Remove existing consent so banner shows again
         setCookie(COOKIE_NAME, '', -1);
-        // Show banner
-        if (!document.getElementById('cookieBanner')) {
-          showBanner();
-        }
+        if (!document.getElementById('ccPopup')) showPopup();
       });
     });
   }
 
-  // --- Init ---
   function init() {
     var consent = getCookie(COOKIE_NAME);
-
-    if (consent === 'accepted') {
-      // User already accepted — load scripts
-      loadAnalytics();
-      savePreferences();
-    } else if (consent === 'declined') {
-      // User declined — save preferences only (no tracking)
-      savePreferences();
-    } else {
-      // No consent yet — show banner
-      showBanner();
-    }
-
-    // Bind "manage cookies" footer links
+    if (consent === 'accepted') loadAnalytics();
+    else if (!consent) showPopup();
     bindManageLinks();
   }
 
-  // Wait for DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
