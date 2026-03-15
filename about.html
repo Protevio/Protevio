@@ -386,50 +386,21 @@ body{
 .nav__hamburger.active span:nth-child(2){opacity:0}
 .nav__hamburger.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
 
-.nav__mobile-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:98;
-}
-.nav__mobile-overlay.active{display:block}
 
-.nav__mobile-menu{
-  position:fixed;top:0;right:-100%;
-  width:280px;max-width:80vw;height:100vh;height:100dvh;
-  background:var(--bg);
-  border-left:1px solid var(--glass-border);
-  padding:80px 32px 32px;
-  z-index:99;
-  transition:right .35s cubic-bezier(.4,0,.2,1);
-  overflow-y:auto;
-  display:none;
-}
-.nav__mobile-menu.active{right:0}
 
-.nav__mobile-menu .mobile-link{
-  display:block;padding:16px 0;
-  font-size:1.1rem;font-weight:600;
-  color:var(--text-muted);text-decoration:none;
-  border-bottom:1px solid var(--glass-border);
-  transition:color .2s;
-}
-.nav__mobile-menu .mobile-link:hover,
-.nav__mobile-menu .mobile-link--active{color:var(--accent)}
 
-.nav__mobile-menu .mobile-login{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:24px;padding:16px;
-  background:linear-gradient(135deg,var(--accent),var(--purple));
-  color:#fff;border-radius:12px;text-decoration:none;
-  font-size:1rem;font-weight:600;
-  box-shadow:0 4px 16px rgba(37,99,235,.2);
-}
+
+
+
+
+
 
 @media(max-width:768px){
   .nav__hamburger{display:flex}
-  .nav__mobile-menu{display:block}
-  .nav__links{display:none !important}
-  .nav__lang{display:none !important}
-  .nav__login{display:none !important}
+  
+  
+  
+  
 }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -634,8 +605,6 @@ body{
 })();
 </script>
 <script>
-(function(){
-  
 
 // Nav + Auth (shared)
 (function(){

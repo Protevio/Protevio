@@ -660,12 +660,14 @@
 .nav__mobile-overlay.active { display: block; }
 
 .nav__mobile-menu {
-  position: fixed; top: 0; right: -280px; width: 280px; height: 100vh;
+  display: none;
+  position: fixed; top: 0; right: 0; width: 280px; height: 100vh;
   background: var(--bg); border-left: 1px solid var(--border);
-  z-index: 101; transition: right .3s ease;
-  padding: 24px; display: flex; flex-direction: column; gap: 8px;
+  z-index: 101; transition: transform .3s ease;
+  padding: 24px; flex-direction: column; gap: 8px;
+  transform: translateX(100%);
 }
-.nav__mobile-menu.active { right: 0; }
+.nav__mobile-menu.active { display: flex; transform: translateX(0); }
 .nav__mobile-menu a {
   display: block; padding: 12px 16px; font-size: .92rem; font-weight: 500;
   color: var(--ink-soft); text-decoration: none; border-radius: var(--r-md);
