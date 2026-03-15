@@ -132,27 +132,42 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 }
 </script>
 <meta name="twitter:image" content="https://protevio.com/og-image.png"/>
+<link rel="stylesheet" href="/protevio.css">
 </head>
 <body>
 <div class="bg-gradient"></div>
 <div class="dot-pattern"></div>
 
-<nav class="nav">
-  <a href="/" class="nav__logo"><span class="nav__logo-text">Protevio<span style="color:var(--accent)">.</span></span></a>
-  <div class="nav__links">
-    <a href="/" class="nav__link">Home</a>
-    <a href="../about.html" class="nav__link">About</a>
-    <a href="../pricing.html" class="nav__link">Pricing</a>
-    <a href="../blog.html" class="nav__link nav__link--active">Blog</a>
-    <a href="../faq.html" class="nav__link">FAQ</a>
-    <a href="../contact.html" class="nav__link">Contact</a><a href="../opt-out.html" class="nav__link">Opt-Out</a>
+<nav class="p-nav">
+  <a href="/" class="p-nav__logo">Protevio<span>.</span></a>
+  <div class="p-nav__center">
+    <a href="/" class="p-nav__link">Home</a>
+    <a href="about.html" class="p-nav__link">About</a>
+    <a href="pricing.html" class="p-nav__link">Pricing</a>
+    <a href="faq.html" class="p-nav__link">FAQ</a>
+    <a href="blog.html" class="p-nav__link p-nav__link--active">Blog</a>
+    <a href="contact.html" class="p-nav__link">Contact</a>
+    <a href="opt-out.html" class="p-nav__link">Opt-Out</a>
   </div>
-  <div class="nav__right">
-    <button class="nav__lang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> EN</button>
-    <a href="../login.html" class="nav__login" id="navAuth"><span>Log In</span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  <div class="p-nav__right">
+    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth">
+      <span>Sign In</span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </a>
   </div>
   <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav__mobile-overlay"></div>
+<div class="nav__mobile-menu">
+  <a href="/">Home</a>
+  <a href="about.html">About</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="opt-out.html">Opt-Out</a>
+  <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
+</div>
 <div class="mobile-menu" id="mobileMenu"><a href="/">Home</a><a href="../about.html">About</a><a href="../pricing.html">Pricing</a><a href="../blog.html">Blog</a><a href="../faq.html">FAQ</a><a href="../contact.html">Contact</a><a href="../login.html" id="mobileAuth">Log In</a></div>
 
 <article class="article">
@@ -241,6 +256,27 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 <script>
 document.querySelector('.nav__hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('active'));
 (function(){var t=localStorage.getItem("protevio_token"),u=JSON.parse(localStorage.getItem("protevio_user")||"null"),n=document.getElementById("navAuth"),m=document.getElementById("mobileAuth");if(t&&u){var f=(u.name||u.username||"Account").split(" ")[0];if(n){n.href="../dashboard.html";n.innerHTML='<span>'+f+'</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}if(m){m.href="../dashboard.html";m.textContent=f;}}})();
+
+// Nav hamburger
+(function(){
+  var h=document.querySelector('.nav__hamburger'),
+      m=document.querySelector('.nav__mobile-menu'),
+      o=document.querySelector('.nav__mobile-overlay');
+  if(h&&m){
+    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    h.onclick=toggle;
+    if(o)o.onclick=toggle;
+  }
+  // Auth state
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
+  if(t&&u.username){
+    var name=u.first_name||u.username;
+    var navAuth=document.getElementById('navAuth');
+    var mobileAuth=document.getElementById('mobileAuth');
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+  }
+})();
 </script>
 </body>
 </html>

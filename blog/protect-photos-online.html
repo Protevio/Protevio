@@ -27,6 +27,27 @@
     "@type": "FAQPage",
     "mainEntity": [{"@type":"Question","name":"How does Protevio photo monitoring work?","acceptedAnswer":{"@type":"Answer","text":"You upload your face once and set up an alert. Our crawlers continuously index new faces from across the web. Every few hours, your alert face is compared against newly discovered images. If a match is found, you receive an email notification with details and action tools."}},{"@type":"Question","name":"How quickly will I be alerted to new matches?","acceptedAnswer":{"@type":"Answer","text":"Our alert system checks for new matches every 4 hours. In most cases, you will be notified within hours of a new website being indexed that contains your face."}},{"@type":"Question","name":"Can I monitor multiple faces?","acceptedAnswer":{"@type":"Answer","text":"Yes. Paid plans allow you to set up multiple face alerts — useful for monitoring different photos of yourself, or for professionals monitoring client images with consent."}},{"@type":"Question","name":"What happens after I get an alert?","acceptedAnswer":{"@type":"Answer","text":"View full match details including the website URL, similarity score, and a preview of the matched image. From there, generate a DMCA takedown letter or PDF evidence report directly within Protevio."}},{"@type":"Question","name":"Is my monitoring data private?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Your alert face data is stored encrypted and used solely for matching against our index. It is never shared, sold, or used for any other purpose. You can delete your alerts at any time."}}]
   }]
+
+// Nav hamburger
+(function(){
+  var h=document.querySelector('.nav__hamburger'),
+      m=document.querySelector('.nav__mobile-menu'),
+      o=document.querySelector('.nav__mobile-overlay');
+  if(h&&m){
+    function toggle(){m.classList.toggle('active');if(o)o.classList.toggle('active');h.classList.toggle('active');}
+    h.onclick=toggle;
+    if(o)o.onclick=toggle;
+  }
+  // Auth state
+  var t=localStorage.getItem('protevio_token'),u=JSON.parse(localStorage.getItem('protevio_user')||'{}');
+  if(t&&u.username){
+    var name=u.first_name||u.username;
+    var navAuth=document.getElementById('navAuth');
+    var mobileAuth=document.getElementById('mobileAuth');
+    if(navAuth){navAuth.href='dashboard.html';navAuth.innerHTML='<span>'+name.split(' ')[0]+'</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';}
+    if(mobileAuth){mobileAuth.href='dashboard.html';mobileAuth.textContent=name.split(' ')[0];}
+  }
+})();
 </script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -114,26 +135,42 @@ body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--
 }
 </style>
 <meta name="twitter:image" content="https://protevio.com/og-image.png"/>
+<link rel="stylesheet" href="/protevio.css">
 </head>
 <body>
 <div class="bg-gradient"></div>
 <div class="dot-pattern"></div>
 
-<nav class="nav">
-  <a href="/" class="nav__logo"><span class="nav__logo-text">Protevio<span style="color:var(--accent)">.</span></span></a>
-  <div class="nav__links">
-    <a href="/" class="nav__link">Home</a>
-    <a href="/about.html" class="nav__link">About</a>
-    <a href="/pricing.html" class="nav__link">Pricing</a>
-    <a href="/faq.html" class="nav__link">FAQ</a>
-    <a href="/blog.html" class="nav__link">Blog</a>
-    <a href="/contact.html" class="nav__link">Contact</a><a href="/opt-out.html" class="nav__link">Opt-Out</a>
+<nav class="p-nav">
+  <a href="/" class="p-nav__logo">Protevio<span>.</span></a>
+  <div class="p-nav__center">
+    <a href="/" class="p-nav__link">Home</a>
+    <a href="about.html" class="p-nav__link">About</a>
+    <a href="pricing.html" class="p-nav__link">Pricing</a>
+    <a href="faq.html" class="p-nav__link">FAQ</a>
+    <a href="blog.html" class="p-nav__link p-nav__link--active">Blog</a>
+    <a href="contact.html" class="p-nav__link">Contact</a>
+    <a href="opt-out.html" class="p-nav__link">Opt-Out</a>
   </div>
-  <div class="nav__right">
-    <a href="/login.html" class="nav__login" id="navAuth"><span>Log In</span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  <div class="p-nav__right">
+    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth">
+      <span>Sign In</span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </a>
   </div>
   <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav__mobile-overlay"></div>
+<div class="nav__mobile-menu">
+  <a href="/">Home</a>
+  <a href="about.html">About</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="faq.html">FAQ</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="opt-out.html">Opt-Out</a>
+  <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
+</div>
 
 <section class="lp-hero">
   <div class="lp-hero__badge">
