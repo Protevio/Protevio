@@ -1231,10 +1231,18 @@
       o=document.querySelector('.nav__mobile-overlay');
   if(!h||!m)return;
   function toggle(){
-    h.classList.toggle('active');
-    m.classList.toggle('active');
-    if(o)o.classList.toggle('active');
-    document.body.style.overflow=m.classList.contains('active')?'hidden':'';
+    var isOpen=m.classList.contains('active');
+    if(isOpen){
+      m.classList.remove('active');m.style.display='none';
+      if(o)o.classList.remove('active');
+      h.classList.remove('active');
+      document.body.style.overflow='';
+    } else {
+      m.classList.add('active');m.style.display='flex';
+      if(o)o.classList.add('active');
+      h.classList.add('active');
+      document.body.style.overflow='hidden';
+    }
   }
   h.addEventListener('click',toggle);
   if(o)o.addEventListener('click',toggle);
@@ -1248,11 +1256,11 @@
   const navAuth = document.getElementById('navAuth');
   const mobileAuth = document.getElementById('mobileAuth');
   if(token && user) {
-    const name = user.name || user.username || 'Account';
+    const name = (user.first_name || user.name || user.username || 'Account').split(' ')[0];
     navAuth.href = 'dashboard.html';
-    navAuth.innerHTML = '<span>' + name.split(' ')[0] + '</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+    navAuth.innerHTML = '<span>' + name + '</span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>';
     mobileAuth.href = 'dashboard.html';
-    mobileAuth.textContent = name.split(' ')[0];
+    mobileAuth.textContent = name;
   }
 })();
 
@@ -2218,7 +2226,20 @@ document.getElementById('unlockOnceBtn').addEventListener('click', () => {
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
+    function toggle(){
+      var isOpen=m.classList.contains('active');
+      if(isOpen){
+        m.classList.remove('active');m.style.display='none';
+        if(o)o.classList.remove('active');
+        h.classList.remove('active');
+        document.body.style.overflow='';
+      } else {
+        m.classList.add('active');m.style.display='flex';
+        if(o)o.classList.add('active');
+        h.classList.add('active');
+        document.body.style.overflow='hidden';
+      }
+    }
     h.onclick=toggle;
     if(o)o.onclick=toggle;
     m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});

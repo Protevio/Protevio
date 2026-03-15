@@ -778,7 +778,7 @@ buildDesktop();
 updateMobile();
 
 // Hamburger
-document.querySelector('.nav__hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('active'));
+// old toggle removed - handled by shared Nav + Auth block
 
 // Auth
 
@@ -975,7 +975,20 @@ async function startTrial() {
       m=document.querySelector('.nav__mobile-menu'),
       o=document.querySelector('.nav__mobile-overlay');
   if(h&&m){
-    function toggle(){h.classList.toggle('active');m.classList.toggle('active');if(o)o.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';}
+    function toggle(){
+      var isOpen=m.classList.contains('active');
+      if(isOpen){
+        m.classList.remove('active');m.style.display='none';
+        if(o)o.classList.remove('active');
+        h.classList.remove('active');
+        document.body.style.overflow='';
+      } else {
+        m.classList.add('active');m.style.display='flex';
+        if(o)o.classList.add('active');
+        h.classList.add('active');
+        document.body.style.overflow='hidden';
+      }
+    }
     h.onclick=toggle;
     if(o)o.onclick=toggle;
     m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(m.classList.contains('active'))toggle()})});
