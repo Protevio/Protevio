@@ -403,21 +403,22 @@ body { background: var(--bg-soft); }
     <a href="opt-out.html" class="p-nav__link">Opt-Out</a>
   </div>
   <div class="p-nav__right">
-    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth"><span>Log In</span></a>
+    <a href="login.html" class="p-btn p-btn--primary p-btn--sm" id="navAuth"><span>Sign In</span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></a>
   </div>
   <button class="nav__hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="nav__mobile-menu" id="mobileMenu">
-  <a href="/" class="mobile-link">Home</a>
-  <a href="about.html" class="mobile-link">About</a>
-  <a href="pricing.html" class="mobile-link mobile-link--active">Pricing</a>
-  <a href="faq.html" class="mobile-link">FAQ</a>
-  <a href="blog.html" class="mobile-link">Blog</a>
-  <a href="contact.html" class="mobile-link">Contact</a>
-  <a href="opt-out.html" class="mobile-link">Opt-Out</a>
-  <a href="login.html" class="mobile-login" id="mobileAuth">Log In &rarr;</a>
-</div>
 
+  <div class="nav__mobile-overlay"></div>
+  <div class="nav__mobile-menu" style="display:none">
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="opt-out.html">Opt-Out</a>
+    <a href="login.html" id="mobileAuth" style="color:var(--blue);font-weight:600;">Sign In</a>
+  </div>
+</nav>
 <div class="container">
 <div class="hero"><h1 class="hero__title">Choose the plan that fits <span>your needs</span></h1><p class="hero__sub">Start free, upgrade when you need more. All plans include our core facial recognition search engine.</p></div>
 

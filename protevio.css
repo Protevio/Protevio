@@ -116,6 +116,7 @@ img { display: block; max-width: 100%; }
   color: var(--ink);
   text-decoration: none;
   letter-spacing: -.02em;
+  min-width: 120px;
 }
 .p-nav__logo span { color: var(--blue); }
 .p-nav__center { display: flex; gap: 28px; align-items: center; }
@@ -127,7 +128,7 @@ img { display: block; max-width: 100%; }
   transition: color .15s;
 }
 .p-nav__link:hover, .p-nav__link--active { color: var(--ink); }
-.p-nav__right { display: flex; gap: 8px; align-items: center; }
+.p-nav__right { display: flex; gap: 8px; align-items: center; min-width: 120px; justify-content: flex-end; }
 
 /* ─── Buttons ───────────────────────────────────────────────────────────── */
 .p-btn {
