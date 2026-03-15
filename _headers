@@ -16,8 +16,3 @@
 
 /*.js
   Cache-Control: public, max-age=86400
-
-# Force non-www via headers (backup for _redirects)
-https://www.protevio.com/*
-  X-Robots-Tag: noindex
-  Link: <https://protevio.com/%splat>; rel="canonical"

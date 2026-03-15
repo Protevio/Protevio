@@ -13,7 +13,7 @@
 :root{
   --bg:#faf8f5;--bg2:#fff;--bg3:#f3efe9;--bg4:#e8e2d9;
   --border:#e5dfd6;--border-h:#d4cdc2;
-  --text:#2c2418;--text2:#4a3f30;--text3:#8c8070;
+  --text:#2c2418;--text1:#2c2418;--text2:#4a3f30;--text3:#8c8070;
   --accent:#3366cc;--accent2:#2855b0;--accent-bg:rgba(51,102,204,.08);
   --green:#2d8659;--green-bg:rgba(45,134,89,.08);
   --red:#c44033;--red-bg:rgba(196,64,51,.06);
@@ -1280,8 +1280,7 @@ async function viewIdPhoto(id) {
     w.document.write('<html><head><title>ID Photo - Request #'+id+'</title>'+
       '<style>body{margin:0;background:#faf8f5;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:16px}'+
       'img{max-width:95%;max-height:85vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)}'+
-      '.warn{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#d97706;padding:8px 20px;border-radius:8px;font:13px/1.4 system-ui;text-align:center;margin-top:16px}</style><meta name="robots" content="noindex, nofollow"/>
-</head>'+
+      '.warn{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#d97706;padding:8px 20px;border-radius:8px;font:13px/1.4 system-ui;text-align:center;margin-top:16px}</style></head>'+
       '<body><div class="warn">&#9888; Confidential &mdash; Verify face &amp; name match the request</div>'+
       '<img src="'+objUrl+'"></body></html>');
   } catch(e) {

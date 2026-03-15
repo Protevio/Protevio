@@ -1,13 +1,13 @@
 # ═══════════════════════════════════════════════════════════════
 # PROTEVIO — Cloudflare Pages Redirect Rules
 # Updated: 2026-03-14 based on Google Search Console data
+#
+# NOTE: www → non-www redirect is handled by Cloudflare 
+# Redirect Rules (dashboard), NOT here. CF Pages _redirects
+# only handles path-level redirects.
 # ═══════════════════════════════════════════════════════════════
 
-# ===== WWW → non-WWW (critical: Google indexing both) =====
-https://www.protevio.com/* https://protevio.com/:splat 301
-
 # ===== Blog: root-level duplicates → canonical /blog/ paths =====
-# GSC shows these root pages still getting indexed alongside /blog/ versions
 /how-catfishers-steal-photos.html /blog/how-catfishers-steal-photos.html 301
 /what-is-reverse-face-search.html /blog/what-is-reverse-face-search.html 301
 /gdpr-right-to-be-forgotten.html /blog/gdpr-right-to-be-forgotten.html 301
@@ -24,7 +24,6 @@ https://www.protevio.com/* https://protevio.com/:splat 301
 /terms-of-service__1_.html /terms-of-service.html 301
 
 # ===== Legal/CSR pages: extensionless → .html canonical =====
-# GSC shows /privacy-policy and /privacy-policy.html indexed separately
 /privacy-policy /privacy-policy.html 301
 /terms-of-service /terms-of-service.html 301
 /csr /csr.html 301
