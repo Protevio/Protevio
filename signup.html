@@ -104,7 +104,10 @@
 
 <script>
 const API = 'https://api.protevio.com/api';
-const _redir = new URLSearchParams(window.location.search).get('redirect');
+// Only allow known safe redirect values to prevent open redirect propagation
+const _redirRaw = new URLSearchParams(window.location.search).get('redirect');
+const ALLOWED_REDIRECTS = ['results'];
+const _redir = ALLOWED_REDIRECTS.includes(_redirRaw) ? _redirRaw : null;
 
 document.getElementById('password').addEventListener('input', function(e) {
   const password = e.target.value;

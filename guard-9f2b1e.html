@@ -204,12 +204,12 @@ a{color:#3366cc;text-decoration:none}
 </div>
 
 <!-- Confirm Modal -->
-<div class="confirm-bg" id="confirmBg" onclick="if(event.target===this)this.classList.remove('open')">
+<div class="confirm-bg" id="confirmBg" onclick="if(event.target===this)this.classList.remove('show')">
   <div class="confirm">
     <div class="confirm__title" id="confirmTitle">Confirm Action</div>
     <div class="confirm__text" id="confirmText"></div>
     <div class="confirm__actions">
-      <button class="btn btn--outline" onclick="document.getElementById('confirmBg').classList.remove('open')">Cancel</button>
+      <button class="btn btn--outline" onclick="document.getElementById('confirmBg').classList.remove('show')">Cancel</button>
       <button class="btn btn--danger" id="confirmBtn">Confirm</button>
     </div>
   </div>
@@ -224,13 +224,28 @@ let currentPage = 1;
 let selectedIds = new Set();
 let allFaces = [];
 
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 async function apiFetch(url, opts) {
   const res = await fetch(API + url, {
     ...opts,
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts?.headers || {}) }
   });
+  if(res.status === 401) { window.location.href = '/login.html'; return null; }
   if(res.status === 403) { alert('Admin access required'); return null; }
-  return res.ok ? await res.json() : null;
+  try {
+    const json = await res.json();
+    if(!res.ok) { json.__error = true; }
+    return json;
+  } catch(e) { return null; }
 }
 
 // ===== TAB SWITCHING =====
@@ -292,15 +307,39 @@ async function loadFaces(page) {
     card.className = 'face-card';
     card.dataset.id = f.face_id;
     const imgUrl = API + '/img/' + btoa(f.filename).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-    card.innerHTML = `
-      <div class="face-card__check"></div>
-      <div class="face-card__age">Age ~${f.age}</div>
-      <img class="face-card__img" src="${imgUrl}" alt="Face" loading="lazy"
-        onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%231a1f2e%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%234b5563%22 font-size=%2210%22>No img</text></svg>'">
-      <div class="face-card__info">
-        <div class="face-card__domain">${f.domain || 'Unknown'}</div>
-        <div class="face-card__meta">${f.gender === 'M' ? 'Male' : f.gender === 'F' ? 'Female' : f.gender || ''} · ${f.created_at ? f.created_at.slice(0,10) : ''}</div>
-      </div>`;
+    const ageEl = document.createElement('div');
+    ageEl.className = 'face-card__age';
+    ageEl.textContent = 'Age ~' + (parseInt(f.age) || '?');
+
+    const img = document.createElement('img');
+    img.className = 'face-card__img';
+    img.src = imgUrl;
+    img.alt = 'Face';
+    img.loading = 'lazy';
+    img.onerror = function() { this.src = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%231a1f2e%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%234b5563%22 font-size=%2210%22>No img</text></svg>'; };
+
+    const domainEl = document.createElement('div');
+    domainEl.className = 'face-card__domain';
+    domainEl.textContent = f.domain || 'Unknown';
+
+    const genderText = f.gender === 'M' ? 'Male' : f.gender === 'F' ? 'Female' : (f.gender || '');
+    const dateText = f.created_at ? f.created_at.slice(0, 10) : '';
+    const metaEl = document.createElement('div');
+    metaEl.className = 'face-card__meta';
+    metaEl.textContent = genderText + (genderText && dateText ? ' · ' : '') + dateText;
+
+    const infoEl = document.createElement('div');
+    infoEl.className = 'face-card__info';
+    infoEl.appendChild(domainEl);
+    infoEl.appendChild(metaEl);
+
+    const checkEl = document.createElement('div');
+    checkEl.className = 'face-card__check';
+
+    card.appendChild(checkEl);
+    card.appendChild(ageEl);
+    card.appendChild(img);
+    card.appendChild(infoEl);
     card.addEventListener('click', () => toggleSelect(card, f.face_id));
     grid.appendChild(card);
   });
@@ -349,22 +388,29 @@ function confirmDelete() {
   const n = selectedIds.size;
   if(!n) return;
   document.getElementById('confirmTitle').textContent = 'Confirm Deletion';
-  document.getElementById('confirmText').innerHTML = `You are about to permanently delete <strong>${n} face${n>1?'s':''}</strong> from the database. This cannot be undone.`;
+  const confirmText = document.getElementById('confirmText');
+  confirmText.textContent = 'You are about to permanently delete ';
+  const strong = document.createElement('strong');
+  strong.textContent = n + ' face' + (n > 1 ? 's' : '');
+  confirmText.appendChild(strong);
+  confirmText.appendChild(document.createTextNode(' from the database. This cannot be undone.'));
   document.getElementById('confirmBtn').textContent = 'Delete';
   document.getElementById('confirmBtn').className = 'btn btn--danger';
   document.getElementById('confirmBtn').onclick = doDelete;
-  document.getElementById('confirmBg').classList.add('open');
+  document.getElementById('confirmBg').classList.add('show');
 }
 
 async function doDelete() {
   const btn = document.getElementById('confirmBtn');
   btn.textContent = 'Deleting...'; btn.disabled = true;
   try {
+    const ids = Array.from(selectedIds).map(id => parseInt(id, 10)).filter(id => !isNaN(id));
     const data = await apiFetch('/admin/minor-faces/delete', {
-      method: 'POST', body: JSON.stringify({ face_ids: Array.from(selectedIds) })
+      method: 'POST', body: JSON.stringify({ face_ids: ids })
     });
     if(data?.success) {
-      document.getElementById('confirmBg').classList.remove('open');
+      document.getElementById('confirmBg').classList.remove('show');
+      selectedIds.clear();
       loadStats(); loadFaces(currentPage);
     } else { alert(data?.error || 'Delete failed'); }
   } catch(e) { alert('Connection error'); }
@@ -381,7 +427,12 @@ async function confirmBulkDelete() {
   if(!data) return;
 
   document.getElementById('confirmTitle').textContent = 'Bulk Delete — Are You Sure?';
-  document.getElementById('confirmText').innerHTML = `This will permanently delete <strong>${data.would_delete.toLocaleString()} faces</strong> with estimated age under ${maxAge}. This cannot be undone.`;
+  const confirmText = document.getElementById('confirmText');
+  confirmText.textContent = 'This will permanently delete ';
+  const strong = document.createElement('strong');
+  strong.textContent = data.would_delete.toLocaleString() + ' faces';
+  confirmText.appendChild(strong);
+  confirmText.appendChild(document.createTextNode(' with estimated age under ' + parseInt(maxAge) + '. This cannot be undone.'));
   document.getElementById('confirmBtn').textContent = `Delete ${data.would_delete.toLocaleString()} Faces`;
   document.getElementById('confirmBtn').className = 'btn btn--danger';
   document.getElementById('confirmBtn').onclick = async () => {
@@ -391,12 +442,12 @@ async function confirmBulkDelete() {
       method: 'POST', body: JSON.stringify({ max_age: maxAge, confirm: true })
     });
     if(result?.success) {
-      document.getElementById('confirmBg').classList.remove('open');
+      document.getElementById('confirmBg').classList.remove('show');
       loadStats(); loadFaces(currentPage);
     } else { alert('Bulk delete failed'); }
     btn.disabled = false;
   };
-  document.getElementById('confirmBg').classList.add('open');
+  document.getElementById('confirmBg').classList.add('show');
 }
 
 
@@ -421,17 +472,64 @@ async function loadViolations() {
     const tr = document.createElement('tr');
     const ageBadge = w.estimated_age < 13 ? 'danger' : 'warn';
     const thumbSrc = w.face_thumbnail || 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 44 44%22><rect fill=%22%231a1f2e%22 width=%2244%22 height=%2244%22/></svg>';
-    const planLabel = w.plan === 'suspended' ? '<span style="color:#fca5a5;font-weight:700">Suspended</span>' : (w.plan || 'free');
     const timeStr = w.created_at ? new Date(w.created_at).toLocaleString() : '';
-    tr.innerHTML = `
-      <td><img class="vtable__thumb" src="${thumbSrc}" alt=""></td>
-      <td><div class="vtable__user">${w.username || 'guest'}</div><div class="vtable__email">${w.email || ''}</div></td>
-      <td><span class="vtable__age-badge vtable__age-badge--${ageBadge}">~${w.estimated_age || '?'}</span></td>
-      <td><span class="vtable__ip">${w.ip_address || ''}</span></td>
-      <td><span class="vtable__time">${timeStr}</span></td>
-      <td style="text-align:center;font-weight:800;color:#ef4444">${w.total_warnings || 0}</td>
-      <td>${planLabel}</td>
-    `;
+
+    const thumbImg = document.createElement('img');
+    thumbImg.className = 'vtable__thumb';
+    thumbImg.src = thumbSrc;
+    thumbImg.alt = '';
+    const tdThumb = document.createElement('td');
+    tdThumb.appendChild(thumbImg);
+
+    const usernameEl = document.createElement('div');
+    usernameEl.className = 'vtable__user';
+    usernameEl.textContent = w.username || 'guest';
+    const emailEl = document.createElement('div');
+    emailEl.className = 'vtable__email';
+    emailEl.textContent = w.email || '';
+    const tdUser = document.createElement('td');
+    tdUser.appendChild(usernameEl);
+    tdUser.appendChild(emailEl);
+
+    const ageBadgeEl = document.createElement('span');
+    ageBadgeEl.className = `vtable__age-badge vtable__age-badge--${ageBadge}`;
+    ageBadgeEl.textContent = '~' + (w.estimated_age || '?');
+    const tdAge = document.createElement('td');
+    tdAge.appendChild(ageBadgeEl);
+
+    const ipEl = document.createElement('span');
+    ipEl.className = 'vtable__ip';
+    ipEl.textContent = w.ip_address || '';
+    const tdIp = document.createElement('td');
+    tdIp.appendChild(ipEl);
+
+    const timeEl = document.createElement('span');
+    timeEl.className = 'vtable__time';
+    timeEl.textContent = timeStr;
+    const tdTime = document.createElement('td');
+    tdTime.appendChild(timeEl);
+
+    const tdWarnings = document.createElement('td');
+    tdWarnings.style.cssText = 'text-align:center;font-weight:800;color:#ef4444';
+    tdWarnings.textContent = w.total_warnings || 0;
+
+    const tdPlan = document.createElement('td');
+    if (w.plan === 'suspended') {
+      const suspendedSpan = document.createElement('span');
+      suspendedSpan.style.cssText = 'color:#fca5a5;font-weight:700';
+      suspendedSpan.textContent = 'Suspended';
+      tdPlan.appendChild(suspendedSpan);
+    } else {
+      tdPlan.textContent = w.plan || 'free';
+    }
+
+    tr.appendChild(tdThumb);
+    tr.appendChild(tdUser);
+    tr.appendChild(tdAge);
+    tr.appendChild(tdIp);
+    tr.appendChild(tdTime);
+    tr.appendChild(tdWarnings);
+    tr.appendChild(tdPlan);
     body.appendChild(tr);
   });
 }
@@ -463,47 +561,84 @@ async function loadFlaggedUsers() {
     else if(u.plan && u.plan !== 'free') { planClass = 'active'; }
 
     const isSuspended = u.plan === 'suspended';
-    const actionBtn = isSuspended
-      ? `<button class="btn btn--success" onclick="unsuspendUser('${u.username}', this)">Unsuspend</button>`
-      : `<button class="btn btn--danger" onclick="suspendUser('${u.username}', this)">Suspend</button>`;
 
-    card.innerHTML = `
-      <div class="user-card__warnings">${u.warnings}</div>
-      <div class="user-card__info">
-        <div class="user-card__name">${u.username}</div>
-        <div class="user-card__email">${u.email || ''}</div>
-        <div class="user-card__meta">Joined ${u.created ? u.created.slice(0,10) : '?'} · <span class="user-card__plan user-card__plan--${planClass}">${planText}</span></div>
-      </div>
-      ${actionBtn}
-    `;
+    const warningsEl = document.createElement('div');
+    warningsEl.className = 'user-card__warnings';
+    warningsEl.textContent = u.warnings;
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'user-card__name';
+    nameEl.textContent = u.username;
+
+    const emailEl = document.createElement('div');
+    emailEl.className = 'user-card__email';
+    emailEl.textContent = u.email || '';
+
+    const planSpan = document.createElement('span');
+    planSpan.className = `user-card__plan user-card__plan--${planClass}`;
+    planSpan.textContent = planText;
+
+    const metaEl = document.createElement('div');
+    metaEl.className = 'user-card__meta';
+    metaEl.textContent = 'Joined ' + (u.created ? u.created.slice(0, 10) : '?') + ' · ';
+    metaEl.appendChild(planSpan);
+
+    const infoEl = document.createElement('div');
+    infoEl.className = 'user-card__info';
+    infoEl.appendChild(nameEl);
+    infoEl.appendChild(emailEl);
+    infoEl.appendChild(metaEl);
+
+    const actionBtn = document.createElement('button');
+    actionBtn.className = isSuspended ? 'btn btn--success' : 'btn btn--danger';
+    actionBtn.textContent = isSuspended ? 'Unsuspend' : 'Suspend';
+    actionBtn.dataset.username = u.username;
+    actionBtn.addEventListener('click', function() {
+      if (isSuspended) unsuspendUser(this.dataset.username, this);
+      else suspendUser(this.dataset.username, this);
+    });
+
+    card.appendChild(warningsEl);
+    card.appendChild(infoEl);
+    card.appendChild(actionBtn);
     list.appendChild(card);
   });
 }
 
 async function suspendUser(username, btn) {
   document.getElementById('confirmTitle').textContent = 'Suspend User';
-  document.getElementById('confirmText').innerHTML = `Suspend <strong>${username}</strong>? They will no longer be able to search.`;
+  const confirmText = document.getElementById('confirmText');
+  confirmText.textContent = 'Suspend ';
+  const strong = document.createElement('strong');
+  strong.textContent = username;
+  confirmText.appendChild(strong);
+  confirmText.appendChild(document.createTextNode('? They will no longer be able to search.'));
   document.getElementById('confirmBtn').textContent = 'Suspend';
   document.getElementById('confirmBtn').className = 'btn btn--danger';
   document.getElementById('confirmBtn').onclick = async () => {
-    await apiFetch(`/admin/users/${username}/suspend`, { method: 'POST' });
-    document.getElementById('confirmBg').classList.remove('open');
+    await apiFetch(`/admin/users/${encodeURIComponent(username)}/suspend`, { method: 'POST' });
+    document.getElementById('confirmBg').classList.remove('show');
     loadFlaggedUsers();
   };
-  document.getElementById('confirmBg').classList.add('open');
+  document.getElementById('confirmBg').classList.add('show');
 }
 
 async function unsuspendUser(username, btn) {
   document.getElementById('confirmTitle').textContent = 'Unsuspend User';
-  document.getElementById('confirmText').innerHTML = `Unsuspend <strong>${username}</strong> and reset to free plan?`;
+  const confirmText = document.getElementById('confirmText');
+  confirmText.textContent = 'Unsuspend ';
+  const strong = document.createElement('strong');
+  strong.textContent = username;
+  confirmText.appendChild(strong);
+  confirmText.appendChild(document.createTextNode(' and reset to free plan?'));
   document.getElementById('confirmBtn').textContent = 'Unsuspend';
   document.getElementById('confirmBtn').className = 'btn btn--success';
   document.getElementById('confirmBtn').onclick = async () => {
-    await apiFetch(`/admin/users/${username}/unsuspend`, { method: 'POST' });
-    document.getElementById('confirmBg').classList.remove('open');
+    await apiFetch(`/admin/users/${encodeURIComponent(username)}/unsuspend`, { method: 'POST' });
+    document.getElementById('confirmBg').classList.remove('show');
     loadFlaggedUsers();
   };
-  document.getElementById('confirmBg').classList.add('open');
+  document.getElementById('confirmBg').classList.add('show');
 }
 
 

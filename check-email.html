@@ -143,7 +143,20 @@ function resendEmail() {
       cooldown--;
       btn.textContent = `Resend (${cooldown}s)`;
       if (cooldown <= 0) {
-        clearI
+        clearInterval(tick);
+        btn.textContent = 'Resend verification email';
+        btn.disabled = false;
+      }
+    }, 1000);
+  })
+  .catch(() => {
+    msg.textContent = 'Failed to send. Please try again.';
+    msg.className = 'resend-msg error';
+    btn.textContent = 'Resend verification email';
+    btn.disabled = false;
+  });
+}
+</script>
 <script src="/cookie-consent.js" defer></script>
 </body>
 </html>
