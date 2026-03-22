@@ -4,8 +4,28 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://cdn.jsdelivr.net https://www.googletagmanager.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://api.protevio.com; connect-src 'self' https://api.protevio.com; frame-src https://accounts.google.com; object-src 'none'; base-uri 'self'
 
 /index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/login.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/signup.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/check-email.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/forgot-password.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/reset-password.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/dashboard.html
   Cache-Control: no-cache, no-store, must-revalidate
 
 /*.html
