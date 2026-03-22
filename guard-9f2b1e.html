@@ -239,8 +239,13 @@ async function apiFetch(url, opts) {
     ...opts,
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts?.headers || {}) }
   });
+  if(res.status === 401) { window.location.href = '/login.html'; return null; }
   if(res.status === 403) { alert('Admin access required'); return null; }
-  return res.ok ? await res.json() : null;
+  try {
+    const json = await res.json();
+    if(!res.ok) { json.__error = true; }
+    return json;
+  } catch(e) { return null; }
 }
 
 // ===== TAB SWITCHING =====
@@ -399,11 +404,13 @@ async function doDelete() {
   const btn = document.getElementById('confirmBtn');
   btn.textContent = 'Deleting...'; btn.disabled = true;
   try {
+    const ids = Array.from(selectedIds).map(id => parseInt(id, 10)).filter(id => !isNaN(id));
     const data = await apiFetch('/admin/minor-faces/delete', {
-      method: 'POST', body: JSON.stringify({ face_ids: Array.from(selectedIds) })
+      method: 'POST', body: JSON.stringify({ face_ids: ids })
     });
     if(data?.success) {
       document.getElementById('confirmBg').classList.remove('show');
+      selectedIds.clear();
       loadStats(); loadFaces(currentPage);
     } else { alert(data?.error || 'Delete failed'); }
   } catch(e) { alert('Connection error'); }

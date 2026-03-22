@@ -28,6 +28,12 @@
 /dashboard.html
   Cache-Control: no-cache, no-store, must-revalidate
 
+/ctrl-7beee6dc.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/guard-9f2b1e.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
 /*.html
   Cache-Control: public, max-age=3600
 
