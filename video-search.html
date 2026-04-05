@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Face Search — Protevio AI</title>
+<link rel="stylesheet" href="/protevio.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0b0f;
+  --bg-card: #12131a;
+  --border: #1e2030;
+  --text-1: #e8e9ed;
+  --text-2: #8b8d9a;
+  --accent: #5b9aff;
+  --green: #4ade80;
+  --amber: #fbbf24;
+  --red: #f87171;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-1);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+h1 span { color: var(--accent); }
+.subtitle {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+/* Upload area */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--bg-card);
+  margin-bottom: 24px;
+}
+.upload-zone:hover, .upload-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(91, 154, 255, 0.04);
+}
+.upload-zone svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--text-2);
+  stroke-width: 1.5;
+  fill: none;
+  margin-bottom: 12px;
+}
+.upload-zone:hover svg { stroke: var(--accent); }
+.upload-zone p { color: var(--text-2); font-size: 0.9rem; }
+.upload-zone .formats { font-size: 0.75rem; color: var(--text-2); margin-top: 8px; opacity: 0.6; }
+.upload-zone input { display: none; }
+
+/* Progress */
+.progress-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  display: none;
+}
+.progress-card.active { display: block; }
+.progress-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.progress-status {
+  color: var(--text-2);
+  font-size: 0.82rem;
+  margin-bottom: 16px;
+}
+.progress-bar-bg {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #7c6aff);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.3s;
+}
+.progress-stats {
+  display: flex;
+  gap: 24px;
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+.progress-stats strong { color: var(--text-1); }
+
+/* Results */
+.results-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  display: none;
+}
+.results-card.active { display: block; }
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.results-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.results-count {
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+
+.faces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.face-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+  background: var(--bg);
+}
+.face-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.face-item.selected { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
+.face-item img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+.face-item .check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.face-item.selected .check {
+  background: var(--green);
+  border-color: var(--green);
+}
+.face-item.selected .check::after {
+  content: '✓';
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+}
+.face-meta {
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  color: var(--text-2);
+  display: flex;
+  justify-content: space-between;
+}
+.face-meta .appearances {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) { background: #4a89ee; }
+.btn-secondary {
+  background: var(--border);
+  color: var(--text-1);
+}
+.btn-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Search results (reuses existing styles) */
+.search-results {
+  display: none;
+  margin-top: 24px;
+}
+.search-results.active { display: block; }
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.match-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.15s;
+}
+.match-item:hover { border-color: var(--accent); }
+.match-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+.match-info {
+  padding: 8px 10px;
+}
+.match-sim {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--green);
+}
+.match-domain {
+  font-size: 0.7rem;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.match-link {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+/* Error */
+.error-msg {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  display: none;
+}
+.error-msg.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="p-nav" style="border-bottom:1px solid var(--border)">
+  <div class="p-nav__logo"><a href="/" style="text-decoration:none;color:var(--text-1);font-weight:700;font-size:1.1rem">Protevio.</a></div>
+  <div class="p-nav__links">
+    <a href="/">Home</a>
+    <a href="/dashboard.html">Dashboard</a>
+  </div>
+  <div class="p-nav__right"></div>
+</nav>
+
+<div class="container" style="padding-top:40px">
+  <h1>🎬 Video <span>Face Search</span></h1>
+  <p class="subtitle">Upload a video — we'll extract every face and let you search them against our database.</p>
+
+  <!-- Error -->
+  <div class="error-msg" id="error"></div>
+
+  <!-- Upload -->
+  <div class="upload-zone" id="dropZone">
+    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    <p>Drop a video here or tap to browse</p>
+    <div class="formats">MP4, AVI, MOV, MKV, WebM — up to 500MB, max 30 min</div>
+    <input type="file" id="fileInput" accept="video/*,.mp4,.avi,.mov,.mkv,.webm,.m4v,.wmv">
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-card" id="progressCard">
+    <div class="progress-title" id="progressTitle">Processing video...</div>
+    <div class="progress-status" id="progressStatus">Starting...</div>
+    <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-stats">
+      <span>Analyzed: <strong id="statFrames">0</strong></span>
+      <span>Blurry skipped: <strong id="statBlur">0</strong></span>
+      <span>Scene changes: <strong id="statScenes">0</strong></span>
+      <span>Faces: <strong id="statFaces">0</strong></span>
+      <span><strong id="statProgress">0%</strong></span>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results-card" id="resultsCard">
+    <div class="results-header">
+      <div class="results-title">Detected Faces</div>
+      <div class="results-count" id="resultsCount"></div>
+    </div>
+    <p style="font-size:0.82rem;color:var(--text-2);margin-bottom:16px">
+      Select faces to search. Faces are grouped by person — <strong>appearances</strong> shows how many frames they appeared in.</p>
+    <div class="faces-grid" id="facesGrid"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="searchBtn" disabled onclick="searchSelected()">
+        Search selected faces
+      </button>
+      <button class="btn btn-secondary" onclick="selectAll()">Select all</button>
+      <span style="font-size:0.8rem;color:var(--text-2)" id="selectedCount">0 selected</span>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<script>
+const API = '';  // same origin
+let currentJobId = null;
+let pollTimer = null;
+let selectedFaces = new Set();
+let allFaceData = [];
+
+// ── Upload ──
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) uploadFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) uploadFile(fileInput.files[0]); });
+
+async function uploadFile(file) {
+  showError('');
+  const maxMB = 500;
+  if (file.size > maxMB * 1024 * 1024) {
+    showError(`File too large (${(file.size/1024/1024).toFixed(0)}MB). Max is ${maxMB}MB.`);
+    return;
+  }
+
+  const form = new FormData();
+  form.append('video', file);
+
+  document.getElementById('progressCard').classList.add('active');
+  document.getElementById('resultsCard').classList.remove('active');
+  document.getElementById('searchResults').classList.remove('active');
+  document.getElementById('progressTitle').textContent = `Processing: ${file.name}`;
+  document.getElementById('progressStatus').textContent = 'Uploading...';
+  document.getElementById('progressBar').style.width = '2%';
+
+  try {
+    const res = await fetch(API + '/api/video/upload', {
+      method: 'POST',
+      body: form,
+      credentials: 'include',
+    });
+    const data = await res.json();
+    if (data.error) { showError(data.error); return; }
+
+    currentJobId = data.job_id;
+    pollStatus();
+  } catch (e) {
+    showError('Upload failed: ' + e.message);
+  }
+}
+
+// ── Poll status ──
+async function pollStatus() {
+  if (!currentJobId) return;
+  try {
+    const res = await fetch(API + `/api/video/status/${currentJobId}`, { credentials: 'include' });
+    const d = await res.json();
+
+    const statusMap = {
+      'queued': 'Waiting to start...',
+      'extracting': 'Extracting frames from video...',
+      'detecting': 'Running face detection on frames...',
+      'grouping': 'Grouping faces by person...',
+      'complete': 'Done!',
+      'error': 'Error: ' + (d.error || 'Unknown'),
+    };
+
+    document.getElementById('progressStatus').textContent = statusMap[d.status] || d.status;
+    document.getElementById('progressBar').style.width = d.progress + '%';
+    document.getElementById('statFrames').textContent = d.frames_analyzed || 0;
+    document.getElementById('statBlur').textContent = d.frames_skipped_blur || 0;
+    document.getElementById('statScenes').textContent = d.scene_changes || 0;
+    document.getElementById('statFaces').textContent = d.faces_raw || 0;
+    document.getElementById('statProgress').textContent = d.progress + '%';
+
+    if (d.status === 'complete') {
+      loadFaces();
+      return;
+    } else if (d.status === 'error') {
+      showError(d.error);
+      return;
+    }
+
+    pollTimer = setTimeout(pollStatus, 1000);
+  } catch (e) {
+    pollTimer = setTimeout(pollStatus, 2000);
+  }
+}
+
+// ── Load faces ──
+async function loadFaces() {
+  try {
+    const res = await fetch(API + `/api/video/faces/${currentJobId}`, { credentials: 'include' });
+    const d = await res.json();
+    if (d.error) { showError(d.error); return; }
+
+    allFaceData = d.faces;
+    selectedFaces.clear();
+    document.getElementById('resultsCount').textContent =
+      `${d.unique_persons} unique persons · ${d.total_detections} detections · ${d.frames_analyzed} frames analyzed · ${d.scene_changes || 0} scene changes`;
+
+    const grid = document.getElementById('facesGrid');
+    grid.innerHTML = d.faces.map((f, i) => `
+      <div class="face-item" data-id="${f.id}" onclick="toggleFace('${f.id}', this)">
+        <div class="check"></div>
+        <img src="${f.thumbnail}" alt="Face ${i+1}" loading="lazy">
+        <div class="face-meta">
+          <span>${f.age || '?'}yo ${f.gender || ''}</span>
+          <span class="appearances">${f.appearances}×</span>
+        </div>
+        <div class="face-meta" style="padding-top:0">
+          <span>${f.first_seen || ''} – ${f.last_seen || ''}</span>
+        </div>
+      </div>
+    `).join('');
+
+    document.getElementById('resultsCard').classList.add('active');
+    document.getElementById('progressCard').classList.remove('active');
+    updateSelectedCount();
+  } catch (e) {
+    showError('Failed to load faces: ' + e.message);
+  }
+}
+
+// ── Face selection ──
+function toggleFace(id, el) {
+  if (selectedFaces.has(id)) {
+    selectedFaces.delete(id);
+    el.classList.remove('selected');
+  } else {
+    selectedFaces.add(id);
+    el.classList.add('selected');
+  }
+  updateSelectedCount();
+}
+
+function selectAll() {
+  const items = document.querySelectorAll('.face-item');
+  if (selectedFaces.size === allFaceData.length) {
+    // Deselect all
+    selectedFaces.clear();
+    items.forEach(el => el.classList.remove('selected'));
+  } else {
+    allFaceData.forEach(f => selectedFaces.add(f.id));
+    items.forEach(el => el.classList.add('selected'));
+  }
+  updateSelectedCount();
+}
+
+function updateSelectedCount() {
+  document.getElementById('selectedCount').textContent = selectedFaces.size + ' selected';
+  document.getElementById('searchBtn').disabled = selectedFaces.size === 0;
+}
+
+// ── Search ──
+async function searchSelected() {
+  if (selectedFaces.size === 0) return;
+  const btn = document.getElementById('searchBtn');
+  btn.disabled = true;
+  btn.textContent = 'Searching...';
+
+  const resultsDiv = document.getElementById('searchResults');
+  resultsDiv.innerHTML = '';
+  resultsDiv.classList.add('active');
+
+  // Search each selected face
+  for (const faceId of selectedFaces) {
+    try {
+      const res = await fetch(API + '/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          faces: [faceId],
+          threshold: 0.45,
+        }),
+      });
+      const d = await res.json();
+
+      if (d.error) {
+        resultsDiv.innerHTML += `<div class="error-msg active" style="margin-bottom:12px">Face ${faceId}: ${d.error}</div>`;
+        continue;
+      }
+
+      const face = allFaceData.find(f => f.id === faceId);
+      const matches = d.results || [];
+
+      resultsDiv.innerHTML += `
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <img src="${face?.thumbnail || ''}" style="width:50px;height:50px;border-radius:8px;object-fit:cover">
+            <div>
+              <div style="font-weight:600;font-size:0.9rem">${face?.age || '?'}yo ${face?.gender || ''} — ${face?.appearances || 0} appearances</div>
+              <div style="color:var(--text-2);font-size:0.8rem">${matches.length} matches found</div>
+            </div>
+          </div>
+          ${matches.length > 0 ? `
+            <div class="match-grid">
+              ${matches.map(m => `
+                <div class="match-item">
+                  <img src="/api/face-image/${m.domain}/${m.filename}" onerror="this.style.display='none'" loading="lazy">
+                  <div class="match-info">
+                    <div class="match-sim">${m.similarity}%</div>
+                    <div class="match-domain">${m.domain}</div>
+                    ${m.url ? `<a class="match-link" href="${m.url}" target="_blank" rel="noopener">View source</a>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          ` : '<div style="color:var(--text-2);font-size:0.85rem">No matches found in database.</div>'}
+        </div>
+      `;
+    } catch (e) {
+      resultsDiv.innerHTML += `<div class="error-msg active">Search error: ${e.message}</div>`;
+    }
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Search selected faces';
+}
+
+function showError(msg) {
+  const el = document.getElementById('error');
+  if (msg) {
+    el.textContent = msg;
+    el.classList.add('active');
+  } else {
+    el.classList.remove('active');
+  }
+}
+</script>
+<script src="/cookie-consent.js" defer></script>
+</body>
+</html>
