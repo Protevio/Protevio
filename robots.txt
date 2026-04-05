@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # Block admin and internal pages
-Disallow: /admin.html
-Disallow: /admin-minors.html
+Disallow: /ctrl-7beee6dc.html
+Disallow: /guard-9f2b1e.html
 Disallow: /dashboard.html
 Disallow: /results.html
 Disallow: /check-email.html
